@@ -1,0 +1,61 @@
+<div mat-dialog-title class="">
+
+  <h2 class="menu_item">{{this.tabledata.tablename.table_name | titlecase}} BILLING
+  <mat-icon class="iconsclose"  (click)="close()"> close</mat-icon>
+
+  </h2>
+
+  <button *ngIf="billflag != 'view'" style="margin-left: 0;" class="bbutton" (click)="addItem()">ADD ITEM</button>
+</div>
+
+
+
+<form *ngIf="menuDataList && table_id" [formGroup]="orderForm">
+  <mat-dialog-content class="mat-typography">
+    <div [class.wrapview]="billflag === 'view'" class="">
+      <div formArrayName="items" *ngFor="let item of items.controls; index as idx">
+        <div [formGroupName]="idx">
+          <div class="form-group btns">
+            <div class="item">
+              <mat-form-field appearance="outline">
+                <mat-select formControlName="name" (selectionChange)="onBookChange($event,item)"
+                  placeholder="Select Menu">
+                  <input type="text" class="search_menu" [formControl]="myControl" placeholder="Serach Item">
+                  <mat-option *ngFor="let stock of menuDataList" [value]="stock.menu_name">{{stock.menu_name}} -
+                    {{stock.menu_price | currency:'INR' }}</mat-option>
+                </mat-select>
+              </mat-form-field>
+            </div>
+            <mat-icon class="icon" (click)="onKeyUpEvent(item,'add')"> add</mat-icon>
+            <div class="qty">
+              <input type="text" class="form-control "  min="1" placeholder="qty" formControlName="qty" readonly>
+            </div>
+            <mat-icon class="icon" (click)="onKeyUpEvent(item,'remove')"> remove</mat-icon>
+
+            <div class="price">
+              <input type="text" class="form-control " placeholder="Price" formControlName="price" readonly>
+            </div>
+            <span (click)="removeGroup(idx)">
+              <mat-icon class="icon" style="background-color:red ;">delete</mat-icon>
+            </span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </mat-dialog-content>
+  <mat-dialog-actions>
+    <div class="btns">
+      
+      <button *ngIf="billflag === 'save'" class="pbutton" (click)="onSubmit()">Place Order</button>
+      <button *ngIf="billflag === 'update'" class="pbutton" (click)="UpdateItem()">Update Order</button>
+     
+      <button *ngIf="billflag === 'update'" style="background: #fd3e3e ; margin-left: 19px;" class="pbutton"
+      (click)="competeItem()">Completed Order</button>
+       <button class="bbutton">Total - {{total_bill}} Rs</button>
+    </div>
+
+    <button *ngIf=" billflag === 'view'" style="background: #3f51b5;     margin-left: 19px;" class="pbutton"
+      (click)="downloadInvoice()">Download Invoice </button>
+  </mat-dialog-actions>
+</form>
+<!-- [disabled]="!orderForm.valid " -->

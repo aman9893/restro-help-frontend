@@ -1,0 +1,35 @@
+ 
+ <mat-icon style="
+ cursor: pointer;" (click)="close()" > close</mat-icon>
+<mat-dialog-content>
+<div *ngIf="updateData" class="invoice-box" id="htmlData">
+    <table>
+        <tr class="top">
+            <td colspan="2">
+                <table>
+                    <tr>
+                        <td>
+                            Invoice #: {{updateData.bill_no}}<br />
+                            Created: January 1, 2015<br />
+                        </td>
+                    </tr>
+                </table>
+            </td>
+        </tr>
+        <tr class="heading">
+            <td>Item</td>
+            <td>Price</td>
+        </tr>
+        <tr class="item"  *ngFor="let billorderlist of billupdate.items">
+            <td>{{billorderlist.name}}-({{billorderlist.qty}})</td>
+            <td> Rs {{billorderlist.price}}</td>
+        </tr>
+    </table>
+</div>
+</mat-dialog-content>
+<div class="btns">
+<span *ngIf="updateData">Total: Rs {{updateData.total_bill}}</span>
+<span class="button" (click)="generatePDF('Download')">Download Pdf</span>
+<span  class="button" (click)="generatePDF('Print')">Print Pdf</span>
+</div>
+

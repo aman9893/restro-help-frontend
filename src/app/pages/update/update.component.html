@@ -1,0 +1,29 @@
+<div class="wrapper">
+  <mat-icon style="float: right;
+  cursor: pointer;" (click)="cancel()" > close</mat-icon>
+    <div  class="signup-box">
+     <div >
+       <h1> Update Restaurants  </h1>
+     </div>
+
+       <form  [formGroup]="sginupForm" novalidate >
+         <label> Name</label>
+         <input type="text" formControlName="name"  placeholder="Enter Name" />
+         <label>Restaurants Name</label>
+         <input type="text" formControlName="company_name" placeholder="Restaurants Name" />
+         <label>Shop Address</label>
+         <input type="text"  formControlName="shop_address" placeholder="Shop Address" />
+         <label>Email</label>
+         <input type="email" formControlName="email" placeholder="Enter Email" />
+         <label>Phone Number</label>
+         <input type="text" formControlName="phone_number" placeholder="Enter Mobile Number" />
+         <label>Password</label>
+         <input type="password" formControlName="password" placeholder="Enter Password" />
+         <input type="button"   [disabled]="!sginupForm.valid" (click)="Update()" value="Update" />
+       </form>
+     </div>
+ 
+ <!-----------------------------------Login Form  ------------------------------------------>
+
+ </div>
+ 

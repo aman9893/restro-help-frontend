@@ -1,0 +1,48 @@
+.breadcrumb {
+    background-color: #c5cee4;
+
+}
+.wrpper{
+    margin: 10px;
+    padding: 53px;
+    background: #3f51b514;
+}
+.breadcrumb a {
+    text-decoration: none;
+}
+
+.container {
+    max-width: 1000px;
+    padding: 0;
+}
+.px-3{
+    padding-top: 31px;
+}
+
+p {
+    margin: 0;
+}
+
+.d-flex a {
+    text-decoration: none;
+    color: #686868;
+}
+
+img {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+.fab.fa-twitter {
+    color: #8ab7f1;
+}
+
+.fab.fa-instagram {
+    color: #E1306C;
+}
+
+.fab.fa-facebook-f {
+    color: #5999ec;
+}

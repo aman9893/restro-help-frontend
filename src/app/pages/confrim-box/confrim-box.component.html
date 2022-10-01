@@ -1,0 +1,16 @@
+<p><div class="model_delete">
+    <mat-icon style="float: right;
+  cursor: pointer;" (click)="deleteResponse('no')"> close</mat-icon>
+    <!-- <div class="Modal_header">
+     1 Delete  {{this.confrimdata.body}}
+  </div> -->
+  <div class="Modal_content">
+    <div class="Modal_explanation">
+        {{this.confrimdata.body}}?
+    </div>
+  </div>
+  <div class="Modal_delete_footer">
+      <button mat-stroked-button color="primary" (click)="deleteResponse('no')" class="cancle_deelete_button">Cancel</button>
+      <button  mat-stroked-button color="warn"(click)="deleteResponse('yes')" class="uppercase_button">Completed</button>
+  </div>
+  </div>

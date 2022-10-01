@@ -1,0 +1,51 @@
+<div class="wrapper">
+   <div *ngIf="registerFormFlg" class="signup-box">
+    <div *ngIf="updateFlag != true">
+      <h1> RestoHelp Registration </h1>
+      <h4>It's free and only takes a minute</h4>
+    </div>
+    <div *ngIf="updateFlag === true">
+      <h1> Update Profile </h1>
+    </div>
+      <form  [formGroup]="sginupForm" novalidate >
+        <label> Name</label>
+        <input type="text" formControlName="name"  placeholder="Enter Name" />
+        <label>Restaurants Name</label>
+        <input type="text" formControlName="company_name" placeholder="Restaurants Name" />
+        <label>Shop Address</label>
+        <input type="text"  formControlName="shop_address" placeholder="Shop Address" />
+        <label>Email</label>
+        <input type="email" formControlName="email" placeholder="Enter Email" />
+        <label>Phone Number</label>
+        <input type="text" formControlName="phone_number" placeholder="Enter Mobile Number" />
+        <label>Password</label>
+        <input type="password" formControlName="password" placeholder="Enter Password" />
+        <input type="button" *ngIf="updateFlag != true"  [disabled]="!sginupForm.valid" (click)="onSubmit()" value="Submit" />
+        <input type="button" *ngIf="updateFlag === true"  [disabled]="!sginupForm.valid" (click)="Update()" value="Update" />
+     
+      </form>
+      <div *ngIf="updateFlag != true">
+        <p class="para-2">
+          Already have an account? <a (click)="login('login')">Login here</a>
+        </p>
+      </div>
+  
+    </div>
+
+
+<!-----------------------------------Login Form  ------------------------------------------>
+
+    <div *ngIf="loginFormFlg" class="login-box">
+      <h1>RestroHelp Login</h1>
+      <form  [formGroup]="loginForm" novalidate>
+        <label>Email</label>
+        <input type="email" formControlName="emailid" placeholder="Enter Email" />
+        <label>Password</label>
+        <input type="password" formControlName="password" placeholder="Enter Password" />
+        <input type="button" [disabled]="!loginForm.valid" (click)="onLogin()" value="Submit" />
+      </form>
+      <p class="para-2">
+        Not have an account? <a  (click)="login('SignUp')">Sign Up Here</a>
+      </p>
+    </div>
+</div>
