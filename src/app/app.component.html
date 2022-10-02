@@ -2,7 +2,7 @@
 <router-outlet></router-outlet>  
 <!-- ng generate module modulea --route a --module app.module -->
 <!-- <app-footer *ngIf="router.url !== '/login'"></app-footer> -->
-<div class="fixed-footer">
+<div  *ngIf="router.url !== '/login'" class="fixed-footer">
     <div class="container">Copyright  &copy; 2022  
         GALAXYSCRIPT PRIVATE LIMITED </div>        
 </div>

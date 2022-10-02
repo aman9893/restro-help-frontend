@@ -154,7 +154,8 @@ export class LoginComponent implements OnInit {
 
   closeDialog(data: any) {
     if (data.status === true) {
-      this.myRoute.navigate(['login']);
+      this.loginFormFlg = true;
+      this.registerFormFlg = false;
       this.openSnackBar(data.message, 'Dismiss');
     }
     if (data.status === false) {
