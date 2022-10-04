@@ -1,6 +1,8 @@
 export const apiConfig = {
 
-    localhostUrl:"http://ec2-43-206-128-164.ap-northeast-1.compute.amazonaws.com:3011/",
+    // localhostUrl:"http://ec2-43-206-128-164.ap-northeast-1.compute.amazonaws.com:3011/",
+    localhostUrl:"http://localhost:8000/",
+
 
     registerData: 'api/register',
     loginData: 'api/login',

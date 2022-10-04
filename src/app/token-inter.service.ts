@@ -21,7 +21,7 @@ export class TokenInterService implements HttpInterceptor {
     public snackBar: MatSnackBar
   ) {}
 
-  showSuccess(message: string): void {
+  showSuccess(message: any): void {
     this.snackBar.open(message);
   }
 
@@ -40,11 +40,14 @@ export class TokenInterService implements HttpInterceptor {
     }
     return next.handle(request).pipe(
       catchError((error) => {
+        this.handleAuthError(error)
         console.log('Returning caught observable');
         return throwError(error);
       })
     );
   }
+
+  
 
   private handleAuthError(err: HttpErrorResponse): Observable<any> {
     //handle your auth error or rethrow
@@ -52,6 +55,7 @@ export class TokenInterService implements HttpInterceptor {
       //navigate /delete cookies or whatever
       console.log('handled error ' + err.status);
       this.router.navigate([`/login`]);
+      this.showSuccess(err);
       // if you've caught / handled the error, you don't want to rethrow it unless you also want downstream consumers to have to handle it as well.
       return of(err.message);
     }

@@ -119,6 +119,8 @@ export class CreateBillComponent implements OnInit {
   formcall() {
     this.orderForm = new FormGroup({
       items: new FormArray([]),
+      cutomer_name:new FormControl,
+      cutomer_number:new FormControl,
     });
     if (this.billflag === 'update' || this.billflag === 'view') {
       for (let index = 0; index < this.billupdate.items.length; index++) {
@@ -242,6 +244,9 @@ export class CreateBillComponent implements OnInit {
         table_name: this.tabledata.tablename.table_name,
         total_bill:  this.total_bill,
         bill_status: 'booked',
+        cutomer_name: this.orderForm.controls['cutomer_name'].value,
+        cutomer_number: this.orderForm.controls['cutomer_number'].value,
+        create_date:new Date(),
       };
       this.dataService.saveBill(tableFormData).subscribe(
         (data: any) => this.closeDialog(data),
@@ -274,6 +279,9 @@ export class CreateBillComponent implements OnInit {
       table_name: this.tabledata.tablename.table_name,
       total_bill: this.total_bill,
       bill_status: 'booked',
+      cutomer_name: this.orderForm.controls['cutomer_name'].value,
+      cutomer_number: this.orderForm.controls['cutomer_number'].value,
+      create_date:new Date(),
     };
     this.dataService.updateBill(tableFormData).subscribe(
       (data: any) => this.closeDialog(data),

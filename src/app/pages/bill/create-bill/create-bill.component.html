@@ -4,13 +4,20 @@
   <mat-icon class="iconsclose"  (click)="close()"> close</mat-icon>
 
   </h2>
-
-  <button *ngIf="billflag != 'view'" style="margin-left: 0;" class="bbutton" (click)="addItem()">ADD ITEM</button>
 </div>
 
+  <form *ngIf="menuDataList && table_id" [formGroup]="orderForm">
+  <div class="flex-container">
+   
+    <div> <button *ngIf="billflag != 'view'" style="margin-left: 0;" class="bbutton" (click)="addItem()">ADD ITEM</button> </div>
+     <div><input type="text" class="form-control " placeholder="Customer Name" formControlName="cutomer_name" >    </div>
+      <div><input type="text" class="form-control " placeholder="Customer Name" formControlName="cutomer_number" >    </div>
+  </div>
 
 
-<form *ngIf="menuDataList && table_id" [formGroup]="orderForm">
+
+
+
   <mat-dialog-content class="mat-typography">
     <div [class.wrapview]="billflag === 'view'" class="">
       <div formArrayName="items" *ngFor="let item of items.controls; index as idx">

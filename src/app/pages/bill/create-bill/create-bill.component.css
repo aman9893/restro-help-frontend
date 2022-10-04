@@ -180,3 +180,12 @@
   padding: 0px !important;
 }
 
+.flex-container {
+  display: flex;
+  justify-content: space-between;
+}
+
+.flex-container > div {
+  margin: 10px;
+  text-align: center;
+}
