@@ -35,7 +35,7 @@ export class CreateBillComponent implements OnInit {
   updateFlag: boolean = false;
   billflag: any;
   totalUnitPrice: any;
-  qtyr: number = 0;
+  qtyr: number = 1;
   table_id: any;
   myFormValueChanges$: any;
   total_bill = 0;
@@ -65,10 +65,14 @@ export class CreateBillComponent implements OnInit {
     if (this.billflag === 'update') {
       this.getTableBillData(this.table_id);
       this.getmenuData();
+      this.formcall();
+      this.myFormValueChanges$ = this.orderForm.controls['items'].valueChanges;
+
     }
     if (this.billflag === 'view') {
       this.getTableBillData(this.table_id);
       this.getmenuData();
+      this.formcall();
     }
   }
 
@@ -90,7 +94,6 @@ export class CreateBillComponent implements OnInit {
     if (datalist && datalist.bill_order) {
       this.updateData = JSON.parse(datalist.bill_order);
       this.billupdate = this.updateData.bill_order;
-      console.log(this.updateData )
       this.total_bill =this.updateData.total_bill;
       this.formcall();
     }
@@ -119,28 +122,34 @@ export class CreateBillComponent implements OnInit {
   formcall() {
     this.orderForm = new FormGroup({
       items: new FormArray([]),
-      cutomer_name:new FormControl,
-      cutomer_number:new FormControl,
+      cutomer_number:new FormControl('',[
+        Validators.required
+      ]),
+      cutomer_name:new FormControl('',[
+        Validators.required
+      ])
     });
     if (this.billflag === 'update' || this.billflag === 'view') {
+      if(this.updateData && this.updateData.cutomer_name != undefined  &&  this.billupdate && this.billupdate.items != undefined){
+        this.orderForm.controls['cutomer_name'].setValue(this.updateData.cutomer_name);
+        this.orderForm.controls['cutomer_number'].setValue(this.updateData.cutomer_number);
+ 
       for (let index = 0; index < this.billupdate.items.length; index++) {
         const element = this.billupdate.items[index];
         let formGroup: FormGroup = this.formBuilder.group({
           name: this.formBuilder.control(element.name, Validators.required),
           qty: this.formBuilder.control(element.qty, [
             Validators.required,
-            Validators.min(1),
-            Validators.pattern('^(0|[1-9][0-9]*)$'),
           ]),
           price: this.formBuilder.control(element.price, [
             Validators.required,
-            Validators.min(1),
             Validators.pattern('^(0|[1-9][0-9]*)$'),
           ]),
         });
         this.items = this.orderForm.get('items') as FormArray;
         this.items.push(formGroup);
       }
+    }
     } else {
       this.addItem();
     }
@@ -182,6 +191,14 @@ export class CreateBillComponent implements OnInit {
   }
 
   onKeyUpEvent(idx: any, flag: any) {
+    this.myFormValueChanges$ = this.orderForm.controls['items'].valueChanges;
+    this.myFormValueChanges$.subscribe((salesList: any) =>
+      this.updateTotalUnitPrice(salesList)
+    )
+    console.log(this.qtyr)
+    this.qtyr= idx.controls['qty'].value
+    console.log( idx.controls['qty'].value)
+
     let qty = idx.controls['qty'].value;
     let price = idx.controls['price'].value;
     let name = idx.controls['name'].value;
@@ -202,10 +219,15 @@ export class CreateBillComponent implements OnInit {
 
     idx.controls['qty'].setValue(this.qtyr);
     idx.controls['price'].setValue(this.totalUnitPrice);
-    this.myFormValueChanges$ = this.orderForm.controls['items'].valueChanges;
-    this.myFormValueChanges$.subscribe((salesList: any) =>
-      this.updateTotalUnitPrice(salesList)
-    );
+ setTimeout(() => {
+  this.myFormValueChanges$ = this.orderForm.controls['items'].valueChanges;
+  console.log(  this.myFormValueChanges$.observers.length)
+  this.myFormValueChanges$.subscribe((salesList: any) =>
+    this.updateTotalUnitPrice(salesList)
+  );
+ }, 2000);
+
+
   }
 
   ///////////////////////////////////////////////////////////////////////////////
@@ -216,6 +238,7 @@ export class CreateBillComponent implements OnInit {
     for (let i in units) {
       let totalUnitPrice = units[i].price;
       this.totalSum += totalUnitPrice;
+      console.log(this.totalSum)
       this.total_bill = this.totalSum;
     }
   }
@@ -228,7 +251,7 @@ export class CreateBillComponent implements OnInit {
 
     be.items.forEach((element: any) => {
       console.log(element);
-      if (element.name === '' || element.qty === 0) {
+      if (element.name === '' || element.qty === 0 ||  !this.orderForm.valid) {
         this.datasubmitTrue = false;
       } else {
         this.datasubmitTrue = true;
@@ -253,7 +276,19 @@ export class CreateBillComponent implements OnInit {
         (err: any) => console.log(err)
       );
     } else {
-      alert('Item Name And Quantity is Blank');
+      let deletedata = {
+        flag:'warn',
+        body: 'Item Name And Item Quantity ,Customer Name ,Customer Number  is Required '
+      };
+      const dialogRef = this.dialog.open(ConfrimBoxComponent, {
+        width: '300px',
+        autoFocus: false,
+        data: deletedata,
+      });
+  
+      dialogRef.afterClosed().subscribe((result) => {
+        console.log(result);
+      });
     }
   }
 

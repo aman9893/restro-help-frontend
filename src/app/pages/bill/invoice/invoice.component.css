@@ -113,3 +113,14 @@
     cursor: pointer;
     margin-top: 14px;
 }
+
+.flex-container {
+    display: flex;
+    justify-content: space-between;
+  }
+  
+  .flex-container > div {
+    width: 313px;
+    font-weight: 500;
+    padding: 10px;
+  }

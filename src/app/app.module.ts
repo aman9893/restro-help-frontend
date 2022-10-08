@@ -30,6 +30,9 @@ import { ListBillComponent } from './pages/bill/list-bill/list-bill.component';
 import { BillComponent } from './pages/bill/bill.component';
 import { LoginComponent } from './pages/login/login.component';
 import { ProfileComponent } from './pages/profile/profile.component';
+import { AddContactBookComponent } from './pages/contact-book/add-contact-book/add-contact-book.component';
+import { ListContactBookComponent } from './pages/contact-book/list-contact-book/list-contact-book.component';
+import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 @NgModule({
   declarations: [
     AppComponent,
@@ -44,7 +47,9 @@ import { ProfileComponent } from './pages/profile/profile.component';
     ListBillComponent,
     BillComponent,
     LoginComponent,
-    ProfileComponent
+    ProfileComponent,
+    AddContactBookComponent,
+    ListContactBookComponent
   ],
   imports: [
     BrowserModule,
@@ -53,7 +58,7 @@ import { ProfileComponent } from './pages/profile/profile.component';
     Ng2SearchPipeModule,
     ReactiveFormsModule,
     HttpClientModule,
-
+    MatProgressSpinnerModule,
    MatSnackBarModule,
    FormsModule,
    MatIconModule,MatButtonModule,

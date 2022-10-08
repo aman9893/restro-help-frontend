@@ -55,10 +55,34 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
     display: inline-block;
     position: relative;
     text-align: left;
-    width: 130px;
+    width: 130px !important;
   }
-
-  
+  .input-mobile {
+	padding: 4px !important;
+    width: 117% !important;
+    margin-left: -9px !important;
+    margin-top: 7px !important;
+    font-size: 11px;
+    text-align: center;
+}
+  .button{
+    font: inherit;
+    color: inherit;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0 1em;
+    height: 23px;
+    border-radius: 8px;
+    line-height: 1;
+    border: 1px solid #3f51b5 !important;
+    color: #404089;
+    font-size: 0.875rem;
+    transition: 0.15s ease;
+    background-color: #ffffff;
+    font-size: 7px !important;
+}
   .circle {
     width: 300px;
     height: 300px;
@@ -148,16 +172,16 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
       justify-content: center;
       padding: 0 1em;
       height: 24px !important;
-      border-radius: 25px !important;
+      border-radius: 2px !important;
       line-height: 1;
       border: 2px solid #3f51b5;
       color: #404089;
       transition: 0.15s ease !important;
-      background-color: #ffffff !important;
-      font-size: 8px !important;
-      width: 91px !important;
-      margin-top: 5px !important;
-      margin-left: 0px !important;
+	  font-size: 10px !important;
+	  width: 91px !important;
+	  margin-top: 5px !important;
+	  margin-left: 73px !important;
+  
   }
   .price{
     width: 20% !important;
@@ -322,7 +346,7 @@ img {
 	height: 40px;
 	border-radius: 8px;
 	line-height: 1;
-	border: 2px solid #eff1f6;
+	border: 2px solid #eff1f6 !important;
 	color: #404089;;
 	font-size: 0.875rem;
 	transition: 0.15s ease;
@@ -777,7 +801,6 @@ img {
     background: rgba(28, 74, 121, 0.0392156863);
     border-radius: 50%;
     text-align: center;
-    padding: m;
     /* padding: 50px; */
     font-size: 14px;
     font-weight: 500;
@@ -797,8 +820,23 @@ img {
 	margin-left: 27px;
 	color: #077f7b;
   }  .icons{
-	font-size: 17px;
+	font-size: 17px !important;
     margin-top: 5px;
     margin-right: 4px;
 	cursor: pointer;
+  }  .wrapperlist{
+    background-image: linear-gradient(#077f7b, #077f7b);
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    height: 100%;
+    margin: 0;
+    display: flex;
+    align-items: center;
+    color: white;
+    font-family: "Montserrat", sans-serif;
+    font-size: 14px;
+    justify-content: center;
   }
+  .input-mobile {
+
+}

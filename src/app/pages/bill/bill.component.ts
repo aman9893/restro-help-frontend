@@ -37,7 +37,7 @@ export class BillComponent implements OnInit {
   tableData(data: any) {
     this.tableDataList = data;
     console.log( this.tableDataList)
-    this.billid= this.tableDataList.bill_id;
+    this.billid = this.tableDataList[0].bill_id;
     console.log( this.billid)
 
   }
@@ -91,7 +91,7 @@ addOder(tablename: any) {
     flag:'update'
   }
   let dialogRef = this.dialog.open(CreateBillComponent, {
-    width: '600px',
+    width: '550px',
     height: '',
     data: tabledata,
     autoFocus: false 
@@ -112,10 +112,14 @@ applyFilter(value: string) {
 }
 
 viewOder(tableInfo: any) { {
+  let tabData= {
+    'billid':this.billid,
+    'tableid':tableInfo
+  }
   const dialogRef = this.dialog.open(InvoiceComponent, {
-    width: '300px',
+    width: '400px',
     autoFocus: false,
-    data: tableInfo,
+    data: tabData,
   });
   dialogRef.afterClosed().subscribe((result) => {});
 }

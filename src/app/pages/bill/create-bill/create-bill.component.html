@@ -8,18 +8,23 @@
 
   <form *ngIf="menuDataList && table_id" [formGroup]="orderForm">
   <div class="flex-container">
-   
-    <div> <button *ngIf="billflag != 'view'" style="margin-left: 0;" class="bbutton" (click)="addItem()">ADD ITEM</button> </div>
-     <div><input type="text" class="form-control " placeholder="Customer Name" formControlName="cutomer_name" >    </div>
-      <div><input type="text" class="form-control " placeholder="Customer Name" formControlName="cutomer_number" >    </div>
+     <div>
+      <label> Customer Name</label>
+        <input class="input-mobile form-control"  placeholder="Customer Name"  formControlName="cutomer_name" required>
+  </div>
+      <div>
+        <label> Customer No</label>
+       <input class="input-mobile  form-control"  placeholder="Cutomer Number"  formControlName="cutomer_number" required>
+  </div>
   </div>
 
 
+  <div> <button *ngIf="billflag != 'view'" style="margin: 2px;" class="addbtn" (click)="addItem()">ADD ITEM</button> </div>
 
 
 
   <mat-dialog-content class="mat-typography">
-    <div [class.wrapview]="billflag === 'view'" class="">
+    <div [class.wrapview]="billflag === 'view'" *ngIf="items" class="">
       <div formArrayName="items" *ngFor="let item of items.controls; index as idx">
         <div [formGroupName]="idx">
           <div class="form-group btns">
@@ -35,12 +40,12 @@
             </div>
             <mat-icon class="icon" (click)="onKeyUpEvent(item,'add')"> add</mat-icon>
             <div class="qty">
-              <input type="text" class="form-control "  min="1" placeholder="qty" formControlName="qty" readonly>
+              <input type="text" class="form-control "   placeholder="qty" formControlName="qty" readonly>
             </div>
             <mat-icon class="icon" (click)="onKeyUpEvent(item,'remove')"> remove</mat-icon>
 
             <div class="price">
-              <input type="text" class="form-control " placeholder="Price" formControlName="price" readonly>
+              <input type="text" class="form-control" placeholder="Price" formControlName="price" readonly>
             </div>
             <span (click)="removeGroup(idx)">
               <mat-icon class="icon" style="background-color:red ;">delete</mat-icon>
@@ -56,13 +61,10 @@
       <button *ngIf="billflag === 'save'" class="pbutton" (click)="onSubmit()">Place Order</button>
       <button *ngIf="billflag === 'update'" class="pbutton" (click)="UpdateItem()">Update Order</button>
      
-      <button *ngIf="billflag === 'update'" style="background: #fd3e3e ; margin-left: 19px;" class="pbutton"
-      (click)="competeItem()">Completed Order</button>
+      <!-- <button *ngIf="billflag === 'update'" style="background: #fd3e3e ; margin-left: 19px;" class="pbutton"
+      (click)="competeItem()">Completed Order</button> -->
        <button class="bbutton">Total - {{total_bill}} Rs</button>
     </div>
-
-    <button *ngIf=" billflag === 'view'" style="background: #3f51b5;     margin-left: 19px;" class="pbutton"
-      (click)="downloadInvoice()">Download Invoice </button>
   </mat-dialog-actions>
 </form>
 <!-- [disabled]="!orderForm.valid " -->

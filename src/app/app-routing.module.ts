@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { AuthGuard } from './auth.guard';
 import { BillComponent } from './pages/bill/bill.component';
+import { ListContactBookComponent } from './pages/contact-book/list-contact-book/list-contact-book.component';
 import { LoginComponent } from './pages/login/login.component';
 import { ProfileComponent } from './pages/profile/profile.component';
 import { AddTableComponent } from './pages/Table/add-table/add-table.component';
@@ -15,7 +16,9 @@ const routes: Routes = [
   { path: 'menu', component: MenulistComponent ,canActivate: [AuthGuard]},
   { path: 'table', component: AddTableComponent ,canActivate: [AuthGuard] },
   { path: 'profile', component: ProfileComponent ,canActivate: [AuthGuard] },
+  { path: 'contact', component: ListContactBookComponent ,canActivate: [AuthGuard] },
 
+  
 ];
 @NgModule({
   imports: [RouterModule.forRoot(routes)],

@@ -1,15 +1,16 @@
-<p><div class="model_delete">
-    <mat-icon style="float: right;
+<div class="model_delete">
+  <mat-icon style="float: right;
   cursor: pointer;" (click)="deleteResponse('no')"> close</mat-icon>
-    <!-- <div class="Modal_header">
-     1 Delete  {{this.confrimdata.body}}
-  </div> -->
-  <div class="Modal_content">
+  <h4 class="menu_item" *ngIf="confrimdata.flag != 'warn'"> {{this.confrimdata.body}}?</h4>
+    <div  *ngIf="confrimdata.flag === 'warn'" >
+     <h3>Alert</h3>
+  </div>
+  <div class="Modal_content" *ngIf="confrimdata.flag === 'warn'">
     <div class="Modal_explanation">
-        {{this.confrimdata.body}}?
+      {{this.confrimdata.body}}
     </div>
   </div>
-  <div class="Modal_delete_footer">
+  <div class="Modal_delete_footer" *ngIf="confrimdata.flag != 'warn'">
       <button mat-stroked-button color="primary" (click)="deleteResponse('no')" class="cancle_deelete_button">Cancel</button>
       <button  mat-stroked-button color="warn"(click)="deleteResponse('yes')" class="uppercase_button">Completed</button>
   </div>

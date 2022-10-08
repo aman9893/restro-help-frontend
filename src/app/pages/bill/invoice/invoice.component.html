@@ -1,35 +1,35 @@
- 
- <mat-icon style="
- cursor: pointer;" (click)="close()" > close</mat-icon>
+<mat-icon style=" float: right;
+ cursor: pointer;" (click)="close()"> close</mat-icon>
+<h2 class="menu_item"> Invoice </h2>
 <mat-dialog-content>
-<div *ngIf="updateData" class="invoice-box" id="htmlData">
-    <table>
-        <tr class="top">
-            <td colspan="2">
-                <table>
-                    <tr>
-                        <td>
-                            Invoice #: {{updateData.bill_no}}<br />
-                            Created: January 1, 2015<br />
-                        </td>
-                    </tr>
-                </table>
-            </td>
-        </tr>
-        <tr class="heading">
-            <td>Item</td>
-            <td>Price</td>
-        </tr>
-        <tr class="item"  *ngFor="let billorderlist of billupdate.items">
-            <td>{{billorderlist.name}}-({{billorderlist.qty}})</td>
-            <td> Rs {{billorderlist.price}}</td>
-        </tr>
-    </table>
-</div>
+    <div *ngIf="updateData" class="invoice-box" id="htmlData">
+        <div class="flex-container ">
+            <div>
+                <b>Bill Details</b> <br />
+                Invoice #: {{updateData.bill_no}}<br />
+                Created: {{updateData.create_date | date}}
+            </div>
+            <div>
+                <b>Customer Details</b> <br />
+                Name :{{updateData.cutomer_name | titlecase}}<br />
+                NO :{{updateData.cutomer_number}}
+            </div>
+        </div>
+        <table>
+            <tr class="heading">
+                <td>Item</td>
+                <td>Price</td>
+            </tr>
+            <tr class="item" *ngFor="let billorderlist of billupdate.items">
+                <td>{{billorderlist.name}}-({{billorderlist.qty}})</td>
+                <td> Rs {{billorderlist.price}}</td>
+            </tr>
+        </table>
+    </div>
 </mat-dialog-content>
 <div class="btns">
-<span *ngIf="updateData">Total: Rs {{updateData.total_bill}}</span>
-<span class="button" (click)="generatePDF('Download')">Download Pdf</span>
-<span  class="button" (click)="generatePDF('Print')">Print Pdf</span>
+    <span *ngIf="updateData">Total: Rs {{updateData.total_bill}}</span>
+    <span class="button" (click)="generatePDF('Download')">Download Pdf</span>
+    <span class="button" (click)="generatePDF('Print')">Print Pdf</span>
+    <span class="button" style="color: red;" (click)="deleteUser()">Completed Order</span>
 </div>
-

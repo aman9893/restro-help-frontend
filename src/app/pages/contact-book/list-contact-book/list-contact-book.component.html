@@ -1,0 +1,64 @@
+<div class="loader_status" *ngIf="showDataLoader === true">
+  <mat-spinner [diameter]="40" mode="indeterminate"></mat-spinner>
+</div>
+<div *ngIf="showDataLoader === false" class="contact_wrapper">
+  <div class="contact_body">
+    <input type="text" style="float: left; width: 30%;" class="form-control" placeholder="Search here"
+    [(ngModel)]="searchedKeyword">
+    <div class="add">
+      <button (click)="addContact('save','data')" mat-stroked-button color="primary">
+        <mat-icon (click)="addContact('save','data')"> add</mat-icon>ADD CONTACT
+      </button>
+    </div>  
+  </div>
+  <div *ngIf="ConatctBookData.length > 0 ">
+      <div *ngFor="let contactdata of ConatctBookData | filter:searchedKeyword">
+        <div class="flex-container" >
+          <div>
+            <div class="user-img">
+              {{contactdata.contact_name | slice:0:1}}
+            </div>
+          </div>
+
+          <div>
+            <span class="contact-name text-ellipsis">{{contactdata.contact_name}} </span>
+            <span class="contact-date">{{contactdata.contact_number}}</span>
+            <br>
+            <span class="contact-date">{{contactdata.contact_email}}</span>
+          </div>
+
+          <div> 
+            <div class="header-top">
+              <button class="button" mat-icon-button [matMenuTriggerFor]="menu" aria-label="Example icon-button with a menu">
+                  <mat-icon>more_vert</mat-icon>
+                </button>
+                <mat-menu #menu="matMenu">
+                  <button (click)="openWhatapp(contactdata.contact_number)" mat-menu-item >
+                    <mat-icon>phone</mat-icon>
+                    <span>Call</span>
+                  </button>
+                  <button (click)="deletestock(contactdata.contact_id)" mat-menu-item>
+                    <mat-icon>delete</mat-icon>
+                    <span>Delete Contact</span>
+                  </button>
+             
+                  <button  (click)="addContact('update',contactdata)" mat-menu-item>
+                    <mat-icon>edit</mat-icon>
+                    <span>Edit Contact</span>
+                  </button>
+                </mat-menu>
+          </div>
+        </div>
+      </div>
+  </div>
+<div *ngIf="ConatctBookData">
+  <div *ngIf="ConatctBookData.length === 0" class="ListPage_emptyContent ember-view">
+    <div class="empty-icon">
+      <mat-icon>person</mat-icon>
+    </div>
+    <div class="empty-title">No Conatct Yet</div>
+    <div class="Title_listtable">Add a Contact by clicking the ADD NEW button above</div>
+  </div>
+</div>
+
+

@@ -76,6 +76,23 @@ getBillByTableID(id:any){
   return this.http.get(apiConfig.localhostUrl + apiConfig.getbillByID+'/'+id);
   
 }
+/////////////////////////////////////////////////////////////////////
+
+
+  
+getConatctList(){
+  return this.http.get(apiConfig.localhostUrl+apiConfig.contactbook_list);
+}
+addConatctBook(data:any){
+  return this.http.post(apiConfig.localhostUrl+apiConfig.addcontactBook,data);
+}
+
+ deleteConatctitem(id:any){
+  return this.http.delete(apiConfig.localhostUrl+apiConfig.deleteContactList+ '/' + id);
+}
+updateConatactItem(data:any){
+  return this.http.put(apiConfig.localhostUrl+apiConfig.update_contact_list, data);
+}
 
 
 openSnackBar(message: string, action: string) {
@@ -84,5 +101,7 @@ openSnackBar(message: string, action: string) {
     panelClass: ['app-bottom-snackbar'],
   });
 }
+
+userData:any;
 
 }

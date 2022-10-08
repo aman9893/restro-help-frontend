@@ -1,7 +1,7 @@
 export const apiConfig = {
 
-    // localhostUrl:"http://ec2-43-206-128-164.ap-northeast-1.compute.amazonaws.com:3011/",
-    localhostUrl:"http://localhost:8000/",
+    localhostUrl:"http://ec2-43-206-128-164.ap-northeast-1.compute.amazonaws.com:3011/",
+    // localhostUrl:"http://localhost:8000/",
 
 
     registerData: 'api/register',
@@ -23,7 +23,18 @@ export const apiConfig = {
     updateBill: 'api/update_bill_info',
     addBill:'api/addbill_data',
     deleteBill:'api/delete_bill',
-    getbillByID:'api/getbill_byTableid'
+    getbillByID:'api/getbill_byTableid',
+
+
+    contactbook_list: 'api/contactbook_list',
+    addcontactBook: 'api/add_contactbook',
+    deleteContactList: 'api/delete_contact',
+    update_contact_list: 'api/update_contact_list',
+
+
+
+
+
 
 
 /////////////////////////////////////////////////////////////////////////////////

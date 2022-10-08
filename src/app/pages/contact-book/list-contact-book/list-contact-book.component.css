@@ -1,0 +1,131 @@
+.contact_wrapper {
+    float: left;
+    width: 100%;
+    
+}
+
+.contact_header {
+    background-color: #fff;
+    border-bottom: 1px solid #eaeaea;
+    padding: 10px 15px;
+}
+
+.user-img {
+    width: 45px;
+    background: #3f51b5;
+    height: 45px;
+    color: white;
+    text-transform: capitalize;
+    float: left;
+    padding: 16px;
+    border-radius: 50%;
+    line-height: 8px;
+    font-size: 21px;
+    cursor: pointer;
+    margin: 10px;
+    font-weight: 600;
+}
+
+.contact-action {
+    float: right;
+    cursor: pointer;
+}
+
+.contacts-list ul li {
+    list-style-type: decimal;
+   
+}
+ul{
+    padding: 4px !important;
+}
+
+.contact_body {
+    height: 100%;
+    position: relative;
+    width: 100%;
+    box-sizing: border-box;
+    float: left;
+    padding: 18px;
+}
+
+.contact-list>li {
+    border: 1px solid #eaeaea;
+    border-radius: inherit;
+    /* padding: 5px; */
+    background-color: #fff;
+    height: 86px;
+    /* margin-right: 10px; */
+    list-style-type: none;
+    margin-top: 4px;
+}
+
+.fa-ellipsis-v:before {
+    float: right;
+}
+
+.text-ellipsis {
+    display: block;
+    max-width: 100%;
+    overflow: hidden;
+    padding-top: 13px;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    text-transform: capitalize;
+    font-size: 14px;
+}
+
+.contact-date {
+    color: #3f51b5;
+    font-size: 13px;
+    font-weight: 500;
+}
+.search_emp_container{
+  float: left;
+  width: 100%;   
+  margin-top: 9px;
+}
+
+
+.contact-cont{
+    float: left;
+    width: 100%;
+}
+.imgwrapper{
+    float: left;
+    width: 16%;
+}
+.contact-info{
+    float: left;
+    width: 68%;
+}
+
+
+.add{
+    width: 30%;
+    float: left;
+    margin-left: 6px;
+    margin-right: 10px;
+}
+
+.contacts-list {
+    float: left;
+    width: 50%;
+}
+
+.flex-container {
+    display: flex;
+    justify-content: space-between;
+    background-color: #eaeaea;
+    border: 1px solid #80808040;
+  }
+  
+  .flex-container > div {
+    width: 313px;
+    /* margin: 10px; */
+  }
+  .header-top{
+     margin-top: 10px;
+  }
+  /* ////////////
+   */
+   

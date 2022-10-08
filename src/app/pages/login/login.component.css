@@ -1,19 +1,6 @@
 
 
-  .wrapperlist{
-    background-image: linear-gradient(#077f7b, #077f7b);
-    background-repeat: no-repeat;
-    background-attachment: fixed;
-    height: 100%;
-    margin: 0;
-    display: flex;
-    align-items: center;
-    color: white;
-    font-family: "Montserrat", sans-serif;
-    font-size: 14px;
-    justify-content: center;
-  }
-  
+
   a {
     color: white;
     text-decoration: none;
