@@ -146,11 +146,11 @@
   .form-field input:hover,
   .form-field input:focus {
     background: white;
-    color: #1ed61e;
+    color: #080e08;
     transition: all 0.2s;
   }
   
   .form-field input:hover::placeholder {
-    color: #64d61e;
+    color: #090f06;
   }
   
