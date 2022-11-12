@@ -1,6 +1,6 @@
 export const apiConfig = {
 
-    localhostUrl:"http://ec2-43-206-128-164.ap-northeast-1.compute.amazonaws.com:3011/",
+    localhostUrl:"https://restrohelp.com/",
     // localhostUrl:"http://localhost:8000/",
 
 
