@@ -7,29 +7,34 @@
 </div>
 
   <form *ngIf="menuDataList && table_id" [formGroup]="orderForm">
-  <div class="flex-container">
-     <div>
-      <label> Customer Name</label>
-        <input class="input-mobile form-control"  placeholder="Customer Name"  formControlName="cutomer_name" required>
+  <div class="row">
+  <div class="col-md-6">
+    <mat-form-field class="width_100" appearance="fill">
+      <mat-label>Cutomer Name</mat-label>
+      <input matInput placeholder="Customer Name" formControlName="cutomer_name" >
+    </mat-form-field>
   </div>
-      <div>
-        <label> Customer No</label>
-       <input class="input-mobile  form-control"  placeholder="Cutomer Number"  formControlName="cutomer_number" required>
+  <div class="col-md-6">
+    <mat-form-field class="width_100" appearance="fill">
+      <mat-label>Cutomer Number</mat-label>
+      <input matInput placeholder="Customer Number" formControlName="cutomer_number" >
+    </mat-form-field>
   </div>
   </div>
-
-
-  <div> <button *ngIf="billflag != 'view'" style="margin: 2px;" class="addbtn" (click)="addItem()">ADD ITEM</button> </div>
-
-
-
-  <mat-dialog-content class="mat-typography">
+  <div>
+    <mat-form-field class="width_100" appearance="fill">
+      <mat-label>Customer Address</mat-label>
+      <input matInput placeholder="Customer Address"  formControlName="cutomer_address">
+    </mat-form-field>
+</div>
+<div> <button *ngIf="billflag != 'view'" style="margin: 2px;" class="addbtn" (click)="addItem()">ADD ITEM</button> </div>
+  <mat-dialog-content>
     <div [class.wrapview]="billflag === 'view'" *ngIf="items" class="">
       <div formArrayName="items" *ngFor="let item of items.controls; index as idx">
         <div [formGroupName]="idx">
-          <div class="form-group btns">
+          <div class="item_wrapper">
             <div class="item">
-              <mat-form-field appearance="outline">
+              <mat-form-field appearance="outline" class="width_100">
                 <mat-select formControlName="name" (selectionChange)="onBookChange($event,item)"
                   placeholder="Select Menu">
                   <input type="text" class="search_menu" [formControl]="myControl" placeholder="Serach Item">
@@ -40,12 +45,28 @@
             </div>
             <mat-icon class="icon" (click)="onKeyUpEvent(item,'add')"> add</mat-icon>
             <div class="qty">
-              <input type="text" class="form-control "   placeholder="qty" formControlName="qty" readonly>
+              <mat-form-field class="width_100" appearance="outline">
+                <mat-label>Qty</mat-label>
+                <input matInput  placeholder="qty" formControlName="qty" readonly>
+              </mat-form-field>
             </div>
             <mat-icon class="icon" (click)="onKeyUpEvent(item,'remove')"> remove</mat-icon>
-
             <div class="price">
-              <input type="text" class="form-control" placeholder="Price" formControlName="price" readonly>
+              <mat-form-field class="width_100" appearance="outline">
+                <mat-label>Price</mat-label>
+                <input matInput   placeholder="Price" formControlName="price" readonly>
+              </mat-form-field>
+            </div>
+            <div class="price">
+              <mat-form-field class="width_100" placeholder="kitchen" appearance="outline">
+                <mat-label>Select kitchen</mat-label>
+                <mat-select   formControlName="restro_name">
+                  <mat-option value="Ab kitchen">Ab kitchen</mat-option>
+                  <mat-option value="V9 kitchen">V9 kitchen</mat-option>
+                  <mat-option value="Momos kitchen">Momos kitchen</mat-option>
+                  <mat-option value="7 Heaven kitchen">7 Heaven kitchen</mat-option>
+                </mat-select>
+              </mat-form-field>
             </div>
             <span (click)="removeGroup(idx)">
               <mat-icon class="icon" style="background-color:red ;">delete</mat-icon>
@@ -63,7 +84,7 @@
      
       <!-- <button *ngIf="billflag === 'update'" style="background: #fd3e3e ; margin-left: 19px;" class="pbutton"
       (click)="competeItem()">Completed Order</button> -->
-       <button class="bbutton">Total - {{total_bill}} Rs</button>
+       <button class="bbutton">Total - {{total_bill}} </button>
     </div>
   </mat-dialog-actions>
 </form>

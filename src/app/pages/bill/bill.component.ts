@@ -37,8 +37,11 @@ export class BillComponent implements OnInit {
   tableData(data: any) {
     this.tableDataList = data;
     console.log( this.tableDataList)
-    this.billid = this.tableDataList[0].bill_id;
-    console.log( this.billid)
+    if(this.tableDataList.length != 0){
+      this.billid = this.tableDataList[0].bill_id;
+      console.log( this.billid)
+    }
+  
 
   }
   billData(data: any) {
@@ -52,8 +55,11 @@ addOder(tablename: any) {
     flag:'save'
   }
     let dialogRef = this.dialog.open(CreateBillComponent, {
-      width: '550px',
-      height: '',
+      panelClass: 'my-full-screen-dialog',
+    maxWidth: '100vw',
+    maxHeight: '100vh',
+    height: '100%',
+    width: '100%',
       data: tabledata,
       autoFocus: false 
     });
@@ -91,8 +97,11 @@ addOder(tablename: any) {
     flag:'update'
   }
   let dialogRef = this.dialog.open(CreateBillComponent, {
-    width: '550px',
-    height: '',
+    panelClass: 'my-full-screen-dialog',
+    maxWidth: '100vw',
+    maxHeight: '100vh',
+    height: '100%',
+    width: '100%',
     data: tabledata,
     autoFocus: false 
   });
@@ -117,7 +126,11 @@ viewOder(tableInfo: any) { {
     'tableid':tableInfo
   }
   const dialogRef = this.dialog.open(InvoiceComponent, {
-    width: '400px',
+    panelClass: 'my-full-screen-dialog',
+    maxWidth: '100vw',
+    maxHeight: '100vh',
+    height: '100%',
+    width: '100%',
     autoFocus: false,
     data: tabData,
   });

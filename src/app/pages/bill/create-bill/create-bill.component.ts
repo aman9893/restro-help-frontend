@@ -95,6 +95,7 @@ export class CreateBillComponent implements OnInit {
       this.updateData = JSON.parse(datalist.bill_order);
       this.billupdate = this.updateData.bill_order;
       this.total_bill =this.updateData.total_bill;
+      
       this.formcall();
     }
   }
@@ -127,7 +128,16 @@ export class CreateBillComponent implements OnInit {
       ]),
       cutomer_name:new FormControl('',[
         Validators.required
-      ])
+      ]),
+      cutomer_address:new FormControl('',[
+        Validators.required
+      ]),  
+    
+      // "cutomer_address":req.body.cutomer_address,
+      //   "restro_name":req.body.restro_name,
+      //   "delivery_charge":req.body.delivery_charge,
+      //   "discount":req.body.discount,
+      //   "status":req.body.status,
     });
     if (this.billflag === 'update' || this.billflag === 'view') {
       if(this.updateData && this.updateData.cutomer_name != undefined  &&  this.billupdate && this.billupdate.items != undefined){
@@ -145,6 +155,8 @@ export class CreateBillComponent implements OnInit {
             Validators.required,
             Validators.pattern('^(0|[1-9][0-9]*)$'),
           ]),
+          restro_name: this.formBuilder.control(element.restro_name, [
+          ]),
         });
         this.items = this.orderForm.get('items') as FormArray;
         this.items.push(formGroup);
@@ -160,6 +172,7 @@ export class CreateBillComponent implements OnInit {
       name: ['', Validators.required],
       qty: [0, Validators.required],
       price: ['', Validators.required],
+      restro_name: ['', Validators.required],
     });
   }
 
@@ -239,7 +252,7 @@ export class CreateBillComponent implements OnInit {
       let totalUnitPrice = units[i].price;
       this.totalSum += totalUnitPrice;
       console.log(this.totalSum)
-      this.total_bill = this.totalSum;
+      this.total_bill = this.totalSum ;
     }
   }
 
@@ -270,7 +283,14 @@ export class CreateBillComponent implements OnInit {
         cutomer_name: this.orderForm.controls['cutomer_name'].value,
         cutomer_number: this.orderForm.controls['cutomer_number'].value,
         create_date:new Date(),
+        status:'Ordered',
+        discount:'',
+        delivery_charge:'20',
+        cutomer_address: this.orderForm.controls['cutomer_address'].value,
+
+
       };
+      console.log(tableFormData)
       this.dataService.saveBill(tableFormData).subscribe(
         (data: any) => this.closeDialog(data),
         (err: any) => console.log(err)
@@ -316,7 +336,12 @@ export class CreateBillComponent implements OnInit {
       bill_status: 'booked',
       cutomer_name: this.orderForm.controls['cutomer_name'].value,
       cutomer_number: this.orderForm.controls['cutomer_number'].value,
+      cutomer_address: this.orderForm.controls['cutomer_address'].value,
       create_date:new Date(),
+      status:'Ordered',
+      discount:'',
+      delivery_charge:'20'
+
     };
     this.dataService.updateBill(tableFormData).subscribe(
       (data: any) => this.closeDialog(data),

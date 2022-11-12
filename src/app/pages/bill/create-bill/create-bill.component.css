@@ -21,13 +21,14 @@
     float: left;
   }
   .price{
-    width: 23%;
+    width: 19% ;
     float: left;
   }
+ 
   .item{
-    /* width: 45%;
-    float: left; */
-  }
+     float: left;
+    	width: 32%;
+     }
 .search_menu{
   width: 100%;
   padding: 9px;
@@ -41,10 +42,10 @@
   text-align: center;
   height: 19px;
   width: 19px;
-  margin: 6px;
+  margin: 3px !important;
   cursor: pointer;
   padding: 2px;
-  margin-top: 10px;
+  margin-top: 23px !important;
   color: white;
 }.button {
 	font: inherit;
@@ -150,7 +151,7 @@
   transition: 0.15s ease;
   background-color: #ffffff;
   font-size: 11px;
-  width: 113px;
+  width: 220px;
   margin-left: 260px;
 
 }
@@ -209,4 +210,8 @@
     background-color: #ffffff;
     font-size: 8px;
     width: 65px;
+}
+.width_100{
+  float: left;
+  width: 100%;
 }

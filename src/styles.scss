@@ -51,11 +51,15 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
   
   @media only screen and (max-width: 600px) {
       
-  .item mat-form-field {
-    display: inline-block;
-    position: relative;
-    text-align: left;
-    width: 130px !important;
+//   .item mat-form-field {
+//     display: inline-block;
+//     position: relative;
+//     text-align: left;
+//     width: 130px !important;
+//   }
+.price{
+    width: 17% !important;
+    float: left;
   }
   .input-mobile {
 	padding: 4px !important;
@@ -138,7 +142,7 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
     color: white !important;
   }
   .qty{
-    width: 15% !important;
+	width: 11% !important;
     text-align: center;
     float: left;
   }
@@ -178,15 +182,12 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
       color: #404089;
       transition: 0.15s ease !important;
 	  font-size: 10px !important;
-	  width: 91px !important;
+	  width: 180px !important;
 	  margin-top: 5px !important;
 	  margin-left: 73px !important;
   
   }
-  .price{
-    width: 20% !important;
-    float: left;
-  }
+
   
    
   .menuwrapper {
@@ -213,10 +214,12 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
   
   }
   
-  .item .mat-form-field-appearance-outline .mat-form-field-infix {
-    padding: 7px !important;
-  }
-
+//   .item .mat-form-field-appearance-outline .mat-form-field-infix {
+// 	padding: 7px !important;
+//     float: left;
+//     width: 100%;
+//   }
+//  
 
   
 img {
@@ -851,3 +854,15 @@ img {
     left: 573px;
 
 }
+
+.my-full-screen-dialog .mat-dialog-container {
+	max-width: none;
+	width: 100vw;
+	height: 100vh;
+  }
+
+  .item_wrapper{
+	width: 100%;
+    float: left;
+    margin-top: 5px;
+  }

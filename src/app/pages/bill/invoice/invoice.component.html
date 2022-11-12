@@ -1,13 +1,14 @@
 <mat-icon style=" float: right;
  cursor: pointer;" (click)="close()"> close</mat-icon>
-<h2 class="menu_item"> Invoice </h2>
+<h2 *ngIf="updateData" class="menu_item"> Invoice - # {{updateData.bill_no}} </h2>
 <mat-dialog-content>
     <div *ngIf="updateData" class="invoice-box" id="htmlData">
         <div class="flex-container ">
-            <div>
-                <b>Bill Details</b> <br />
-                Invoice #: {{updateData.bill_no}}<br />
-                Created: {{updateData.create_date | date}}
+            <div style="font-weight:700">
+                Date: {{updateData.create_date | date:'medium'}} <br/>
+                <b>Customer Address </b> <br />
+                <Address> {{updateData.cutomer_address}}</Address> <br />
+               
             </div>
             <div>
                 <b>Customer Details</b> <br />
@@ -19,10 +20,12 @@
             <tr class="heading">
                 <td>Item</td>
                 <td>Price</td>
+                <td style="color: green; padding-left: 92px;">Restro Name</td>
             </tr>
             <tr class="item" *ngFor="let billorderlist of billupdate.items">
                 <td>{{billorderlist.name}}-({{billorderlist.qty}})</td>
                 <td> Rs {{billorderlist.price}}</td>
+                <td style="color: green; padding-left: 92px;"> {{billorderlist.restro_name}}</td>
             </tr>
         </table>
     </div>
