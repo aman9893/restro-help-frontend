@@ -1,108 +1,75 @@
-
-
-    <div *ngIf="registerFormFlg"  class="wrapperlist">
-
-      <div class="login-card">
-        <div class="login-card-content">
-          <div class="headerlist">
-            <h2> <span class="highlight">Restro Help Registration</span></h2>
-          </div>
-          <form [formGroup]="sginupForm" novalidate class="form" autocomplete="off">
-          <div class="form">
-            <div class="form-field username">
-              <div class="icon">
-                <i class="far fa-user"></i>
-              </div>
-              <input type="text" formControlName="name"  placeholder="Enter Name" />
-            </div>
-            <div class="form-field password">
-              <div class="icon">
-                <i class="fas fa-lock"></i>
-              </div>
-              <input type="text" formControlName="company_name" placeholder="Restaurants Name" />
-            </div>
-
-            <div class="form-field password">
-              <div class="icon">
-                <i class="fas fa-lock"></i>
-              </div>
-              <input type="text"  formControlName="shop_address" placeholder="Shop Address" />
-            </div>
-      
-            <div class="form-field password">
-              <div class="icon">
-                <i class="fas fa-lock"></i>
-              </div>
-              <input type="email" formControlName="email" placeholder="Enter Email" />
-            </div>
-      
-            <div class="form-field password">
-              <div class="icon">
-                <i class="fas fa-lock"></i>
-              </div>
-              <input type="text" formControlName="phone_number" placeholder="Enter Mobile Number" />
-            </div>
-      
-            <div class="form-field password">
-              <div class="icon">
-                <i class="fas fa-lock"></i>
-              </div>
-              <input type="password" formControlName="password" placeholder="Password">
-            </div>
-      
-      
-            <button type="submit"  (click)="onSubmit()">Sgin Up  </button>
-              
-            <div (click)="login('login')">
-              Already have an account? <a >Login here</a>
-            </div>
-            <div class="login-card-footer">
-              <a>Forgot password?</a>
-            </div>
-          </div>
-        </form>
-        </div>
-      
-      </div>  
-      </div>
-
-
-
-<!-----------------------------------Login Form  ------------------------------------------>
-<div *ngIf="loginFormFlg"  class="wrapperlist">
-
-<div class="login-card">
-  <div class="login-card-content">
-    <div class="headerlist">
-      <h2> <span class="highlight">Restro Help</span></h2>
+<div  *ngIf="loginFormFlg"  class="divmain">
+  <div class="wrapper">
+    <div class="title">
+      Restro Help Login
     </div>
     <form [formGroup]="loginForm" novalidate class="form" autocomplete="off">
-    <div class="form">
-      <div class="form-field username">
-        <div class="icon">
-          <i class="far fa-user"></i>
-        </div>
-        <input type="text" formControlName="emailid" placeholder="Username">
-      </div>
-      <div class="form-field password">
-        <div class="icon">
-          <i class="fas fa-lock"></i>
-        </div>
-        <input type="password" formControlName="password" placeholder="Password">
-      </div>
-
-      <button type="submit"  (click)="onLogin()">
-        Login
-      </button>
-      <div (click)="login('SignUp')">
-        Don't have an account? <a >Sign Up Now</a>
-      </div>
-      <div class="login-card-footer">
-        <a>Forgot password?</a>
-      </div>
-    </div>
-  </form>
+       <div class="field">
+          <input type="text" formControlName="emailid" placeholder="Username">
+       </div>
+       <div class="field">
+          <input type="password" formControlName="password" placeholder="Password">
+       </div>
+       <div class="content">
+          <div class="checkbox">
+             <input type="checkbox" id="remember-me">
+             <label for="remember-me">Remember me</label>
+          </div>
+          <div class="pass-link">
+             <a href="#">Forgot password?</a>
+          </div>
+       </div>
+       <div class="field">
+          <input type="submit"   (click)="onLogin()" value="Login">
+       </div>
+       <div class="signup-link" >
+          Not a member? <a  (click)="login('SignUp')">Signup now</a>
+       </div>
+    </form>
   </div>
-
-</div>  
 </div>
+<!-- singup -->
+
+<div  *ngIf="registerFormFlg"  class="divmain">
+  <div class="wrapper">
+    <div class="title">
+      Restro Help Registration
+    </div>
+    <form [formGroup]="sginupForm" novalidate class="form" autocomplete="off">
+       <div class="field">
+        <input type="text" formControlName="name"  placeholder="Enter Name" />
+       </div>
+       <div class="field">
+        <input type="text" formControlName="company_name" placeholder="Restaurants Name" />
+       </div>
+       <div class="field">
+        <input type="text"  formControlName="shop_address" placeholder="Shop Address" />
+       </div>
+       <div class="field">
+        <input type="email" formControlName="email" placeholder="Enter Email" />
+       </div>
+       <div class="field">
+        <input type="text" formControlName="phone_number" placeholder="Enter Mobile Number" />
+       </div>
+       <div class="field">
+        <input type="password" formControlName="password" placeholder="Password">
+       </div>
+     
+       <div class="content">
+          <div class="pass-link">
+             <a href="#">Forgot password?</a>
+          </div>
+       </div>
+       <div class="field">
+          <input type="submit"  (click)="onSubmit()"value="Register">
+       </div>
+       <div class="signup-link" >
+          you a member <a  (click)="login('login')">Login now</a>
+       </div>
+    </form>
+  </div>
+</div>
+
+ 
+
+

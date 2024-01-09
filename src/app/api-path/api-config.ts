@@ -1,7 +1,7 @@
 export const apiConfig = {
 
-    localhostUrl:"https://restrohelp.com/",
-    // localhostUrl:"http://localhost:8000/",
+   // localhostUrl:"https://restrohelp.com/",
+     localhostUrl:"http://localhost:8000/",
 
 
     registerData: 'api/register',
