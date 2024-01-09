@@ -9,16 +9,24 @@ import { AddTableComponent } from './pages/Table/add-table/add-table.component';
 import { MenulistComponent } from './pages/Table/table/menulist/menulist.component';
 
 const routes: Routes = [
-  { path: '', component: BillComponent  , canActivate: [AuthGuard] },
-  { path: '', redirectTo: 'bill', pathMatch: 'full' },
-  { path: 'login', component: LoginComponent, },
-  { path: 'bill', component: BillComponent ,canActivate: [AuthGuard]},
-  { path: 'menu', component: MenulistComponent ,canActivate: [AuthGuard]},
-  { path: 'table', component: AddTableComponent ,canActivate: [AuthGuard] },
-  { path: 'profile', component: ProfileComponent ,canActivate: [AuthGuard] },
-  { path: 'contact', component: ListContactBookComponent ,canActivate: [AuthGuard] },
+  // { path: '', component: BillComponent  , canActivate: [AuthGuard] },
+  // { path: '', redirectTo: 'bill', pathMatch: 'full' },
+  // { path: 'login', component: LoginComponent, },
+  // { path: 'bill', component: BillComponent ,canActivate: [AuthGuard]},
+  // { path: 'menu', component: MenulistComponent ,canActivate: [AuthGuard]},
+  // { path: 'table', component: AddTableComponent ,canActivate: [AuthGuard] },
+  // { path: 'profile', component: ProfileComponent ,canActivate: [AuthGuard] },
+  // { path: 'contact', component: ListContactBookComponent ,canActivate: [AuthGuard] },
 
-  
+  { path: '', component: BillComponent  , },
+  { path: '', redirectTo: 'bill', pathMatch: 'full' },
+  { path: 'login', component: LoginComponent },
+  { path: 'bill', component: BillComponent },
+  { path: 'menu', component: MenulistComponent },
+  { path: 'table', component: AddTableComponent  },
+  { path: 'profile', component: ProfileComponent},
+  { path: 'contact', component: ListContactBookComponent  },
+
 ];
 @NgModule({
   imports: [RouterModule.forRoot(routes)],

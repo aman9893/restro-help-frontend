@@ -20,6 +20,8 @@ export class AddTableComponent implements OnInit {
   update_data: any;
   updatebtn: boolean = false;
   table_id: any;
+  registerForm: any;
+  submitted = false;
   constructor(
     private formBuilder: FormBuilder,
     private dataService: DataService,
@@ -31,7 +33,6 @@ export class AddTableComponent implements OnInit {
   ngOnInit() {
     this.getTableData();
     let UserId = this.authService.getUserId();
-    console.log(UserId);
     this.user_id = UserId;
     this.createForm();
   }
@@ -56,9 +57,17 @@ export class AddTableComponent implements OnInit {
   ErrorMessage() {
     return '*This is required field';
   }
+  get f() { return this.registerForm.controls; }
 
   //---------------------------------------------add file end -------------------------------------
   onSubmit() {
+    this.submitted = true;
+
+    // stop here if form is invalid
+    if (this.tableForm.invalid) {
+        return;
+    }
+
     if (this.tableForm.valid) {
       let tableFormData = {
         user_id: this.user_id,
@@ -71,6 +80,7 @@ export class AddTableComponent implements OnInit {
       );
     }
     this.tableForm.reset();
+    this.submitted=false;
   }
 
   closeDialog(data: any) {
