@@ -124,6 +124,7 @@ export class AddTableComponent implements OnInit {
     if (data.status === true) {
       this.dataService.openSnackBar(data.message, 'Dismiss')
       this.getTableData();
+      this.tableForm.reset();
     }
   }
 }

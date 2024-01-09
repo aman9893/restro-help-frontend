@@ -22,16 +22,9 @@
                 <tr *ngFor="let table of tableDataList ;  let i=index;">
                     <th scope="row">{{i+1}}</th>
                     <td>{{table.table_name}}</td>
-                    <td>
-                            <ul class="list-inline m-0">
-                                <li class="list-inline-item">
-                                        <mat-icon style="color: #fff;" class="icons" (click)="edit(table)"> edit</mat-icon> 
-                                </li>
-                                <li class="list-inline-item">
-                                        <mat-icon style="color: #c8101094;" class="icons" (click)="delete(table.table_id)"> delete</mat-icon> 
-                                </li>
-                            </ul>
-                    </td>
+                    <td>     <mat-icon style="color: #fff;" class="icons" (click)="edit(table)"> edit</mat-icon> </td>
+                    <td>  <mat-icon style="color: #000000c9;" class="icons" (click)="delete(table.table_id)"> delete</mat-icon></td>
+                    
                 </tr>
             </tbody>
         </table>
