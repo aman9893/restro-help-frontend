@@ -1,6 +1,6 @@
 export const apiConfig = {
 
-    localhostUrl:"https://18.217.110.106:3011/",
+    localhostUrl:"http://18.217.110.106:3011/",
    //  localhostUrl:"http://localhost:8000/",
 
 
