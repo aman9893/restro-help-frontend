@@ -65,6 +65,7 @@ export class AddTableComponent implements OnInit {
 
     // stop here if form is invalid
     if (this.tableForm.invalid) {
+      this.dataService.openSnackBar('* Table Name is mandatory ', 'Dismiss')
         return;
     }
 

@@ -6,9 +6,9 @@
       <form [formGroup]="tableForm" class="menu-container" >
          <div class="field">
             <input type="text" formControlName="table_name" placeholder="Enter Table Name">
-            <div *ngIf="submitted && tableForm.controls['table_name'].errors?.['required']" >
+            <!-- <div *ngIf="submitted && tableForm.controls['table_name'].errors?.['required']" >
             <mat-error style="margin: 10px;" *ngIf="tableForm.controls['table_name'].errors?.['required']">Table Name is required</mat-error>
-        </div>
+        </div> -->
         </div>
 
          <div class="field">

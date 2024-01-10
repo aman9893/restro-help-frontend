@@ -107,7 +107,7 @@ img {
 		}
 
 		&:hover,
-		&:focus {
+		&:focus ,&:active{
 		    text-decoration: none;
     color: #fff;
     font-weight: 500;
@@ -115,6 +115,15 @@ img {
 	font-size: 20px;
 		}
 	}
+}
+
+.active{
+	text-decoration: none;
+    color: #fff;
+    font-weight: 500;
+    transition: 0.15s ease;
+	font-size: 20px;
+	border-bottom: 1px solid;
 }
 
 .header-navigation-actions {

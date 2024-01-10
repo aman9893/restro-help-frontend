@@ -1,286 +1,161 @@
+table {
+  background: linear-gradient(-135deg, #c850c0, #4158d0);
+  transition: all 0.3s ease;
+  color: white;
+  font-size: 14px;
+  cursor: pointer;
+  /* margin: 10px; */
+  font-weight: 500;
+  border: 1px solid;
+  padding: 16px !important;
+  border-radius: 10px;
+  text-align: center;
+  margin-top: 19px;
 
-:focus {
-	outline: 0;
-}
-
-.responsive-wrapper {
-	width: 90%;
-	max-width: 1280px;
-	margin-left: auto;
-	margin-right: auto;
-}
-
-  .menuwrapper {
-	float: left;
-    max-width: 405px;
-    /* position: fixed; */
-    background: #fff;
-    border-radius: 7px;
-    padding: 28px 0 40px;
-    /* transition-duration: 0.15s; */
-    /* margin: 0px auto !important; */
-    box-shadow: 0 13px 27px -5px rgb(50 50 93 / 25%), 0 8px 16px -8px rgb(0 0 0 / 30%), 0 -6px 16px -6px rgb(0 0 0 / 3%);
-    // margin-left: 437px;
-    width: 100%;
-    margin-top: 10px;
-    margin-left: 48px;
 }
 
 
-  .task-input {
-	position: relative;
-	height: 52px;
-	padding: 0 25px;
-  }
-  
-  .task-input ion-icon {
-	position: absolute;
-	top: 50%;
-	color: #999;
-	font-size: 25px;
-	transform: translate(17px, -50%);
-  }
-  
- 
-  
-  .task-input input:focus,
-  .task-input input.active {
-	padding-left: 52px;
-	border: 2px solid  #003366;
-  }
-  
-  .task-input-1 {
-	float: left;
-    width: 40%;
-    margin: 9px;
-  }
-  .task-input-2{
-	float: left;
-    width: 40%;
-    margin: 9px;
-  }
-  
-  .controls,
-  
-  .controls {
-	padding: 18px 25px;
-	border-bottom: 1px solid #ccc;
-  }
-  
-  .filters span {
-	margin: 0 8px;
-	font-size: 17px;
-	color: #444444;
-	cursor: pointer;
-  }
-  
-  .filters span:first-child {
-	margin-left: 0;
-  }
-  
-  .filters span.active {
-	color: #f12711;
-  }
-  
-  .clear-btn {
-	border: none;
-    opacity: 0.6;
-    outline: none;
-    color: #fff;
-    cursor: pointer;
-    font-size: 13px;
-    padding: 7px 13px;
-    border-radius: 4px;
-    letter-spacing: 0.3px;
-    transition: transform 0.25s ease;
-    background: linear-gradient(135deg, #f5af19 0%, #f12711 100%);
-    width: 332px;
-    /* margin: 14px; */
+// 
+
+
+@media (min-width:1025px) { /* big landscape tablets, laptops, and desktops */ }
+@media (min-width:1281px) { /* hi-res laptops and desktops */ }
+
+
+.divmain{
+  display: grid;
+  height: auto;
+  width: 100%;
+  place-items: center;
+  background: #f2f2f2;
+  padding: 20px;
+  /* background: linear-gradient(-135deg, #c850c0, #4158d0); */
+}
+
+
+
+::selection{
+  background: #4158d0;
+  color: #fff;
+}
+.wrapper{
+  width: 287px;
+  background: #fff;
+  border-radius: 15px;
+  box-shadow: 0px 15px 20px rgba(0,0,0,0.1);
+}
+.wrapper .title{
+  font-size: 17px;
+    font-weight: 600;
     text-align: center;
-    margin-left: 58px;
-    margin: 14px;
-  }
-  
-  .clear-btn.active {
-	opacity: 0.9;
-  }
-  
-  .clear-btn:active {
-	transform: scale(0.93);
-  }
-  
-  .task-box {
-	margin-top: 20px;
-	margin-right: 5px;
-	padding: 0 20px 10px 25px;
-  }
-  
-  .task-box.overflow {
-	overflow-y: auto;
-	max-height: 300px;
-  }
-  
-  .task-box::-webkit-scrollbar {
-	width: 5px;
-  }
-  
-  .task-box::-webkit-scrollbar-track {
-	background: #f12711;
-	border-radius: 25px;
-  }
-  
-  .task-box::-webkit-scrollbar-thumb {
-	background: #e6e6e6;
-	border-radius: 25px;
-  }
-  
-  .task-box .task {
-	list-style: none;
-	font-size: 17px;
-	margin-bottom: 18px;
-	padding-bottom: 16px;
-	align-items: flex-start;
-	border-bottom: 1px solid #ccc;
-  }
-  
-  .task-box .task:last-child {
-	margin-bottom: 0;
-	border-bottom: 0;
-	padding-bottom: 0;
-  }
-  
-  .task-box .task label {
-	display: flex;
-	align-items: flex-start;
-  }
-  
-  .task label input {
-	margin-top: 7px;
-	accent-color: #f12711;
-  }
-  
-  .task label p {
-	user-select: none;
-	margin-left: 12px;
-	word-wrap: break-word;
-  }
+    line-height: 44px;
+    color: #fff;
+    -webkit-user-select: none;
+    user-select: none;
+    border-radius: 15px 15px 0 0;
+    background: linear-gradient(-135deg, #c850c0, #4158d0);
+}
+.wrapper form{
+  padding: 10px 30px 50px 30px;
+}
+.wrapper form .field{
+  height: 50px;
+  width: 100%;
+  position: relative;
+}
+.wrapper form .field input{
+  height: 100%;
+  width: 100%;
+  outline: none;
+  font-size: 17px;
+  padding-left: 20px;
+  border: 1px solid lightgrey;
+  border-radius: 25px;
+  transition: all 0.3s ease;
+  margin: 3px;
+}
+.wrapper form .field input:focus,
+form .field input:valid{
+  border-color: #4158d0;
+}
+.wrapper form .field label{
+  position: absolute;
+  top: 50%;
+  left: 20px;
+  color: #999999;
+  font-weight: 400;
+  font-size: 17px;
+  pointer-events: none;
+  transform: translateY(-50%);
+  transition: all 0.3s ease;
+}
+form .field input:focus ~ label,
+form .field input:valid ~ label{
+  top: 0%;
+  font-size: 16px;
+  color: #4158d0;
+  background: #fff;
+  transform: translateY(-50%);
+}
+form .content{
+  display: flex;
+  width: 100%;
+  height: 50px;
+  font-size: 16px;
+  align-items: center;
+  justify-content: space-around;
+}
+form .content .checkbox{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+form .content input{
+  width: 15px;
+  height: 15px;
+  background: red;
+}
+form .content label{
+  color: #262626;
+  user-select: none;
+  padding-left: 5px;
+}
+form .content .pass-link{
+  color: "";
+}
+.btn{
+  height: 50px;
+  width: 100%;
+  position: relative;
+  color: #fff;
+  border: none;
+  padding-left: 0;
+  font-size: 20px;
+  font-weight: 500;
+  cursor: pointer;
+  background: linear-gradient(-135deg, #c850c0, #4158d0);
+  transition: all 0.3s ease;
+  margin-top: 8px;
+}
+form .field input[type="submit"]:active{
+  transform: scale(0.95);
+}
+form .signup-link{
+  color: #262626;
+  margin-top: 20px;
+  text-align: center;
+}
+form .pass-link a,
+form .signup-link a{
+  color: #4158d0;
+  text-decoration: none;
+}
+form .pass-link a:hover,
+form .signup-link a:hover{
+  text-decoration: underline;
+}
 
-  .task label p.checked {
-	text-decoration: line-through;
-  }
-  
-  .task-box .settings {
-	position: relative;
-  }
-  
-  .settings :where(i, li) {
-	cursor: pointer;
-  }
-  
-  .settings .task-menu {
-	position: absolute;
-	right: -5px;
-	bottom: -65px;
-	padding: 5px 0;
-	background: #fff;
-	border-radius: 4px;
-	transform: scale(0);
-	transform-origin: top right;
-	box-shadow: 0 0 6px rgba(0, 0, 0, 0.15);
-	transition: transform 0.2s ease;
-	z-index: 10;
-  }
-  
-  .task-box .task:last-child .task-menu {
-	bottom: 0;
-	transform-origin: bottom right;
-  }
-  
-  .task-box .task:first-child .task-menu {
-	bottom: -65px;
-	transform-origin: top right;
-  }
-  
-  .task-menu.show {
-	transform: scale(1);
-  }
-  
-  .task-menu li {
-	height: 25px;
-	font-size: 16px;
-	margin-bottom: 2px;
-	padding: 17px 15px;
-	cursor: pointer;
-	justify-content: flex-start;
-  }
-  
-  .task-menu li:last-child {
-	margin-bottom: 0;
-  }
-  
-  .settings li:hover {
-	background: #f5f5f5;
-  }
-  
-  .settings li i {
-	padding-right: 8px;
-  }
-  
-  @media (max-width: 400px) {
-	body {
-	  padding: 0 10px;
-	}
-	.wrapper {
-	  padding: 20px 0;
-	}
-	.filters span {
-	  margin: 0 5px;
-	}
-	.task-input {
-	  padding: 0 20px;
-	}
-	.controls {
-	  padding: 18px 20px;
-	}
-	.task-box {
-	  margin-top: 20px;
-	  margin-right: 5px;
-	  padding: 0 15px 10px 20px;
-	}
-	.task label input {
-	  margin-top: 4px;
-	}
-  }
-  
 
-  .errorspan{
-	float: left;
-    width: 100%;
-    margin-left: 2px;
-    color: red;
-    padding-bottom: 9px;
-    padding-top: 7px;
-  }
-  .taskwrapper{
-
-  }
-
-  .menu-container{
-	float: left;
-	width: 100%;
-  }
-
-  .menu-container mat-form-field{
-	float: left;
-    width: 46%;
-    /* margin: 7px; */
-    margin-left: 12px;
-
-  }
-
-  .table td, .table th {
-    padding: 0.75rem;
-    vertical-align: top;
-    border-top: 1px solid #dee2e6;
-    text-align: center !important;
+a{
+  cursor: pointer;
 }

@@ -1,42 +1,31 @@
-
-<div class="menuwrapper ">
-    <h2 class="menu_item">ADD MENU</h2>
-    <form  class="menu-container" [formGroup]="tableForm"  autocomplete="off" novalidate>
-        <mat-form-field appearance="outline">
-          <mat-label>Item Name</mat-label>
-          <input matInput type="text" formControlName="menu_name" placeholder="Add Item">
-          <mat-error *ngIf="tableForm.controls['menu_price'].errors?.['required']">Menu Name is Required</mat-error>
-        </mat-form-field>
-      
-        <mat-form-field appearance="outline" >
-          <mat-label>Item Price</mat-label>
-          <input matInput type="number" formControlName="menu_price" placeholder=" Price ">
-          <mat-error *ngIf="tableForm.controls['menu_price'].errors?.['required']">Menu Price Name is Required</mat-error>
-        </mat-form-field>
-   
-        <div>
-            <button *ngIf="!updatebtn" class="clear-btn" type="submit" [disabled]="!tableForm.valid" (click)="onSubmit()">Save</button>
-            <button *ngIf="updatebtn" class="clear-btn" type="submit" [disabled]="!tableForm.valid" (click)="update()">Update</button>
+<div class="divmain">
+    <div class="wrapper">
+        <div class="title">
+            Add Menu Name
         </div>
-        <table class="table m-0 task-box">
-            <tbody>
-                <tr *ngFor="let table of tableDataList ;  let i=index;">
-                    <th scope="row">{{i+1}}</th>
-                    <td>{{table.menu_name}}</td>
-                    <td>{{table.menu_price}}</td>
-                    <td>
-                        <!-- Call to action buttons -->
-                        <ul class="list-inline m-0">
-                            <li class="list-inline-item">
-                                    <mat-icon style="color: gray;" class="icons" (click)="edit(table)"> edit</mat-icon> 
-                            </li>
-                            <li class="list-inline-item">
-                                    <mat-icon style="color: #ff000094;" class="icons" (click)="delete(table.menu_id)"> delete</mat-icon> 
-                            </li>
-                        </ul>
-                    </td>
-                </tr>
-            </tbody>
-        </table>
-    </form>
-</div>
+        <form class="menu-container" [formGroup]="tableForm" autocomplete="off" novalidate>
+            <div class="field">
+                <input type="text" formControlName="menu_name" placeholder="Enter Item Name">
+            </div>
+            <div class="field">
+                <input type="text" formControlName="menu_price" placeholder="Enter Item Price">
+            </div>
+            <div class="field">
+                <button *ngIf="!updatebtn" class="btn" type="submit" (click)="onSubmit()">Save</button>
+                <button *ngIf="updatebtn" class="btn" type="submit" [disabled]="!tableForm.valid"
+                    (click)="update()">Update</button>
+            </div>
+            <table class="table  ">
+                <tbody>
+                    <tr *ngFor="let table of tableDataList ;  let i=index;">
+                        <td>{{table.menu_name}} </td>
+                        <td>{{table.menu_price}} </td>
+                        <td> <mat-icon style="color: #fff;" class="icons" (click)="edit(table)"> edit</mat-icon> </td>
+                        <td> <mat-icon style="color: #000000c9;" class="icons" (click)="delete(table.table_id)">
+                                delete</mat-icon></td>
+
+                    </tr>
+                </tbody>
+            </table>
+        </form>
+    </div>

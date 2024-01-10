@@ -99,4 +99,11 @@ export class ListContactBookComponent implements OnInit {
   openWhatapp(PhoneNumber:any){
     window.location.href ='https://wa.me/'+PhoneNumber;
   }
+
+   email(email:any)
+{
+  let  emaila = email;
+  let email2 = 'mailto:' + email
+    window.location.href = email2;
+}
 }

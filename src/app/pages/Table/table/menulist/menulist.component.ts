@@ -63,6 +63,12 @@ export class MenulistComponent implements OnInit {
 
   //---------------------------------------------add file end -------------------------------------
   onSubmit() {
+    if (this.tableForm.invalid) {
+      this.dataService.openSnackBar('* Menu Name  And Menu Price is mandatory ', 'Dismiss')
+      return;
+
+  }
+
     if (this.tableForm.valid) {
       let tableFormData = {
         user_id: this.user_id,

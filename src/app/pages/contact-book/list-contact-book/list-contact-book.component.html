@@ -1,80 +1,69 @@
-
-
-
-<div class="container">
-  <div class="loader" *ngIf="showDataLoader === true">
-    <mat-spinner [diameter]="40" mode="indeterminate"></mat-spinner>
-  </div>
-  <div *ngIf="showDataLoader === false" class="contact_wrapper">
-
-  
-  
-  <div class="row">
-
-    <div class="contact_body" style="    padding: 17px;">
-      <input type="text" style="float: left; width: 30%;" class="form-control" placeholder="Search here"
-      [(ngModel)]="searchedKeyword">
-      <div class="add">
-        <button style="margin-left: 9px;" (click)="addContact('save','data')" mat-stroked-button color="primary">
-          <mat-icon (click)="addContact('save','data')"> add</mat-icon>ADD CONTACT
-        </button>
-      </div>  
+<div class="divmain">
+  <div class="wrapper">
+    <div class="title">
+      Customer Contact Book
     </div>
-      <div class="col-lg-6 layout-spacing">
-          <div class="statbox widget box box-shadow">
-              <div class="widget-content widget-content-area">
-                  <div class="row">
+
+
+    <div class="field">
+      <button class="btn" (click)="addContact('save','data')">Add Contact</button>
+
+    </div>
+    <table class="table" *ngIf="showDataLoader === false">
+      <tbody>
+        <tr *ngFor="let contactdata of ConatctBookData | filter:searchedKeyword">
+          <td style="    width: 7px;">
+            <mat-icon (click)="openWhatapp(contactdata.contact_number)">phone</mat-icon>
+            
+          </td>
+          <td title="contactdata.contact_name">{{contactdata.contact_name}}</td>
+          <td class="cell-4">
+          <a href="mailto:{{contactdata.contact_email}}?subject=Hello&body=How are you?" class="text-overflow" title={{contactdata.contact_email}}>{{contactdata.contact_email}}</a>
+        </td>
+          <td >
+            <div  class="header-top">
+              <button class="button" mat-icon-button [matMenuTriggerFor]="menu"
+                aria-label="Example icon-button with a menu">
+                <mat-icon>more_vert</mat-icon>
+              </button>
+              <mat-menu #menu="matMenu">
+                <button (click)="openWhatapp(contactdata.contact_number)" mat-menu-item>
+                  <mat-icon>phone</mat-icon>
+                  <span>Call</span>
+                </button>
+                <button  mat-menu-item (click)="email(contactdata.contact_email)">
+                  <mat-icon>mail</mat-icon>
+                  <span>Email</span>
                  
-                      <div class="col-lg-12 col-md-12 col-sm-12">
-                          <div id="content_2" class="tabcontent"> 
-                              <div class="story-container-2">
-                                  <div class="single-story" *ngFor="let contactdata of ConatctBookData | filter:searchedKeyword">
-                                      <div class="story-dp">
-                                        <div class="header-top">
-                                          <button class="button" mat-icon-button [matMenuTriggerFor]="menu" aria-label="Example icon-button with a menu">
-                                              <mat-icon>more_vert</mat-icon>
-                                            </button>
-                                            <mat-menu #menu="matMenu">
-                                              <button (click)="openWhatapp(contactdata.contact_number)" mat-menu-item >
-                                                <mat-icon>phone</mat-icon>
-                                                <span>Call</span>
-                                              </button>
-                                              <button (click)="deletestock(contactdata.contact_id)" mat-menu-item>
-                                                <mat-icon>delete</mat-icon>
-                                                <span>Delete Contact</span>
-                                              </button>
-                                         
-                                              <button  (click)="addContact('update',contactdata)" mat-menu-item>
-                                                <mat-icon>edit</mat-icon>
-                                                <span>Edit Contact</span>
-                                              </button>
-                                            </mat-menu>
-                                      </div>
-                                      </div>
-                                      <div class="story-author">
-                                          <p class="name">{{contactdata.contact_name}}</p>
-                                          <p class="time">{{contactdata.contact_number}}</p> 
-                                          <p class="time">{{contactdata.contact_email}}</p>
-                                       
-                                      </div>
-                                  </div>
-                                
-                                  </div>
-                              </div>
-                          </div>
-                      </div>
-                  </div>
-              </div>
-              <!-- <div class="widget-footer p-2 text-center bg-light-primary">
-                  <a class="text-primary strong" href="#">View All</a>
-              </div> -->
-          </div>
-      </div>
+                </button>
+                <button (click)="deletestock(contactdata.contact_id)" mat-menu-item>
+                  <mat-icon>delete</mat-icon>
+                  <span>Delete Contact</span>
+                </button>
+
+                <button (click)="addContact('update',contactdata)" mat-menu-item>
+                  <mat-icon>edit</mat-icon>
+                  <span>Edit Contact</span>
+                </button>
+              </mat-menu>
+            </div>
+          </td>
+
+        </tr>
+      </tbody>
+    </table>
   </div>
+
+</div>
+
+
+
+<div class="loader" *ngIf="showDataLoader === true">
+  <mat-spinner [diameter]="40" mode="indeterminate"></mat-spinner>
 </div>
 
 <div *ngIf="ConatctBookData">
   <div *ngIf="ConatctBookData.length === 0" class="ListPage_emptyContent ember-view">
-    <div class="empty-title">No Conatct </div>
+    <div class="empty-title">No Contacts! Please on click Add Contact </div>
   </div>
 </div>

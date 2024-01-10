@@ -1,47 +1,40 @@
-<div class="container-fuild" >
+<div class="container-fuild">
     <mat-icon style="float: right;
-    cursor: pointer;" (click)="closeDialog('close')" > close</mat-icon>
+    cursor: pointer;" (click)="closeDialog('close')"> close</mat-icon>
     <h2 class="menu_item">Add Contact</h2>
 </div>
 <div [formGroup]="ContactForm" novalidate>
-  <div mat-dialog-content>
-      <mat-form-field class="width_100" appearance="outline">
-          <mat-label>FirstName</mat-label>
-          <input matInput placeholder="Enter FirstName" formControlName="firstName">
-          <mat-error *ngIf="ContactForm['controls']['firstName'].invalid">{{ErrorMessage('First Name')}}</mat-error>
+    <div mat-dialog-content>
+        <mat-form-field class="width_100" appearance="outline">
+            <mat-label>Full Name</mat-label>
+            <input matInput placeholder="Enter FirstName" formControlName="firstName">
+            <mat-error *ngIf="ContactForm['controls']['firstName'].invalid">{{ErrorMessage('First Name')}}</mat-error>
         </mat-form-field>
-      <mat-form-field class="width_100" appearance="outline">
-          <mat-label>Last Name</mat-label>
-          <input matInput placeholder="Enter LastName" formControlName="lastName">
-      </mat-form-field>
-      <mat-form-field class="width_100" appearance="outline">
-        <mat-label>Phone</mat-label>
-        <input type="number" matInput placeholder="Enter Phone Number" formControlName="phonenumber">
-        <mat-error *ngIf="ContactForm['controls']['phonenumber'].invalid">{{ErrorvalidMessage('PhoneNumber')}}</mat-error>
-      </mat-form-field>
 
-      <mat-form-field class="width_100" appearance="outline">
-          <mat-label>Email </mat-label>
-          <input matInput placeholder="Enter Email Id" formControlName="email">
-          <mat-error *ngIf="ContactForm['controls']['email'].invalid">{{ErrorvalidMessage('Email')}}</mat-error>
-      </mat-form-field>
- 
-      <!-- <mat-radio-group formControlName="contact_status">
-          <mat-radio-button class="form_feild_gendar" value=1>Active </mat-radio-button>
-          <mat-radio-button class="form_feild_gendar" value=0>unActive</mat-radio-button>
-      </mat-radio-group> -->
+        <mat-form-field class="width_100" appearance="outline">
+            <mat-label>Phone</mat-label>
+            <input type="number" matInput placeholder="Enter Phone Number" formControlName="phonenumber">
+            <mat-error
+                *ngIf="ContactForm['controls']['phonenumber'].invalid">{{ErrorvalidMessage('PhoneNumber')}}</mat-error>
+        </mat-form-field>
 
-      <div *ngIf="update_data.flag ==='save'" class="both_btn">
-          <button mat-raised-button (click)="closeDialog('close')" color="warn" class="uppercase_button cancel_btn">Cancel</button>
-          <button mat-raised-button type="submit" (click)="onSubmit()" [disabled]="!ContactForm.valid" class="uppercase_button save_btn"><mat-icon>
-              add
-          </mat-icon>Save</button>
-      </div>
-      <div *ngIf="update_data.flag ==='update'" class="both_btn">
-          <button  mat-raised-button (click)="closeDialog('close')" color="warn" class="uppercase_button cancel_btn">Cancel</button>
-          <button mat-raised-button type="submit" [disabled]="!ContactForm.valid" (click)="onUpdate()" class="uppercase_button save_btn"><mat-icon>
-              add
-          </mat-icon>Update</button>
-      </div>
-  </div>
+        <mat-form-field class="width_100" appearance="outline">
+            <mat-label>Email </mat-label>
+            <input matInput placeholder="Enter Email Id" formControlName="email">
+            <mat-error *ngIf="ContactForm['controls']['email'].invalid">{{ErrorvalidMessage('Email')}}</mat-error>
+        </mat-form-field>
+
+        <div *ngIf="update_data.flag ==='save'"  style="float: right;">
+            <button mat-raised-button (click)="closeDialog('close')" color="warn"
+                class="uppercase_button cancel_btn">Cancel</button>
+            <button mat-raised-button type="submit" (click)="onSubmit()" [disabled]="!ContactForm.valid"
+                class="uppercase_button save_btn">Save</button>
+        </div>
+        <div *ngIf="update_data.flag ==='update'" style="float: right;">
+            <button mat-raised-button (click)="closeDialog('close')" color="warn"
+                class="uppercase_button cancel_btn">Cancel</button>
+            <button mat-raised-button type="submit" [disabled]="!ContactForm.valid" (click)="onUpdate()"
+                class="uppercase_button save_btn">Update</button>
+        </div>
+    </div>
 </div>
