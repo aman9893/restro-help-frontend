@@ -1,0 +1,78 @@
+<div mat-dialog-title class="">
+    <h2 class="menu_item"> Add Bill
+    <mat-icon class="iconsclose"  (click)="close()"> close</mat-icon>
+    <button *ngIf="billflag != 'view'" style="margin: 2px;" class="addbtn" (click)="addItem()">ADD ITEM</button>
+  </h2>
+  </div>
+    <form *ngIf="menuDataList && table_id" [formGroup]="orderForm">
+    <div class="row">
+    <div class="col-md-6">
+      <input type="text" class="form-control"   formControlName="cutomer_name" placeholder="Customer Name">
+    </div>
+    <div class="col-md-6">
+      <input type="text" class="form-control " formControlName="cutomer_number" placeholder="Customer NO">
+    </div>
+    </div>
+  <div>
+      </div>
+    <mat-dialog-content>
+      <div [class.wrapview]="billflag === 'view'" *ngIf="items" class="">
+        <div formArrayName="items" *ngFor="let item of items.controls; index as idx">
+          <div [formGroupName]="idx">
+            <div class="item_wrapper">
+              <div class="item">
+                <mat-form-field appearance="outline" class="width_100">
+                  <mat-select formControlName="name" (selectionChange)="onBookChange($event,item)"
+                    placeholder="Select Menu">
+                    <input type="text" class="search_menu" [formControl]="myControl" placeholder="Serach Item">
+                    <mat-option *ngFor="let stock of menuDataList" [value]="stock.menu_name">{{stock.menu_name}} -
+                      {{stock.menu_price | currency:'INR' }}</mat-option>
+                  </mat-select>
+                </mat-form-field>
+              </div>
+              <mat-icon class="icon" (click)="onKeyUpEvent(item,'add')"> add</mat-icon>
+              <div class="qty">
+                <mat-form-field class="width_100" appearance="outline">
+                  <mat-label>Qty</mat-label>
+                  <input matInput  placeholder="qty" formControlName="qty" readonly>
+                </mat-form-field>
+              </div>
+              <mat-icon class="icon" (click)="onKeyUpEvent(item,'remove')"> remove</mat-icon>
+              <div class="price">
+                <mat-form-field class="width_100" appearance="outline">
+                  <mat-label>Price</mat-label>
+                  <input matInput   placeholder="Price" formControlName="price" readonly>
+                </mat-form-field>
+              </div>
+              <!-- <div class="price">
+                <mat-form-field class="width_100" placeholder="kitchen" appearance="outline">
+                  <mat-label>Select kitchen</mat-label>
+                  <mat-select   formControlName="restro_name">
+                    <mat-option value="Ab kitchen">Ab kitchen</mat-option>
+                    <mat-option value="V9 kitchen">V9 kitchen</mat-option>
+                    <mat-option value="Momos kitchen">Momos kitchen</mat-option>
+                    <mat-option value="7 Heaven kitchen">7 Heaven kitchen</mat-option>
+                  </mat-select>
+                </mat-form-field>
+              </div> -->
+              <span (click)="removeGroup(idx)">
+                <mat-icon class="icon" style="background-color:red ;">delete</mat-icon>
+              </span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </mat-dialog-content>
+    <mat-dialog-actions>
+      <div class="btns">
+        
+        <button *ngIf="billflag === 'save'" class="pbutton" (click)="onSubmit()">Place Order</button>
+        <button *ngIf="billflag === 'update'" class="pbutton" (click)="UpdateItem()">Update Order</button>
+       
+        <!-- <button *ngIf="billflag === 'update'" style="background: #fd3e3e ; margin-left: 19px;" class="pbutton"
+        (click)="competeItem()">Completed Order</button> -->
+         <button class="bbutton">Total - {{total_bill}} </button>
+      </div>
+    </mat-dialog-actions>
+  </form>
+  <!-- [disabled]="!orderForm.valid " -->

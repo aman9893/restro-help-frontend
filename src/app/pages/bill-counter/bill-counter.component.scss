@@ -12,13 +12,13 @@
 
 
 table {
-    background: linear-gradient(-135deg, #c850c0, #4158d0);
+    background: linear-gradient(-135deg, #495075, #4158d0);
     transition: all 0.3s ease;
     color: white;
     font-size: 13px;
     cursor: pointer;
     margin-top: 7px;
-    font-weight: 500;
+    font-weight: 400;
     border: 1px solid;
     padding: 16px !important;
     border-radius: 10px;
@@ -61,7 +61,6 @@ table {
     color: #fff;
   }
   .wrapper{
-    width: 287px;
     background: #fff;
     border-radius: 15px;
     box-shadow: 0px 15px 20px rgba(0,0,0,0.1);

@@ -21,12 +21,6 @@
     </mat-form-field>
   </div>
   </div>
-  <div>
-    <mat-form-field class="width_100" appearance="fill">
-      <mat-label>Customer Address</mat-label>
-      <input matInput placeholder="Customer Address"  formControlName="cutomer_address">
-    </mat-form-field>
-</div>
 <div> <button *ngIf="billflag != 'view'" style="margin: 2px;" class="addbtn" (click)="addItem()">ADD ITEM</button> </div>
   <mat-dialog-content>
     <div [class.wrapview]="billflag === 'view'" *ngIf="items" class="">
@@ -57,7 +51,7 @@
                 <input matInput   placeholder="Price" formControlName="price" readonly>
               </mat-form-field>
             </div>
-            <div class="price">
+            <!-- <div class="price">
               <mat-form-field class="width_100" placeholder="kitchen" appearance="outline">
                 <mat-label>Select kitchen</mat-label>
                 <mat-select   formControlName="restro_name">
@@ -67,7 +61,7 @@
                   <mat-option value="7 Heaven kitchen">7 Heaven kitchen</mat-option>
                 </mat-select>
               </mat-form-field>
-            </div>
+            </div> -->
             <span (click)="removeGroup(idx)">
               <mat-icon class="icon" style="background-color:red ;">delete</mat-icon>
             </span>

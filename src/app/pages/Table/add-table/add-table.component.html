@@ -1,35 +1,28 @@
-<div   class="divmain">
-    <div class="wrapper">
-      <div class="title">
-       Add Table Name
-      </div>
-      <form [formGroup]="tableForm" class="menu-container" >
-         <div class="field">
-            <input type="text" formControlName="table_name" placeholder="Enter Table Name">
-            <!-- <div *ngIf="submitted && tableForm.controls['table_name'].errors?.['required']" >
-            <mat-error style="margin: 10px;" *ngIf="tableForm.controls['table_name'].errors?.['required']">Table Name is required</mat-error>
-        </div> -->
-        </div>
-
-         <div class="field">
-            <button *ngIf="!updatebtn" class="btn" type="submit" 
-                (click)="onSubmit()">Save</button>
-                <button *ngIf="updatebtn" class="btn" type="submit" [disabled]="!tableForm.valid"
-                (click)="update()">Update</button>
-         </div>
-         <table class="table  ">
-            <tbody>
-                <tr *ngFor="let table of tableDataList ;  let i=index;">
-                    <th scope="row">{{i+1}}</th>
-                    <td>{{table.table_name}}</td>
-                    <td>     <mat-icon style="color: #fff;" class="icons" (click)="edit(table)"> edit</mat-icon> </td>
-                    <td>  <mat-icon style="color: #000000c9;" class="icons" (click)="delete(table.table_id)"> delete</mat-icon></td>
-                    
-                </tr>
-            </tbody>
-        </table>
-      </form>
+<div class="divmain">
+  <div class="wrapper">
+    <div class="title">
+      Add Table Name
     </div>
-
+    <form [formGroup]="tableForm" class="menu-container">
+      <div class="field">
+        <input type="text" formControlName="table_name" placeholder="Enter Table Name">
+      </div>
+      <div class="field">
+        <button *ngIf="!updatebtn" class="btn" type="submit" (click)="onSubmit()">Save</button>
+        <button *ngIf="updatebtn" class="btn" type="submit" [disabled]="!tableForm.valid"
+          (click)="update()">Update</button>
+      </div>
+      <table class="table  ">
+        <tbody>
+          <tr *ngFor="let table of tableDataList ;  let i=index;">
+            <th scope="row">{{i+1}}</th>
+            <td>{{table.table_name}}</td>
+            <td> <mat-icon style="color: #fff;" class="icons" (click)="edit(table)"> edit</mat-icon> </td>
+            <td> <mat-icon style="color: #000000c9;" class="icons" (click)="delete(table.table_id)"> delete</mat-icon>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </form>
   </div>
-
+</div>

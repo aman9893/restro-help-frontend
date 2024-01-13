@@ -312,9 +312,11 @@ img {
 }
 .tableno{
 	cursor: pointer;
-    font-size: 13px;
+    font-size: 14px;
+    margin-top: 6px;
     font-weight: 500;
-}.width100{
+}
+.width100{
 	width: 140px;
 }
 .main-header {
@@ -557,9 +559,10 @@ img {
 	}
 }
 .card-body {
-	padding: 1rem 1.25rem;
-	font-size: 0.875rem;
-	background: cadetblue;
+  padding: 1rem 1.25rem;
+  font-size: 0.875rem;
+  background: cadetblue;
+  background: linear-gradient(-135deg, #8a96da, #5f333357);
 }
 
 .card-footer {
@@ -601,13 +604,13 @@ img {
 
   }
   .circle_aera{
-	width: 101px;
-    height: 101px;
-    border-radius: 50%;
+    width: 101px;
+    /* height: 101px; */
+    /* border-radius: 50%; */
     font-weight: 500;
     font-size: 15px;
-	margin-left: 27px;
-	color: #077f7b;
+    margin-left: 27px;
+    color: #3f51b5;
   }  .icons{
 	font-size: 17px !important;
     margin-top: 5px;
@@ -658,4 +661,9 @@ img {
   }
 
 
+}
+
+.mat-dialog-container {
+  display: block;
+  padding: 9px !important;
 }

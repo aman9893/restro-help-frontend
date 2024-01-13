@@ -1,7 +1,7 @@
 export const apiConfig = {
 
-    localhostUrl:"http://18.217.110.106:3011/",
-   //  localhostUrl:"http://localhost:8000/",
+   // localhostUrl:"http://18.217.110.106:3011/",
+    localhostUrl:"http://localhost:8000/",
 
 
     registerData: 'api/register',

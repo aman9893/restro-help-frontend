@@ -14,15 +14,16 @@ import {
 } from '@angular/material/dialog';
 import { AuthService } from 'src/app/auth.service';
 import { DataService } from 'src/app/service/data.service';
+import { CreateBillComponent } from '../../bill/create-bill/create-bill.component';
 import { ConfrimBoxComponent } from '../../confrim-box/confrim-box.component';
+import { InvoiceComponent } from '../../bill/invoice/invoice.component';
 
-import { InvoiceComponent } from '../invoice/invoice.component';
 @Component({
-  selector: 'app-create-bill',
-  templateUrl: './create-bill.component.html',
-  styleUrls: ['./create-bill.component.css'],
+  selector: 'app-add-bill-counetr',
+  templateUrl: './add-bill-counetr.component.html',
+  styleUrls: ['./add-bill-counetr.component.scss']
 })
-export class CreateBillComponent implements OnInit {
+export class AddBillCounetrComponent implements OnInit {
   orderForm!: FormGroup;
   items!: FormArray;
   menuDataList: any;
@@ -46,7 +47,7 @@ export class CreateBillComponent implements OnInit {
     private formBuilder: FormBuilder,
     public authService: AuthService,
     public dialogRef: MatDialogRef<CreateBillComponent>,
-    @Inject(MAT_DIALOG_DATA) public tabledata: any,
+    @Inject(MAT_DIALOG_DATA) public billDataValue: any,
     public dialog: MatDialog
   ) {
     let UserId = this.authService.getUserId();
@@ -55,8 +56,8 @@ export class CreateBillComponent implements OnInit {
 
   ngOnInit() {
     this.total_bill = 0;
-    this.billflag = this.tabledata.flag;
-    this.table_id = this.tabledata.tablename.table_id;
+    this.billflag = this.billDataValue.flag;
+    this.table_id = this.billDataValue.bill_data;
     if (this.billflag === 'save') {
       this.getmenuData();
       this.updateCustomer();
@@ -124,10 +125,10 @@ export class CreateBillComponent implements OnInit {
     this.orderForm = new FormGroup({
       items: new FormArray([]),
       cutomer_number:new FormControl('',[
-        Validators.required
+       
       ]),
       cutomer_name:new FormControl('',[
-        Validators.required
+       
       ]),
       cutomer_address:new FormControl('',[
       ]),  
@@ -276,7 +277,7 @@ export class CreateBillComponent implements OnInit {
         bill_no: r,
         bill_order: this.orderForm.value,
         table_id: this.table_id,
-        table_name: this.tabledata.tablename.table_name,
+        table_name: '',
         total_bill:  this.total_bill,
         bill_status: 'booked',
         cutomer_name: this.orderForm.controls['cutomer_name'].value,
@@ -325,12 +326,12 @@ export class CreateBillComponent implements OnInit {
   UpdateItem() {
     let r = Math.random().toString(36).substring(7);
     let tableFormData = {
-      bill_id: this.tabledata.tablename.bill_id,
+      bill_id: this.billDataValue.bill_data.bill_id,
       user_id: this.user_id,
       bill_no: r,
       bill_order: this.orderForm.value,
       table_id: this.table_id,
-      table_name: this.tabledata.tablename.table_name,
+      table_name: '',
       total_bill: this.total_bill,
       bill_status: 'booked',
       cutomer_name: this.orderForm.controls['cutomer_name'].value,
@@ -365,7 +366,7 @@ export class CreateBillComponent implements OnInit {
       console.log(result);
       if (result == 'yes') {
         this.dataService
-          .compelteOrder(this.tabledata.tablename.bill_id)
+          .compelteOrder(this.billDataValue.bill_data.bill_id)
           .subscribe((data: any) => this.closedeleteDialog(data));
         this.dialogRef.close();
         window.location.reload();

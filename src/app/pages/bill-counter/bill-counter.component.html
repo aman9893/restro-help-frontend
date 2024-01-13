@@ -1,0 +1,60 @@
+<div class="divmain">
+    <div class="wrapper">
+        <div class="title">
+            Bill List
+        </div>
+        <div class="field">
+            <button class="btn" (click)="addContact('save','data')">Add Bill</button>
+        </div>
+
+        <table class="table" *ngIf="showDataLoader === false">
+            <thead>
+                <tr>
+                    <th scope="col">#Invoice No</th>
+                    <th scope="col">Customer Name</th>
+                    <th scope="col">Bill Amount</th>
+                    <th scope="col">Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let bill of BillData | filter:searchedKeyword">
+                    <th scope="row">{{bill.bill_no}}</th>
+                    <td>{{bill.cutomer_name}}</td>
+                    <td>{{bill.total_bill}}</td>
+                    <td>
+                        <div class="header-top">
+                            <button class="button" mat-icon-button [matMenuTriggerFor]="menu"
+                                aria-label="Example icon-button with a menu">
+                                <mat-icon>more_vert</mat-icon>
+                            </button>
+                            <mat-menu #menu="matMenu">
+
+                                <button (click)="deletestock(bill.contact_id)" mat-menu-item>
+                                    <mat-icon>delete</mat-icon>
+                                    <span>Delete Contact</span>
+                                </button>
+
+                                <button (click)="addContact('update',bill)" mat-menu-item>
+                                    <mat-icon>edit</mat-icon>
+                                    <span>Edit Contact</span>
+                                </button>
+                            </mat-menu>
+                        </div>
+                    </td>
+                </tr>
+
+            </tbody>
+        </table>
+     
+    </div>
+</div>
+
+<div class="loader" *ngIf="showDataLoader === true">
+    <mat-spinner [diameter]="40" mode="indeterminate"></mat-spinner>
+</div>
+
+<div *ngIf="BillData">
+    <div *ngIf="BillData.length === 0" class="ListPage_emptyContent ember-view">
+        <div class="empty-title">No Bill! Please on click Add Bill </div>
+    </div>
+</div>

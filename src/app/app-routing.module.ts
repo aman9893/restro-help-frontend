@@ -7,6 +7,7 @@ import { LoginComponent } from './pages/login/login.component';
 import { ProfileComponent } from './pages/profile/profile.component';
 import { AddTableComponent } from './pages/Table/add-table/add-table.component';
 import { MenulistComponent } from './pages/Table/table/menulist/menulist.component';
+import { BillCounterComponent } from './pages/bill-counter/bill-counter.component';
 
 const routes: Routes = [
   // { path: '', component: BillComponent  , canActivate: [AuthGuard] },
@@ -22,6 +23,7 @@ const routes: Routes = [
   { path: '', redirectTo: 'bill', pathMatch: 'full' },
   { path: 'login', component: LoginComponent },
   { path: 'bill', component: BillComponent },
+  { path: 'counterbill', component: BillCounterComponent },
   { path: 'menu', component: MenulistComponent },
   { path: 'table', component: AddTableComponent  },
   { path: 'profile', component: ProfileComponent},

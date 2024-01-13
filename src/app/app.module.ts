@@ -34,6 +34,8 @@ import { AddContactBookComponent } from './pages/contact-book/add-contact-book/a
 import { ListContactBookComponent } from './pages/contact-book/list-contact-book/list-contact-book.component';
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 import { AddBillComponent } from './pages/qnq/add-bill/add-bill.component';
+import { BillCounterComponent } from './pages/bill-counter/bill-counter.component';
+import { AddBillCounetrComponent } from './pages/bill-counter/add-bill-counetr/add-bill-counetr.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -51,7 +53,9 @@ import { AddBillComponent } from './pages/qnq/add-bill/add-bill.component';
     ProfileComponent,
     AddContactBookComponent,
     ListContactBookComponent,
-    AddBillComponent
+    AddBillComponent,
+    BillCounterComponent,
+    AddBillCounetrComponent
   ],
   imports: [
     BrowserModule,
