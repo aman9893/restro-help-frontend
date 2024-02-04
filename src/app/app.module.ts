@@ -36,6 +36,9 @@ import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 import { AddBillComponent } from './pages/qnq/add-bill/add-bill.component';
 import { BillCounterComponent } from './pages/bill-counter/bill-counter.component';
 import { AddBillCounetrComponent } from './pages/bill-counter/add-bill-counetr/add-bill-counetr.component';
+import { MatTableModule } from '@angular/material/table';
+import { MatPaginatorModule } from '@angular/material/paginator';
+import { MatSortModule } from '@angular/material/sort';
 @NgModule({
   declarations: [
     AppComponent,
@@ -72,7 +75,8 @@ import { AddBillCounetrComponent } from './pages/bill-counter/add-bill-counetr/a
    MatInputModule,
    ReactiveFormsModule,
    MatChipsModule,
-   MatAutocompleteModule,MatDialogModule ,MatMenuModule,
+  MatTableModule, MatPaginatorModule,
+  MatAutocompleteModule,MatDialogModule ,MatMenuModule,MatSortModule
 
   ],
   providers: [{provide: HTTP_INTERCEPTORS, useClass: TokenInterService, multi: true},],

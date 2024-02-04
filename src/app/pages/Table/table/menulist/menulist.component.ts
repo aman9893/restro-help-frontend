@@ -1,4 +1,4 @@
-import { Component, Inject, OnInit } from '@angular/core';
+import { Component, OnInit ,AfterViewInit, ViewChild} from '@angular/core';
 import {
   FormBuilder,
   FormControl,
@@ -8,42 +8,87 @@ import {
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { AuthService } from 'src/app/auth.service';
 import { DataService } from 'src/app/service/data.service';
+import { MatPaginator } from '@angular/material/paginator';
+import { MatSort } from '@angular/material/sort';
+import { MatTableDataSource } from '@angular/material/table';
 
 @Component({
   selector: 'app-menulist',
   templateUrl: './menulist.component.html',
   styleUrls: ['./menulist.component.scss']
 })
-export class MenulistComponent implements OnInit {
+export class MenulistComponent implements OnInit ,AfterViewInit  {
   user_id: any;
-  tableDataList: any;
+  billData: any;
   update_data: any;
   updatebtn: boolean = false;
   menu_id: any;
+  tableForm!: FormGroup;
+
+
+ public displayedColumns:any = ['menu_id', 'menu_name', 'menu_price'];
+ public dataSource :any;
+
+  @ViewChild(MatSort) sort = {} as MatSort;
+  @ViewChild(MatPaginator) paginator = {} as MatPaginator;
+  showDataLoader: boolean= true;
+
   constructor(
     private formBuilder: FormBuilder,
     private dataService: DataService,
     private authService: AuthService,
     public snackBar: MatSnackBar
   ) {}
+  
+  @ViewChild(MatSort) set matSort(ms: MatSort) {
+    this.sort = ms;
+    this.setDataSourceAttributes();
+  }
 
-  tableForm!: FormGroup;
+  @ViewChild(MatPaginator) set matPaginator(mp: MatPaginator) {
+    this.paginator = mp;
+    this.setDataSourceAttributes();
+  }
+  ngAfterViewInit() {
+    this.dataSource.sort = this.sort;
+    this.dataSource.paginator = this.paginator;
+  }
+
+  applyFilter(event: Event) {
+    const filterValue = (event.target as HTMLInputElement).value;
+    this.dataSource.filter = filterValue.trim().toLowerCase();
+  }
+  setDataSourceAttributes() {
+    if (this.paginator !== undefined && this.sort != undefined) {
+      this.dataSource.paginator = this.paginator;
+      this.dataSource.sort = this.sort;
+    }
+  }
+  showUp() {
+    let element :any = document.querySelector('#goUp');
+    element.scrollIntoView();
+}
+
   ngOnInit() {
-    this.getTableDatamenu();
     let UserId = this.authService.getUserId();
-    console.log(UserId);
     this.user_id = UserId;
+    this.getTableDatamenu();
     this.createForm();
   }
-
   getTableDatamenu(): void {
-    this.dataService.getMenuInfo().subscribe((data) => this.tableData(data));
+    this.dataService.getMenuInfo().subscribe((data) => this.tableData(data),
+    (err: Error) => console.log(err));
+  }
+  tableData(data: any) { 
+    this.billData= data;
+    if( this.billData){
+    this.dataSource =new MatTableDataSource(this.billData);
+    this.showDataLoader = false;
+    this.dataSource.sort = this.sort;
+    this.dataSource.paginator = this.paginator;
+    }
   }
 
-  tableData(data: any) {
-    this.tableDataList = data;
-    console.log(this.tableDataList);
-  }
   createForm() {
     this.tableForm = this.formBuilder.group({
       menu_name: new FormControl('', {
@@ -64,9 +109,8 @@ export class MenulistComponent implements OnInit {
   //---------------------------------------------add file end -------------------------------------
   onSubmit() {
     if (this.tableForm.invalid) {
-      this.dataService.openSnackBar('* Menu Name  And Menu Price is mandatory ', 'Dismiss')
+      this.dataService.openSnackBar('* Item Name  And Item Price is mandatory ', 'Dismiss')
       return;
-
   }
 
     if (this.tableForm.valid) {
@@ -91,6 +135,8 @@ export class MenulistComponent implements OnInit {
   cancel(data: any) {}
 
   edit(data: any){
+
+    this.showUp()
     this.updatebtn =true;
     this.tableForm.controls['menu_name'].setValue(data.menu_name);
     this.tableForm.controls['menu_price'].setValue(data.menu_price);
@@ -129,5 +175,4 @@ export class MenulistComponent implements OnInit {
       this.getTableDatamenu();
     }
   }
-
 }

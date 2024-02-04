@@ -1,16 +1,251 @@
 /* You can add global styles to this file, and also import other style files */
 @import url('https://fonts.googleapis.com/css?family=Poppins:400,500,600,700&display=swap');
-*{
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-  font-family: 'Poppins', sans-serif;
+@import "~bootstrap/dist/css/bootstrap.css";
+
+
+// table page and menu page css 
+
+table {
+  width: 100%;
+}
+.mat-mdc-form-field {
+  font-size: 14px;
+  width: 100%;
+}
+th.mat-sort-header-sorted {
+  color: black;
+}
+.divmain{
+  display: grid;
+  height: auto;
+  width: 100%;
+  place-items: center;
+  background: #f2f2f2;
+  padding: 20px;
 }
 
-html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+.fiter{
+  width: 100% !important;
+  padding-top: 22px;
+}
+::selection{
+  background: #4158d0;
+  color: #fff;
+}
+.wrapper{
+  width: 287px;
+  background: #fff;
+  border-radius: 15px;
+  box-shadow: 0px 15px 20px rgba(0,0,0,0.1);
+}
+.wrapper .title{
+  font-size: 17px;
+    font-weight: 500;
+    text-align: center;
+    line-height: 44px;
+    color: #fff;
+    -webkit-user-select: none;
+    user-select: none;
+    border-radius: 15px 15px 0 0;
+    background: linear-gradient(-135deg, #c850c0, #4158d0);
+}
+.wrapper form{
+  padding: 10px 30px 50px 30px;
+}
+.wrapper form .field{
+  height: 40px;
+  width: 100%;
+  position: relative;
+  margin-top: 6px;
+}
+.wrapper form .field input{
+  height: 100%;
+  width: 100%;
+  outline: none;
+  font-size: 14px;
+  padding-left: 20px;
+  border: 1px solid lightgrey;
+  border-radius: 25px;
+  transition: all 0.3s ease;
+  margin: 3px;
+}
+.wrapper form .field input:focus,
+form .field input:valid{
+  border-color: #4158d0;
+}
+.wrapper form .field label{
+  position: absolute;
+  top: 50%;
+  left: 20px;
+  color: #999999;
+  font-weight: 400;
+  font-size: 17px;
+  pointer-events: none;
+  transform: translateY(-50%);
+  transition: all 0.3s ease;
+}
+form .field input:focus ~ label,
+form .field input:valid ~ label{
+  top: 0%;
+  font-size: 16px;
+  color: #4158d0;
+  background: #fff;
+  transform: translateY(-50%);
+}
+form .content{
+  display: flex;
+  width: 100%;
+  height: 50px;
+  font-size: 16px;
+  align-items: center;
+  justify-content: space-around;
+}
+form .content .checkbox{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+form .content input{
+  width: 15px;
+  height: 15px;
+  background: red;
+}
+form .content label{
+  color: #262626;
+  user-select: none;
+  padding-left: 5px;
+}
+form .content .pass-link{
+  color: "";
+}
+.btn{
+  height: 50px;
+  width: 100%;
+  position: relative;
+  color: #fff;
+  border: none;
+  padding-left: 0;
+  font-size: 20px;
+  font-weight: 500;
+  cursor: pointer;
+  background: linear-gradient(-135deg, #c850c0, #4158d0);
+  transition: all 0.3s ease;
+  margin-top: 8px;
+}
+form .field input[type="submit"]:active{
+  transform: scale(0.95);
+}
+form .signup-link{
+  color: #262626;
+  margin-top: 20px;
+  text-align: center;
+}
+form .pass-link a,
+form .signup-link a{
+  color: #4158d0;
+  text-decoration: none;
+}
+form .pass-link a:hover,
+form .signup-link a:hover{
+  text-decoration: underline;
+}
+a{
+  cursor: pointer;
+}
+.empty-state {
+  width: 750px;
+  margin: 40px auto;
+  background: #ffffff;
+  box-shadow: 1px 2px 10px #e1e3ec;
+  border-radius: 4px;
 
-@import "~bootstrap/dist/css/bootstrap.css";
+  &__content {
+    padding: 48px;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+
+    .empty-state__icon {
+      width: 200px;
+      height: 200px;
+      display: flex;
+      align-items: center;
+      border-radius: 200px;
+      justify-content: center;
+      background-color: #f7fafc;
+      box-shadow: 0px 2px 1px #e1e3ec;
+
+      img {
+        width: 170px;
+      }
+    }
+
+    .empty-state__message {
+      color: #38a169;
+      font-size: 1.5rem;
+      font-weight: 500;
+      margin-top: 0.85rem;
+    }
+
+    .empty-state__help {
+      color: #a2a5b9;
+      font-size: 0.875rem;
+      margin: 11px;
+    }
+  }
+}
+
+.credit {
+  color: #A2A5B9;
+  font-size: .75rem;
+  text-align: center;
+  
+  a {
+    color: #444;
+  }
+}
+
+// end the page 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+.ag-theme-quartz {
+  --ag-background-color: #ddd;
+}
+.ag-theme-quartz .ag-header-cell-label {
+  font-style: italic;
+}
 .menu_item{
     text-align: center;
     border-bottom: 3px solid;
@@ -492,7 +727,52 @@ img {
 
 ///mobile
 @media only screen and (max-width: 600px) {
+  .mat-paginator-range-label {
+    margin: 0px !important;
+}
 
+.wrapper{
+  width: 100% !important;
+}
+.divmain{
+  place-items:start !important;
+}
+
+
+.empty-state__content .empty-state__icon {
+  width: 100px;
+  height: 100px;
+  display: flex;
+  align-items: center;
+  border-radius: 200px;
+  justify-content: center;
+  background-color: #f7fafc;
+  box-shadow: 0px 2px 1px #e1e3ec;
+}
+.empty-state__content .empty-state__help {
+  color: #a2a5b9;
+  font-size: 10px;
+}
+.empty-state__content {
+  padding: 23px;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+}
+.empty-state__content .empty-state__message {
+  color: #38a169;
+  font-size: 14px;
+  font-weight: 500;
+  margin-top: 0.85rem;
+}
+
+.empty-state {
+  width: 349px;
+  margin: 24px auto;
+  background: #ffffff;
+  box-shadow: 1px 2px 10px #e1e3ec;
+  border-radius: 4px;
+}
 	.cell-4 {
 		width: 0px !important;
 	  }
@@ -634,7 +914,7 @@ img {
     width: 40px;
     height: 40px;
     text-align: center;
-    position: fixed;
+  
     top: 211px;
     left: 573px;
 }
@@ -645,10 +925,21 @@ img {
 	height: 100vh;
   }
 
+
+
+
+
+
+
+
+
+
+
   .item_wrapper{
 	width: 100%;
     float: left;
     margin-top: 5px;
+    border-bottom: 1px dotted;
   }
 
   
@@ -663,7 +954,4 @@ img {
 
 }
 
-.mat-dialog-container {
-  display: block;
-  padding: 9px !important;
-}
+

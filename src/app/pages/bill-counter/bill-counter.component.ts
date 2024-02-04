@@ -5,6 +5,9 @@ import { DataService } from 'src/app/service/data.service';
 import { ConfrimBoxComponent } from '../confrim-box/confrim-box.component';
 import { AddContactBookComponent } from '../contact-book/add-contact-book/add-contact-book.component';
 import { AddBillCounetrComponent } from './add-bill-counetr/add-bill-counetr.component';
+import { MatSort } from '@angular/material/sort';
+import { MatPaginator } from '@angular/material/paginator';
+import { MatTableDataSource } from '@angular/material/table';
 
 @Component({
   selector: 'app-bill-counter',
@@ -16,10 +19,13 @@ export class BillCounterComponent implements OnInit {
   listView: boolean | undefined ;
   GirdView!: boolean;
   showDataLoader: boolean = true;
-  ConatctBookData=[];
-  dataSource: any;
   searchedKeyword!: string;
   BillData: any;
+  public displayedColumns:any = ['bill_id','bill_no', 'cutomer_name','total_bill'];
+  public dataSource :any;
+ 
+   @ViewChild(MatSort) sort = {} as MatSort;
+   @ViewChild(MatPaginator) paginator = {} as MatPaginator;
   constructor(public dataService: DataService,
   public snackBar: MatSnackBar, public dialog: MatDialog) { }
 
@@ -27,15 +33,43 @@ export class BillCounterComponent implements OnInit {
     event.stopPropagation()
   }
   ngOnInit() {
-    this.getBillData()
-   
+    this.getBillData();
   }
+  @ViewChild(MatSort) set matSort(ms: MatSort) {
+    this.sort = ms;
+    this.setDataSourceAttributes();
+  }
+
+  @ViewChild(MatPaginator) set matPaginator(mp: MatPaginator) {
+    this.paginator = mp;
+    this.setDataSourceAttributes();
+  }
+  ngAfterViewInit() {
+    this.dataSource.sort = this.sort;
+    this.dataSource.paginator = this.paginator;
+  }
+
+  applyFilter(event: Event) {
+    const filterValue = (event.target as HTMLInputElement).value;
+    this.dataSource.filter = filterValue.trim().toLowerCase();
+  }
+  setDataSourceAttributes() {
+    if (this.paginator !== undefined && this.sort != undefined) {
+      this.dataSource.paginator = this.paginator;
+      this.dataSource.sort = this.sort;
+    }
+  }
+  showUp() {
+    let element :any = document.querySelector('#goUp');
+    element.scrollIntoView();
+}
+  
   getBillData() {
     this.dataService.getBillInfo().subscribe((data) => this.billData(data));
   }
   billData(data: Object): void {
-    console.log(data);
-    this.BillData = data
+    this.BillData = data;
+    this.dataSource =new MatTableDataSource(this.BillData);
     this.showDataLoader = false;
   }
  
@@ -52,10 +86,7 @@ export class BillCounterComponent implements OnInit {
     this.searchView = false;
   }
 
- 
-
- 
-  addContact(flag:any, data:any) {
+  addBill(flag:any, data:any) {
     let updatedata = {
       flag: flag,
       bill_data: data,
@@ -64,23 +95,18 @@ export class BillCounterComponent implements OnInit {
       width: '550px',
       data: updatedata
     });
-    dialogRef.afterClosed().subscribe((result: { status: boolean; data: any[]; message: any; }) => {
-      if (typeof result === 'object') {
-        if (result.status === true) {
-          let lastInsertedData = result.data[0];
-          // this.ConatctBookData.unshift(lastInsertedData);
-          this.dataService.openSnackBar(result.message, 'Dissmiss')
-        }
+    dialogRef.afterClosed().subscribe((result: any) => {
+        if (result === true) {
+          this.getBillData();
       }
     });
   }
 
-  deletestock(id:any) {
-    this.deleteContactType(id)
-
+  deleteBillListValue(id:any) {
+    this.deleteBillList(id)
   }
-  deleteContactType(id:any) {
-    this.dataService.deleteConatctitem(id).subscribe(
+  deleteBillList(id:any) {
+    this.dataService.deleteBill(id).subscribe(
       (      data: any) => this.deleteResponse(data, id),
     )
   }

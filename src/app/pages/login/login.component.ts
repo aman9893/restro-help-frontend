@@ -171,7 +171,7 @@ export class LoginComponent implements OnInit {
     if (this.loginForm.valid) {
       this.dataService.loginData(userData).subscribe(
         (data) => this.closeLoginDialog(data),
-        (err) => console.log(err)
+        (err) => this.openSnackBar(err.message, 'Dismiss')
       );
     }
     this.loginForm.reset();

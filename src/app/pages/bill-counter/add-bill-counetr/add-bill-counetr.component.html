@@ -44,17 +44,7 @@
                   <input matInput   placeholder="Price" formControlName="price" readonly>
                 </mat-form-field>
               </div>
-              <!-- <div class="price">
-                <mat-form-field class="width_100" placeholder="kitchen" appearance="outline">
-                  <mat-label>Select kitchen</mat-label>
-                  <mat-select   formControlName="restro_name">
-                    <mat-option value="Ab kitchen">Ab kitchen</mat-option>
-                    <mat-option value="V9 kitchen">V9 kitchen</mat-option>
-                    <mat-option value="Momos kitchen">Momos kitchen</mat-option>
-                    <mat-option value="7 Heaven kitchen">7 Heaven kitchen</mat-option>
-                  </mat-select>
-                </mat-form-field>
-              </div> -->
+           
               <span (click)="removeGroup(idx)">
                 <mat-icon class="icon" style="background-color:red ;">delete</mat-icon>
               </span>
@@ -63,16 +53,13 @@
         </div>
       </div>
     </mat-dialog-content>
-    <mat-dialog-actions>
       <div class="btns">
-        
+        <button class="bbutton">Total - {{total_bill}} </button>
         <button *ngIf="billflag === 'save'" class="pbutton" (click)="onSubmit()">Place Order</button>
         <button *ngIf="billflag === 'update'" class="pbutton" (click)="UpdateItem()">Update Order</button>
        
         <!-- <button *ngIf="billflag === 'update'" style="background: #fd3e3e ; margin-left: 19px;" class="pbutton"
         (click)="competeItem()">Completed Order</button> -->
-         <button class="bbutton">Total - {{total_bill}} </button>
       </div>
-    </mat-dialog-actions>
   </form>
   <!-- [disabled]="!orderForm.valid " -->

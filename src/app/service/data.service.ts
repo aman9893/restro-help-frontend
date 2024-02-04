@@ -1,7 +1,8 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from  '@angular/common/http';
-import { apiConfig } from '../api-path/api-config';
+
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { apiConfig } from '../api-path/api-config';
 
 @Injectable({
   providedIn: 'root'

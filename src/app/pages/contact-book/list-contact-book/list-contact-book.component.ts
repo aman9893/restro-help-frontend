@@ -1,29 +1,42 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { DataService } from 'src/app/service/data.service';
 import { ConfrimBoxComponent } from '../../confrim-box/confrim-box.component';
 import { AddContactBookComponent } from '../add-contact-book/add-contact-book.component';
+import { MatSort } from '@angular/material/sort';
+import { MatPaginator } from '@angular/material/paginator';
+import { MatTableDataSource } from '@angular/material/table';
 
 @Component({
   selector: 'app-list-contact-book',
   templateUrl: './list-contact-book.component.html',
   styleUrls: ['./list-contact-book.component.css']
 })
-export class ListContactBookComponent implements OnInit {
+export class ListContactBookComponent implements OnInit ,AfterViewInit{
   searchView: boolean | undefined;
   listView: boolean | undefined ;
   GirdView!: boolean;
   showDataLoader: boolean = true;
   ConatctBookData=[];
-  dataSource: any;
   searchedKeyword!: string;
+  
+  public displayedColumns:any = ['contact_id', 'contact_name','contact_number'];
+  public dataSource :any;
+ 
+   @ViewChild(MatSort) sort = {} as MatSort;
+   @ViewChild(MatPaginator) paginator = {} as MatPaginator;
+
+
   constructor(public dataService: DataService,
   public snackBar: MatSnackBar, public dialog: MatDialog) { }
 
   stopPropagation(event:any) {
     event.stopPropagation()
   }
+
+
+
   ngOnInit() {
     this.getConatctBookData();
     if (window.screen.width === 360) { // 768px portrait
@@ -33,6 +46,36 @@ export class ListContactBookComponent implements OnInit {
       this.listView = true;
     }
   }
+
+  @ViewChild(MatSort) set matSort(ms: MatSort) {
+    this.sort = ms;
+    this.setDataSourceAttributes();
+  }
+
+  @ViewChild(MatPaginator) set matPaginator(mp: MatPaginator) {
+    this.paginator = mp;
+    this.setDataSourceAttributes();
+  }
+  ngAfterViewInit() {
+    this.dataSource.sort = this.sort;
+    this.dataSource.paginator = this.paginator;
+  }
+
+  applyFilter(event: Event) {
+    const filterValue = (event.target as HTMLInputElement).value;
+    this.dataSource.filter = filterValue.trim().toLowerCase();
+  }
+  setDataSourceAttributes() {
+    if (this.paginator !== undefined && this.sort != undefined) {
+      this.dataSource.paginator = this.paginator;
+      this.dataSource.sort = this.sort;
+    }
+  }
+  showUp() {
+    let element :any = document.querySelector('#goUp');
+    element.scrollIntoView();
+}
+  
   openPhone(PhoneNumber:any) {
     window.location.href = "tel://" + PhoneNumber;
   }
@@ -51,12 +94,13 @@ export class ListContactBookComponent implements OnInit {
 
   getConatctBookData() {
     this.dataService.getConatctList().subscribe(
-      (      data: any) => this.showtodoDetails(data),
+      (data: any) => this.showtodoDetails(data),
     )
   }
   showtodoDetails(data:any) {
     this.ConatctBookData = data
     this.showDataLoader = false;
+    this.dataSource =new MatTableDataSource(this.ConatctBookData);
   }
 
   addContact(flag:any, data:any) {

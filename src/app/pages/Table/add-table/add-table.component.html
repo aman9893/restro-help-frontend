@@ -1,28 +1,67 @@
-<div class="divmain">
-  <div class="wrapper">
-    <div class="title">
-      Add Table Name
-    </div>
-    <form [formGroup]="tableForm" class="menu-container">
-      <div class="field">
-        <input type="text" formControlName="table_name" placeholder="Enter Table Name">
+
+
+<section class="divmain">
+  <section class="wrapper" id="goUp">
+      <div class="title">
+          Add Table Name
       </div>
-      <div class="field">
-        <button *ngIf="!updatebtn" class="btn" type="submit" (click)="onSubmit()">Save</button>
-        <button *ngIf="updatebtn" class="btn" type="submit" [disabled]="!tableForm.valid"
-          (click)="update()">Update</button>
-      </div>
-      <table class="table  ">
-        <tbody>
-          <tr *ngFor="let table of tableDataList ;  let i=index;">
-            <th scope="row">{{i+1}}</th>
-            <td>{{table.table_name}}</td>
-            <td> <mat-icon style="color: #fff;" class="icons" (click)="edit(table)"> edit</mat-icon> </td>
-            <td> <mat-icon style="color: #000000c9;" class="icons" (click)="delete(table.table_id)"> delete</mat-icon>
-            </td>
-          </tr>
-        </tbody>
-      </table>
-    </form>
+      <form class="menu-container" [formGroup]="tableForm" autocomplete="off" novalidate>
+          <div class="field">
+            <input type="text" formControlName="table_name" placeholder="Enter Table Name">
+          </div>
+          <div class="field">
+            <button *ngIf="!updatebtn" class="btn" type="submit" (click)="onSubmit()">Save</button>
+            <button *ngIf="updatebtn" class="btn" type="submit" [disabled]="!tableForm.valid"
+           (click)="update()">Update</button>
+          </div>
+              <div *ngIf="tableDataList.length >0" class="grid-wrapper" >
+                  <mat-form-field class="fiter">
+                      <mat-label>Filter</mat-label>
+                      <input matInput (keyup)="applyFilter($event)" placeholder="Item Name" #input>
+                    </mat-form-field>
+                  <div class="mat-elevation-z8" *ngIf="dataSource">
+                    <table  class="mat-elevation-z8" mat-table   [dataSource]="dataSource" matSortmatSortStart="desc"  matSort>
+          
+                      <!-- Position Column -->
+                      <ng-container  matColumnDef="table_id">
+                        <th mat-header-cell   *matHeaderCellDef> Action </th>
+                            <td  mat-cell  *matCellDef="let element"> <mat-icon style="color: gery;" class="icons" (click)="edit(element)"> edit</mat-icon>
+                          <mat-icon style="color: #c84874;" class="icons" (click)="delete(element.table_id)"> delete</mat-icon> </td>
+                      </ng-container>
+                      <ng-container matColumnDef="table_name">
+                        <th mat-header-cell  mat-sort-header *matHeaderCellDef> Table Name </th>
+                        <td mat-cell *matCellDef="let element"> {{element.table_name}} </td>
+                      </ng-container>
+                 
+                      <tr mat-header-row  *matHeaderRowDef="displayedColumns"></tr>
+                      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+                    </table>
+                      <mat-paginator [pageSizeOptions]="[5, 10, 20,50,100,150]"
+                      showFirstLastButtons
+                      aria-label="Select page of periodic elements">
+                   </mat-paginator>
+             </div>
+          </div>
+      </form>
+</section>
+
+
+  <div class="loader" *ngIf="showDataLoader === true">
+    <mat-spinner [diameter]="40" mode="indeterminate"></mat-spinner>
   </div>
-</div>
+  
+  <div *ngIf="tableDataList">
+    <div *ngIf="tableDataList.length === 0" >
+        <div class="empty-state">
+            <div class="empty-state__content">
+              <div class="empty-state__icon">
+                <img src="https://cdni.iconscout.com/illustration/premium/thumb/sorry-item-not-found-3328225-2809510.png" alt="">
+              </div>
+              <div class="empty-state__message">No records has been added yet.</div>
+              <div class="empty-state__help">
+                Add a new record by simpley clicking the button on top 
+              </div>
+            </div>
+          </div>
+    </div>
+  </div>

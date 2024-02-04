@@ -1,11 +1,14 @@
-import { Component, Inject, OnInit } from '@angular/core';
+import { AfterViewInit, Component, Inject, OnInit, ViewChild } from '@angular/core';
 import {
   FormBuilder,
   FormControl,
   FormGroup,
   Validators,
 } from '@angular/forms';
+import { MatPaginator } from '@angular/material/paginator';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { MatSort } from '@angular/material/sort';
+import { MatTableDataSource } from '@angular/material/table';
 import { AuthService } from 'src/app/auth.service';
 import { DataService } from 'src/app/service/data.service';
 
@@ -14,7 +17,7 @@ import { DataService } from 'src/app/service/data.service';
   templateUrl: './add-table.component.html',
   styleUrls: ['./add-table.component.scss'],
 })
-export class AddTableComponent implements OnInit {
+export class AddTableComponent implements OnInit,AfterViewInit {
   user_id: any;
   tableDataList: any;
   update_data: any;
@@ -22,6 +25,19 @@ export class AddTableComponent implements OnInit {
   table_id: any;
   registerForm: any;
   submitted = false;
+  tableForm!: FormGroup;
+
+
+  
+ public displayedColumns:any = ['table_id', 'table_name'];
+ public dataSource :any;
+
+  @ViewChild(MatSort) sort = {} as MatSort;
+  @ViewChild(MatPaginator) paginator = {} as MatPaginator;
+  showDataLoader: boolean =true;
+
+
+
   constructor(
     private formBuilder: FormBuilder,
     private dataService: DataService,
@@ -29,7 +45,34 @@ export class AddTableComponent implements OnInit {
     public snackBar: MatSnackBar
   ) {}
 
-  tableForm!: FormGroup;
+  @ViewChild(MatSort) set matSort(ms: MatSort) {
+    this.sort = ms;
+    this.setDataSourceAttributes();
+  }
+
+  @ViewChild(MatPaginator) set matPaginator(mp: MatPaginator) {
+    this.paginator = mp;
+    this.setDataSourceAttributes();
+  }
+  ngAfterViewInit() {
+    this.dataSource.sort = this.sort;
+    this.dataSource.paginator = this.paginator;
+  }
+
+  applyFilter(event: Event) {
+    const filterValue = (event.target as HTMLInputElement).value;
+    this.dataSource.filter = filterValue.trim().toLowerCase();
+  }
+  setDataSourceAttributes() {
+    if (this.paginator !== undefined && this.sort != undefined) {
+      this.dataSource.paginator = this.paginator;
+      this.dataSource.sort = this.sort;
+    }
+  }
+  showUp() {
+    let element :any = document.querySelector('#goUp');
+    element.scrollIntoView();
+}
   ngOnInit() {
     this.getTableData();
     let UserId = this.authService.getUserId();
@@ -44,6 +87,8 @@ export class AddTableComponent implements OnInit {
   tableData(data: any) {
     this.tableDataList = data;
     console.log(this.tableDataList);
+    this.dataSource =new MatTableDataSource(this.tableDataList);
+    this.showDataLoader = false;
   }
   createForm() {
     this.tableForm = this.formBuilder.group({
@@ -90,6 +135,7 @@ export class AddTableComponent implements OnInit {
   cancel(data: any) {}
 
   edit(data: any){
+    this.showUp();
     this.updatebtn =true;
     this.tableForm.controls['table_name'].setValue(data.table_name);
     this.table_id= data.table_id;

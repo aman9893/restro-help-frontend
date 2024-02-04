@@ -17,6 +17,8 @@ import { DataService } from 'src/app/service/data.service';
 import { CreateBillComponent } from '../../bill/create-bill/create-bill.component';
 import { ConfrimBoxComponent } from '../../confrim-box/confrim-box.component';
 import { InvoiceComponent } from '../../bill/invoice/invoice.component';
+import { MatSort } from '@angular/material/sort';
+import { MatPaginator } from '@angular/material/paginator';
 
 @Component({
   selector: 'app-add-bill-counetr',
@@ -41,6 +43,7 @@ export class AddBillCounetrComponent implements OnInit {
   myFormValueChanges$: any;
   total_bill = 0;
   itemstable: any;
+  Bill_id: any;
 
   constructor(
     public dataService: DataService,
@@ -57,25 +60,26 @@ export class AddBillCounetrComponent implements OnInit {
   ngOnInit() {
     this.total_bill = 0;
     this.billflag = this.billDataValue.flag;
-    this.table_id = this.billDataValue.bill_data;
+    this.Bill_id = this.billDataValue.bill_data;
     if (this.billflag === 'save') {
       this.getmenuData();
       this.updateCustomer();
       this.formcall();
     }
     if (this.billflag === 'update') {
-      this.getTableBillData(this.table_id);
+      this.getTableBillData(this.Bill_id);
       this.getmenuData();
       this.formcall();
       this.myFormValueChanges$ = this.orderForm.controls['items'].valueChanges;
 
     }
     if (this.billflag === 'view') {
-      this.getTableBillData(this.table_id);
+      this.getTableBillData(this.Bill_id);
       this.getmenuData();
       this.formcall();
     }
   }
+
 
   updateCustomer() {
     this.myControl.valueChanges.subscribe((selectedValue) => {
@@ -140,6 +144,7 @@ export class AddBillCounetrComponent implements OnInit {
       //   "status":req.body.status,
     });
     if (this.billflag === 'update' || this.billflag === 'view') {
+      console.log('sdhsjkdhksdhfkldzhb')
       if(this.updateData && this.updateData.cutomer_name != undefined  &&  this.billupdate && this.billupdate.items != undefined){
         this.orderForm.controls['cutomer_name'].setValue(this.updateData.cutomer_name);
         this.orderForm.controls['cutomer_number'].setValue(this.updateData.cutomer_number);
@@ -259,24 +264,20 @@ export class AddBillCounetrComponent implements OnInit {
   //////////////////////////////////////////////////////////////////////////////////////
   datasubmitTrue: boolean = false;
   onSubmit() {
-    let be = this.orderForm.value;
-    console.log(be.items);
-
-    be.items.forEach((element: any) => {
-      console.log(element);
-      if (element.name === '' || element.qty === 0 ||  !this.orderForm.valid) {
-        this.datasubmitTrue = false;
-      } else {
-        this.datasubmitTrue = true;
-      }
-    });
-    if (this.datasubmitTrue === true) {
+    // let be = this.orderForm.value;
+    // be.items.forEach((element: any) => {
+    //   if (element.name === '' || element.qty === 0 ||  !this.orderForm.valid) {
+    //     this.openWarrning();
+    //     return;
+    //   }
+    // })
+      
       let r = Math.random().toString(36).substring(7);
       let tableFormData = {
         user_id: this.user_id,
         bill_no: r,
         bill_order: this.orderForm.value,
-        table_id: this.table_id,
+        table_id: '',
         table_name: '',
         total_bill:  this.total_bill,
         bill_status: 'booked',
@@ -285,40 +286,37 @@ export class AddBillCounetrComponent implements OnInit {
         create_date:new Date(),
         status:'Ordered',
         discount:'',
-        delivery_charge:'20',
-        cutomer_address: this.orderForm.controls['cutomer_address'].value,
-
+        delivery_charge:'',
+        cutomer_address: '',
 
       };
-      console.log(tableFormData)
       this.dataService.saveBill(tableFormData).subscribe(
         (data: any) => this.closeDialog(data),
         (err: any) => console.log(err)
       );
-    } else {
-      let deletedata = {
-        flag:'warn',
-        body: 'Item Name And Item Quantity ,Customer Name ,Customer Number  is Required '
-      };
-      const dialogRef = this.dialog.open(ConfrimBoxComponent, {
-        width: '300px',
-        autoFocus: false,
-        data: deletedata,
-      });
-  
-      dialogRef.afterClosed().subscribe((result) => {
-        console.log(result);
-      });
-    }
+    
   }
-
+ 
   closeDialog(data: any) {
     if (data.status === true) {
-      this.dataService.openSnackBar(data.message, 'Dismiss');
-      this.getmenuData();
       this.dialogRef.close(true);
+      this.dataService.openSnackBar(data.message, 'Dismiss');
     }
   }
+  openWarrning(){
+    let required = {
+      flag:'warn',
+      body: 'Item Name And Item Quantity ,Customer Name ,Customer Number  is Required '
+    };
+    const dialogRef = this.dialog.open(ConfrimBoxComponent, {
+      width: '300px',
+      autoFocus: false,
+      data: required,
+    });
+      dialogRef.afterClosed().subscribe((result) => {
+    });
+  }
+
   /////////////////////////////////////////////////////////////////////////////////
   close() {
     this.dialogRef.close('close');
