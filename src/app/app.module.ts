@@ -1,6 +1,5 @@
-import { NgModule } from '@angular/core';
+import { CUSTOM_ELEMENTS_SCHEMA, NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -8,7 +7,6 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { TokenInterService } from './token-inter.service';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
 import { MatInputModule } from '@angular/material/input';
@@ -39,6 +37,20 @@ import { AddBillCounetrComponent } from './pages/bill-counter/add-bill-counetr/a
 import { MatTableModule } from '@angular/material/table';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatSortModule } from '@angular/material/sort';
+import {MatCardModule} from '@angular/material/card';
+import {MatTabsModule} from '@angular/material/tabs';
+import { CategiresComponent } from './pages/categires/categires.component';
+import { DashbordComponent } from './pages/dashbord/dashbord.component';
+import { AttenderComponent } from './pages/Table/attender/attender.component';
+
+import {MatSidenavModule} from '@angular/material/sidenav';
+import {MatToolbarModule} from '@angular/material/toolbar';
+import { PageHeaderComponent } from './pages/dashbord/page-header/page-header.component';
+import { LayoutComponent } from './pages/dashbord/layout/layout.component';
+import { MenuItemComponent } from './pages/dashbord/menu-item/menu-item.component';
+import {MatListModule} from '@angular/material/list';
+import {MatExpansionModule} from '@angular/material/expansion';
+import { ZingchartAngularModule } from 'zingchart-angular';
 @NgModule({
   declarations: [
     AppComponent,
@@ -58,7 +70,13 @@ import { MatSortModule } from '@angular/material/sort';
     ListContactBookComponent,
     AddBillComponent,
     BillCounterComponent,
-    AddBillCounetrComponent
+    AddBillCounetrComponent,
+    CategiresComponent,
+    DashbordComponent,
+    AttenderComponent,
+    PageHeaderComponent,
+    LayoutComponent,
+    MenuItemComponent
   ],
   imports: [
     BrowserModule,
@@ -73,14 +91,13 @@ import { MatSortModule } from '@angular/material/sort';
    MatIconModule,MatButtonModule,
    MatSelectModule,
    MatInputModule,
-   ReactiveFormsModule,
+   ReactiveFormsModule,MatTabsModule,
    MatChipsModule,
   MatTableModule, MatPaginatorModule,
-  MatAutocompleteModule,MatDialogModule ,MatMenuModule,MatSortModule
-
+  MatAutocompleteModule,MatDialogModule ,MatMenuModule,MatSortModule,MatCardModule,MatSidenavModule,MatToolbarModule,MatListModule,MatExpansionModule,ZingchartAngularModule
   ],
   providers: [{provide: HTTP_INTERCEPTORS, useClass: TokenInterService, multi: true},],
-
+  schemas: [CUSTOM_ELEMENTS_SCHEMA],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -1,65 +1,327 @@
-<div mat-dialog-title class="">
+<div mat-dialog-title>
     <h2 class="menu_item"> Add Bill
-    <mat-icon class="iconsclose"  (click)="close()"> close</mat-icon>
-    <button *ngIf="billflag != 'view'" style="margin: 2px;" class="addbtn" (click)="addItem()">ADD ITEM</button>
-  </h2>
-  </div>
-    <form *ngIf="menuDataList && table_id" [formGroup]="orderForm">
-    <div class="row">
-    <div class="col-md-6">
-      <input type="text" class="form-control"   formControlName="cutomer_name" placeholder="Customer Name">
-    </div>
-    <div class="col-md-6">
-      <input type="text" class="form-control " formControlName="cutomer_number" placeholder="Customer NO">
-    </div>
-    </div>
-  <div>
-      </div>
-    <mat-dialog-content>
-      <div [class.wrapview]="billflag === 'view'" *ngIf="items" class="">
-        <div formArrayName="items" *ngFor="let item of items.controls; index as idx">
-          <div [formGroupName]="idx">
-            <div class="item_wrapper">
-              <div class="item">
-                <mat-form-field appearance="outline" class="width_100">
-                  <mat-select formControlName="name" (selectionChange)="onBookChange($event,item)"
-                    placeholder="Select Menu">
-                    <input type="text" class="search_menu" [formControl]="myControl" placeholder="Serach Item">
-                    <mat-option *ngFor="let stock of menuDataList" [value]="stock.menu_name">{{stock.menu_name}} -
-                      {{stock.menu_price | currency:'INR' }}</mat-option>
-                  </mat-select>
-                </mat-form-field>
-              </div>
-              <mat-icon class="icon" (click)="onKeyUpEvent(item,'add')"> add</mat-icon>
-              <div class="qty">
-                <mat-form-field class="width_100" appearance="outline">
-                  <mat-label>Qty</mat-label>
-                  <input matInput  placeholder="qty" formControlName="qty" readonly>
-                </mat-form-field>
-              </div>
-              <mat-icon class="icon" (click)="onKeyUpEvent(item,'remove')"> remove</mat-icon>
-              <div class="price">
-                <mat-form-field class="width_100" appearance="outline">
-                  <mat-label>Price</mat-label>
-                  <input matInput   placeholder="Price" formControlName="price" readonly>
-                </mat-form-field>
-              </div>
-           
-              <span (click)="removeGroup(idx)">
-                <mat-icon class="icon" style="background-color:red ;">delete</mat-icon>
-              </span>
-            </div>
-          </div>
-        </div>
-      </div>
-    </mat-dialog-content>
-      <div class="btns">
-        <button class="bbutton">Total - {{total_bill}} </button>
-        <button *ngIf="billflag === 'save'" class="pbutton" (click)="onSubmit()">Place Order</button>
-        <button *ngIf="billflag === 'update'" class="pbutton" (click)="UpdateItem()">Update Order</button>
+        <mat-icon class="iconsclose" (click)="close()"> close</mat-icon>
+        
+        <button *ngIf="GirdView"  style="margin: 2px;" (click)="showListView()" class="addbtn">List View </button>
+        <button   *ngIf="listView"  style="margin: 2px;" (click)="showGirdView()" class="addbtn">Gird View </button>
        
-        <!-- <button *ngIf="billflag === 'update'" style="background: #fd3e3e ; margin-left: 19px;" class="pbutton"
-        (click)="competeItem()">Completed Order</button> -->
-      </div>
-  </form>
-  <!-- [disabled]="!orderForm.valid " -->
+    </h2>
+</div>
+
+<div *ngIf="GirdView" class="row">
+    <div class="col-md-6 row flexcontainer">
+        <div class="wrapper">
+            <div class="d-md-flex align-items-md-center">
+                <div class="search">
+                    <input type="search" [(ngModel)]="term" placeholder="Search" autocomplete="off"
+                        placeholder="Search Item" />
+                </div>
+            </div>
+       
+            <div *ngIf="!mobileview " class="content py-md-0 py-3">
+                <section id="sidebar">
+                    <div class="py-3">
+                        <ul class="list-group">
+                            <li (click)="getmenuData()"
+                                class="list-group-item list-group-item-action d-flex justify-content-between align-items-center category">
+                                <span>All Items </span>
+                            </li>
+                            <li *ngFor="let item of categoryDataList" (click)="filtercate(item.category_id)"
+                                class="list-group-item list-group-item-action d-flex justify-content-between align-items-center category">
+                                {{item.category_name | titlecase }}</li>
+                        </ul>
+                    </div>
+                </section>
+                <div class="buttons">
+                    <button *ngFor="let menu of menuDataList |filter : term" class="neumorphic active">
+                        <div (click)="addProduct(menu)">
+                            <div class="image-container img-one">
+                                <img src="{{menu.menu_url}}" alt="tennis" />
+                                <div class="overlay">
+                                    <span>{{menu.menu_name}}</span>
+                                </div>
+                            </div>
+                        </div>
+                    </button>
+                </div>
+            </div>
+  <!-- mobile view only -->
+
+            <div *ngIf="mobileview && menuDataList" >
+            <div class="filters"> 
+                <mat-tab-group  (selectedTabChange)="ontabChange($event)">
+                <mat-tab label="All Item">
+                    <div class="mobile_menu">
+                        <div class="mobile_menusub" *ngFor="let menu of menuDataList |filter : term" (click)="addProduct(menu)">
+                           <span  title={{menu.menu_name}}>{{menu.menu_name}}</span> 
+                         </div>
+                    </div>
+              
+                </mat-tab>
+                <mat-tab *ngFor="let item of categoryDataList"  label={{item.category_name}}  > 
+                    <div class="mobile_menu">
+                    <div class="mobile_menusub" *ngFor="let menu of menuDataList |filter : term"  (click)="addProduct(menu)">
+                       <span title={{menu.menu_name}}>{{menu.menu_name}}</span> 
+                     </div>
+                </div>
+          
+            </mat-tab>
+              </mat-tab-group>
+         </div>
+        </div>
+        </div>
+    </div>
+
+    <div class="col-md-6">
+        <form *ngIf="menuDataList " [formGroup]="orderForm" (keydown.enter)="$event.preventDefault()">
+            <div class="row">
+                <div  *ngIf="!mobileview && products.length !==0 " class="row">
+                    <div class="col-md-6 inputbox">
+                        <input type="number" formControlName="cutomer_number" (change)="onChangeDataset()"
+                            placeholder="Customer Number" list="languages">
+                        <datalist id="languages">
+                            <option class="optionLIST" *ngFor="let item of conatctBookList"
+                                [value]="item.contact_number">
+                        </datalist>
+                    </div>
+                    <div class="col-md-6 inputbox">
+                        <input type="text" formControlName="cutomer_name" placeholder="Customer Name">
+                    </div>
+                </div>
+                <div  *ngIf="mobileview && products.length !==0 " class="width_100" >
+                    <div class="width_50  inputbox">
+                        <input type="number" formControlName="cutomer_number" (change)="onChangeDataset()"
+                            placeholder="Customer Number" list="languages">
+                        <datalist id="languages">
+                            <option class="optionLIST" *ngFor="let item of conatctBookList"
+                                [value]="item.contact_number">
+                        </datalist>
+                    </div>
+                    <div class="width_50 inputbox">
+                        <input type="text" formControlName="cutomer_name" placeholder="Customer Name">
+                    </div>
+                </div>
+                <div>
+                    <div>
+                        <div class="cardcart">
+                            <div class="card-body-cart p-0 table-responsive">
+                                <table class="table cart-table mb-0">
+                                    <tbody *ngIf="products.length ===0 ">
+                                        <tr>
+                                            <td colSpan="6">
+                                                <div class="cart-empty">
+                                                    <i class="fa fa-shopping-cart"></i>
+                                                    <p>Your Cart Is empty</p>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                                <table *ngIf="products.length !==0 " class="table cart-table mb-0">
+                                    <thead>
+                                        <tr>
+                                            <th>Action</th>
+                                            <th>product</th>
+                                            <th>Name</th>
+                                            <th>Price</th>
+                                            <th style="    padding-left: 37px;">Qty</th>
+                                            <th>Total Amount</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr *ngFor="let item of products">
+                                            <td>
+                                                <button class="prdct-qty-close" type="button"
+                                                    (click)="removeProduct(item)">
+                                                    <mat-icon>close</mat-icon>
+                                                </button>
+                                            </td>
+                                            <td>
+                                                <div class="product-img">
+                                                    <img src="{{item.menu_url}}" alt='Image' />
+                                                </div>
+                                            </td>
+                                            <td>
+                                                <div class="product-name">
+                                                    <p>{{item.menu_name}}</p>
+                                                </div>
+                                            </td>
+                                            <td>
+                                                <div class="product-name">
+                                                    <p>{{item.menu_price}}</p>
+                                                </div>
+                                            </td>
+                                            <td>
+                                                <div class="prdct-qty-wrp">
+                                                    <button class="prdct-qty-btn" type="button"
+                                                        (click)="decrease(item)">
+                                                        <i class="fa fa-minus"></i>
+                                                    </button>
+                                                    <input type="text" name="qty" [value]="item.qty"
+                                                        class="qty-input-box" disabled />
+                                                    <button class="prdct-qty-btn" (click)="increase(item)"
+                                                        type="button">
+                                                        <i class="fa fa-plus"></i>
+                                                    </button>
+                                                </div>
+                                            </td>
+                                            <td>{{item.qty * item.menu_price}}</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                        <div *ngIf="products.length !==0 ">
+                            <div class="wrapperdiv1">
+                                <div>
+                                    Subtotal
+                                </div>
+                                <div class="div1">
+                                    {{this.subtotal}} Rs
+                                </div>
+                            </div>
+                            <div class="wrapperdiv">
+                                <div>
+                                    <mat-form-field appearance="outline">
+                                        <mat-label>Discount</mat-label>
+                                        <input type="number" matInput placeholder="Discount" (change)="discountchange('grid')"
+                                            formControlName="discount">
+                                        <mat-icon matSuffix>money</mat-icon>
+                                    </mat-form-field>
+                                </div>
+                            
+                                <div class="divtotal">
+                                    Grand Total - {{allProducts}} Rs
+                                </div>
+                            </div>
+                            <div class="wrapperdivbtn">
+                                <div>
+                                    <button class="bbutton" (click)="onDesktopBillSubmit()">Save Bill </button>
+                                </div>
+                                <div>
+                                    <button class="bbutton" (click)="onDesktopBillSubmit()">Save & Print </button>
+                                </div>
+                                <div>
+                                    <button class="bbutton" (click)="onDesktopBillSubmit()">KOT & Print </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </form>
+    </div>
+</div>
+
+<!-- List view Code -->
+<div *ngIf="listView">
+    <form *ngIf="menuDataList " [formGroup]="orderForm" (keydown.enter)="$event.preventDefault()">
+<mat-dialog-content >
+ 
+        <div   class="width_100" >
+        
+            <div class="width_50  inputbox">
+                <input type="number" formControlName="cutomer_number" (change)="onChangeDataset()"
+                    placeholder="Customer Number" list="languages">
+                <datalist id="languages">
+                    <option class="optionLIST" *ngFor="let item of conatctBookList"
+                        [value]="item.contact_number">
+                </datalist>
+            </div>
+            <div class="width_50 inputbox">
+                <input type="text" formControlName="cutomer_name" placeholder="Customer Name">
+            </div>
+        </div>
+
+        <div>
+        </div>
+        <button  style="margin-bottom: 10px;" mat-raised-button (click)="addItem()">ADD
+            ITEM <mat-icon> add</mat-icon></button>
+        <div class="itemwrap" [class.wrapview]="billflag === 'view'" *ngIf="items">
+         
+            <div  formArrayName="items" *ngFor="let item of items.controls; index as idx">
+                <div [formGroupName]="idx">
+                    <div class="item_wrapper">
+                        <div class="item">
+                            <mat-form-field appearance="outline" class="width_100">
+                                <mat-select formControlName="name" (selectionChange)="onBookChange($event,item)"
+                                    placeholder="Select Menu">
+                                    <input type="text" class="search_menu" [formControl]="myControl"
+                                        placeholder="Serach Item">
+                                    <mat-option *ngFor="let stock of menuDataList"
+                                        [value]="stock.menu_name">{{stock.menu_name}}
+                                        -
+                                        {{stock.menu_price | currency:'INR'
+                                        }}</mat-option>
+                                </mat-select>
+                            </mat-form-field>
+                        </div>
+                        <mat-icon class="iconlist" (click)="onKeyUpEvent(item,'add')"> add</mat-icon>
+                        <div class="qty">
+                            <mat-form-field class="width_100" appearance="outline">
+                                <mat-label>Qty</mat-label>
+                                <input matInput placeholder="qty" formControlName="qty" readonly>
+                            </mat-form-field>
+                        </div>
+                        <mat-icon class="iconlist" (click)="onKeyUpEvent(item,'remove')">
+                            remove</mat-icon>
+                        <div class="price">
+                            <mat-form-field class="width_100" appearance="outline">
+                                <mat-label>Price</mat-label>
+                                <input matInput placeholder="Price" formControlName="price" readonly>
+                            </mat-form-field>
+                        </div>
+
+                        <span (click)="removeGroup(idx)">
+                            <mat-icon class="iconlist" style="background-color:red ;">delete</mat-icon>
+                        </span>
+                    </div>
+                </div>
+            </div>
+            <div>
+       
+            </div>
+        </div>
+
+</mat-dialog-content>
+<mat-dialog-actions>
+    <div *ngIf="items.length !==0 ">
+        <div class="wrapperdiv1">
+            <div>
+                Subtotal
+            </div>
+            <div class="div1">
+                {{this.total_bill}} Rs
+            </div>
+        </div>
+        <div class="wrapperdiv">
+            <div>
+                <mat-form-field appearance="outline">
+                    <mat-label>Discount</mat-label>
+                    <input type="number" matInput placeholder="Discount" (change)="discountchange('list')"
+                        formControlName="discount">
+                    <mat-icon matSuffix>money</mat-icon>
+                </mat-form-field>
+            </div>
+            <div class="divtotal">
+                Grand Total - {{this.allSubtotal}} Rs
+            </div>
+        </div>
+        <div class="wrapperdivbtn">
+            <div>
+                <button class="bbutton" (click)="onSubmit()">Save Bill </button>
+            </div>
+            <div>
+                <button class="bbutton" (click)="onSubmit()">Save & Print </button>
+            </div>
+            <div>
+                <button class="bbutton" (click)="onSubmit()">KOT & Print </button>
+            </div>
+        </div>
+    </div>
+</mat-dialog-actions>
+</form>
+
+</div>
+<!-- [disabled]="!orderForm.valid " -->

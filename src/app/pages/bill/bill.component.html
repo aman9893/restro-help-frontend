@@ -1,5 +1,5 @@
 <main *ngIf="tableDataList && tableDataList.length>0" class="main">
-    <div class="responsive-wrapper">
+    <div >
         <div class="">
             <div class="search">
                 <input type="text" [(ngModel)]="term" placeholder="Search" autocomplete="off"
@@ -7,8 +7,8 @@
             </div>
         </div>
 
-        <div class="content">
-            <div class="content-main">
+        <div >
+            <!-- <div class="content-main">
                 <div class="card-grid">
                     <article class="card" *ngFor="let table of tableDataList |filter : term">
                         <div class="card-header">
@@ -32,18 +32,88 @@
                         </div>
                     </article>
                 </div>
-            </div>
-        </div>
+            </div> -->
+
+            <div class="page-wrapper">
+                    <ul class="infographic-cards">
+                        <li class="color-1" *ngFor="let table of tableDataList |filter : term">
+                            <div class="cardboxs">
+                               <div class="row">
+                                <div class="col-md-3">
+                                    <div *ngIf="table.bill_status =='booked'" class="number-box booked">
+                                    </div>
+                                    <div *ngIf="table.bill_status !=='booked'" class="number-box Available">
+                                    </div>
+                                   
+                                </div>
+                                <div class="col-md-9">
+                                    <div *ngIf="table.bill_status ==='booked'" >
+                                       <h6> {{table.attender_name}}</h6> 
+                                      </div>
+                                      <div *ngIf="table.bill_status !=='booked'" >
+                                       </div>
+                                </div>
+                               </div>
+
+                                <span class="title">
+                                  
+                                    {{table.table_name | titlecase}}
+                                 
+                                </span>
+                                <p *ngIf="table.bill_status ==='booked'" class="description"> {{table.create_date |  date:'shortTime' }} </p>
+
+                                <p *ngIf="table.bill_status !=='booked'" class="description" style="color: green;"> Available</p>
+                               
+                              
+                                <div class="actions">
+                                    <div *ngIf="table.bill_status !=='booked'" class="example-button-container" style="    margin-left: 27px;">
+                                        <button  mat-mini-fab color="primary" title="Add Order" aria-label="Example icon button with a delete icon"  (click)="addOder(table)">
+                                          <mat-icon>add</mat-icon>
+                                        </button>
+                                      </div>
+                                      <div *ngIf="table.bill_status ==='booked'" class="example-button-container">
+                                        <button  mat-mini-fab color="primary"  title="Edit Order"  aria-label="Example icon button with a delete icon"  (click)="updateOder(table)">
+                                          <mat-icon>edit</mat-icon>
+                                        </button>
+                                      </div>
+                                      <div *ngIf="table.bill_status ==='booked'" class="example-button-container">
+                                        <button  mat-mini-fab color="accent"  title="View Order"   aria-label="Example icon button with a delete icon"  (click)="viewOder(table.table_id)">
+                                          <mat-icon>remove_red_eye</mat-icon>
+                                        </button>
+                                      </div>
+                                     
+                                 
+                                </div>
+                            </div>
+                           
+                        </li>
+                    </ul>
+                </div>
+               </div>
+        
     </div>
 </main>
 
 
-<div *ngIf=" tableDataList && tableDataList.length===0">
 
-    <div class="circle">
-        <a class="button" [routerLink]="['/table']"> Add Table </a>
-        <br>
-        <br>
-        Please Add Table First
-    </div>
-</div>
+
+<!-- <div class="loader" *ngIf="showDataLoader === true">
+    <mat-spinner [diameter]="40" mode="indeterminate"></mat-spinner>
+  </div> -->
+  <section class="divmain">
+    <div *ngIf="tableDataList">
+        <div *ngIf="tableDataList.length === 0" >
+            <div class="empty-state">
+                <div class="empty-state__content">
+                  <div class="empty-state__icon">
+                    <img src="https://cdni.iconscout.com/illustration/premium/thumb/sorry-item-not-found-3328225-2809510.png" alt="">
+                  </div>
+                  <div class="empty-state__message">No records has been added yet.</div>
+                  <div class="empty-state__help">
+                    Add a new record by simpley clicking link <a class="button" [routerLink]="['/table']"> Add Table </a>
+                  </div>
+                </div>
+              </div>
+        </div>
+      </div>
+      </section>

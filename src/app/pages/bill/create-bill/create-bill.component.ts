@@ -40,6 +40,10 @@ export class CreateBillComponent implements OnInit {
   myFormValueChanges$: any;
   total_bill = 0;
   itemstable: any;
+  attenderDataList: any;
+  conatctBookList: any;
+  discount: any;
+  allSubtotal: number=0;
 
   constructor(
     public dataService: DataService,
@@ -74,12 +78,35 @@ export class CreateBillComponent implements OnInit {
       this.getmenuData();
       this.formcall();
     }
+    this.getattenderData();
+    this.getConatctBookData();
+  }
+
+  onChangeDataset() {
+    let contactValue;
+    let cutomer_number = this.orderForm.controls['cutomer_number'].value;
+    console.log(cutomer_number)
+    this.conatctBookList.forEach((ele: any) => {
+      if (ele.contact_number == cutomer_number) {
+        contactValue = ele.contact_name;
+      }
+    });
+    this.orderForm.controls['cutomer_name'].setValue(contactValue);
   }
 
   updateCustomer() {
     this.myControl.valueChanges.subscribe((selectedValue) => {
       this.filter(selectedValue);
     });
+  }
+
+  getConatctBookData() {
+    this.dataService.getConatctList().subscribe(
+      (data: any) => this.showtodoDetails(data),
+    )
+  }
+  showtodoDetails(data: any) {
+    this.conatctBookList = data;
   }
 
   //////////////////////////////////////////////////api call/////////////////////////////////////////
@@ -104,6 +131,14 @@ export class CreateBillComponent implements OnInit {
   }
   menuData(data: any) {
     this.menuDataList = data;
+  }
+  getattenderData(): void {
+    this.dataService.getAttenderInfo().subscribe((data:any) => this.attenderData(data));
+  }
+
+  attenderData(data: any) {
+    this.attenderDataList = data;
+
   }
   //////////////////////////////////////////////////api call/////////////////////////////////////////
 
@@ -130,7 +165,13 @@ export class CreateBillComponent implements OnInit {
         Validators.required
       ]),
       cutomer_address:new FormControl('',[
-      ]),  
+      ]), 
+      attender_name: new FormControl('',[
+      ]), 
+      attender_id: new FormControl('',[
+      ]), 
+      discount: new FormControl( '', [Validators.pattern(this.dataService.phoneValidation()),Validators.maxLength(20)]),
+
     
       // "cutomer_address":req.body.cutomer_address,
       //   "restro_name":req.body.restro_name,
@@ -142,6 +183,8 @@ export class CreateBillComponent implements OnInit {
       if(this.updateData && this.updateData.cutomer_name != undefined  &&  this.billupdate && this.billupdate.items != undefined){
         this.orderForm.controls['cutomer_name'].setValue(this.updateData.cutomer_name);
         this.orderForm.controls['cutomer_number'].setValue(this.updateData.cutomer_number);
+        this.orderForm.controls['discount'].setValue(this.updateData.discount);
+        this.orderForm.controls['attender_name'].setValue(this.updateData.attender_name);
  
       for (let index = 0; index < this.billupdate.items.length; index++) {
         const element = this.billupdate.items[index];
@@ -154,8 +197,7 @@ export class CreateBillComponent implements OnInit {
             Validators.required,
             Validators.pattern('^(0|[1-9][0-9]*)$'),
           ]),
-          restro_name: this.formBuilder.control(element.restro_name, [
-          ]),
+        
         });
         this.items = this.orderForm.get('items') as FormArray;
         this.items.push(formGroup);
@@ -165,13 +207,18 @@ export class CreateBillComponent implements OnInit {
       this.addItem();
     }
   }
+  
+  discountchange(view:any){
+        this.discount = this.orderForm.controls['discount'].value;
+        this.allSubtotal = this.total_bill - this.discount;
+        this.total_bill = this.allSubtotal;
+  }
 
   createItem(): FormGroup {
     return this.formBuilder.group({
       name: ['', Validators.required],
       qty: [0, Validators.required],
       price: ['', Validators.required],
-      restro_name: [''],
     });
   }
 
@@ -259,7 +306,7 @@ export class CreateBillComponent implements OnInit {
   datasubmitTrue: boolean = false;
   onSubmit() {
     let be = this.orderForm.value;
-    console.log(be.items);
+    console.log( this.orderForm.controls['attender_name'].value,);
 
     be.items.forEach((element: any) => {
       console.log(element);
@@ -281,13 +328,13 @@ export class CreateBillComponent implements OnInit {
         bill_status: 'booked',
         cutomer_name: this.orderForm.controls['cutomer_name'].value,
         cutomer_number: this.orderForm.controls['cutomer_number'].value,
+        attender_name: this.orderForm.controls['attender_name'].value,
+        discount: this.orderForm.controls['discount'].value,
+        attender_id: '',
         create_date:new Date(),
-        status:'Ordered',
-        discount:'',
-        delivery_charge:'20',
-        cutomer_address: this.orderForm.controls['cutomer_address'].value,
-
-
+        status:'tablebook',
+        delivery_charge:'',
+        cutomer_address: '',
       };
       console.log(tableFormData)
       this.dataService.saveBill(tableFormData).subscribe(
@@ -335,11 +382,13 @@ export class CreateBillComponent implements OnInit {
       bill_status: 'booked',
       cutomer_name: this.orderForm.controls['cutomer_name'].value,
       cutomer_number: this.orderForm.controls['cutomer_number'].value,
-      cutomer_address: this.orderForm.controls['cutomer_address'].value,
+      cutomer_address: '',
       create_date:new Date(),
-      status:'Ordered',
-      discount:'',
-      delivery_charge:'20'
+      status:'tablebook',
+      attender_name: this.orderForm.controls['attender_name'].value,
+      discount: this.orderForm.controls['discount'].value,
+      attender_id: '',
+      delivery_charge:''
 
     };
     this.dataService.updateBill(tableFormData).subscribe(

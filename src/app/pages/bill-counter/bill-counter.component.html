@@ -8,11 +8,11 @@
       <button class="btn" (click)="addBill('save','data')">Add
         Bill</button>
     </div>
-    <div *ngIf="BillData.length > 0" class="grid-wrapper">
+    <div *ngIf="BillData && BillData.length > 0" class="grid-wrapper">
       <mat-form-field class="fiter">
         <mat-label>Filter</mat-label>
         <input matInput (keyup)="applyFilter($event)"
-          placeholder="Contact  Name" #input>
+          placeholder="Filter Bill" #input>
       </mat-form-field>
       <div *ngIf="BillData" class="mat-elevation-z8">
         <table class="mat-elevation-z8" mat-table [dataSource]="dataSource"
@@ -33,30 +33,47 @@
                   <span>Delete Bill</span>
                 </button>
 
-                <button (click)="addBill('update',element.bill_id)" mat-menu-item>
+                <!-- <button (click)="addBill('update',element.bill_id)" mat-menu-item>
                   <mat-icon>edit</mat-icon>
                   <span>Edit Bill</span>
-                </button>
+                </button> -->
               </mat-menu>
             </td>
           </ng-container>
+
+
+          <ng-container matColumnDef="create_date">
+            <th mat-header-cell mat-sort-header *matHeaderCellDef> View Invoice
+            </th>
+            <td mat-cell *matCellDef="let element" (click)="downloadInvoice(element.bill_id)"> <mat-icon>receipt</mat-icon>  
+            </td>
+          </ng-container>
+          <ng-container matColumnDef="status">
+            <th mat-header-cell mat-sort-header *matHeaderCellDef>Date
+            </th>
+            <td mat-cell *matCellDef="let element" >  {{element.create_date | date}}
+            </td>
+          </ng-container>
+
           <ng-container matColumnDef="cutomer_name">
             <th mat-header-cell mat-sort-header *matHeaderCellDef> Contact Name
             </th>
             <td mat-cell *matCellDef="let element"> {{element.cutomer_name}}
             </td>
           </ng-container>
+
+
           <ng-container matColumnDef="bill_no">
             <th mat-header-cell mat-sort-header
               *matHeaderCellDef> Invoice Number </th>
             <td mat-cell *matCellDef="let element">
-              {{element.bill_no}} </td>
+            #  {{element.bill_no}} </td>
           </ng-container>
           <ng-container matColumnDef="total_bill">
             <th mat-header-cell mat-sort-header
               *matHeaderCellDef> Total Amount </th>
             <td mat-cell *matCellDef="let element">
-              {{element.total_bill}} </td>
+              {{element.total_bill}} Rs </td>
           </ng-container>
         
 
@@ -69,14 +86,12 @@
         </mat-paginator>
       </div>
     </div>
-  </section>
-
+  </section>  
   <div class="loader" *ngIf="showDataLoader === true">
     <mat-spinner [diameter]="40" mode="indeterminate"></mat-spinner>
   </div>
-
   <div *ngIf="BillData">
-    <div *ngIf="BillData.length === 0">
+    <div *ngIf="BillData && BillData.length === 0">
       <div class="empty-state">
         <div class="empty-state__content">
           <div class="empty-state__icon">

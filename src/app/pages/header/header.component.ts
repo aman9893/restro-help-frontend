@@ -1,19 +1,20 @@
-import { Component, OnInit } from '@angular/core';
-import {MatMenuModule} from '@angular/material/menu';
+import { ChangeDetectionStrategy, Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { MatMenuModule } from '@angular/material/menu';
 import { Router } from '@angular/router';
 import { AuthService } from 'src/app/auth.service';
 import { DataService } from 'src/app/service/data.service';
 @Component({
   selector: 'app-header',
   templateUrl: './header.component.html',
-  styleUrls: ['./header.component.scss']
+  styleUrls: ['./header.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class HeaderComponent implements OnInit {
   UserId: any;
   userData: any;
 
-  constructor(public authService:AuthService,public router: Router,  public dataService :DataService) { }
-
+  constructor(public authService: AuthService, public router: Router, public dataService: DataService) { }
+  @Output() menuToggled = new EventEmitter<boolean>();
   ngOnInit(): void {
     this.UserId = this.authService.getUserId();
     this.getResgiterDataById();
@@ -26,12 +27,12 @@ export class HeaderComponent implements OnInit {
       )
   }
 
-  getRegisterData(data:any) {
-     this.userData = data[0];
-     console.log(this.userData);
-     this.dataService.userData = this.userData;
+  getRegisterData(data: any) {
+    this.userData = data[0];
+    console.log(this.userData);
+    this.dataService.userData = this.userData;
   }
-  logout(){
+  logout() {
     this.authService.logout();
   }
 }

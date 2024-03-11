@@ -32,6 +32,7 @@ export class MenulistComponent implements OnInit ,AfterViewInit  {
   @ViewChild(MatSort) sort = {} as MatSort;
   @ViewChild(MatPaginator) paginator = {} as MatPaginator;
   showDataLoader: boolean= true;
+  categoryDataList: any;
 
   constructor(
     private formBuilder: FormBuilder,
@@ -50,8 +51,7 @@ export class MenulistComponent implements OnInit ,AfterViewInit  {
     this.setDataSourceAttributes();
   }
   ngAfterViewInit() {
-    this.dataSource.sort = this.sort;
-    this.dataSource.paginator = this.paginator;
+   
   }
 
   applyFilter(event: Event) {
@@ -73,6 +73,7 @@ export class MenulistComponent implements OnInit ,AfterViewInit  {
     let UserId = this.authService.getUserId();
     this.user_id = UserId;
     this.getTableDatamenu();
+    this.getcategoryData();
     this.createForm();
   }
   getTableDatamenu(): void {
@@ -89,6 +90,15 @@ export class MenulistComponent implements OnInit ,AfterViewInit  {
     }
   }
 
+  getcategoryData(): void {
+    this.dataService.getcategoryList().subscribe((data) => this.categoryData(data));
+  }
+
+  categoryData(data: any) {
+    this.categoryDataList = data;
+    console.log(this.categoryDataList);
+  }
+
   createForm() {
     this.tableForm = this.formBuilder.group({
       menu_name: new FormControl('', {
@@ -97,6 +107,14 @@ export class MenulistComponent implements OnInit ,AfterViewInit  {
       }),
       menu_price: new FormControl('', {
         validators: [Validators.required, Validators.maxLength(55)],
+        // updateOn: 'blur',
+      }),
+      menu_url: new FormControl('', {
+        // validators: [Validators.required, Validators.maxLength(500)],
+        // updateOn: 'blur',
+      }),
+      menu_categories: new FormControl('', {
+        // validators: [Validators.required, Validators.maxLength(500)],
         // updateOn: 'blur',
       }),
     });
@@ -118,6 +136,8 @@ export class MenulistComponent implements OnInit ,AfterViewInit  {
         user_id: this.user_id,
         menu_name: this.tableForm.controls['menu_name'].value,
         menu_price: this.tableForm.controls['menu_price'].value,
+        menu_url: this.tableForm.controls['menu_url'].value,
+        menu_categories: this.tableForm.controls['menu_categories'].value,
       };
       console.log(tableFormData);
       this.dataService.saveMenu(tableFormData).subscribe(
@@ -140,6 +160,8 @@ export class MenulistComponent implements OnInit ,AfterViewInit  {
     this.updatebtn =true;
     this.tableForm.controls['menu_name'].setValue(data.menu_name);
     this.tableForm.controls['menu_price'].setValue(data.menu_price);
+    this.tableForm.controls['menu_url'].setValue(data.menu_url);
+    this.tableForm.controls['menu_categories'].setValue(data.menu_categories);
     this.menu_id= data.menu_id;
   }
   update() {
@@ -148,6 +170,8 @@ export class MenulistComponent implements OnInit ,AfterViewInit  {
       user_id: this.user_id,
       menu_name: this.tableForm.controls['menu_name'].value,
       menu_price: this.tableForm.controls['menu_price'].value,
+      menu_url: this.tableForm.controls['menu_url'].value,
+      menu_categories: this.tableForm.controls['menu_categories'].value,
     };
     this.dataService.updateMenu(tableFormData).subscribe(
       (data: any) => this.updateDialog(data),

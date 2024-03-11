@@ -11,15 +11,17 @@
 }
 
 .Modal_content {
-    padding: 10px 0px;
     overflow-y: auto;
-    color: red;
+    color: #ed6056;
     float: left;
     width: 100%;
+    font-size: larger;
 }
 
 .Modal_explanation {
-    margin-bottom: 20px;
+    margin-bottom: 10px;
+    font-size: 14px;
+    font-weight: 500;
 }
 
 .Modal_footer {

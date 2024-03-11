@@ -55,8 +55,7 @@ export class AddTableComponent implements OnInit,AfterViewInit {
     this.setDataSourceAttributes();
   }
   ngAfterViewInit() {
-    this.dataSource.sort = this.sort;
-    this.dataSource.paginator = this.paginator;
+   
   }
 
   applyFilter(event: Event) {

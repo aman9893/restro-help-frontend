@@ -1,10 +1,17 @@
 
-
+<app-page-header icon="home"  >
+  <h4  routerLink="/home">Home</h4>
+  <span  class="centertext">
+      Table management
+  </span>
+  <button mat-flat-button color="primary" class="action" >
+    <mat-icon class="mr-2">add</mat-icon>
+    <span> Table </span>
+  </button>
+</app-page-header>
 <section class="divmain">
   <section class="wrapper" id="goUp">
-      <div class="title">
-          Add Table Name
-      </div>
+ 
       <form class="menu-container" [formGroup]="tableForm" autocomplete="off" novalidate>
           <div class="field">
             <input type="text" formControlName="table_name" placeholder="Enter Table Name">
@@ -14,7 +21,7 @@
             <button *ngIf="updatebtn" class="btn" type="submit" [disabled]="!tableForm.valid"
            (click)="update()">Update</button>
           </div>
-              <div *ngIf="tableDataList.length >0" class="grid-wrapper" >
+              <div *ngIf="tableDataList && tableDataList.length >0" class="grid-wrapper" >
                   <mat-form-field class="fiter">
                       <mat-label>Filter</mat-label>
                       <input matInput (keyup)="applyFilter($event)" placeholder="Item Name" #input>

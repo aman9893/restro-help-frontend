@@ -2,26 +2,33 @@
 
   <h2 class="menu_item">{{this.tabledata.tablename.table_name | titlecase}} BILLING
   <mat-icon class="iconsclose"  (click)="close()"> close</mat-icon>
-
   </h2>
 </div>
-
+<button  *ngIf="billflag != 'view'"  mat-raised-button (click)="addItem()">ADD
+  ITEM <mat-icon> add</mat-icon></button>
   <form *ngIf="menuDataList && table_id" [formGroup]="orderForm">
-  <div class="row">
-  <div class="col-md-6">
-    <mat-form-field class="width_100" appearance="fill">
-      <mat-label>Cutomer Name</mat-label>
-      <input matInput placeholder="Customer Name" formControlName="cutomer_name" >
-    </mat-form-field>
+    <div  class="width_100" >
+      <div class="width_30  inputbox">
+          <input type="number" formControlName="cutomer_number" (change)="onChangeDataset()"
+              placeholder="Customer Number" list="languages">
+          <datalist id="languages">
+              <option class="optionLIST" *ngFor="let item of conatctBookList"
+                  [value]="item.contact_number">
+          </datalist>
+      </div>
+      <div class="width_30 inputbox">
+          <input type="text" formControlName="cutomer_name" placeholder="Customer Name">
+      </div>
+      <div  class="width_30 inputbox">
+        <mat-form-field class="width_100" placeholder="kitchen" appearance="outline">
+          <mat-label>Select Attender</mat-label>
+          <mat-select   formControlName="attender_name">
+            <mat-option *ngFor="let item of attenderDataList" [value]="item.attender_name">{{item.attender_name}}</mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
   </div>
-  <div class="col-md-6">
-    <mat-form-field class="width_100" appearance="fill">
-      <mat-label>Cutomer Number</mat-label>
-      <input matInput placeholder="Customer Number" formControlName="cutomer_number" >
-    </mat-form-field>
-  </div>
-  </div>
-<div> <button *ngIf="billflag != 'view'" style="margin: 2px;" class="addbtn" (click)="addItem()">ADD ITEM</button> </div>
+ 
   <mat-dialog-content>
     <div [class.wrapview]="billflag === 'view'" *ngIf="items" class="">
       <div formArrayName="items" *ngFor="let item of items.controls; index as idx">
@@ -51,17 +58,7 @@
                 <input matInput   placeholder="Price" formControlName="price" readonly>
               </mat-form-field>
             </div>
-            <!-- <div class="price">
-              <mat-form-field class="width_100" placeholder="kitchen" appearance="outline">
-                <mat-label>Select kitchen</mat-label>
-                <mat-select   formControlName="restro_name">
-                  <mat-option value="Ab kitchen">Ab kitchen</mat-option>
-                  <mat-option value="V9 kitchen">V9 kitchen</mat-option>
-                  <mat-option value="Momos kitchen">Momos kitchen</mat-option>
-                  <mat-option value="7 Heaven kitchen">7 Heaven kitchen</mat-option>
-                </mat-select>
-              </mat-form-field>
-            </div> -->
+          
             <span (click)="removeGroup(idx)">
               <mat-icon class="icon" style="background-color:red ;">delete</mat-icon>
             </span>
@@ -71,15 +68,40 @@
     </div>
   </mat-dialog-content>
   <mat-dialog-actions>
-    <div class="btns">
-      
-      <button *ngIf="billflag === 'save'" class="pbutton" (click)="onSubmit()">Place Order</button>
-      <button *ngIf="billflag === 'update'" class="pbutton" (click)="UpdateItem()">Update Order</button>
-     
-      <!-- <button *ngIf="billflag === 'update'" style="background: #fd3e3e ; margin-left: 19px;" class="pbutton"
-      (click)="competeItem()">Completed Order</button> -->
-       <button class="bbutton">Total - {{total_bill}} </button>
-    </div>
+    <div *ngIf="items.length !==0 ">
+      <div class="wrapperdiv1">
+          <div>
+              Subtotal
+          </div>
+          <div class="div1">
+              {{this.total_bill}} Rs
+          </div>
+      </div>
+      <div class="wrapperdiv">
+          <div>
+              <mat-form-field appearance="outline">
+                  <mat-label>Discount</mat-label>
+                  <input type="number" matInput placeholder="Discount" (change)="discountchange('list')"
+                      formControlName="discount">
+                  <mat-icon matSuffix>money</mat-icon>
+              </mat-form-field>
+          </div>
+          <div class="divtotal">
+              Grand Total -  Rs {{  this.total_bill}}
+          </div>
+      </div>
+      <div class="wrapperdivbtn">
+        <div   *ngIf="billflag === 'update'" >
+          <button class="bbutton" (click)="UpdateItem()">Update Bill </button>
+      </div>
+          <div   *ngIf="billflag === 'save'" >
+              <button class="bbutton" (click)="onSubmit()">Save Bill </button>
+          </div>
+          <div  *ngIf="billflag === 'save'">
+              <button class="bbutton" (click)="onSubmit()">Save & Print </button>
+          </div>
+      </div>
+  </div>
   </mat-dialog-actions>
 </form>
 <!-- [disabled]="!orderForm.valid " -->

@@ -1,8 +1,19 @@
+<app-page-header icon="home"  >
+    <h4  routerLink="/home">Home</h4>
+    <span  class="centertext">
+        Menu management
+    </span>
+    <button mat-flat-button color="primary" class="action" >
+      <mat-icon class="mr-2">add</mat-icon>
+      <span> Menu </span>
+    </button>
+  </app-page-header>
+
 <section class="divmain">
     <section class="wrapper" id="goUp">
-        <div class="title">
+        <!-- <div class="title">
             Add Item Name
-        </div>
+        </div> -->
         <form class="menu-container" [formGroup]="tableForm" autocomplete="off"
             novalidate>
             <div class="field">
@@ -14,13 +25,23 @@
                     placeholder="Enter Item Price">
             </div>
             <div class="field">
+                <input type="text" formControlName="menu_url"
+                    placeholder="Enter Item Product Image Url">
+            </div>
+            <div class="field">
+                <select formControlName="menu_categories"  placeholder="Enter Item Categories">
+                    <option value="">Select your option</option> 
+                    <option *ngFor="let item of categoryDataList" value="{{item.category_id}}">{{item.category_name}}</option>
+                  </select>
+            </div>
+            <div class="field">
                 <button *ngIf="!updatebtn" class="btn" type="submit"
                     (click)="onSubmit()">Save</button>
                 <button *ngIf="updatebtn" class="btn" type="submit"
-                    [disabled]="!tableForm.valid"
+                   
                     (click)="update()">Update</button>
             </div>
-            <div *ngIf="billData.length>0" class="grid-wrapper">
+            <div *ngIf="billData && billData.length>0" class="grid-wrapper">
                 <mat-form-field class="fiter">
                     <mat-label>Filter</mat-label>
                     <input matInput (keyup)="applyFilter($event)"

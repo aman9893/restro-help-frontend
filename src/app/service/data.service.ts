@@ -3,6 +3,7 @@ import { HttpClient } from  '@angular/common/http';
 
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { apiConfig } from '../api-path/api-config';
+import { BehaviorSubject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -10,7 +11,113 @@ import { apiConfig } from '../api-path/api-config';
 export class DataService {
 
   constructor(private http :HttpClient,private snackBar: MatSnackBar,) { 
+    if (window.innerWidth < 768) {
+      this.isMobileResolution = true;
+    } else {
+      this.isMobileResolution = false;
+    }
   }
+
+  cartDataList: any = [];
+  productList = new BehaviorSubject<any>([]);
+
+
+
+  inProduct(product:any) {
+    console.log(product)
+    for (let p of this.cartDataList) {
+      if (p.menu_id === product.menu_id) {
+        p.qty += 1;
+        p.total=  parseInt(p.qty)*parseInt(p.menu_price);
+        this.productList.next(this.cartDataList);
+        this.getTotalAmount();
+  
+      }
+   
+  }
+   
+  }
+ 
+  decreaseProduct(product:any) {
+    let added = false;
+    console.log(product)
+    for (let  p of this.cartDataList) {
+      if (p.menu_id === product.menu_id) {
+        p.qty -= 1;
+        if ( p.qty === 0) {
+         this.removeCart(p)
+				}
+        this.getTotalAmount();
+
+        this.productList.next(this.cartDataList);
+        break;
+      }
+    }
+  }
+ 
+  // Remove product one by one
+  removeCart(product: any) {
+    this.cartDataList.map((a: any, index: any) => {
+      if (product.menu_id === a.menu_id) {
+        this.cartDataList.splice(index, 1);
+      }
+    })
+  }
+
+  
+
+  getProductData() {
+    return this.productList.asObservable();
+  }
+
+
+
+  // Add products to cart
+  addToCart(product: any) {
+    let isDuplicate = false;
+    for(let i=0; i<this.cartDataList.length;i++){
+       if(product.menu_id == this.cartDataList[i].menu_id){
+        isDuplicate =true;
+         break;
+        }
+
+   }
+   if(!isDuplicate ){
+    this.cartDataList.push(product);
+    this.productList.next(this.cartDataList);
+    this.getTotalAmount();
+     }
+
+  }
+
+  // Calculate total amount
+  getTotalAmount() {
+    let totalSum = 0;
+    for (let i=0; i<this.cartDataList.length;i++) {
+      totalSum +=  parseInt(this.cartDataList[i].total);
+    }
+    return  totalSum ;
+
+  }
+
+  // Remove product one by one
+  removeCartData(product: any) {
+    this.cartDataList.map((a: any, index: any) => {
+      if (product.menu_id === a.menu_id) {
+        this.cartDataList.splice(index, 1);
+      }
+    })
+  }
+
+  // Empties the whole cart
+  removeAllCart() {
+    this.cartDataList = [];
+    this.productList.next(this.cartDataList);
+  }
+
+
+
+  
   
   registerData(data:any) {
     return this.http.post(apiConfig.localhostUrl + apiConfig.registerData, data);
@@ -24,7 +131,8 @@ export class DataService {
   getAdminProfileDataById(id:any){
     return this.http.get(apiConfig.localhostUrl+apiConfig.getAdminProfile + '/' + id);
    }
-  ///////////////////////////table ////////////////////////////////////////
+//---------------------------------------------------------------------------------
+
   updateTable(data:any){
     return this.http.put(apiConfig.localhostUrl + apiConfig.updateTable, data);
   }
@@ -36,6 +144,33 @@ export class DataService {
   }
   getTableInfo() {
     return this.http.get(apiConfig.localhostUrl + apiConfig.getTable);
+  }
+//---------------------------------------------------------------------------------
+  updateAttender(data:any){
+    return this.http.put(apiConfig.localhostUrl + apiConfig.update_attender, data);
+  }
+  deleteAttender(id:any){
+    return this.http.delete(apiConfig.localhostUrl + apiConfig.delete_attender+'/'+id);
+  }
+  saveAttender(data:any){
+    return this.http.post(apiConfig.localhostUrl + apiConfig.add_attender, data);
+  }
+  getAttenderInfo() {
+    return this.http.get(apiConfig.localhostUrl + apiConfig.get_attender);
+  }
+//////////////////////////////menu ///////////////////////////////////
+  ///////////////////////////table ////////////////////////////////////////
+  updateCategory(data:any){
+    return this.http.put(apiConfig.localhostUrl + apiConfig.updatecategory_list, data);
+  }
+  deletecategoryList(id:any){
+    return this.http.delete(apiConfig.localhostUrl + apiConfig.deletecategoryList+'/'+id);
+  }
+  adddcategoryList(data:any){
+    return this.http.post(apiConfig.localhostUrl + apiConfig.addcategory, data);
+  }
+  getcategoryList() {
+    return this.http.get(apiConfig.localhostUrl + apiConfig.category_list);
   }
 //////////////////////////////menu ///////////////////////////////////
 
@@ -52,9 +187,15 @@ export class DataService {
   getMenuInfo() {
     return this.http.get(apiConfig.localhostUrl + apiConfig.getMenu);
   }
+  getMenuFilterById(id:any){
+    return this.http.get(apiConfig.localhostUrl + apiConfig.filterMenu+'/'+id);
+  }
 
-
-//////////////////////////////////////////////////////////////////////////////////
+///////////
+getallcount(){
+  return this.http.get(apiConfig.localhostUrl + apiConfig.getallcount);
+}
+///////////////////////////////////////////////////////////////////////
 
 updateBill(data:any){
   return this.http.put(apiConfig.localhostUrl + apiConfig.updateBill, data);
@@ -69,12 +210,16 @@ getBillInfo() {
   return this.http.get(apiConfig.localhostUrl + apiConfig.getBill);
 }
 
-compelteOrder(id:any){
-  return this.http.delete(apiConfig.localhostUrl + apiConfig.deleteBill+'/'+id);
+compelteOrder(tableFormData:any){
+  return this.http.put(apiConfig.localhostUrl + apiConfig.completeorder,tableFormData);
 }
 
 getBillByTableID(id:any){
   return this.http.get(apiConfig.localhostUrl + apiConfig.getbillByID+'/'+id);
+  
+}
+getBillByBillID(id:any){
+  return this.http.get(apiConfig.localhostUrl + apiConfig.getBillbasedBillId+'/'+id);
   
 }
 /////////////////////////////////////////////////////////////////////
@@ -105,4 +250,29 @@ openSnackBar(message: string, action: string) {
 
 userData:any;
 
+phoneValidation(){
+  return  /^[0-9]*(\.[0-9]+)?$/;
 }
+
+numberValidation(){
+  return  /^[0-9]*(\.[0-9]+)?$/;
+}
+
+emailValidation(){
+ return  /^([a-zA-Z0-9_.+-])+\@(([a-zA-Z0-9-])+\.)+([a-zA-Z0-9]{2,4})+$/
+}
+
+
+private isMobileResolution: boolean = false;
+
+
+public getIsMobileResolution(): boolean {
+  console.log(this.isMobileResolution)
+  return this.isMobileResolution;
+}
+
+}
+
+
+
+

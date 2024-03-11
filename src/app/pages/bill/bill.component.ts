@@ -41,8 +41,6 @@ export class BillComponent implements OnInit {
       this.billid = this.tableDataList[0].bill_id;
       console.log( this.billid)
     }
-  
-
   }
   billData(data: any) {
     this.billDataList = data;
@@ -72,24 +70,7 @@ addOder(tablename: any) {
     });
   }
 
-// viewOder(tableInfo: any) {
-//   let tabledata={
-//     tablename:tableInfo,
-//     flag:'view'
-//   }
-//   let dialogRef = this.dialog.open(CreateBillComponent, {
-//     width: '600px',
-//     height: '',
-//     data: tabledata,
-//     autoFocus: false 
-//   });
-//   dialogRef.afterClosed().subscribe((result) => {
-//     if(result === true){
-//       this.getTableData();
-//       this.getBillData();
-//     }
-//   });
-//  }
+
 
  updateOder(tableInfo: any) {
   let tabledata={

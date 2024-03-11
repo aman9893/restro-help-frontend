@@ -1,45 +1,21 @@
-<header class="header">
-  <div class="header-content responsive-wrapper">
-    <div class="header-logo">
-      <span *ngIf="userData && userData.company_name" [routerLink]="['/bill']">{{this.userData.company_name}}</span>
-    </div>
-    <div class="header-navigation">
-      <nav class="header-navigation-links">
-        <a [routerLink]="['/bill']" routerLinkActive="active"> Home </a>
-        <a [routerLink]="['/menu']" routerLinkActive="active"> Menu </a>
-        <a [routerLink]="['/table']" routerLinkActive="active"> Table </a>
-        <a [routerLink]="['/contact']" routerLinkActive="active"> Customer </a>
-        <a [routerLink]="['/counterbill']" routerLinkActive="active"> Bill Counter </a>
-      </nav>
-    </div>
-    <div class="header-navigation-actions">
-      <div class="header-navigation-actions">
-        <button class="button" mat-icon-button [matMenuTriggerFor]="menu" aria-label="Example icon-button with a menu">
-          <mat-icon>reorder</mat-icon>
-        </button>
-        <mat-menu #menu="matMenu">
-          <button [routerLink]="['/menu']" mat-menu-item>
-            <mat-icon>list_alt</mat-icon>
-            <span>Add Menu</span>
-          </button>
-          <button [routerLink]="['/table']" mat-menu-item>
-            <mat-icon>weekend</mat-icon>
-            <span>Add Table</span>
-          </button>
-          <button [routerLink]="['/contact']" mat-menu-item>
-            <mat-icon>phone</mat-icon>
-            <span>Add Contact</span>
-          </button>
-          <button [routerLink]="['/profile']" mat-menu-item>
-            <mat-icon>account_circle</mat-icon>
-            <span>Profile</span>
-          </button>
-          <button (click)="logout()" mat-menu-item>
-            <mat-icon>settings_power</mat-icon>
-            <span>Logout</span>
-          </button>
-        </mat-menu>
-      </div>
-    </div>
-  </div>
-</header>
+
+
+<mat-toolbar color="primary">
+  <button (click)="menuToggled.emit(true)" mat-icon-button>
+    <mat-icon>menu</mat-icon>
+  </button>
+  <span class="title" routerLink="/">Dashboard</span>
+  <span class="spacer"></span>
+  <span  *ngIf="userData && userData.company_name"  class="welcome-text">Hello </span>
+  <button mat-icon-button [matMenuTriggerFor]="menu">
+    <mat-icon>account_circle</mat-icon>
+  </button>
+  <mat-menu #menu="matMenu">
+    <button mat-menu-item routerLink="/profile">
+      <span>Profile</span>
+    </button>
+    <button mat-menu-item (click)="logout()">
+      <span>Logout</span>
+    </button>
+  </mat-menu>
+</mat-toolbar>

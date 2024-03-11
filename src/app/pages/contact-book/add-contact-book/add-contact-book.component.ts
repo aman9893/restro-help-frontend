@@ -59,7 +59,7 @@ export class AddContactBookComponent implements OnInit {
       contact_status: this.ContactForm.controls['contact_status'].value,
     }
     this.dataService.addConatctBook(ContactFormData).subscribe(
-      data => this.closeDialog(data),
+      data => this.closeContactDialog(data),
       err => console.log(err)
     )
   }
@@ -81,11 +81,22 @@ export class AddContactBookComponent implements OnInit {
       contact_status: this.ContactForm.controls['contact_status'].value,
     }
     this.dataService.updateConatactItem(ContactFormData).subscribe(
-      data => this.closeDialog(data),
+      data => this.closeContactDialog(data),
       err => console.log(err)
     )
   }
-  closeDialog(data:any) {
-    this.dialogRef.close(data)
+  closeContactDialog(data:any) {
+    if(data.status === true){
+      this.dialogRef.close(data)
+      this.dataService.openSnackBar(data.message, 'Dismiss')
+    }
+    else{
+      this.dialogRef.close(data)
+      this.dataService.openSnackBar(data.message, 'Dismiss')
+    }
+  }
+
+  closeDialog(data:any){
+    this.dialogRef.close(data);
   }
 }

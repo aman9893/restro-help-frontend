@@ -8,6 +8,10 @@ import { ProfileComponent } from './pages/profile/profile.component';
 import { AddTableComponent } from './pages/Table/add-table/add-table.component';
 import { MenulistComponent } from './pages/Table/table/menulist/menulist.component';
 import { BillCounterComponent } from './pages/bill-counter/bill-counter.component';
+import { CategiresComponent } from './pages/categires/categires.component';
+import { DashbordComponent } from './pages/dashbord/dashbord.component';
+import { AttenderComponent } from './pages/Table/attender/attender.component';
+import { LayoutComponent } from './pages/dashbord/layout/layout.component';
 
 const routes: Routes = [
   // { path: '', component: BillComponent  , canActivate: [AuthGuard] },
@@ -19,16 +23,22 @@ const routes: Routes = [
   // { path: 'profile', component: ProfileComponent ,canActivate: [AuthGuard] },
   // { path: 'contact', component: ListContactBookComponent ,canActivate: [AuthGuard] },
 
-  { path: '', component: BillComponent  , },
-  { path: '', redirectTo: 'bill', pathMatch: 'full' },
-  { path: 'login', component: LoginComponent },
-  { path: 'bill', component: BillComponent },
+   { path: 'login', component: LoginComponent, },
+  {path: '',component: LayoutComponent,
+  children: [
+   {path: '', pathMatch: 'full',redirectTo: 'DashbordComponent'},
+  { path: 'home',  component: DashbordComponent},
+  { path: 'tablebill', component: BillComponent },
   { path: 'counterbill', component: BillCounterComponent },
   { path: 'menu', component: MenulistComponent },
   { path: 'table', component: AddTableComponent  },
   { path: 'profile', component: ProfileComponent},
   { path: 'contact', component: ListContactBookComponent  },
-
+  { path: 'category', component: CategiresComponent  },
+  { path: 'home', component: DashbordComponent  },
+  { path: 'attender', component: AttenderComponent  },
+    ]
+  }
 ];
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
