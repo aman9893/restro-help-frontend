@@ -1,4 +1,13 @@
-<main *ngIf="tableDataList && tableDataList.length>0" class="main">
+<app-page-header icon="home"  >
+  <h3 routerLink="/home">Home</h3>
+  <span  class="centertext">
+    Table Billing
+  </span>
+  <button mat-flat-button color="primary" class="action"  routerLink="/tablebillList">
+   <mat-icon>note</mat-icon> Bill List 
+  </button>
+</app-page-header>
+<div *ngIf="tableDataList && tableDataList.length>0" >
     <div >
         <div class="">
             <div class="search">
@@ -6,7 +15,6 @@
                     placeholder="Search Table" />
             </div>
         </div>
-
         <div >
             <!-- <div class="content-main">
                 <div class="card-grid">
@@ -39,7 +47,7 @@
                         <li class="color-1" *ngFor="let table of tableDataList |filter : term">
                             <div class="cardboxs">
                                <div class="row">
-                                <div class="col-md-3">
+                                <div class="col-md-3 elementcardbox">
                                     <div *ngIf="table.bill_status =='booked'" class="number-box booked">
                                     </div>
                                     <div *ngIf="table.bill_status !=='booked'" class="number-box Available">
@@ -51,6 +59,7 @@
                                        <h6> {{table.attender_name}}</h6> 
                                       </div>
                                       <div *ngIf="table.bill_status !=='booked'" >
+                                        <h6> .</h6> 
                                        </div>
                                 </div>
                                </div>
@@ -92,14 +101,14 @@
                </div>
         
     </div>
-</main>
+  </div>
 
 
-
-
-<!-- <div class="loader" *ngIf="showDataLoader === true">
-    <mat-spinner [diameter]="40" mode="indeterminate"></mat-spinner>
-  </div> -->
+<div class="loaderwrap" *ngIf="showDataLoader === true">
+  <div class="loader" >
+    <mat-spinner [diameter]="60" mode="indeterminate"></mat-spinner>
+  </div>
+</div>
   <section class="divmain">
     <div *ngIf="tableDataList">
         <div *ngIf="tableDataList.length === 0" >

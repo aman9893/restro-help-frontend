@@ -12,6 +12,7 @@ import { CategiresComponent } from './pages/categires/categires.component';
 import { DashbordComponent } from './pages/dashbord/dashbord.component';
 import { AttenderComponent } from './pages/Table/attender/attender.component';
 import { LayoutComponent } from './pages/dashbord/layout/layout.component';
+import { ListBillComponent } from './pages/bill/list-bill/list-bill.component';
 
 const routes: Routes = [
   // { path: '', component: BillComponent  , canActivate: [AuthGuard] },
@@ -23,10 +24,10 @@ const routes: Routes = [
   // { path: 'profile', component: ProfileComponent ,canActivate: [AuthGuard] },
   // { path: 'contact', component: ListContactBookComponent ,canActivate: [AuthGuard] },
 
-   { path: 'login', component: LoginComponent, },
+  { path: 'login', component: LoginComponent, },
   {path: '',component: LayoutComponent,
   children: [
-   {path: '', pathMatch: 'full',redirectTo: 'DashbordComponent'},
+  { path: '', component: DashbordComponent  , canActivate: [AuthGuard] },
   { path: 'home',  component: DashbordComponent},
   { path: 'tablebill', component: BillComponent },
   { path: 'counterbill', component: BillCounterComponent },
@@ -35,8 +36,9 @@ const routes: Routes = [
   { path: 'profile', component: ProfileComponent},
   { path: 'contact', component: ListContactBookComponent  },
   { path: 'category', component: CategiresComponent  },
-  { path: 'home', component: DashbordComponent  },
   { path: 'attender', component: AttenderComponent  },
+  { path: 'tablebillList', component: ListBillComponent  },
+  
     ]
   }
 ];

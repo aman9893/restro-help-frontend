@@ -50,7 +50,10 @@ import { LayoutComponent } from './pages/dashbord/layout/layout.component';
 import { MenuItemComponent } from './pages/dashbord/menu-item/menu-item.component';
 import {MatListModule} from '@angular/material/list';
 import {MatExpansionModule} from '@angular/material/expansion';
-import { ZingchartAngularModule } from 'zingchart-angular';
+import { CanvasJSAngularChartsModule } from '@canvasjs/angular-charts';
+import { CommonModule } from '@angular/common';
+import { CalculatorComponent } from './pages/dashbord/calculator/calculator.component';
+import { NgxPrintModule } from 'ngx-print';
 @NgModule({
   declarations: [
     AppComponent,
@@ -76,7 +79,8 @@ import { ZingchartAngularModule } from 'zingchart-angular';
     AttenderComponent,
     PageHeaderComponent,
     LayoutComponent,
-    MenuItemComponent
+    MenuItemComponent,
+    CalculatorComponent
   ],
   imports: [
     BrowserModule,
@@ -94,7 +98,9 @@ import { ZingchartAngularModule } from 'zingchart-angular';
    ReactiveFormsModule,MatTabsModule,
    MatChipsModule,
   MatTableModule, MatPaginatorModule,
-  MatAutocompleteModule,MatDialogModule ,MatMenuModule,MatSortModule,MatCardModule,MatSidenavModule,MatToolbarModule,MatListModule,MatExpansionModule,ZingchartAngularModule
+  CommonModule,
+  MatAutocompleteModule,MatDialogModule ,MatMenuModule,MatSortModule,MatCardModule,
+  MatSidenavModule,MatToolbarModule,MatListModule,MatExpansionModule,CanvasJSAngularChartsModule ,NgxPrintModule
   ],
   providers: [{provide: HTTP_INTERCEPTORS, useClass: TokenInterService, multi: true},],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],

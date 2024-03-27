@@ -185,7 +185,7 @@ export class LoginComponent implements OnInit {
       this.authService.sendToken( this.loginData.token);
       this.authService.setuserData( this.loginData.data.id);
       this.authService.setuserInfo( this.loginData.data);
-      this.myRoute.navigateByUrl('/bill');
+      this.myRoute.navigateByUrl('/home');
     }
     if (data.status === false) {
       this.openSnackBar(data.message, 'Dismiss');

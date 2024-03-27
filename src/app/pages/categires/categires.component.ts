@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, Inject, OnInit, ViewChild } from '@angular/core';
+import { AfterViewInit, ChangeDetectorRef, Component, Inject, OnInit, ViewChild } from '@angular/core';
 import {
   FormBuilder,
   FormControl,
@@ -43,7 +43,8 @@ export class CategiresComponent implements OnInit {
     private formBuilder: FormBuilder,
     private dataService: DataService,
     private authService: AuthService,
-    public snackBar: MatSnackBar
+    public snackBar: MatSnackBar,
+    private cdref: ChangeDetectorRef
   ) {}
 
   @ViewChild(MatSort) set matSort(ms: MatSort) {
@@ -89,6 +90,9 @@ export class CategiresComponent implements OnInit {
     console.log(this.categoryDataList);
     this.dataSource =new MatTableDataSource(this.categoryDataList);
     this.showDataLoader = false;
+    this.setDataSourceAttributes();
+    this.cdref.detectChanges();
+
   }
   createForm() {
     this.categoryForm = this.formBuilder.group({

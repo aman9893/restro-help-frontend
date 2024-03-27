@@ -4,18 +4,18 @@
   <button (click)="menuToggled.emit(true)" mat-icon-button>
     <mat-icon>menu</mat-icon>
   </button>
-  <span class="title" routerLink="/">Dashboard</span>
+  <span  *ngIf="userData && userData.company_name" class="title" routerLink="/">{{userData.company_name}}</span>
   <span class="spacer"></span>
-  <span  *ngIf="userData && userData.company_name"  class="welcome-text">Hello </span>
+  <span   class="welcome-text">Hello </span>
   <button mat-icon-button [matMenuTriggerFor]="menu">
     <mat-icon>account_circle</mat-icon>
   </button>
   <mat-menu #menu="matMenu">
     <button mat-menu-item routerLink="/profile">
-      <span>Profile</span>
+      <mat-icon>person</mat-icon><span>Profile</span>
     </button>
     <button mat-menu-item (click)="logout()">
-      <span>Logout</span>
+      <mat-icon>power_settings_new</mat-icon> <span>Logout</span>
     </button>
   </mat-menu>
 </mat-toolbar>

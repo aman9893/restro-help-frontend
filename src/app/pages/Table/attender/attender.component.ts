@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, Inject, OnInit, ViewChild } from '@angular/core';
+import { AfterViewInit, ChangeDetectorRef, Component, Inject, OnInit, ViewChild } from '@angular/core';
 import {
   FormBuilder,
   FormControl,
@@ -43,7 +43,7 @@ export class AttenderComponent implements OnInit {
     private formBuilder: FormBuilder,
     private dataService: DataService,
     private authService: AuthService,
-    public snackBar: MatSnackBar
+    public snackBar: MatSnackBar,private cdref: ChangeDetectorRef,
   ) {}
 
   @ViewChild(MatSort) set matSort(ms: MatSort) {
@@ -89,6 +89,8 @@ export class AttenderComponent implements OnInit {
     console.log(this.attenderDataList);
     this.dataSource =new MatTableDataSource(this.attenderDataList);
     this.showDataLoader = false;
+    this.cdref.detectChanges();
+    this.setDataSourceAttributes();
   }
   createForm() {
     this.attenderForm = this.formBuilder.group({

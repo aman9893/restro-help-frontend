@@ -25,14 +25,12 @@
   <div class="model_delete" *ngIf="confrimdata.flag === 'delete'">
     <mat-icon style="float: right;
     cursor: pointer;" (click)="deleteResponse('no')"> close</mat-icon>
-      <div>
-       <h1>Alert</h1>
-    </div>
-    <div class="Modal_content">
-      <div class="Modal_explanation">
-        {{this.confrimdata.body}}
-      </div>
-    </div>
+      <h2 mat-dialog-title>Delete Bill</h2>
+    <mat-dialog-content>
+      Would you like to delete this Bill?
+    </mat-dialog-content>
+    
+   
     <div class="Modal_delete_footer" >
         <button mat-stroked-button color="primary" (click)="deleteResponse('no')" class="cancle_deelete_button">No</button>
         <button  mat-stroked-button color="warn"(click)="deleteResponse('yes')" class="uppercase_button">Yes</button>

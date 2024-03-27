@@ -1,14 +1,14 @@
 
 
 <app-page-header icon="home"  >
-  <h4  routerLink="/home">Home</h4>
+  <h3 routerLink="/home">Home</h3>
   <span  class="centertext">
     Category management
   </span>
-  <button mat-flat-button color="primary" class="action" >
+  <!-- <button mat-flat-button color="primary" class="action" >
     <mat-icon class="mr-2">add</mat-icon>
     <span> Category </span>
-  </button>
+  </button> -->
 </app-page-header>
 <section class="divmain">
     <section class="wrapper" id="goUp">
@@ -56,9 +56,11 @@
   </section>
   
   
-    <div class="loader" *ngIf="showDataLoader === true">
-      <mat-spinner [diameter]="40" mode="indeterminate"></mat-spinner>
+  <div class="loaderwrap" *ngIf="showDataLoader === true">
+    <div class="loader" >
+      <mat-spinner [diameter]="60" mode="indeterminate"></mat-spinner>
     </div>
+  </div>
     
     <div *ngIf="categoryDataList">
       <div *ngIf="categoryDataList.length === 0" >

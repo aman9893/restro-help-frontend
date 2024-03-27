@@ -1,4 +1,4 @@
-import { Component, OnInit ,AfterViewInit, ViewChild} from '@angular/core';
+import { Component, OnInit ,AfterViewInit, ViewChild, ChangeDetectorRef} from '@angular/core';
 import {
   FormBuilder,
   FormControl,
@@ -38,7 +38,7 @@ export class MenulistComponent implements OnInit ,AfterViewInit  {
     private formBuilder: FormBuilder,
     private dataService: DataService,
     private authService: AuthService,
-    public snackBar: MatSnackBar
+    public snackBar: MatSnackBar,private cdref: ChangeDetectorRef,
   ) {}
   
   @ViewChild(MatSort) set matSort(ms: MatSort) {
@@ -70,11 +70,12 @@ export class MenulistComponent implements OnInit ,AfterViewInit  {
 }
 
   ngOnInit() {
+    this.createForm();
     let UserId = this.authService.getUserId();
     this.user_id = UserId;
     this.getTableDatamenu();
     this.getcategoryData();
-    this.createForm();
+
   }
   getTableDatamenu(): void {
     this.dataService.getMenuInfo().subscribe((data) => this.tableData(data),
@@ -84,9 +85,9 @@ export class MenulistComponent implements OnInit ,AfterViewInit  {
     this.billData= data;
     if( this.billData){
     this.dataSource =new MatTableDataSource(this.billData);
+    this.setDataSourceAttributes();
     this.showDataLoader = false;
-    this.dataSource.sort = this.sort;
-    this.dataSource.paginator = this.paginator;
+
     }
   }
 
@@ -138,6 +139,7 @@ export class MenulistComponent implements OnInit ,AfterViewInit  {
         menu_price: this.tableForm.controls['menu_price'].value,
         menu_url: this.tableForm.controls['menu_url'].value,
         menu_categories: this.tableForm.controls['menu_categories'].value,
+        category_id: this.tableForm.controls['menu_categories'].value,
       };
       console.log(tableFormData);
       this.dataService.saveMenu(tableFormData).subscribe(
@@ -151,6 +153,7 @@ export class MenulistComponent implements OnInit ,AfterViewInit  {
   closeDialog(data: any) {
     this.getTableDatamenu();
     this.dataService.openSnackBar(data.message, 'Dismiss')
+    this.createForm();
   }
   cancel(data: any) {}
 
@@ -185,7 +188,8 @@ export class MenulistComponent implements OnInit ,AfterViewInit  {
       this.getTableDatamenu();
       this.dataService.openSnackBar(data.message, 'Dismiss')
       this.tableForm.reset();
-
+      this.createForm();
+      this.setDataSourceAttributes();
     }
   }
   delete(id: any) {

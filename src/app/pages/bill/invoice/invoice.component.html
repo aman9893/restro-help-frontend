@@ -4,12 +4,13 @@
  cursor: pointer;" (click)="close()"> close</mat-icon>
 <h2 *ngIf="updateData" class="menu_item"> Invoice - # {{updateData.bill_no}} 
     <div class="btns">
-        <span class="buttoninvoice" (click)="generatePDF('Download','counter')">Download Pdf</span>
+      <button printSectionId="print-section" ngxPrint>print</button> 
+        <span class="buttoninvoice"  (click)="generatePDF('Download','counter')">Download Pdf</span>
         <span class="buttoninvoice"(click)="generatePDF('Download','counter')">Print Pdf</span>
         <span class="buttoninvoice" style="color: red;" (click)="deleteUser()">Completed Order</span>
     </div>
 </h2>
-<section class="back">
+<section class="back" id="print-section">
   <div class="container">
     <div class="row">
       <div class="col-xs-12">

@@ -423,9 +423,18 @@ export class AddBillCounetrComponent implements OnInit {
     })
     
   }
-
-  //////////////////////////////////////////////////////////////////////////////////////
+   generateKitchenTokenNumbers(startingNumber=1, numTokens=100) {
+    let tokenNumbers = [];
+    for (let i = 0; i < numTokens; i++) {
+        let token = (startingNumber + i)
+        tokenNumbers.push(token);
+    }
+    return tokenNumbers;
+}
+//////////////////////////////////////////////////////////////////////////////////////
   onSubmit() {
+ 
+
     console.log(this.allSubtotal);
     if(this.allSubtotal=== 0){
       this.allSubtotal = this.total_bill;
@@ -433,7 +442,7 @@ export class AddBillCounetrComponent implements OnInit {
     this.validation();
     if(!this.validationvalue){
       let r = Math.random().toString(36).substring(7);
-    let tableFormData = {
+      let tableFormData = {
       user_id: this.user_id,
       bill_no: r,
       bill_order: this.orderForm.value,
@@ -450,6 +459,8 @@ export class AddBillCounetrComponent implements OnInit {
       cutomer_address: '',
       attender_name: '',
       attender_id: '',
+      token_no: Math.floor(Math.random() * 100) + 1
+
     };
     this.dataService.saveBill(tableFormData).subscribe(
       (data: any) => this.closeDialog(data),
@@ -459,6 +470,8 @@ export class AddBillCounetrComponent implements OnInit {
     }
     
   }
+
+  
 
   onDesktopBillSubmit() {
     console.log(this.products)
@@ -484,6 +497,7 @@ export class AddBillCounetrComponent implements OnInit {
       cutomer_address: '',
       attender_name: '',
       attender_id: '',
+      token_no:Math.floor(Math.random() * 100) + 1
     };
     console.log(BillData)
     this.dataService.saveBill(BillData).subscribe(
@@ -536,7 +550,8 @@ export class AddBillCounetrComponent implements OnInit {
       create_date: new Date(),
       status: 'Ordered',
       discount: '',
-      delivery_charge: '20'
+      delivery_charge: '20',
+      token_no: this.updateData.token_no,
     };
     console.log(tableFormData)
     this.dataService.updateBill(tableFormData).subscribe(

@@ -1,12 +1,12 @@
 <app-page-header icon="home"  >
-    <h4  routerLink="/home">Home</h4>
+    <h3 routerLink="/home">Home</h3>
     <span  class="centertext">
-        Menu management
+        Item Management
     </span>
-    <button mat-flat-button color="primary" class="action" >
+    <!-- <button mat-flat-button color="primary" class="action" >
       <mat-icon class="mr-2">add</mat-icon>
       <span> Menu </span>
-    </button>
+    </button> -->
   </app-page-header>
 
 <section class="divmain">
@@ -21,7 +21,7 @@
                     placeholder="Enter Item Name">
             </div>
             <div class="field">
-                <input type="text" formControlName="menu_price"
+                <input type="number" formControlName="menu_price"
                     placeholder="Enter Item Price">
             </div>
             <div class="field">
@@ -29,8 +29,8 @@
                     placeholder="Enter Item Product Image Url">
             </div>
             <div class="field">
-                <select formControlName="menu_categories"  placeholder="Enter Item Categories">
-                    <option value="">Select your option</option> 
+                <select   formControlName="menu_categories"  placeholder="Enter Item Categories">
+                    <option value="">Select your Categories</option> 
                     <option *ngFor="let item of categoryDataList" value="{{item.category_id}}">{{item.category_name}}</option>
                   </select>
             </div>
@@ -89,9 +89,11 @@
             </div>
         </form>
     </section>
-    <div class="loader" *ngIf="showDataLoader === true">
-        <mat-spinner [diameter]="40" mode="indeterminate"></mat-spinner>
-    </div>
+    <div class="loaderwrap" *ngIf="showDataLoader === true">
+        <div class="loader" >
+          <mat-spinner [diameter]="60" mode="indeterminate"></mat-spinner>
+        </div>
+      </div>
 
     <div *ngIf="billData">
         <div *ngIf="billData.length === 0" class="nodata">

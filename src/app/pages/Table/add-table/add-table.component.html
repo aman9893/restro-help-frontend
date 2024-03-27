@@ -1,13 +1,13 @@
 
 <app-page-header icon="home"  >
-  <h4  routerLink="/home">Home</h4>
+  <h3 routerLink="/home">Home</h3>
   <span  class="centertext">
       Table management
   </span>
-  <button mat-flat-button color="primary" class="action" >
-    <mat-icon class="mr-2">add</mat-icon>
+  <!-- <button mat-flat-button color="primary" class="action" >
+    <mat-icon class="mr-1">add</mat-icon>
     <span> Table </span>
-  </button>
+  </button> -->
 </app-page-header>
 <section class="divmain">
   <section class="wrapper" id="goUp">
@@ -50,12 +50,15 @@
              </div>
           </div>
       </form>
+      
+      <div class="loaderwrap" *ngIf="showDataLoader === true">
+        <div class="loader" >
+          <mat-spinner [diameter]="60" mode="indeterminate"></mat-spinner>
+        </div>
+      </div>
 </section>
 
 
-  <div class="loader" *ngIf="showDataLoader === true">
-    <mat-spinner [diameter]="40" mode="indeterminate"></mat-spinner>
-  </div>
   
   <div *ngIf="tableDataList">
     <div *ngIf="tableDataList.length === 0" >

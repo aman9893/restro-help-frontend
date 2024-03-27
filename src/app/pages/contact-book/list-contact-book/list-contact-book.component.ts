@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
+import { AfterViewInit, ChangeDetectorRef, Component, OnInit, ViewChild } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { DataService } from 'src/app/service/data.service';
@@ -17,7 +17,6 @@ export class ListContactBookComponent implements OnInit ,AfterViewInit{
   searchView: boolean | undefined;
   listView: boolean | undefined ;
   GirdView!: boolean;
-  showDataLoader: boolean = true;
   ConatctBookData=[];
   searchedKeyword!: string;
   
@@ -26,9 +25,10 @@ export class ListContactBookComponent implements OnInit ,AfterViewInit{
  
    @ViewChild(MatSort) sort = {} as MatSort;
    @ViewChild(MatPaginator) paginator = {} as MatPaginator;
+   showDataLoader: boolean = true;
 
 
-  constructor(public dataService: DataService,
+  constructor(public dataService: DataService,private cdref: ChangeDetectorRef,
   public snackBar: MatSnackBar, public dialog: MatDialog) { }
 
   stopPropagation(event:any) {
@@ -57,8 +57,7 @@ export class ListContactBookComponent implements OnInit ,AfterViewInit{
     this.setDataSourceAttributes();
   }
   ngAfterViewInit() {
-    this.dataSource.sort = this.sort;
-    this.dataSource.paginator = this.paginator;
+
   }
 
   applyFilter(event: Event) {
@@ -101,6 +100,8 @@ export class ListContactBookComponent implements OnInit ,AfterViewInit{
     this.ConatctBookData = data
     this.showDataLoader = false;
     this.dataSource =new MatTableDataSource(this.ConatctBookData);
+    this.cdref.detectChanges();
+
   }
 
   addContact(flag:any, data:any) {

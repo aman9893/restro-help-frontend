@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { DataService } from 'src/app/service/data.service';
 import { MatDialog } from '@angular/material/dialog';
 import { CreateBillComponent } from './create-bill/create-bill.component';
@@ -20,8 +20,9 @@ export class BillComponent implements OnInit {
   searchText:any;
   searchKey :any ;
   term:any;
-  constructor(public dataService: DataService, public dialog: MatDialog) {}
+  constructor(public dataService: DataService, public dialog: MatDialog,private cdref: ChangeDetectorRef,) {}
   tableDataList: any;
+  showDataLoader:boolean =true;
 
   ngOnInit() {
     this.getTableData();
@@ -41,9 +42,12 @@ export class BillComponent implements OnInit {
       this.billid = this.tableDataList[0].bill_id;
       console.log( this.billid)
     }
+    this.showDataLoader = false;
+    this.cdref.detectChanges();
   }
   billData(data: any) {
     this.billDataList = data;
+    console.log(this.billDataList)
   }
 
 addOder(tablename: any) {

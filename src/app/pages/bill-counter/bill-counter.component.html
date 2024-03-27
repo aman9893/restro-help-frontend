@@ -1,13 +1,21 @@
 
+
+<app-page-header icon="home"  >
+  <h3 routerLink="/home">Home</h3>
+  <span  class="centertext">
+    Counter  Billing
+  </span>
+  <button mat-flat-button color="primary" class="action" (click)="addBill('save','data')">
+    <mat-icon class="mr-2">add</mat-icon>
+    <span> Add Bill </span>
+  </button>
+</app-page-header>
 <section class="divmain">
   <section class="wrapper" id="goUp">
-    <div class="title">
+    <!-- <div class="title">
       Bill List
-    </div>
-    <div class="field">
-      <button class="btn" (click)="addBill('save','data')">Add
-        Bill</button>
-    </div>
+    </div> -->
+
     <div *ngIf="BillData && BillData.length > 0" class="grid-wrapper">
       <mat-form-field class="fiter">
         <mat-label>Filter</mat-label>
@@ -87,8 +95,10 @@
       </div>
     </div>
   </section>  
-  <div class="loader" *ngIf="showDataLoader === true">
-    <mat-spinner [diameter]="40" mode="indeterminate"></mat-spinner>
+  <div class="loaderwrap" *ngIf="showDataLoader === true">
+    <div class="loader" >
+      <mat-spinner [diameter]="60" mode="indeterminate"></mat-spinner>
+    </div>
   </div>
   <div *ngIf="BillData">
     <div *ngIf="BillData && BillData.length === 0">

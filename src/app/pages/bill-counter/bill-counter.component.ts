@@ -1,5 +1,5 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
-import { MatDialog } from '@angular/material/dialog';
+import { AfterViewInit, ChangeDetectorRef, Component, OnInit, ViewChild } from '@angular/core';
+import { DialogPosition, MatDialog } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { DataService } from 'src/app/service/data.service';
 import { ConfrimBoxComponent } from '../confrim-box/confrim-box.component';
@@ -14,11 +14,11 @@ import { InvoiceComponent } from '../bill/invoice/invoice.component';
   templateUrl: './bill-counter.component.html',
   styleUrls: ['./bill-counter.component.scss']
 })
-export class BillCounterComponent implements OnInit {
+export class BillCounterComponent implements OnInit,AfterViewInit {
   searchView: boolean | undefined;
   listView: boolean | undefined ;
   GirdView!: boolean;
-  showDataLoader: boolean = true;
+  showDataLoader: boolean = false;;
   searchedKeyword!: string;
   BillData: any;
   public displayedColumns:any = ['bill_id', 'create_date', 'status', 'bill_no', 'cutomer_name','total_bill'];
@@ -27,18 +27,21 @@ export class BillCounterComponent implements OnInit {
    @ViewChild(MatSort) sort = {} as MatSort;
    @ViewChild(MatPaginator) paginator = {} as MatPaginator;
   categoryDataList: any;
-  constructor(public dataService: DataService,
+  constructor(public dataService: DataService,private cdref: ChangeDetectorRef,
   public snackBar: MatSnackBar, public dialog: MatDialog) { }
-
-  stopPropagation(event:any) {
+    stopPropagation(event:any) {
     event.stopPropagation()
   }
   ngOnInit() {
+    this.cdref.detectChanges();
     this.getBillData();
   }
   @ViewChild(MatSort) set matSort(ms: MatSort) {
     this.sort = ms;
     this.setDataSourceAttributes();
+  } 
+   ngAfterViewInit() {
+
   }
 
   @ViewChild(MatPaginator) set matPaginator(mp: MatPaginator) {
@@ -89,13 +92,15 @@ export class BillCounterComponent implements OnInit {
       flag: flag,
       bill_data: data,
     }
+    let enterAnimationDuration= '500ms'
     const dialogRef = this.dialog.open(AddBillCounetrComponent, {
-      panelClass: 'my-full-screen-dialog',
+        panelClass: 'my-full-screen-dialog',
         maxWidth: '100vw',
         maxHeight: '100vh',
         height: '100%',
         width: '100%',
-      data: updatedata
+      data: updatedata,
+      enterAnimationDuration,
     });
     dialogRef.afterClosed().subscribe((result: any) => {
         if (result === true) {
@@ -142,6 +147,7 @@ export class BillCounterComponent implements OnInit {
         order: id,
         billcounter:true, bill:'counter'
       };
+       let enterAnimationDuration= '500ms'
       const dialogRef = this.dialog.open(InvoiceComponent, {
         autoFocus: false,
         panelClass: 'my-full-screen-dialog',
@@ -150,6 +156,7 @@ export class BillCounterComponent implements OnInit {
         height: '100%',
         width: '100%',
         data: invoicedata,
+        enterAnimationDuration
       });
       dialogRef.afterClosed().subscribe((result) => {});
     }

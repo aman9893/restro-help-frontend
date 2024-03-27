@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { MatMenuModule } from '@angular/material/menu';
 import { Router } from '@angular/router';
 import { AuthService } from 'src/app/auth.service';
@@ -13,7 +13,7 @@ export class HeaderComponent implements OnInit {
   UserId: any;
   userData: any;
 
-  constructor(public authService: AuthService, public router: Router, public dataService: DataService) { }
+  constructor(public authService: AuthService, public router: Router, public dataService: DataService,private cdref: ChangeDetectorRef,) { }
   @Output() menuToggled = new EventEmitter<boolean>();
   ngOnInit(): void {
     this.UserId = this.authService.getUserId();
@@ -31,6 +31,8 @@ export class HeaderComponent implements OnInit {
     this.userData = data[0];
     console.log(this.userData);
     this.dataService.userData = this.userData;
+    this.cdref.detectChanges();
+
   }
   logout() {
     this.authService.logout();

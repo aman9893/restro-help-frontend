@@ -1,9 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from 'src/app/auth.service';
 import { DataService } from 'src/app/service/data.service';
-import ZingchartAngular from 'zingchart-angular/zingchart';
-import zingchart from 'zingchart-angular/zingchart';
-
+import { CanvasJSAngularChartsModule } from '@canvasjs/angular-charts';
 @Component({
   selector: 'app-dashbord',
   templateUrl: './dashbord.component.html',
@@ -13,33 +11,95 @@ export class DashbordComponent implements OnInit {
   countData: any;
   userData: any;
   UserId: any;
+  currentNumber = '0';
+  firstOperand :any= null;
+  operator :any= null;
+  waitForSecondNumber = false;
+  mobileview:any
 
   constructor(public dataService:DataService,public authService:AuthService,) { }
-  config: ZingchartAngular.graphset = {
-    type: 'line',
-    series: [{
-      values: [3,6,4,6,4,6,4,6]
-    }],
-  };
+
   ngOnInit(): void {
     this.getAllCount();
     this.UserId = this.authService.getUserId();
     this.getResgiterDataById();
-    const navItems = document.querySelectorAll(".nav-item");
-
-navItems.forEach((navItem, i) => {
-  navItem.addEventListener("click", () => {
-    navItems.forEach((item, j) => {
-      item.className = "nav-item";
-    });
-    navItem.className = "nav-item active";
-  });
-});
+  this. mobileview = this.dataService.getIsMobileResolution();
   }
+  chartOptions = {
+    title: {
+      text: "Basic Column Chart in Angular"
+    },
+    data: [{
+      type: "column",
+      dataPoints: [
+      { label: "Apple",  y: 10  },
+      { label: "Orange", y: 15  },
+      { label: "Banana", y: 25  },
+      { label: "Mango",  y: 30  },
+      { label: "Grape",  y: 28  }
+      ]
+    }]                
+    };
+
+    chartOptions2 = {
+      title: {
+        text: 'Monthly Sales Data',
+      },
+      theme: 'light2',
+      animationEnabled: true,
+      exportEnabled: true,
+      axisY: {
+        includeZero: true,
+        valueFormatString: '$#,##0k',
+      },
+      data: [
+        {
+          type: 'column', //change type to bar, line, area, pie, etc
+          yValueFormatString: '$#,##0k',
+          color: '#01b8aa',
+          dataPoints: [
+            { label: 'Jan', y: 172 },
+            { label: 'Feb', y: 189 },
+            { label: 'Mar', y: 201 },
+            { label: 'Apr', y: 240 },
+            { label: 'May', y: 166 },
+            { label: 'Jun', y: 196 },
+            { label: 'Jul', y: 218 },
+            { label: 'Aug', y: 167 },
+            { label: 'Sep', y: 175 },
+            { label: 'Oct', y: 152 },
+            { label: 'Nov', y: 156 },
+            { label: 'Dec', y: 164 },
+          ],
+        },
+      ],
+    };
+    chartOptions3= {
+      animationEnabled: true,
+      theme: "dark2",
+      exportEnabled: true,
+      title: {
+        text: "Developer Work Week"
+      },
+      subtitles: [{
+        text: "Median hours/week"
+      }],
+      data: [{
+        type: "pie", //change type to column, line, area, doughnut, etc
+        indexLabel: "{name}: {y}%",
+        dataPoints: [
+          { name: "Overhead", y: 9.1 },
+          { name: "Problem Solving", y: 3.7 },
+          { name: "Debugging", y: 36.4 },
+          { name: "Writing Code", y: 30.7 },
+          { name: "Firefighting", y: 20.1 }
+        ]
+      }]
+    }
   getResgiterDataById() {
     this.dataService.getAdminProfileDataById(this.UserId)
       .subscribe(
-        data => this.getRegisterData(data),
+        (data:any) => this.getRegisterData(data),
       )
   }
 
@@ -58,6 +118,13 @@ navItems.forEach((navItem, i) => {
 
 }
 
+
+public clear(){
+  this.currentNumber = '0';
+  this.firstOperand = null;
+  this.operator = null;
+  this.waitForSecondNumber = false;
+}
 
 
 }
