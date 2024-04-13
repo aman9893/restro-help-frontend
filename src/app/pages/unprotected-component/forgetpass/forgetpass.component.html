@@ -1,0 +1,83 @@
+
+
+<div  *ngIf="!showresetwindow"  class="divmain">
+  <div class="wrapper">
+    <div class="title">
+      Restro Help Password Reset
+    </div>
+    <div class="radiobtn">
+      <mat-radio-group aria-label="Select an option">
+        <!-- <mat-radio-button (change) ="handleChange('phone')"   value="1">Phone - Verification</mat-radio-button> -->
+        <!-- <mat-radio-button (change) ="handleChange('email')"  value="2">Email-Verification</mat-radio-button> -->
+      </mat-radio-group>
+    </div>
+    <div *ngIf="showemailDiv">
+
+      <form [formGroup]="ForgotForm" novalidate class="form" autocomplete="off">
+        <div class="field">
+           <input type="email" formControlName="email" placeholder="Please Enter The Email'Id">
+        </div>
+        <div class="field">
+           <input type="submit"[disabled]="!ForgotForm.valid" (click)="onSubmit('email')"  value="Submit">
+        </div>
+        <div class="content">
+          <div class="signup-link" >
+            you a member? <a   routerLink="/login">Login now</a>
+         </div>
+         
+       </div>
+     </form>
+    </div>
+    <div class="otp" *ngIf="message">{{message}}</div>
+  </div>
+</div>
+<div class="divmain" *ngIf="showOtp ">
+  <div class="wrapper">
+    <form [formGroup]="ForgototpForm" class="example-form">
+      <div class="otp" >Enter the OTP</div>
+          <div class="field">
+             <input type="Enter The OTP"  formControlName="otp"  placeholder="Please Enter The OTP">
+          </div>
+          <div class="field">
+            <input type="submit"[disabled]="!ForgototpForm.valid" (click)="onSubmit('otpCheck')" value=" Verify Otp">
+         </div>
+       </form>
+       </div>
+</div>
+
+
+<div *ngIf="showresetwindow" class="divmain">
+  <div class="wrapper">
+    <div novalidate class="form_container_wrapper">
+        <div class="title">
+          Reset Password
+        </div>
+        <form>
+          <mat-form-field appearance="outline" class="form_container">
+            <mat-label>Password</mat-label>
+            <input type="password"  id="exampleInputPassword2" placeholder="Password" #newPassword matInput>
+          </mat-form-field>
+          <mat-form-field appearance="outline" class="form_container">
+            <mat-label> Re-enter New Password</mat-label>
+            <input type="password"  id="exampleInputPassword3" placeholder="Confrim Password"
+              #reNewPassword matInput>
+          </mat-form-field>
+          <button type="submit"  class="upload_btn" mat-raised-button type="button" 
+            (click)="changePassword(newPassword,reNewPassword)">Submit</button>
+            <div class="signup-link" >
+              you a member? <a   routerLink="/login">Login now</a>
+           </div>
+          
+        </form>
+    </div>
+  </div>
+</div> 
+ 
+
+
+
+<div class="loaderwrap" *ngIf="showDataLoader === true">
+  <div class="loader" >
+    <mat-spinner [diameter]="60" mode="indeterminate"></mat-spinner>
+  </div>
+</div>

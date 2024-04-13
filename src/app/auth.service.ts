@@ -39,6 +39,7 @@ export class AuthService {
     localStorage.removeItem("LoggedInUser");
     localStorage.removeItem("UserData");
     localStorage.removeItem("UserInfo")
+    localStorage.removeItem("shop_type")
     this.myRoute.navigate(["login"]);
   }
    

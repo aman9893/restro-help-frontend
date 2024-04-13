@@ -30,15 +30,7 @@ export class LoginComponent implements OnInit {
   editdata:any
 
   ngOnInit() {
-    // this.editdata = this.activatedRoute.snapshot.queryParamMap.get("page");
-    // console.log(this.editdata)
-    // this.updateFlag =this.editdata.update;
-    // console.log(this.updateFlag)
-    // if(this.editdata &&this.updateFlag === true){
-    //   this.updateValue =this.editdata.data;
-    //  this.loginFormFlg = false;
-    //  this.registerFormFlg = true;
-    // }
+    this.authService.logout();
 
     this.createForm();
     this.loginFormData();
@@ -67,6 +59,10 @@ export class LoginComponent implements OnInit {
         validators: [Validators.maxLength(55)],
         updateOn: 'change',
       }),
+      shop_type: new FormControl('restaurant', {
+        validators: [Validators.maxLength(55)],
+        updateOn: 'change',
+      }),
       phone_number: new FormControl('', {
         validators: [Validators.maxLength(55)],
         updateOn: 'change',
@@ -76,6 +72,7 @@ export class LoginComponent implements OnInit {
     });
     if(this.updateFlag === true){
       this.sginupForm.controls['name'].setValue(this.updateValue.name);
+      this.sginupForm.controls['shop_type'].setValue(this.updateValue.shop_type);
       this.sginupForm.controls['email'].setValue(this.updateValue.email);
       this.sginupForm.controls['password'].setValue(this.updateValue.password);
       this.sginupForm.controls['company_name'].setValue(this.updateValue.company_name);
@@ -138,9 +135,10 @@ export class LoginComponent implements OnInit {
       company_name: this.sginupForm['controls']['company_name'].value,
       phone_number: this.sginupForm['controls']['phone_number'].value,
       shop_address: this.sginupForm['controls']['shop_address'].value,
+      shop_type: this.sginupForm['controls']['shop_type'].value,
       company_logo: '',
-      username: '',
-      gst_num: '',
+      username:this.sginupForm['controls']['name'].value,
+      gst_num: this.sginupForm['controls']['gst'].value,
       user_expiry_date: new Date(),
       trial_days: 14,
       rolename_id: 1,
@@ -184,7 +182,8 @@ export class LoginComponent implements OnInit {
       this.openSnackBar(data.message, 'Dismiss');
       this.authService.sendToken( this.loginData.token);
       this.authService.setuserData( this.loginData.data.id);
-      this.authService.setuserInfo( this.loginData.data);
+      localStorage.setItem('shop_type',this.loginData.data.shop_type)
+      // this.authService.setuserInfo( this.loginData.data);
       this.myRoute.navigateByUrl('/home');
     }
     if (data.status === false) {

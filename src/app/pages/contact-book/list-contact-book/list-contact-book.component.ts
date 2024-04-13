@@ -125,10 +125,26 @@ export class ListContactBookComponent implements OnInit ,AfterViewInit{
     });
   }
 
-  deletestock(id:any) {
-    this.deleteContactType(id)
-
+  deleteContactValue(id:any) {
+    let deletedata = {
+      flag:'delete',
+      body: 'Want to delete? '
+    };
+    const dialogRef = this.dialog.open(ConfrimBoxComponent, {
+      width: '300px',
+      autoFocus: false,
+      data: deletedata,
+    });
+  
+    dialogRef.afterClosed().subscribe((result) => {
+      console.log(result);
+      if(result === 'yes'){
+        this.deleteContactType(id)
+      }
+    });
   }
+
+
   deleteContactType(id:any) {
     this.dataService.deleteConatctitem(id).subscribe(
       (      data: any) => this.deleteResponse(data, id),

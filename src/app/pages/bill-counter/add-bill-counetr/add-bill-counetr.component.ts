@@ -1,4 +1,4 @@
-import { Inject, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Inject, OnInit } from '@angular/core';
 import { Component } from '@angular/core';
 import {
   FormArray,
@@ -9,14 +9,13 @@ import {
 } from '@angular/forms';
 import {
   MatDialog,
-  MatDialogRef,
-  MAT_DIALOG_DATA,
 } from '@angular/material/dialog';
 import { AuthService } from 'src/app/auth.service';
 import { DataService } from 'src/app/service/data.service';
 import { CreateBillComponent } from '../../bill/create-bill/create-bill.component';
 import { ConfrimBoxComponent } from '../../confrim-box/confrim-box.component';
 import { InvoiceComponent } from '../../bill/invoice/invoice.component';
+import { Router } from '@angular/router';
 export interface Cart {
   productName: string;
   productImage: string;
@@ -46,62 +45,53 @@ export class AddBillCounetrComponent implements OnInit {
   table_id: any;
   myFormValueChanges$: any;
   myContactValueChanges$: any;
-  total_bill = 0;
+  ListViewTotalBill = 0;
   itemstable: any;
   Bill_id: any;
   term: any;
-  listView: boolean = false;
+  listView: boolean =  false;
   GirdView: boolean = true;
   categoryDataList: any;
   conatctBookList: any;
   discount: any;
   taxvalue: any;
   subtotal: number=0;
-  allSubtotal: number=0;
+  listViewSubTotal: number=0;
   mobileview: boolean= false;
-  validationvalue: boolean = true;
-
+  validationvalue: boolean = false;
+  itemprice: number =0;
+  billDataValue:any;
+  DesktopProducts: any = [];
+  allProductsDesktopTotal: any = 0;
+  GrandtotalListViewbill: number=0;
+  manualView: boolean = true;
   constructor(
     public dataService: DataService,
     private formBuilder: FormBuilder,
     public authService: AuthService,
-    public dialogRef: MatDialogRef<CreateBillComponent>,
-    @Inject(MAT_DIALOG_DATA) public billDataValue: any,
-    public dialog: MatDialog
+    public dialog: MatDialog,private router: Router,private cdref: ChangeDetectorRef
   ) {
     this.user_id = this.authService.getUserId();
   }
-
   ngOnInit() {
-    console.log(this.dataService.getIsMobileResolution(),'aaa')
     this.mobileview =this.dataService.getIsMobileResolution();
     this.updateCart();
     this.getcategoryData();
     this.getConatctBookData();
-    this.total_bill = 0;
-    this.billflag = this.billDataValue.flag;
-    this.Bill_id = this.billDataValue.bill_data;
-    if (this.billflag === 'save') {
+    this.ListViewTotalBill = 0;
+    this.billflag = "this.billDataValue.flag;"
+    this.Bill_id = "this.billDataValue.bill_data;"
       this.getmenuData();
       this.updateCustomer();
       this.formcall();
-    }
-    if (this.billflag === 'update') {
-      this.getCounterBillData(this.Bill_id);
-      this.getmenuData();
-      this.formcall();
       this.myFormValueChanges$ = this.orderForm.controls['items'].valueChanges;
-    }
-    if (this.billflag === 'view') {
-      this.getCounterBillData(this.Bill_id);
-      this.getmenuData();
-      this.formcall();
-    }
+  
   }
+// page All Api all-------------------------------------------------------------------------------
+
   getcategoryData(): void {
     this.dataService.getcategoryList().subscribe((data) => this.categoryData(data));
   }
-
   getConatctBookData() {
     this.dataService.getConatctList().subscribe(
       (data: any) => this.showtodoDetails(data),
@@ -110,11 +100,26 @@ export class AddBillCounetrComponent implements OnInit {
   showtodoDetails(data: any) {
     this.conatctBookList = data;
   }
+  categoryData(data: any) {
+    this.categoryDataList = data;
+  }
+  showListView() {
+    this.getmenuData();
+    this.updateCustomer();
+    this.formcall();
+    this.listView = true;
+    this.GirdView = false;
+}
+showGirdView() {
+  this.listView = false;
+  this.GirdView = true;
+}
+  // page All Api all-------------------------------------------------------------------------------
 
+  // DesktopView  All Api all-------------------------------------------------------------------------------
   onChangeDataset() {
     let contactValue;
     let cutomer_number = this.orderForm.controls['cutomer_number'].value;
-    console.log(cutomer_number)
     this.conatctBookList.forEach((ele: any) => {
       if (ele.contact_number == cutomer_number) {
         contactValue = ele.contact_name;
@@ -122,24 +127,9 @@ export class AddBillCounetrComponent implements OnInit {
     });
     this.orderForm.controls['cutomer_name'].setValue(contactValue);
   }
-  categoryData(data: any) {
-    this.categoryDataList = data;
-    console.log(this.categoryDataList);
-  }
-  showListView() {
-    this.getmenuData();
-      this.updateCustomer();
-      this.formcall();
-    this.listView = true;
+ 
 
-    this.GirdView = false;
-  }
-  showGirdView() {
-    this.listView = false;
-    this.GirdView = true;
-  }
   ontabChange(event:any){
-               console.log(event.tab.textLabel)
                if(event.tab.textLabel !== 'All Item'){
                 let category_id:any;
                 for (let i in this.categoryDataList) {
@@ -152,19 +142,18 @@ export class AddBillCounetrComponent implements OnInit {
            else{
             this.getmenuData()
            }
-  }
+    }
 
   updateCustomer() {
     this.myControl.valueChanges.subscribe((selectedValue) => {
       this.filter(selectedValue);
     });
   }
-  products: any = [];
-  allProducts: any = 0;
+
   updateCart() {
     this.dataService.getProductData().subscribe(res => {
-      this.products = res;
-      this.allProducts = this.dataService.getTotalAmount();
+      this.DesktopProducts = res;
+      this.allProductsDesktopTotal = this.dataService.getTotalAmount();
       this.subtotal =  this.dataService.getTotalAmount();
     })
   }
@@ -207,14 +196,13 @@ export class AddBillCounetrComponent implements OnInit {
   billdata(data: any) {
     let datalist = data[0];
     if(datalist.bill_status ==='couter'){
-      console.log(datalist);
       let datalistvalue =  JSON.parse(datalist.bill_order)
       this.dataService.productList.next(datalistvalue.bill_order.items);
     }
     if (datalist && datalist.bill_order) {
       this.updateData = JSON.parse(datalist.bill_order);
       this.billupdate = this.updateData.bill_order;
-      this.total_bill = this.updateData.total_bill;
+      this.ListViewTotalBill = this.updateData.ListViewTotalBill;
       this.formcall();
     }
   }
@@ -244,11 +232,11 @@ export class AddBillCounetrComponent implements OnInit {
       this.getmenuData();
     }
   }
+  /////////////////////////////////////////////////////////////////////////.//////////////////////////////////////////////
   formcall() {
     this.orderForm = new FormGroup({
       items: new FormArray([]),
       cutomer_number: new FormControl('', [
-
       ]),
       cutomer_name: new FormControl('', [
 
@@ -259,46 +247,19 @@ export class AddBillCounetrComponent implements OnInit {
       discount: new FormControl( '', [Validators.pattern(this.dataService.phoneValidation()),Validators.maxLength(20)]),
       delivery_charge: new FormControl('', [
       ]),
-
-      // "cutomer_address":req.body.cutomer_address,
-      //   "restro_name":req.body.restro_name,
-      //   "delivery_charge":req.body.delivery_charge,
-      //   "discount":req.body.discount,
-      //   "status":req.body.status,
+      token_no: new FormControl('', [
+      ]),
+      payment_type: new FormControl('UPI', [
+      ]),
     });
-   
-    if (this.billflag === 'update' || this.billflag === 'view') {
-      if (this.updateData && this.updateData.cutomer_name != undefined && this.billupdate && this.billupdate.items != undefined) {
-        this.orderForm.controls['cutomer_name'].setValue(this.updateData.cutomer_name);
-        this.orderForm.controls['cutomer_number'].setValue(this.updateData.cutomer_number);
-
-        for (let index = 0; index < this.billupdate.items.length; index++) {
-          const element = this.billupdate.items[index];
-          let formGroup: FormGroup = this.formBuilder.group({
-            name: this.formBuilder.control(element.name, Validators.required),
-            qty: this.formBuilder.control(element.qty, [
-              Validators.required,
-            ]),
-            price: this.formBuilder.control(element.price, [
-              Validators.required,
-              Validators.pattern('^(0|[1-9][0-9]*)$'),
-            ]),
-            restro_name: this.formBuilder.control(element.restro_name, [
-            ]),
-          });
-          this.items = this.orderForm.get('items') as FormArray;
-          this.items.push(formGroup);
-        }
-      }
-    } else {
-       this.addItem();
-    }
+    this.addItem();
   }
   createItem(): FormGroup {
     return this.formBuilder.group({
       name: ['', Validators.required],
-      qty: [0, Validators.required],
+      qty: [1, Validators.required],
       price: ['', Validators.required],
+      itemprice: ['', Validators.required],
       restro_name: [''],
     });
   }
@@ -306,55 +267,67 @@ export class AddBillCounetrComponent implements OnInit {
   addItem() {
     this.items = this.orderForm.get('items') as FormArray;
     this.items.push(this.createItem());
+    
   }
   removeGroup(i: number) {
     this.items = this.orderForm.get('items') as FormArray;
     this.items.removeAt(i);
   }
-  //////////////////////////////////////////////////////////////////////////////
+  //////////////////////////////////////////////////////////////////////////////./////////////////////////////////////////////
 
   discountchange(view:any){
     if(view === 'grid'){
-    this.updateCart();
-      this. discount = this.orderForm.controls['discount'].value;
-      this.allProducts = this.allProducts -  this.discount ;
-    }
-   else{
-      this.discount = this.orderForm.controls['discount'].value;
-        this.allSubtotal = this.total_bill - this.discount;
-        this.total_bill =this.allSubtotal;
-      }
-  }
-  tax(view:any){
-    console.log( this.allSubtotal)
-    this.taxvalue = this.orderForm.controls['delivery_charge'].value;
-     if(view === 'grid' && this.allSubtotal ===0){
       this.updateCart();
-      let pervalue =((this.taxvalue*this.allProducts)/100 )
-      console.log(pervalue)
-      this.allProducts = this.allProducts + pervalue;
+      this. discount = this.orderForm.controls['discount'].value;
+      if(this.discount < this.allProductsDesktopTotal  ){
+        this.allProductsDesktopTotal = this.allProductsDesktopTotal -  this.discount ;
+      }
+      else{
+        this.allProductsDesktopTotal =0;
+      }
+    }
+  }
+
+  discountListchange(){
+    this.discount = this.orderForm.controls['discount'].value;
+    if(this.discount < this.ListViewTotalBill  ){
+    this.GrandtotalListViewbill = this.ListViewTotalBill - this.discount;
+    console.log(this.GrandtotalListViewbill)
     }
     else{
-      this.discountchange('grid')
-      let pervalue =((this.taxvalue*this.allProducts)/100 )
-      this.allProducts = this.allProducts + pervalue;
+      this.GrandtotalListViewbill =0;
     }
   }
   onBookChange(event: any, idx: any) {
-    this.value = event.value;
     for (let i in this.menuDataList) {
-      if (event.value === this.menuDataList[i].menu_name) {
+      if (event.target .value === this.menuDataList[i].menu_name) {
         let price = this.menuDataList[i].menu_price;
+        this.itemprice = this.menuDataList[i].menu_price;
         let qty = idx.controls['qty'].value;
         let totalUnitPrice = qty * price;
         idx.controls['price'].setValue(totalUnitPrice);
+        idx.controls['itemprice'].setValue(price);
+        this.manualView = true;
       }
+      this.myFormValueChanges$ = this.orderForm.controls['items'].valueChanges;
+        this.myFormValueChanges$.subscribe((salesList: any) =>
+          this.updateTotalUnitPrice(salesList)
+        )
     }
+    this.cdref.detectChanges();
+    this.getmenuData();
+  }
+
+  onPriceChange(event: any, idx: any){
+    let qty = idx.controls['qty'].value;
+    let price = idx.controls['itemprice'].value;
+    this.totalUnitPrice = qty * price;
+    idx.controls['qty'].setValue(qty);
+    idx.controls['price'].setValue(this.totalUnitPrice);
     this.myFormValueChanges$ = this.orderForm.controls['items'].valueChanges;
     this.myFormValueChanges$.subscribe((salesList: any) =>
       this.updateTotalUnitPrice(salesList)
-    );
-    this.getmenuData();
+    )
   }
 
   onKeyUpEvent(idx: any, flag: any) {
@@ -362,10 +335,7 @@ export class AddBillCounetrComponent implements OnInit {
     this.myFormValueChanges$.subscribe((salesList: any) =>
       this.updateTotalUnitPrice(salesList)
     )
-    console.log(this.qtyr)
     this.qtyr = idx.controls['qty'].value
-    console.log(idx.controls['qty'].value)
-
     let qty = idx.controls['qty'].value;
     let price = idx.controls['price'].value;
     let name = idx.controls['name'].value;
@@ -373,7 +343,10 @@ export class AddBillCounetrComponent implements OnInit {
       this.qtyr = ++qty;
     }
     if (flag === 'remove') {
-      if (this.qtyr != 1) {
+      if (this.qtyr-1 === 0) {
+        this.removeGroup(idx)
+      }
+      else{
         this.qtyr = --qty;
       }
     }
@@ -383,20 +356,45 @@ export class AddBillCounetrComponent implements OnInit {
         this.totalUnitPrice = this.qtyr * price;
       }
     }
-
     idx.controls['qty'].setValue(this.qtyr);
     idx.controls['price'].setValue(this.totalUnitPrice);
     setTimeout(() => {
       this.myFormValueChanges$ = this.orderForm.controls['items'].valueChanges;
-      console.log(this.myFormValueChanges$.observers.length)
       this.myFormValueChanges$.subscribe((salesList: any) =>
         this.updateTotalUnitPrice(salesList)
       );
     }, 2000);
-
-
   }
-
+  onMaualKeyUpEvent(idx: any, flag: any) {
+    this.myFormValueChanges$ = this.orderForm.controls['items'].valueChanges;
+    this.myFormValueChanges$.subscribe((salesList: any) =>
+      this.updateTotalUnitPrice(salesList)
+    )
+    this.qtyr = idx.controls['qty'].value
+    let qty = idx.controls['qty'].value;
+    let price = idx.controls['itemprice'].value;
+    let name = idx.controls['name'].value;
+    if (flag === 'add') {
+      this.qtyr = ++qty;
+    }
+    if (flag === 'remove') {
+      if (this.qtyr-1 === 0) {
+        this.removeGroup(idx)
+      }
+      else{
+        this.qtyr = --qty;
+      }
+    }
+   this.totalUnitPrice = this.qtyr * price;
+    idx.controls['qty'].setValue(this.qtyr);
+    idx.controls['price'].setValue(this.totalUnitPrice);
+    setTimeout(() => {
+      this.myFormValueChanges$ = this.orderForm.controls['items'].valueChanges;
+      this.myFormValueChanges$.subscribe((salesList: any) =>
+        this.updateTotalUnitPrice(salesList)
+      );
+    }, 2000);
+  }
   ///////////////////////////////////////////////////////////////////////////////
 
   totalSum: any;
@@ -405,8 +403,8 @@ export class AddBillCounetrComponent implements OnInit {
     for (let i in units) {
       let totalUnitPrice = units[i].price;
       this.totalSum += totalUnitPrice;
-      console.log(this.totalSum)
-      this.total_bill = this.totalSum;
+      this.ListViewTotalBill = this.totalSum;
+      this.GrandtotalListViewbill =this.totalSum;
     }
   }
 
@@ -414,13 +412,16 @@ export class AddBillCounetrComponent implements OnInit {
     let orderbe = this.orderForm.value;
     orderbe.items.forEach((element: any) => {
       if (element.name === '' || element.qty === 0 ||  !this.orderForm.valid) {
-        this.openWarrning();
         this.validationvalue = true;
       }
       else{
         this.validationvalue = false;
       }
     })
+    if(this.validationvalue){
+      this.dataService.openSnackBar("* Please Select the Item", 'Dismiss');   
+
+    }
     
   }
    generateKitchenTokenNumbers(startingNumber=1, numTokens=100) {
@@ -433,12 +434,6 @@ export class AddBillCounetrComponent implements OnInit {
 }
 //////////////////////////////////////////////////////////////////////////////////////
   onSubmit() {
- 
-
-    console.log(this.allSubtotal);
-    if(this.allSubtotal=== 0){
-      this.allSubtotal = this.total_bill;
-    }
     this.validation();
     if(!this.validationvalue){
       let r = Math.random().toString(36).substring(7);
@@ -448,7 +443,8 @@ export class AddBillCounetrComponent implements OnInit {
       bill_order: this.orderForm.value,
       table_id: '',
       table_name: '',
-      total_bill: this.allSubtotal,
+      total_bill: this.GrandtotalListViewbill,
+      subtotal_bill: this.ListViewTotalBill,
       bill_status: 'counterlist',
       cutomer_name: this.orderForm.controls['cutomer_name'].value,
       cutomer_number: this.orderForm.controls['cutomer_number'].value,
@@ -459,24 +455,19 @@ export class AddBillCounetrComponent implements OnInit {
       cutomer_address: '',
       attender_name: '',
       attender_id: '',
-      token_no: Math.floor(Math.random() * 100) + 1
-
+      token_no:this.orderForm.controls['token_no'].value,
+      payment_type:this.orderForm.controls['payment_type'].value,
     };
     this.dataService.saveBill(tableFormData).subscribe(
       (data: any) => this.closeDialog(data),
       (err: any) => console.log(err)
     );
-
     }
-    
   }
-
-  
-
+//////////////////////////////////////////////////////////////////////////////////////
   onDesktopBillSubmit() {
-    console.log(this.products)
     let obj = {
-      items: this.products
+      items: this.DesktopProducts
     }
     console.log(obj)
     let r = Math.random().toString(36).substring(7);
@@ -486,7 +477,8 @@ export class AddBillCounetrComponent implements OnInit {
       bill_order: obj,
       table_id: '',
       table_name: '',
-      total_bill: this.allProducts,
+      total_bill: this.allProductsDesktopTotal,
+      subtotal_bill:this.subtotal,
       bill_status: 'counter',
       cutomer_name: this.orderForm.controls['cutomer_name'].value,
       cutomer_number: this.orderForm.controls['cutomer_number'].value,
@@ -497,9 +489,9 @@ export class AddBillCounetrComponent implements OnInit {
       cutomer_address: '',
       attender_name: '',
       attender_id: '',
-      token_no:Math.floor(Math.random() * 100) + 1
+      token_no:this.orderForm.controls['token_no'].value,
+      payment_type:this.orderForm.controls['payment_type'].value,
     };
-    console.log(BillData)
     this.dataService.saveBill(BillData).subscribe(
       (data: any) => this.closeDialog(data),
       (err: any) => console.log(err)
@@ -507,11 +499,10 @@ export class AddBillCounetrComponent implements OnInit {
   }
 
   closeDialog(data: any) {
-    console.log(data)
     if (data.status === true) {
-      this.dialogRef.close(true);
       this.dataService.removeAllCart();
       this.dataService.openSnackBar(data.message, 'Dismiss');
+      this.router.navigateByUrl('/counterbill');
     }
   }
   openWarrning() {
@@ -531,7 +522,6 @@ export class AddBillCounetrComponent implements OnInit {
 
   /////////////////////////////////////////////////////////////////////////////////
   close() {
-    this.dialogRef.close('close');
     this.dataService.removeAllCart();
   }
   UpdateItem() {
@@ -542,7 +532,7 @@ export class AddBillCounetrComponent implements OnInit {
       bill_order: this.orderForm.value,
       table_id: this.table_id,
       table_name: '',
-      total_bill: this.total_bill,
+      total_bill: this.ListViewTotalBill,
       bill_status: 'booked',
       cutomer_name: this.orderForm.controls['cutomer_name'].value,
       cutomer_number: this.orderForm.controls['cutomer_number'].value,
@@ -551,9 +541,9 @@ export class AddBillCounetrComponent implements OnInit {
       status: 'Ordered',
       discount: '',
       delivery_charge: '20',
-      token_no: this.updateData.token_no,
+      token_no:this.orderForm.controls['token_no'].value,
+      payment_type:this.orderForm.controls['payment_type'].value,
     };
-    console.log(tableFormData)
     this.dataService.updateBill(tableFormData).subscribe(
       (data: any) => this.closeDialog(data),
       (err: any) => console.log(err)
@@ -562,7 +552,6 @@ export class AddBillCounetrComponent implements OnInit {
   competeItem() {
     this.deleteUser();
   }
-
   deleteUser() {
     let deletedata = {
       body: 'Are you sure  Completed the Order',
@@ -574,18 +563,14 @@ export class AddBillCounetrComponent implements OnInit {
     });
 
     dialogRef.afterClosed().subscribe((result) => {
-      console.log(result);
       if (result == 'yes') {
-        console.log(this.billDataValue)
         this.dataService
           .compelteOrder(this.billDataValue.bill_data.bill_id)
           .subscribe((data: any) => this.closedeleteDialog(data));
-        this.dialogRef.close();
         window.location.reload();
       }
       if (result === 'no') {
         console.log('not deleted');
-        this.dialogRef.close();
       }
     });
   }

@@ -9,6 +9,7 @@ import { MatTableDataSource } from '@angular/material/table';
 import { AddBillCounetrComponent } from '../../bill-counter/add-bill-counetr/add-bill-counetr.component';
 import { ConfrimBoxComponent } from '../../confrim-box/confrim-box.component';
 import { InvoiceComponent } from '../invoice/invoice.component';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-list-bill',
@@ -19,17 +20,28 @@ export class ListBillComponent implements  OnInit,AfterViewInit {
   searchView: boolean | undefined;
   listView: boolean | undefined ;
   GirdView!: boolean;
-  showDataLoader: boolean = false;;
+  showDataLoader: boolean = false;
+  dashborddata: boolean = false;
+  displayedColumns: any;
+;
   searchedKeyword!: string;
   BillData:any=[];
-  public displayedColumns:any = ['bill_id', 'create_date', 'status', 'bill_no', 'cutomer_name','total_bill'];
   public dataSource :any;
  
    @ViewChild(MatSort) sort = {} as MatSort;
    @ViewChild(MatPaginator) paginator = {} as MatPaginator;
   categoryDataList: any;
   constructor(public dataService: DataService,private cdref: ChangeDetectorRef,
-  public snackBar: MatSnackBar, public dialog: MatDialog) { }
+  public snackBar: MatSnackBar, public dialog: MatDialog,router: Router) { 
+    console.log(router.routerState.snapshot.url);
+    if(router.routerState.snapshot.url == '/' || router.routerState.snapshot.url == '/home'){
+      this.dashborddata = true;
+        this.displayedColumns = ['bill_id', 'create_date', 'status', 'bill_no','total_bill'];
+    }
+    else{
+      this.displayedColumns = ['bill_id', 'create_date', 'status', 'bill_no', 'cutomer_name','total_bill'];
+      }
+  }
 
   stopPropagation(event:any) {
     event.stopPropagation()
@@ -76,10 +88,7 @@ export class ListBillComponent implements  OnInit,AfterViewInit {
       if(ele.status === "tablebook"){
         this.BillData.push(ele);
       }
-      
     });
-    console.log(this.BillData)
-
     this.dataSource =new MatTableDataSource(this.BillData);
     this.cdref.detectChanges();
     this.showDataLoader = false;
@@ -97,9 +106,6 @@ export class ListBillComponent implements  OnInit,AfterViewInit {
     this.GirdView = true;
     this.searchView = false;
   }
-
-
-
 
   deleteBillListValue(id:any) {
     let deletedata = {

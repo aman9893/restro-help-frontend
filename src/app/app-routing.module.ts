@@ -13,6 +13,11 @@ import { DashbordComponent } from './pages/dashbord/dashbord.component';
 import { AttenderComponent } from './pages/Table/attender/attender.component';
 import { LayoutComponent } from './pages/dashbord/layout/layout.component';
 import { ListBillComponent } from './pages/bill/list-bill/list-bill.component';
+import { AddBillCounetrComponent } from './pages/bill-counter/add-bill-counetr/add-bill-counetr.component';
+import { CreateBillComponent } from './pages/bill/create-bill/create-bill.component';
+import { ForgetpassComponent } from './pages/unprotected-component/forgetpass/forgetpass.component';
+import { AdminUserlistComponent } from './pages/unprotected-component/admin-userlist/admin-userlist.component';
+import { HelprequestComponent } from './pages/unprotected-component/helprequest/helprequest.component';
 
 const routes: Routes = [
   // { path: '', component: BillComponent  , canActivate: [AuthGuard] },
@@ -25,19 +30,30 @@ const routes: Routes = [
   // { path: 'contact', component: ListContactBookComponent ,canActivate: [AuthGuard] },
 
   { path: 'login', component: LoginComponent, },
+  { path: 'forgetpassword', component: ForgetpassComponent },
+  { path: 'admin', component: AdminUserlistComponent },
+
+  
   {path: '',component: LayoutComponent,
+  
   children: [
+    { path: 'help', component: HelprequestComponent },
+
   { path: '', component: DashbordComponent  , canActivate: [AuthGuard] },
-  { path: 'home',  component: DashbordComponent},
-  { path: 'tablebill', component: BillComponent },
-  { path: 'counterbill', component: BillCounterComponent },
-  { path: 'menu', component: MenulistComponent },
-  { path: 'table', component: AddTableComponent  },
-  { path: 'profile', component: ProfileComponent},
-  { path: 'contact', component: ListContactBookComponent  },
-  { path: 'category', component: CategiresComponent  },
-  { path: 'attender', component: AttenderComponent  },
-  { path: 'tablebillList', component: ListBillComponent  },
+  { path: 'addcounterbill',  component: AddBillCounetrComponent , canActivate: [AuthGuard]},
+  { path: 'booktable/:id',  component: CreateBillComponent , canActivate: [AuthGuard]},
+  { path: 'home',  component: DashbordComponent , canActivate: [AuthGuard]},
+  { path: 'tablebill', component: BillComponent , canActivate: [AuthGuard]},
+  { path: 'counterbill', component: BillCounterComponent , canActivate: [AuthGuard] },
+  { path: 'menu', component: MenulistComponent , canActivate: [AuthGuard] },
+  { path: 'table', component: AddTableComponent  , canActivate: [AuthGuard]},
+  { path: 'profile', component: ProfileComponent , canActivate: [AuthGuard]},
+  { path: 'contact', component: ListContactBookComponent, canActivate: [AuthGuard]  },
+  { path: 'category', component: CategiresComponent  , canActivate: [AuthGuard] },
+  { path: 'attender', component: AttenderComponent  , canActivate: [AuthGuard] },
+  { path: 'tablebillList', component: ListBillComponent  , canActivate: [AuthGuard] },
+  
+  
   
     ]
   }

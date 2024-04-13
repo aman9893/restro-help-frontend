@@ -11,6 +11,8 @@ import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { AuthService } from 'src/app/auth.service';
 import { DataService } from 'src/app/service/data.service';
+import { ConfrimBoxComponent } from '../../confrim-box/confrim-box.component';
+import { MatDialog } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-add-table',
@@ -29,19 +31,17 @@ export class AddTableComponent implements OnInit,AfterViewInit {
 
 
   
- public displayedColumns:any = ['table_id', 'table_name'];
+ public displayedColumns:any = [ 'table_name','table_id',];
  public dataSource :any;
 
   @ViewChild(MatSort) sort = {} as MatSort;
   @ViewChild(MatPaginator) paginator = {} as MatPaginator;
   showDataLoader: boolean =true;
 
-
-
   constructor(
     private formBuilder: FormBuilder,
     private dataService: DataService,
-    private authService: AuthService,
+    private authService: AuthService,public dialog: MatDialog,
     public snackBar: MatSnackBar, private cdref: ChangeDetectorRef
   ) {}
 
@@ -176,5 +176,24 @@ export class AddTableComponent implements OnInit,AfterViewInit {
       this.getTableData();
       this.tableForm.reset();
     }
+  }
+
+  deleteValue(id:any) {
+    let deletedata = {
+      flag:'delete',
+      body: 'Want to delete This Table? '
+    };
+    const dialogRef = this.dialog.open(ConfrimBoxComponent, {
+      width: '300px',
+      autoFocus: false,
+      data: deletedata,
+    });
+  
+    dialogRef.afterClosed().subscribe((result:any) => {
+      console.log(result);
+      if(result === 'yes'){
+        this.delete(id)
+      }
+    });
   }
 }

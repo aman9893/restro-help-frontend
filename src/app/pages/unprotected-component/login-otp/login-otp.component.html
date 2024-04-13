@@ -1,0 +1,38 @@
+<div class="d-flex">
+  <div class="d-flex flex-column justify-content-between">
+    <div class="card mt-3 p-5">
+      <div class="logo mb-3"><img src="https://imgur.com/zydrQCr.png"></div>
+      <div>
+        <p class="mb-1">Verify your</p>
+        <h4 class="mb-5 text-white">Mobile Number</h4>
+      </div>
+    </div>
+    <div class="card two bg-white  mb-3">
+      <div class="form-group">
+        <div>
+          <form [formGroup]="ForgotPhoneForm" class="example-form">
+            <mat-form-field appearance="outline" class="form_container">
+              <mat-label>Enter Phone</mat-label>
+              <input type="number"  formControlName="phone"  class="width_100" matInput>
+              <!-- <mat-error *ngIf="ForgotPhoneForm['controls'].phone.invalid">{{ErrorMessage('phone')}}</mat-error> -->
+              <button style="margin: 16px;" matSuffix mat-mini-fab disabled type="submit" [disabled]="!ForgotPhoneForm.valid" (click)="onSubmit('phone')">
+                <mat-icon>keyboard_return</mat-icon>
+              </button>
+            </mat-form-field>
+            <div class="otp" *ngIf="message">{{message}}</div>
+          </form>
+        </div>
+        <div *ngIf="message">
+          <form  [formGroup]="ForgototpForm" class="example-form">
+            <mat-form-field appearance="outline" class="form_container">
+              <mat-label>OTP</mat-label>
+              <input formControlName="otp" class="width_100" matInput>
+            </mat-form-field>
+            <button class="btnvry" type="submit" [disabled]="!ForgototpForm.valid" (click)="verify()"
+              mat-stroked-button color="primary"> Verify Otp </button>
+          </form>
+        </div>
+     <!-- /   <button class="btn btn-primary btn-block btn-lg mt-1 mb-2"><span>Get started<i class="fas fa-long-arrow-alt-right ml-2"></i></span></button> -->
+      </div>
+    </div>
+  </div>

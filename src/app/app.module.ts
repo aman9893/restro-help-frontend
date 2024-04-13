@@ -31,7 +31,7 @@ import { ProfileComponent } from './pages/profile/profile.component';
 import { AddContactBookComponent } from './pages/contact-book/add-contact-book/add-contact-book.component';
 import { ListContactBookComponent } from './pages/contact-book/list-contact-book/list-contact-book.component';
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
-import { AddBillComponent } from './pages/qnq/add-bill/add-bill.component';
+
 import { BillCounterComponent } from './pages/bill-counter/bill-counter.component';
 import { AddBillCounetrComponent } from './pages/bill-counter/add-bill-counetr/add-bill-counetr.component';
 import { MatTableModule } from '@angular/material/table';
@@ -53,7 +53,12 @@ import {MatExpansionModule} from '@angular/material/expansion';
 import { CanvasJSAngularChartsModule } from '@canvasjs/angular-charts';
 import { CommonModule } from '@angular/common';
 import { CalculatorComponent } from './pages/dashbord/calculator/calculator.component';
-import { NgxPrintModule } from 'ngx-print';
+import { SearchpipeComponent } from './pages/searchpipe/searchpipe.component'
+import { PricingComponent } from './pages/unprotected-component/pricing/pricing.component';
+import { LoginOtpComponent } from './pages/unprotected-component/login-otp/login-otp.component';
+import { ForgetpassComponent } from './pages/unprotected-component/forgetpass/forgetpass.component';
+import {MatRadioModule} from '@angular/material/radio';
+import { AdminUserlistComponent } from './pages/unprotected-component/admin-userlist/admin-userlist.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -71,7 +76,7 @@ import { NgxPrintModule } from 'ngx-print';
     ProfileComponent,
     AddContactBookComponent,
     ListContactBookComponent,
-    AddBillComponent,
+    LoginOtpComponent, 
     BillCounterComponent,
     AddBillCounetrComponent,
     CategiresComponent,
@@ -80,13 +85,16 @@ import { NgxPrintModule } from 'ngx-print';
     PageHeaderComponent,
     LayoutComponent,
     MenuItemComponent,
-    CalculatorComponent
+    CalculatorComponent,
+    SearchpipeComponent
+    ,PricingComponent,
+    ForgetpassComponent,
+    AdminUserlistComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
-    Ng2SearchPipeModule,
     ReactiveFormsModule,
     HttpClientModule,
     MatProgressSpinnerModule,
@@ -100,7 +108,7 @@ import { NgxPrintModule } from 'ngx-print';
   MatTableModule, MatPaginatorModule,
   CommonModule,
   MatAutocompleteModule,MatDialogModule ,MatMenuModule,MatSortModule,MatCardModule,
-  MatSidenavModule,MatToolbarModule,MatListModule,MatExpansionModule,CanvasJSAngularChartsModule ,NgxPrintModule
+  MatSidenavModule,MatToolbarModule,MatListModule,MatExpansionModule,CanvasJSAngularChartsModule , MatRadioModule
   ],
   providers: [{provide: HTTP_INTERCEPTORS, useClass: TokenInterService, multi: true},],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],

@@ -1,6 +1,6 @@
 
 
-<app-page-header icon="home"  >
+<app-page-header icon="home" *ngIf="!dashborddata"  >
     <h3 routerLink="/home">Home</h3>
     <span  class="centertext">
    Table Bill List
@@ -60,7 +60,7 @@
               </td>
             </ng-container>
   
-            <ng-container matColumnDef="cutomer_name">
+            <ng-container  matColumnDef="cutomer_name">
               <th mat-header-cell mat-sort-header *matHeaderCellDef> Contact Name
               </th>
               <td mat-cell *matCellDef="let element"> {{element.cutomer_name}}

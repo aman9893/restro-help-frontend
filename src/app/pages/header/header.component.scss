@@ -28,119 +28,6 @@ img {
 	background: linear-gradient(-135deg, #c850c0, #262833);
 }
 
-.header-content {
-	display: flex;
-	align-items: center;
-	& > a {
-		display: none;
-	}
-	@media (max-width: 1200px) {
-		justify-content: space-between;
-		& > a {
-			display: inline-flex;
-		}
-	}
-}
-
-.header-logo {
-    margin-right: 2.5rem;
-    /* margin-top: -9px; */
-    font-weight: 900;
-    font-size: 30px;
-    color: rgb(255, 255, 255);
-	text-transform: capitalize;
-	cursor: pointer;
-	a {
-		display: flex;
-		align-items: center;
-		div {
-			// outline: 2px solid;
-			flex-shrink: 0;
-			position: relative;
-			&:after {
-				display: block;
-				content: "";
-				position: absolute;
-				left: 0;
-				top: auto;
-				right: 0;
-				bottom: 0;
-				overflow: hidden;
-				height: 50%;
-				border-bottom-left-radius: 8px;
-				border-bottom-right-radius: 8px;
-				background-color: rgba(#fff, 0.2);
-				backdrop-filter: blur(4px);
-				text-decoration: none;
-				color: #fff;
-				font-weight: 500;
-				transition: 0.15s ease;
-			}
-		}
-	}
-}
-
-.header-navigation {
-	display: flex;
-	flex-grow: 1;
-	align-items: center;
-	justify-content: space-between;
-	@media (max-width: 1200px) {
-		display: none;
-	}
-}
-
-.header-navigation-links {
-	display: flex;
-	align-items: center;
-
-	a {
-		text-decoration: none;
-	    text-decoration: none;
-    color: #fff;
-    font-weight: 500;
-    transition: 0.15s ease;
-		font-weight: 500;
-		transition: 0.15s ease;
-		& + * {
-			margin-left: 1.5rem;
-		}
-
-		&:hover,
-		&:focus ,&:active{
-		    text-decoration: none;
-    color: #fff;
-    font-weight: 500;
-    transition: 0.15s ease;
-	font-size: 20px;
-		}
-	}
-}
-
-.active{
-	text-decoration: none;
-    color: #fff;
-    font-weight: 500;
-    transition: 0.15s ease;
-	font-size: 20px;
-	border-bottom: 1px solid;
-}
-
-.header-navigation-actions {
-	display: flex;
-	align-items: center;
-	& > .avatar {
-		margin-left: 0.75rem;
-	}
-	& > .icon-button + .icon-button {
-		margin-left: 0.25rem;
-	}
-
-	& > .button + .icon-button {
-		margin-left: 1rem;
-	}
-}
-
 
 .spacer {
 	flex: 1 1 auto;
@@ -153,3 +40,9 @@ img {
   .welcome-text {
 	font-size: smaller;
   }
+  .mat-toolbar-row, .mat-toolbar-single-row {
+
+    height: 42px !important;
+    font-size: 16px !important;
+	background-color: #1abc9c !important;
+}

@@ -1,4 +1,4 @@
-<app-page-header icon="home"  >
+<app-page-header icon="eye"   >
   <h3 routerLink="/home">Home</h3>
   <span  class="centertext">
     Contact management
@@ -46,7 +46,7 @@
                     <span>Email</span>
 
                   </button>
-                  <button (click)="deletestock(element.contact_id)"
+                  <button (click)="deleteContactValue(element.contact_id)"
                     mat-menu-item>
                     <mat-icon>delete</mat-icon>
                     <span>Delete Contact</span>

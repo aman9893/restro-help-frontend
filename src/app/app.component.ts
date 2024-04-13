@@ -11,8 +11,9 @@ import { AuthService } from './auth.service';
 export class AppComponent {
 
   constructor(public authService:AuthService,public router: Router) {
-
+    if( router.routerState.snapshot.url == '/login'){
+        this.authService.logout();
+    }
   }
-
 
 }

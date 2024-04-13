@@ -11,6 +11,8 @@ import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { AuthService } from 'src/app/auth.service';
 import { DataService } from 'src/app/service/data.service';
+import { ConfrimBoxComponent } from '../confrim-box/confrim-box.component';
+import { MatDialog } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-categires',
@@ -44,7 +46,7 @@ export class CategiresComponent implements OnInit {
     private dataService: DataService,
     private authService: AuthService,
     public snackBar: MatSnackBar,
-    private cdref: ChangeDetectorRef
+    private cdref: ChangeDetectorRef,public dialog: MatDialog,
   ) {}
 
   @ViewChild(MatSort) set matSort(ms: MatSort) {
@@ -177,6 +179,25 @@ export class CategiresComponent implements OnInit {
       this.getcategoryData();
       this.categoryForm.reset();
     }
+  }
+
+  deleteValue(id:any) {
+    let deletedata = {
+      flag:'delete',
+      body: 'Want to delete This Category? '
+    };
+    const dialogRef = this.dialog.open(ConfrimBoxComponent, {
+      width: '300px',
+      autoFocus: false,
+      data: deletedata,
+    });
+  
+    dialogRef.afterClosed().subscribe((result:any) => {
+      console.log(result);
+      if(result === 'yes'){
+        this.delete(id)
+      }
+    });
   }
 }
 

@@ -1,0 +1,172 @@
+<mat-toolbar color="primary">
+  <mat-toolbar-row>
+      <span class="main_header_title"> ShopMart 360</span>
+      <span class="example-spacer"></span>
+      <mat-icon class="icon_value">local_atm</mat-icon>
+      <span routerLinkActive="active" routerLink="/pricing" class="icon_text"> Pricing </span>
+  </mat-toolbar-row>
+</mat-toolbar>
+<!-- <p class="e2e-inner-html-bound"  id=""  [innerHTML]="paybox">hello</p> -->
+
+<div class="wrapper_data_payment">
+    <mat-card>
+          <div class="row">
+            <div class="col-md-4">
+                <figure class="card card-product">
+                    <figcaption class="info-wrap">
+                            <h4 class="title"> 1 Month </h4>
+                            <p class="desc"> Active Plan - {{plan}}</p>
+                    </figcaption>
+                    <div class="bottom-wrap">
+                        <button  (click)="payWithRazor(price,30)"  mat-raised-button color="primary" class="float-right paybtn">Pay Now</button>	
+                        <div class="price-wrap h5">
+                            <span class="price-new">Rs {{price}} </span> <del class="price-old"> Rs{{price}} </del>
+                        </div> <!-- price-wrap.// -->
+                    </div> <!-- bottom-wrap.// -->
+                </figure>
+            </div> <!-- col // -->
+            <div class="col-md-4">
+                <figure class="card card-product">
+                    <figcaption class="info-wrap">
+                            <h4 class="title"> 6 Month </h4>
+                            <p class="desc"> Active Plan - {{plan}}</p>
+                    </figcaption>
+                    <div class="bottom-wrap">
+                        <button  (click)="payWithRazor( price *6 - 200,180)" mat-raised-button color="primary" class="float-right paybtn">Pay Now</button>	
+
+                        <div class="price-wrap h5">
+                            <span class="price-new">Rs  {{(price *6) - 200}} </span> <del class="price-old"> Rs{{price * 6}} </del>
+                        </div> <!-- price-wrap.// -->
+                    </div> <!-- bottom-wrap.// -->
+                </figure>
+            </div> <!-- col // -->
+            <div class="col-md-4">
+                <figure class="card card-product">
+                    <figcaption class="info-wrap">
+                            <h4 class="title"> 12 Month </h4>
+                            <p class="desc"> Active Plan - {{plan}}</p>
+                    </figcaption>
+                    <div class="bottom-wrap">
+                        <button (click)="payWithRazor( price *12 - 300,360)" mat-raised-button color="primary" class="float-right paybtn">Pay Now</button>	
+
+                        <div class="price-wrap h5">
+                            <span class="price-new">Rs {{price *12 - 300}} </span> <del class="price-old"> Rs{{price *12}} </del>
+                        </div> <!-- price-wrap.// -->
+                    </div> <!-- bottom-wrap.// -->
+                </figure>
+            </div> <!-- col // -->
+            </div> <!-- row.// -->
+    </mat-card>
+</div>
+
+<!--container end.//-->
+
+<!-- <mat-tab-group>
+ <mat-tab>
+     <ng-template mat-tab-label>
+       <mat-icon class="example-tab-icon">chrome_reader_mode</mat-icon>
+       Cards 
+     </ng-template>
+     <div class="col-sm-10" >
+       <hr />
+       
+       <div class="form-group">
+           <label class="control-label" for="username">Card Holder's Name</label>
+           <div class="controls">
+               <input type="text" id="username" name="username" placeholder="" class="form-control">
+           </div>
+       </div>
+     
+       <div class="form-group">
+           <label class="control-label" for="card_number">Card Number</label>
+           <div class="controls">
+               <input type="text" id="card_number" name="card_number" placeholder="" class="form-control">
+           </div>
+       </div>
+       <hr />
+   
+       <div class="form-group">
+           <label class="control-label" for="expiry_month">Card Expiry Date</label>
+           <div class="row">
+               <div class="col-sm-4">
+                   <select class="form-control" name="expiry_month" id="expiry_month">
+                       <option>----</option>
+                       <option value="01">Jan (01)</option>
+                       <option value="02">Feb (02)</option>
+                       <option value="03">Mar (03)</option>
+                       <option value="04">Apr (04)</option>
+                       <option value="05">May (05)</option>
+                       <option value="06">June (06)</option>
+                       <option value="07">July (07)</option>
+                       <option value="08">Aug (08)</option>
+                       <option value="09">Sep (09)</option>
+                       <option value="10">Oct (10)</option>
+                       <option value="11">Nov (11)</option>
+                       <option value="12">Dec (12)</option>
+                   </select>
+               </div>
+               <div class="col-sm-3">
+                   <select class="form-control" name="expiry_year">
+                       <option value="">-----</option>
+                       <option value="13">2013</option>
+                       <option value="14">2014</option>
+                       <option value="15">2015</option>
+                       <option value="16">2016</option>
+                       <option value="17">2017</option>
+                       <option value="18">2018</option>
+                       <option value="19">2019</option>
+                       <option value="20">2020</option>
+                       <option value="21">2021</option>
+                       <option value="22">2022</option>
+                       <option value="23">2023</option>
+                   </select>
+               </div>
+           </div>
+       </div>
+       <hr />
+       <div class="row">
+           <div class="col-sm-3">
+   
+               <div class="form-group">
+                   <label class="control-label" for="password_confirm">Card CVV</label>
+
+
+                   <input type="password" id="password_confirm" name="password_confirm" placeholder=""
+                       class="form-control">
+               </div>
+           </div>
+       </div>
+       <div class="row">
+           <div class="col-sm-3">
+              
+               <div class="form-group">
+                   <button (click)="paymentSuccessfully()" class="btn btn-success">Pay Now</button>
+               </div>
+           </div>
+           <div class="col-sm-4"></div>
+           <div class="col-sm-5">
+               
+           </div>
+       </div>
+   </div>
+   </mat-tab> 
+   <mat-tab>
+     <ng-template mat-tab-label>
+       <mat-icon class="example-tab-icon">settings_cell
+       </mat-icon>
+       Phone Pay & GPay
+     </ng-template>
+       
+     <mat-card> Pay This Number - 9806701954</mat-card>
+     <mat-card>  Upi - 9806701954@Upi</mat-card>
+   </mat-tab>
+   <mat-tab>
+     <ng-template mat-tab-label>
+       <mat-icon class="example-tab-icon">format_paint</mat-icon>
+       Paytm
+     </ng-template>
+       
+        <mat-card>  On Paytm - 9806701954</mat-card>
+   </mat-tab>
+ </mat-tab-group>
+ <span> When Payment Has been Done Call Me   This Number 9806701954</span> -->

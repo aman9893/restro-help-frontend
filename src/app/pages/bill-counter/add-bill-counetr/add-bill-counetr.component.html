@@ -1,22 +1,20 @@
-<div mat-dialog-title>
-    <div class="menu_item"> Add Bill
-        <mat-icon class="iconsclose" (click)="close()"> close</mat-icon>
-        <mat-icon title="ListView"  *ngIf="GirdView"  (click)="showListView()" class="btntop"> menu</mat-icon>
-        <mat-icon title="GridView"    *ngIf="listView"  (click)="showGirdView()" class="btntop"> desktop_mac</mat-icon>
-        </div>
-</div>
-
-<div *ngIf="GirdView" class="row ">
-    <div class="col-md-6 row flexcontainer">
-        <div class="wrapper">
-            <div class="d-md-flex align-items-md-center">
-                <div class="search">
-                    <mat-icon class="searchicon">search</mat-icon>
-                    <input type="search" [(ngModel)]="term" placeholder="Search" autocomplete="off"
-                        placeholder="Search Item" />
-                </div>
-            </div>
-       
+<app-page-header icon="home">
+    <h3 routerLink="/counterbill">Bill List</h3>
+    <span class="centertext">
+        Counter Bill
+    </span>
+    <button *ngIf="GirdView" mat-flat-button color="primary" class="action" (click)="showListView()">
+        <mat-icon class="mr-2">menu</mat-icon>
+        <span> Show List </span>
+    </button>
+    <button *ngIf="listView" mat-flat-button color="primary" class="action" (click)="showGirdView()">
+        <mat-icon class="mr-2">desktop_mac</mat-icon>
+        <span> Show Grid </span>
+    </button>
+</app-page-header>
+<div *ngIf="GirdView" class="row floatleft">
+    <div class="col-md-6">
+        <div>
             <div *ngIf="!mobileview " class="content py-md-0 ">
                 <section id="sidebar">
                     <div class="py-1">
@@ -31,54 +29,58 @@
                         </ul>
                     </div>
                 </section>
-         
+
                 <div class="buttonsbox1">
-                    <div *ngFor="let menu of menuDataList |filter : term" class="box2 active">
+                    <div *ngFor="let menu of menuDataList " class="box2 active">
                         <div (click)="addProduct(menu)">
-                          <mat-card class="menuboxovrflow" title="{{menu.menu_name}}">
-                               <div *ngIf="menu.menu_url" class="image-container img-one">
-                            <img src="{{menu.menu_url}}" alt="tennis" />
-                        </div>
-                          <p  *ngIf="!menu.menu_url"  style="text-transform: capitalize; margin-top: 10px;">   {{menu.menu_name}} </p>
-                          <span  *ngIf="menu.menu_url" style="text-transform: capitalize;">   {{menu.menu_name}} </span>
-                        </mat-card>
+                            <mat-card class="menuboxovrflow" title="{{menu.menu_name}}">
+                                <div *ngIf="menu.menu_url" class="image-container img-one">
+                                    <img src="{{menu.menu_url}}" alt="tennis" />
+                                </div>
+                                <p *ngIf="!menu.menu_url" style="text-transform: capitalize; margin-top: 10px;">
+                                    {{menu.menu_name}} </p>
+                                <span *ngIf="menu.menu_url" style="text-transform: capitalize;"> {{menu.menu_name}}
+                                </span>
+                            </mat-card>
                         </div>
                     </div>
                 </div>
 
 
             </div>
-  <!-- mobile view only -->
+            <!-- mobile view only -->
 
-            <div *ngIf="mobileview && menuDataList" >
-            <div class="filters"> 
-                <mat-tab-group  (selectedTabChange)="ontabChange($event)">
-                <mat-tab label="All Item">
-                    <div class="mobile_menu">
-                        <div class="mobile_menusub" *ngFor="let menu of menuDataList |filter : term" (click)="addProduct(menu)">
-                           <span  title={{menu.menu_name}}>{{menu.menu_name}}</span> 
-                         </div>
-                    </div>
-              
-                </mat-tab>
-                <mat-tab *ngFor="let item of categoryDataList"  label={{item.category_name}}  > 
-                    <div class="mobile_menu">
-                    <div class="mobile_menusub" *ngFor="let menu of menuDataList |filter : term"  (click)="addProduct(menu)">
-                       <span title={{menu.menu_name}}>{{menu.menu_name}}</span> 
-                     </div>
+            <div *ngIf="mobileview && menuDataList">
+                <div class="filters">
+                    <mat-tab-group (selectedTabChange)="ontabChange($event)">
+                        <mat-tab label="All Item">
+                            <div class="mobile_menu">
+                                <div class="mobile_menusub" *ngFor="let menu of menuDataList "
+                                    (click)="addProduct(menu)">
+                                    <span title={{menu.menu_name}}>{{menu.menu_name}}</span>
+                                </div>
+                            </div>
+
+                        </mat-tab>
+                        <mat-tab *ngFor="let item of categoryDataList" label={{item.category_name}}>
+                            <div class="mobile_menu">
+                                <div class="mobile_menusub" *ngFor="let menu of menuDataList "
+                                    (click)="addProduct(menu)">
+                                    <span title={{menu.menu_name}}>{{menu.menu_name}}</span>
+                                </div>
+                            </div>
+
+                        </mat-tab>
+                    </mat-tab-group>
                 </div>
-          
-            </mat-tab>
-              </mat-tab-group>
-         </div>
-        </div>
+            </div>
         </div>
     </div>
 
     <div class="col-md-6">
         <form *ngIf="menuDataList " [formGroup]="orderForm" (keydown.enter)="$event.preventDefault()">
             <div class="row maindiv">
-                <div  *ngIf="!mobileview && products.length !==0 " class="row">
+                <div *ngIf="!mobileview && DesktopProducts.length !==0 " class="row">
                     <div class="col-md-6 inputbox">
                         <input type="number" formControlName="cutomer_number" (change)="onChangeDataset()"
                             placeholder="Customer Number" list="languages">
@@ -91,7 +93,7 @@
                         <input type="text" formControlName="cutomer_name" placeholder="Customer Name">
                     </div>
                 </div>
-                <div  *ngIf="mobileview && products.length !==0 " class="width_100" >
+                <div *ngIf="mobileview && DesktopProducts.length !==0 " class="width_100">
                     <div class="width_50  inputbox">
                         <input type="number" formControlName="cutomer_number" (change)="onChangeDataset()"
                             placeholder="Customer Number" list="languages">
@@ -105,111 +107,167 @@
                     </div>
                 </div>
                 <div>
-                    <div>
-                        <div class="cardcart">
-                            <div class="card-body-cart p-0 table-responsive">
-                                <table class="table cart-table mb-0">
-                                    <tbody *ngIf="products.length ===0 ">
-                                        <tr>
-                                            <td colSpan="6">
-                                                <div class="cart-empty">
-                                                    <i class="fa fa-shopping-cart"></i>
-                                                    <p>Your Cart Is empty</p>
-                                                </div>
-                                            </td>
-                                        </tr>
-                                    </tbody>
-                                </table>
-                                <table *ngIf="products.length !==0 " class="table cart-table mb-0">
-                                    <thead>
-                                        <tr>
-                                            <th>Action</th>
-                                            <!-- <th>product</th> -->
-                                            <th>Name</th>
-                                            <th>Price</th>
-                                            <th style="    padding-left: 37px;">Qty</th>
-                                            <th>Total Amount</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <tr *ngFor="let item of products">
-                                            <td>
-                                                <button class="prdct-qty-close" type="button"
-                                                    (click)="removeProduct(item)">
-                                                    <mat-icon>close</mat-icon>
+                    <div class="cardcart">
+                        <div class="card-body-cart p-0 table-responsive">
+                            <table class="table cart-table mb-0 ">
+                                <tbody *ngIf="DesktopProducts.length ===0 ">
+                                    <tr>
+                                        <td colSpan="6">
+                                            <div class="cart-empty">
+                                                <i class="fa fa-shopping-cart"></i>
+                                                <p>Your Cart Is empty</p>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                            <table *ngIf="DesktopProducts.length !==0 " class="table cart-table mb-0">
+                                <thead>
+                                    <tr>
+                                        <th>Action</th>
+                                        <!-- <th>product</th> -->
+                                        <th>Name</th>
+                                        <th>Price</th>
+                                        <th style="padding-left: 37px;">Qty</th>
+                                        <th>Total Amount</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr *ngFor="let item of DesktopProducts">
+                                        <td>
+                                            <button class="prdct-qty-close" type="button" (click)="removeProduct(item)">
+                                                <mat-icon>close</mat-icon>
+                                            </button>
+                                        </td>
+                                        <td>
+                                            <div class="product-name">
+                                                <p>{{item.menu_name}}</p>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div class="product-name">
+                                                <p>{{item.menu_price}}</p>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div class="prdct-qty-wrp">
+                                                <button class="prdct-qty-btn" type="button" (click)="decrease(item)">
+                                                    <i class="fa fa-minus"></i>
                                                 </button>
-                                            </td>
-                                            <!-- <td>
-                                                <div class="product-img">
-                                                    <img src="{{item.menu_url}}" alt='Image' />
-                                                </div>
-                                            </td> -->
-                                            <td>
-                                                <div class="product-name">
-                                                    <p>{{item.menu_name}}</p>
-                                                </div>
-                                            </td>
-                                            <td>
-                                                <div class="product-name">
-                                                    <p>{{item.menu_price}}</p>
-                                                </div>
-                                            </td>
-                                            <td>
-                                                <div class="prdct-qty-wrp">
-                                                    <button class="prdct-qty-btn" type="button"
-                                                        (click)="decrease(item)">
-                                                        <i class="fa fa-minus"></i>
-                                                    </button>
-                                                    <input type="text" name="qty" [value]="item.qty"
-                                                        class="qty-input-box" disabled />
-                                                    <button class="prdct-qty-btn" (click)="increase(item)"
-                                                        type="button">
-                                                        <i class="fa fa-plus"></i>
-                                                    </button>
-                                                </div>
-                                            </td>
-                                            <td>{{item.qty * item.menu_price}}</td>
-                                        </tr>
-                                    </tbody>
-                                </table>
+                                                <input type="text" name="qty" [value]="item.qty" class="qty-input-box"
+                                                    disabled />
+                                                <button class="prdct-qty-btn" (click)="increase(item)" type="button">
+                                                    <i class="fa fa-plus"></i>
+                                                </button>
+                                            </div>
+                                        </td>
+                                        <td>{{item.qty * item.menu_price}}</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <div *ngIf="DesktopProducts.length !==0  && !mobileview">
+                        <div class="wrapperdiv1">
+                            <div>
+                                Total Item <span style="padding-left: 54px;"> {{DesktopProducts.length}}</span>
+                            </div>
+                            <div>
+                                Subtotal <span style="padding-left: 155px;">{{this.subtotal}} Rs</span>
+                            </div>
+
+                        </div>
+                        <div class="wrapperdiscount">
+                            <div *ngIf="!mobileview && DesktopProducts.length !==0 " class="row">
+                                <div class="col-md-4">
+                                    <label for="last">Token:</label>
+                                    <input id="last" class="form-label" type="text" formControlName="token_no" />
+                                </div>
+                                <div class="col-md-4 ">
+                                    <label for="first">Discount:</label>
+                                    <input id="first" class="form-label" type="text" formControlName="discount"
+                                        (change)="discountchange('grid')" />
+                                </div>
+                                <div class="col-md-4 ">
+                                    <select class="form-select" formControlName="payment_type">
+                                        <option value="Payment Type">Payment Type</option>
+                                        <option value="UPI">UPI</option>
+                                        <option value="CASH">CASH</option>
+                                        <option value="Bank">Bank</option>
+                                    </select>
+
+                                </div>
                             </div>
                         </div>
-                        <div *ngIf="products.length !==0 ">
-                            <div class="wrapperdiv1">
-                                <div class="div2">
-                                    Subtotal
-                                </div>
-                                <div class="div1" >
-                                    {{this.subtotal}} Rs
-                                </div>
+                        <div class="divtotal">
+                            Grand Total - {{allProductsDesktopTotal}} Rs
+                        </div>
+                        <div class="wrapperdivbtn">
+                            <div>
+                                <button class="bbutton" (click)="onDesktopBillSubmit()">Save Bill </button>
                             </div>
-                            <div class="wrapperdiv">
-                                <div>
-                                    <mat-form-field appearance="outline">
-                                        <mat-label>Discount</mat-label>
-                                        <input type="number" matInput placeholder="Discount" (change)="discountchange('grid')"
-                                            formControlName="discount">
-                                        <mat-icon matSuffix>money</mat-icon>
-                                    </mat-form-field>
-                                </div>
-                            
-                                <div class="divtotal">
-                                    Grand Total - {{allProducts}} Rs
-                                </div>
+                            <div>
+                                <button class="bbutton" (click)="onDesktopBillSubmit()">Save & Print </button>
                             </div>
-                            <div class="wrapperdivbtn">
-                                <div>
-                                    <button class="bbutton" (click)="onDesktopBillSubmit()">Save Bill </button>
-                                </div>
-                                <div>
-                                    <button class="bbutton" (click)="onDesktopBillSubmit()">Save & Print </button>
-                                </div>
-                                <div>
-                                    <button class="bbutton" (click)="onDesktopBillSubmit()">KOT & Print </button>
-                                </div>
+                            <div>
+                                <button class="bbutton" (click)="onDesktopBillSubmit()">KOT & Print </button>
                             </div>
                         </div>
                     </div>
+                    <div *ngIf="DesktopProducts &&DesktopProducts.length !==0 && mobileview " class="listwrapp">
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th width="5%"> Total Item</th>
+                                    <th width="5%">Subtotal </th>
+                                    <th width="15%"> Token No</th>
+                                    <th width="15%">Discount </th>
+                                    <th width="15%">Payment Type</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr class="">
+                                    <td class="subtitiletable">
+                                        {{DesktopProducts.length}}
+                                    </td>
+                                    <td  class="subtitiletable">
+                                        {{this.subtotal}} Rs
+                                    </td>
+                                    <td >
+                                        <input  style="width: 61px;" id="last" class="form-label" type="text" formControlName="token_no" />
+                                    </td>
+                                    <td>
+                                        <input   style="width: 61px;"  id="first" class="form-label" type="text" formControlName="discount"
+                                            (change)="discountListchange()" />
+                                    </td>
+                                    <td>
+                                        <select class="form-select" formControlName="payment_type">
+                                            <option value="Payment Type">Payment Type</option>
+                                            <option value="UPI">UPI</option>
+                                            <option value="CASH">CASH</option>
+                                            <option value="Bank">Bank</option>
+                                        </select>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <div class="divtotalmobile">
+                            Grand Total -{{allProductsDesktopTotal}} Rs
+                        </div>
+                        <div class="wrapperdivbtn">
+                            <div>
+                                <button class="bbuttonmobile" (click)="onDesktopBillSubmit()">Save Bill </button>
+                            </div>
+                            <div>
+                                <button class="bbuttonmobile" (click)="onDesktopBillSubmit()">Save & Print </button>
+                            </div>
+                            <div>
+                                <button class="bbuttonmobile" (click)="onDesktopBillSubmit()">KOT & Print </button>
+                            </div>
+                        </div>
+                       
+                    </div>
+                 
                 </div>
             </div>
 
@@ -220,111 +278,195 @@
 <!-- List view Code -->
 <div *ngIf="listView">
     <form *ngIf="menuDataList " [formGroup]="orderForm" (keydown.enter)="$event.preventDefault()">
-<mat-dialog-content >
- 
-        <div   class="width_100" >
-        
+        <div class="width_100">
             <div class="width_50  inputbox">
                 <input type="number" formControlName="cutomer_number" (change)="onChangeDataset()"
                     placeholder="Customer Number" list="languages">
                 <datalist id="languages">
-                    <option class="optionLIST" *ngFor="let item of conatctBookList"
-                        [value]="item.contact_number">
+                    <option class="optionLIST" *ngFor="let item of conatctBookList" [value]="item.contact_number">
                 </datalist>
             </div>
             <div class="width_50 inputbox">
                 <input type="text" formControlName="cutomer_name" placeholder="Customer Name">
             </div>
         </div>
-
         <div>
         </div>
-        <button  style="margin-bottom: 10px;     margin-top: 13px;" mat-raised-button (click)="addItem()">ADD
-            ITEM <mat-icon> add</mat-icon></button>
-        <div class="itemwrap" [class.wrapview]="billflag === 'view'" *ngIf="items">
-         
-            <div  formArrayName="items" *ngFor="let item of items.controls; index as idx">
-                <div [formGroupName]="idx">
-                    <div class="item_wrapper">
-                        <div class="item">
-                            <mat-form-field appearance="outline" class="width_100">
-                                <mat-select formControlName="name" (selectionChange)="onBookChange($event,item)"
-                                    placeholder="Select Menu">
-                                    <input type="text" class="search_menu" [formControl]="myControl"
-                                        placeholder="Serach Item">
-                                    <mat-option *ngFor="let stock of menuDataList"
-                                        [value]="stock.menu_name">{{stock.menu_name}}
-                                        -
-                                        {{stock.menu_price | currency:'INR'
-                                        }}</mat-option>
-                                </mat-select>
-                            </mat-form-field>
-                        </div>
-                        <mat-icon class="iconlist" (click)="onKeyUpEvent(item,'add')"> add</mat-icon>
-                        <div class="qty">
-                            <mat-form-field class="width_100" appearance="outline">
-                                <mat-label>Qty</mat-label>
-                                <input matInput placeholder="qty" formControlName="qty" readonly>
-                            </mat-form-field>
-                        </div>
-                        <mat-icon class="iconlist" (click)="onKeyUpEvent(item,'remove')">
-                            remove</mat-icon>
-                        <div class="price">
-                            <mat-form-field class="width_100" appearance="outline">
-                                <mat-label>Price</mat-label>
-                                <input matInput placeholder="Price" formControlName="price" readonly>
-                            </mat-form-field>
-                        </div>
-
-                        <span (click)="removeGroup(idx)">
-                            <mat-icon class="iconlist" style="background-color:red ;">delete</mat-icon>
-                        </span>
-                    </div>
+        <div class="listwarpfixed">
+            <button class="btnadd" mat-raised-button (click)="addItem()">ADD
+                ITEM <mat-icon> add</mat-icon></button>
+            <div>
+                <table class="table" *ngIf="items">
+                    <thead>
+                        <tr>
+                            <th width="3%">Action</th>
+                            <th width="40%">Items </th>
+                            <th width="25%">Price</th>
+                            <th width="20%">Qty</th>
+                            <th width="15%">Total Amount</th>
+                        </tr>
+                    </thead>
+                    <tbody formArrayName="items" *ngFor="let item of items.controls; index as idx">
+                        <tr [formGroupName]="idx">
+                            <td>
+                                <button class="prdct-qty-close" type="button" (click)="removeGroup(idx)">
+                                    <mat-icon>close</mat-icon>
+                                </button>
+                            </td>
+                            <td>
+                                <div class="product-name">
+                                    <input list="encodings" formControlName="name" (change)="onBookChange($event,item)"
+                                        class="custom-select custom-select-sm">
+                                    <datalist id="encodings">
+                                        <option *ngFor="let stock of menuDataList"  [value]="stock.menu_name">
+                                            {{stock.menu_name}}-
+                                            {{stock.menu_price | currency:'INR'}}</option>
+                                    </datalist>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="product-name" *ngIf="!manualView">
+                                    <input class="form-control" formControlName="itemprice" readonly>
+                                </div>
+                                <div class="product-name" *ngIf="manualView">
+                                    <input class="form-control" formControlName="itemprice"  (change)="onPriceChange($event,item)">
+                                </div>
+                            </td>
+                            <td>
+                                <div class="prdct-qty-wrp" *ngIf="!manualView">
+                                    <button class="prdct-qty-btn" type="button" (click)="onKeyUpEvent(item,'remove')">
+                                        <i class="fa fa-minus"></i>
+                                    </button>
+                                    <input placeholder="qty" class="qty-input-box" formControlName="qty" readonly>
+                                    <button class="prdct-qty-btn" (click)="onKeyUpEvent(item,'add')" type="button">
+                                        <i class="fa fa-plus"></i>
+                                    </button>
+                                </div>
+                                <div class="prdct-qty-wrp" *ngIf="manualView">
+                                    <button class="prdct-qty-btn" type="button" (click)="onMaualKeyUpEvent(item,'remove')">
+                                        <i class="fa fa-minus"></i>
+                                    </button>
+                                    <input placeholder="qty" class="qty-input-box" formControlName="qty" readonly>
+                                    <button class="prdct-qty-btn" (click)="onMaualKeyUpEvent(item,'add')" type="button">
+                                        <i class="fa fa-plus"></i>
+                                    </button>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="product-name">
+                                    <input class="form-control" placeholder="Price" formControlName="price" readonly>
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <div *ngIf="items &&items.length !==0  && !mobileview" class="listwrapp">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th width="15%"> Total Item</th>
+                        <th width="15%">Subtotal </th>
+                        <th width="15%"> Token No</th>
+                        <th width="15%">Discount </th>
+                        <th width="15%">Payment Type</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr class="wrapperdiscount">
+                        <td class="subtitiletable">
+                            {{items.length}}
+                        </td>
+                        <td  class="subtitiletable">
+                            {{this.ListViewTotalBill}} Rs
+                        </td>
+                        <td>
+                            <label for="last">Token:</label>
+                            <input id="last" class="form-label" type="text" formControlName="token_no" />
+                        </td>
+                        <td>
+                            <label for="first">Discount:</label>
+                            <input id="first" class="form-label" type="text" formControlName="discount"
+                                (change)="discountListchange()" />
+                        </td>
+                        <td>
+                            <select class="form-select" formControlName="payment_type">
+                                <option value="Payment Type">Payment Type</option>
+                                <option value="UPI">UPI</option>
+                                <option value="CASH">CASH</option>
+                                <option value="Bank">Bank</option>
+                            </select>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+            <div class="divtotal">
+                Grand Total - {{GrandtotalListViewbill}} Rs
+            </div>
+            <div class="wrapperdivbtn">
+                <div>
+                    <button class="bbutton" (click)="onSubmit()">Save Bill </button>
+                </div>
+                <div>
+                    <button class="bbutton" (click)="onSubmit()">Save & Print </button>
+                </div>
+                <div>
+                    <button class="bbutton" (click)="onSubmit()">KOT & Print </button>
                 </div>
             </div>
-            <div>
-       
+        </div>
+        <div *ngIf="items &&items.length !==0 && mobileview " class="listwrapp">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th width="5%"> Total Item</th>
+                        <th width="5%">Subtotal </th>
+                        <th width="15%"> Token No</th>
+                        <th width="15%">Discount </th>
+                        <th width="15%">Payment Type</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr class="">
+                        <td class="subtitiletable">
+                            {{items.length}}
+                        </td>
+                        <td  class="subtitiletable">
+                            {{this.ListViewTotalBill}} Rs
+                        </td>
+                        <td >
+                            <input  style="width: 61px;" id="last" class="form-label" type="text" formControlName="token_no" />
+                        </td>
+                        <td>
+                            <input   style="width: 61px;"  id="first" class="form-label" type="text" formControlName="discount"
+                                (change)="discountListchange()" />
+                        </td>
+                        <td>
+                            <select class="form-select" formControlName="payment_type">
+                                <option value="Payment Type">Payment Type</option>
+                                <option value="UPI">UPI</option>
+                                <option value="CASH">CASH</option>
+                                <option value="Bank">Bank</option>
+                            </select>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+            <div class="divtotalmobile">
+                Grand Total - {{GrandtotalListViewbill}} Rs
+            </div>
+            <div class="wrapperdivbtn">
+                <div>
+                    <button class="bbuttonmobile" (click)="onSubmit()">Save Bill </button>
+                </div>
+                <div>
+                    <button class="bbuttonmobile" (click)="onSubmit()">Save & Print </button>
+                </div>
+                <div>
+                    <button class="bbuttonmobile" (click)="onSubmit()">KOT & Print </button>
+                </div>
             </div>
         </div>
-
-</mat-dialog-content>
-<mat-dialog-actions>
-    <div *ngIf="items.length !==0 ">
-        <div class="wrapperdiv1">
-            <div>
-                Subtotal
-            </div>
-            <div class="div1">
-                {{this.total_bill}} Rs
-            </div>
-        </div>
-        <div class="wrapperdiv">
-            <div>
-                <mat-form-field appearance="outline">
-                    <mat-label>Discount</mat-label>
-                    <input type="number" matInput placeholder="Discount" (change)="discountchange('list')"
-                        formControlName="discount">
-                    <mat-icon matSuffix>money</mat-icon>
-                </mat-form-field>
-            </div>
-            <div class="divtotal">
-                Grand Total - {{this.allSubtotal}} Rs
-            </div>
-        </div>
-        <div class="wrapperdivbtn">
-            <div>
-                <button class="bbutton" (click)="onSubmit()">Save Bill </button>
-            </div>
-            <div>
-                <button class="bbutton" (click)="onSubmit()">Save & Print </button>
-            </div>
-            <div>
-                <button class="bbutton" (click)="onSubmit()">KOT & Print </button>
-            </div>
-        </div>
-    </div>
-</mat-dialog-actions>
-</form>
-
+    </form>
 </div>
-<!-- [disabled]="!orderForm.valid " -->

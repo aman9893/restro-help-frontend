@@ -131,6 +131,15 @@ export class DataService {
   getAdminProfileDataById(id:any){
     return this.http.get(apiConfig.localhostUrl+apiConfig.getAdminProfile + '/' + id);
    }
+   forgetPassData(data:any) {
+    return this.http.post(apiConfig.localhostUrl + apiConfig.forgetPasswordData, data);
+  }
+  updatePassword(data:any){
+    return this.http.post(apiConfig.localhostUrl+apiConfig.updatePassword,data);
+  }
+  getAllusers(){
+    return this.http.get(apiConfig.localhostUrl+apiConfig.getAllusers);
+  }
 //---------------------------------------------------------------------------------
 
   updateTable(data:any){
@@ -144,6 +153,10 @@ export class DataService {
   }
   getTableInfo() {
     return this.http.get(apiConfig.localhostUrl + apiConfig.getTable);
+  }
+
+  getMonthlyData() {
+    return this.http.get(apiConfig.localhostUrl + apiConfig.getMonthlyData);
   }
 //---------------------------------------------------------------------------------
   updateAttender(data:any){
@@ -200,6 +213,9 @@ getallcount(){
 updateBill(data:any){
   return this.http.put(apiConfig.localhostUrl + apiConfig.updateBill, data);
 }
+updateTableStaus(data:any){
+  return this.http.put(apiConfig.localhostUrl + apiConfig.updateBill, data);
+}
 deleteBill(id:any){
   return this.http.delete(apiConfig.localhostUrl + apiConfig.deleteBill+'/'+id);
 }
@@ -208,6 +224,10 @@ saveBill(data:any){
 }
 getBillInfo() {
   return this.http.get(apiConfig.localhostUrl + apiConfig.getBill);
+}
+
+getTodayBillInfo() {
+  return this.http.get(apiConfig.localhostUrl + apiConfig.today_bill_list);
 }
 
 compelteOrder(tableFormData:any){

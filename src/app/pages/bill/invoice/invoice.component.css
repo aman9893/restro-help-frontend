@@ -16,19 +16,16 @@ Invoice-top-left refers to the client name & address, service provided
 }
 .invoice-top-left h2 , .invoice-top-left h6{
 	line-height: 1.5;
-	font-family: 'Montserrat', sans-serif;
 }
 .invoice-top-left h4{
 	margin-top: 30px;
-	font-family: 'Montserrat', sans-serif;
 }
 .invoice-top-left h5{
-	line-height: 1.4;
-	font-family: 'Montserrat', sans-serif;
+
 	font-weight: 400;
 }
 .client-company-name{
-	font-size: 20px;
+	font-size: 12px;
 	font-weight: 600;
 	margin-bottom: 0;
 }
@@ -42,13 +39,13 @@ Invoice-top-left refers to the client name & address, service provided
 Invoice-top-right refers to the our name & address, logo and date
 */
 .invoice-top-right h2 , .invoice-top-right h6{
-	text-align: right;
-	line-height: 1.5;
-	font-family: 'Montserrat', sans-serif;
+    text-align: left;
+    line-height: 18px;
+    font-size: 12px;
+
 }
 .invoice-top-right h5{
 	line-height: 1.4;
-    font-family: 'Montserrat', sans-serif;
     font-weight: 400;
     text-align: right;
     margin-top: 0;
@@ -74,20 +71,17 @@ Invoice-bottom refers to the bottom part of invoice template
 }
 .title{
 	font-size: 30px;
-	font-family: 'Montserrat', sans-serif;
 	font-weight: 600;
 }
 /*
 Invoice-bottom-left
 */
 .invoice-bottom-left h5, .invoice-bottom-left h4{
-	font-family: 'Montserrat', sans-serif;
 }
 .invoice-bottom-left h4{
 	font-weight: 400;
 }
 .terms{
-	font-family: 'Montserrat', sans-serif;
 	font-size: 14px;
 	margin-top: 40px;
 }
@@ -107,23 +101,24 @@ bottom-bar is colored bar located at bottom of invoice-card
 	background-color: #323149;
 }
 .buttoninvoice {
-  font: inherit;
-  color: inherit;
-  text-decoration: none;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  padding: 0 1em;
-  height: 40px;
-  border-radius: 8px;
-  line-height: 1;
-  border: 2px solid #eff1f6 !important;
-  color: #404089;
-  font-size: 0.875rem;
-  transition: 0.15s ease;
-  background-color: #ffffff;
-  margin: 2px;
-  cursor: pointer;
+    font: inherit;
+    color: inherit;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0 1em;
+    height: 22px;
+    border-radius: 5px;
+    line-height: 1;
+    border: 1px solid #343a4070 !important;
+    color: #404089;
+    font-size: 0.875rem;
+    transition: 0.15s ease;
+    background-color: #ffffff;
+    margin: 2px;
+    cursor: pointer;
+    font-size: 9px;
 }
 
 .titlehead{
@@ -133,4 +128,29 @@ bottom-bar is colored bar located at bottom of invoice-card
 }
 .btns{
   text-align: center;
+}
+.closeicon{
+    position: absolute;
+    right: 0px;
+    top: 10px;
+    cursor: pointer;
+}
+.prdct-qty-close {
+    width: 20px;
+    height: 20px;
+    border: none;
+    border-radius: 50px;
+    background-color: #d8190c;
+    color: #fff;
+    font-size: 0px;
+    padding: 3px;
+    transition: 0.3s;
+    box-shadow: 0 4px 6px rgba(50, 50, 93, 0.11), 0 1px 3px rgba(0, 0, 0, 0.08);
+    margin-top: 6px;
+}
+
+.table td{
+    padding: 2px !important;
+    font-size: 11px;
+
 }

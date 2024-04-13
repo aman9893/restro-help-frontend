@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { AddBillComponent } from './add-bill.component';
+import { SearchpipeComponent } from './searchpipe.component';
 
-describe('AddBillComponent', () => {
-  let component: AddBillComponent;
-  let fixture: ComponentFixture<AddBillComponent>;
+describe('SearchpipeComponent', () => {
+  let component: SearchpipeComponent;
+  let fixture: ComponentFixture<SearchpipeComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ AddBillComponent ]
+      imports: [SearchpipeComponent]
     })
     .compileComponents();
-
-    fixture = TestBed.createComponent(AddBillComponent);
+    
+    fixture = TestBed.createComponent(SearchpipeComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

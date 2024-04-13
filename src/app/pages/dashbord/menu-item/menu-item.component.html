@@ -8,10 +8,13 @@
           routerLinkActive="active"
           [routerLinkActiveOptions]="{ exact: true }"
         >
-          <mat-icon [style.color]="item.color" mat-list-icon>
+     
+          <div class="itemvalue" >
+			<mat-icon [style.color]="item.color" >
             {{ item.icon }}
           </mat-icon>
-          <div class="itemvalue" mat-line>{{ item.title }}</div>
+		  <span> {{ item.title }}</span>
+		</div>
         </mat-list-item>
       </ng-container>
 

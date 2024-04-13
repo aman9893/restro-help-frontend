@@ -1,0 +1,79 @@
+<div *ngIf="!showAdminUser" class="box2_login">
+  <div class="login_window">
+    <div [formGroup]="loginForm" novalidate class="form_container_wrapper">
+      <mat-card>
+        <div class="change_company_header">
+          <span class="logo_company_header">Login</span>
+        </div>
+        <div class="change_company_cantainer">
+          <mat-form-field appearance="outline" class="form_container">
+            <mat-label>Email</mat-label>
+            <input formControlName="email" matInput placeholder="Email">
+          </mat-form-field>
+
+          <mat-form-field appearance="outline" class="form_container">
+            <mat-label>Password</mat-label>
+            <input type="password" formControlName="password" matInput placeholder="Password">
+          </mat-form-field>
+        </div>
+        <div class="change_company_cantainer">
+          <div class="form_container_btn_wrapper">
+            <button type="submit" [disabled]="!loginForm.valid" (click)="onSubmit()" mat-stroked-button color="primary">
+              Login </button>
+          </div>
+        </div>
+      </mat-card>
+    </div>
+  </div>
+</div>
+<div *ngIf="showAdminUser">
+  <div *ngIf="Userslist && showAdminUser && Userslist.length !== 0">
+    <div class="table-responsive">
+      <div class="mattable_list table-responsive">
+        <table mat-table [dataSource]="dataSource" class="mat-elevation-z8 table-hover" matSort matSortStart="desc">
+          <ng-container matColumnDef="phone_number">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> Phone </th>
+            <td mat-cell *matCellDef="let element"> {{element.phone_number }} </td>
+          </ng-container>
+          <ng-container matColumnDef="user_expiry_date">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> Date </th>
+            <td mat-cell *matCellDef="let element"> {{element.user_expiry_date |date }} </td>
+          </ng-container>
+          <ng-container matColumnDef="company_name">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> Shop Name </th>
+            <td mat-cell *matCellDef="let element"> {{element.company_name}} </td>
+          </ng-container>
+          <ng-container matColumnDef="password">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> Password </th>
+            <td mat-cell *matCellDef="let element"> {{element.password}} </td>
+          </ng-container>
+
+          <ng-container matColumnDef="trial_days">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> Trial Days </th>
+            <td mat-cell *matCellDef="let element"> {{element.trial_days }} </td>
+          </ng-container>
+
+          <ng-container matColumnDef="name">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> Name </th>
+            <td mat-cell *matCellDef="let element"> {{element.name}} </td>
+          </ng-container>
+          <ng-container matColumnDef="email">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> Email </th>
+            <td mat-cell *matCellDef="let element"> {{element.email}} </td>
+          </ng-container>
+
+          <ng-container matColumnDef="action">
+            <th mat-header-cell *matHeaderCellDef> Remove</th>
+            <td mat-cell *matCellDef="let element">
+              <mat-icon (click)="deleteUser(element.id)"> delete </mat-icon>
+            </td>
+          </ng-container>
+
+          <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+          <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+        </table>
+      </div>
+      <mat-paginator [pageSize]="10" [pageSizeOptions]="[10, 20, 30, 40, 50]"> </mat-paginator>
+    </div>
+  </div>
+</div>

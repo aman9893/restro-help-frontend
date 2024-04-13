@@ -7,44 +7,29 @@
    <mat-icon>note</mat-icon> Bill List 
   </button>
 </app-page-header>
-<div *ngIf="tableDataList && tableDataList.length>0" >
-    <div >
-        <div class="">
-            <div class="search">
-                <input type="text" [(ngModel)]="term" placeholder="Search" autocomplete="off"
-                    placeholder="Search Table" />
+<div *ngIf="tableDataList && tableDataList.length>0" class="container" >
+    <div class="container-search">
+      <div >
+
+        <div class="row height d-flex justify-content-left align-items-left">
+
+          <div class="col-md-6">
+
+            <div class="form">
+              <i class="fa fa-search"></i>
+              <input type="text" [(ngModel)]="searchText" class="form-control form-input" placeholder="Search Table Name...">
             </div>
+            
+          </div>
+          
         </div>
+        
+      </div>
         <div >
-            <!-- <div class="content-main">
-                <div class="card-grid">
-                    <article class="card" *ngFor="let table of tableDataList |filter : term">
-                        <div class="card-header">
-                            <div>
-                                <a *ngIf="table.bill_status =='booked'" class="tableno" (click)="updateOder(table)">
-                                    Update Order</a>
-                                <a *ngIf="table.bill_status !=='booked'" class="tableno" (click)="addOder(table)"> Add
-                                    Order</a>
-                            </div>
-                            <h3 *ngIf="table.bill_status =='booked'" class="booked"> Booked</h3>
-                            <h3 *ngIf="table.bill_status !='booked'" class="Available "> Available</h3>
-
-                        </div>
-                        <div class="card-body">
-                            <a class="button width100 circle_aera"> {{table.table_name | titlecase}} </a>
-                        </div>
-                        <div class="card-header">
-                            <a *ngIf="table.bill_status =='booked' " class="tableno"
-                                (click)="viewOder(table.table_id)">View Order </a>
-
-                        </div>
-                    </article>
-                </div>
-            </div> -->
-
+  
             <div class="page-wrapper">
                     <ul class="infographic-cards">
-                        <li class="color-1" *ngFor="let table of tableDataList |filter : term">
+                        <li class="color-1" *ngFor="let table of tableDataList  | searchFilter: searchText">
                             <div class="cardboxs">
                                <div class="row">
                                 <div class="col-md-3 elementcardbox">
@@ -75,7 +60,7 @@
                                
                               
                                 <div class="actions">
-                                    <div *ngIf="table.bill_status !=='booked'" class="example-button-container" style="    margin-left: 27px;">
+                                    <div *ngIf="table.bill_status !=='booked'" class="example-button-container" style="margin-left: 45px;">
                                         <button  mat-mini-fab color="primary" title="Add Order" aria-label="Example icon button with a delete icon"  (click)="addOder(table)">
                                           <mat-icon>add</mat-icon>
                                         </button>
@@ -90,16 +75,12 @@
                                           <mat-icon>remove_red_eye</mat-icon>
                                         </button>
                                       </div>
-                                     
-                                 
                                 </div>
                             </div>
-                           
                         </li>
                     </ul>
                 </div>
                </div>
-        
     </div>
   </div>
 

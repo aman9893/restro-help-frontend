@@ -1,17 +1,20 @@
 .itemvalue{
-    font-size: 14px !important;
-    font-weight: 500 !important;
-    cursor: pointer !important;
-    border: 1;
-    color: darkslategrey;
+    color: #011d46;
+    display: flex;
+    margin: 19px;
+    padding: 3px;
+    font-size: 11px;
+    padding: 10px;
+    cursor: pointer;
 
+    span{
+    margin-left: 13px;
+
+    }
 }
 
 .itemvalue :hover{
-    font-size: 16px !important;
-    font-weight: 500 !important;
-    cursor: pointer !important;
-    border: 1;
-    color: darkslategrey;
+    // border: 1px dotted;
+
 
 }

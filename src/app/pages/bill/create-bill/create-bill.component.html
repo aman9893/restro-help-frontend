@@ -1,107 +1,138 @@
-<div mat-dialog-title class="">
-
-  <h2 class="menu_item">{{this.tabledata.tablename.table_name | titlecase}} BILLING
-  <mat-icon class="iconsclose"  (click)="close()"> close</mat-icon>
-  </h2>
-</div>
-<button  *ngIf="billflag != 'view'"  mat-raised-button (click)="addItem()">ADD
-  ITEM <mat-icon> add</mat-icon></button>
-  <form *ngIf="menuDataList && table_id" [formGroup]="orderForm">
-    <div  class="width_100" >
-      <div class="width_30  inputbox">
-          <input type="number" formControlName="cutomer_number" (change)="onChangeDataset()"
-              placeholder="Customer Number" list="languages">
-          <datalist id="languages">
-              <option class="optionLIST" *ngFor="let item of conatctBookList"
-                  [value]="item.contact_number">
-          </datalist>
-      </div>
-      <div class="width_30 inputbox">
-          <input type="text" formControlName="cutomer_name" placeholder="Customer Name">
-      </div>
-      <div  class="width_30 inputbox">
-        <mat-form-field class="width_100" placeholder="kitchen" appearance="outline">
-          <mat-label>Select Attender</mat-label>
-          <mat-select   formControlName="attender_name">
-            <mat-option *ngFor="let item of attenderDataList" [value]="item.attender_name">{{item.attender_name}}</mat-option>
-          </mat-select>
-        </mat-form-field>
-      </div>
-  </div>
- 
-  <mat-dialog-content>
-    <div [class.wrapview]="billflag === 'view'" *ngIf="items" class="">
-      <div formArrayName="items" *ngFor="let item of items.controls; index as idx">
-        <div [formGroupName]="idx">
-          <div class="item_wrapper">
-            <div class="item">
-              <mat-form-field appearance="outline" class="width_100">
-                <mat-select formControlName="name" (selectionChange)="onBookChange($event,item)"
-                  placeholder="Select Menu">
-                  <input type="text" class="search_menu" [formControl]="myControl" placeholder="Serach Item">
-                  <mat-option *ngFor="let stock of menuDataList" [value]="stock.menu_name">{{stock.menu_name}} -
-                    {{stock.menu_price | currency:'INR' }}</mat-option>
-                </mat-select>
-              </mat-form-field>
-            </div>
-            <mat-icon class="icon" (click)="onKeyUpEvent(item,'add')"> add</mat-icon>
-            <div class="qty">
-              <mat-form-field class="width_100" appearance="outline">
-                <mat-label>Qty</mat-label>
-                <input matInput  placeholder="qty" formControlName="qty" readonly>
-              </mat-form-field>
-            </div>
-            <mat-icon class="icon" (click)="onKeyUpEvent(item,'remove')"> remove</mat-icon>
-            <div class="price">
-              <mat-form-field class="width_100" appearance="outline">
-                <mat-label>Price</mat-label>
-                <input matInput   placeholder="Price" formControlName="price" readonly>
-              </mat-form-field>
-            </div>
-          
-            <span (click)="removeGroup(idx)">
-              <mat-icon class="icon" style="background-color:red ;">delete</mat-icon>
-            </span>
-          </div>
-        </div>
-      </div>
+<div>
+    <div class="menu_item">{{this.tabledata.tablename.table_name | titlecase}} BILLING
+        <mat-icon class="iconsclose" (click)="close()"> close</mat-icon>
     </div>
-  </mat-dialog-content>
-  <mat-dialog-actions>
-    <div *ngIf="items.length !==0 ">
-      <div class="wrapperdiv1">
-          <div>
-              Subtotal
-          </div>
-          <div class="div1">
-              {{this.total_bill}} Rs
-          </div>
-      </div>
-      <div class="wrapperdiv">
-          <div>
-              <mat-form-field appearance="outline">
-                  <mat-label>Discount</mat-label>
-                  <input type="number" matInput placeholder="Discount" (change)="discountchange('list')"
-                      formControlName="discount">
-                  <mat-icon matSuffix>money</mat-icon>
-              </mat-form-field>
-          </div>
-          <div class="divtotal">
-              Grand Total -  Rs {{  this.total_bill}}
-          </div>
-      </div>
-      <div class="wrapperdivbtn">
-        <div   *ngIf="billflag === 'update'" >
-          <button class="bbutton" (click)="UpdateItem()">Update Bill </button>
-      </div>
-          <div   *ngIf="billflag === 'save'" >
-              <button class="bbutton" (click)="onSubmit()">Save Bill </button>
-          </div>
-          <div  *ngIf="billflag === 'save'">
-              <button class="bbutton" (click)="onSubmit()">Save & Print </button>
-          </div>
-      </div>
-  </div>
-  </mat-dialog-actions>
+</div>
+<div></div>
+<form *ngIf="menuDataList && table_id" [formGroup]="orderForm">
+    <div class="width_100">
+        <div class="width_30  inputbox">
+            <input type="number" formControlName="cutomer_number" (change)="onChangeDataset()"
+                placeholder="Customer Number" list="languages">
+            <datalist id="languages">
+                <option class="optionLIST" *ngFor="let item of conatctBookList" [value]="item.contact_number">
+            </datalist>
+        </div>
+        <div class="width_30 inputbox">
+            <input type="text" formControlName="cutomer_name" placeholder="Customer Name">
+        </div>
+        <div class="width_30 inputbox mt-2">
+            <select formControlName="attender_name" class="form-control selectpicker">
+                <option value="NoAttender">Please Select Attender Name</option>
+                <option *ngFor="let item of attenderDataList" [value]="item.attender_name">{{item.attender_name}}
+                </option>
+            </select>
+        </div>
+    </div>
+    <button class="btnadd" mat-raised-button (click)="addItem()">ADD
+        ITEM <mat-icon> add</mat-icon></button>
+
+    <div [class.wrapview]="billflag === 'view'" *ngIf="items" class="wrpbill">
+        <div class="listwarpfixed">
+            <div>
+                <table class="table" *ngIf="items">
+                    <thead>
+                        <tr>
+                            <th width="3%">Action</th>
+                            <th width="40%">Items </th>
+                            <th width="25%">Price</th>
+                            <th width="20%">Qty</th>
+                            <th width="15%">Total Amt</th>
+                        </tr>
+                    </thead>
+                    <tbody formArrayName="items" *ngFor="let item of items.controls; index as idx">
+                        <tr [formGroupName]="idx">
+                            <td>
+                                <button class="prdct-qty-close" type="button" (click)="deleteValue(idx)">
+                                    <mat-icon>close</mat-icon>
+                                </button>
+                            </td>
+                            <td>
+                                <div class="product-name">
+                                    <input list="encodings" formControlName="name" (change)="onBookChange($event,item)"
+                                        class="custom-select custom-select-sm">
+                                    <datalist id="encodings">
+                                        <option *ngFor="let stock of menuDataList" [value]="stock.menu_name">
+                                            {{stock.menu_name}}-
+                                            {{stock.menu_price | currency:'INR'}}</option>
+                                    </datalist>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="product-name">
+                                    <input class="form-control" formControlName="itemprice" readonly>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="prdct-qty-wrp">
+                                    <button class="prdct-qty-btn" type="button" (click)="onKeyUpEvent(item,'remove')">
+                                        <i class="fa fa-minus"></i>
+                                    </button>
+                                    <input placeholder="qty" class="qty-input-box" formControlName="qty" readonly>
+                                    <button class="prdct-qty-btn" (click)="onKeyUpEvent(item,'add')" type="button">
+                                        <i class="fa fa-plus"></i>
+                                    </button>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="product-name">
+                                    <input class="form-control" placeholder="Price" formControlName="price" readonly>
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    <div *ngIf="items &&items.length !==0 " class="listwrapp">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th width="15%"> Total Item</th>
+                    <th width="15%">Subtotal </th>
+                    <th width="15%">Discount </th>
+                    <th width="15%">Payment Type</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr class="">
+                    <td class="subtitiletable">
+                        {{items.length}}
+                    </td>
+                    <td class="subtitiletable">
+                        Rs {{ this.total_bill}}
+                    </td>
+
+                    <td>
+                        <input class="form-control" type="text" placeholder="Discount" formControlName="discount"
+                            (change)="discountListchange()" />
+                    </td>
+                    <td>
+                        <select class="form-select" formControlName="payment_type">
+                            <option value="Payment Type">Payment Type</option>
+                            <option value="UPI">UPI</option>
+                            <option value="CASH">CASH</option>
+                            <option value="Bank">Bank</option>
+                        </select>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+
+        <div class="width_100">
+
+            <div class="divtotalcreatebtn">
+                <button class="bbuttoncreate" *ngIf="billflag === 'update'" (click)="UpdateItem()">Update Bill </button>
+            </div>
+            <div class="divtotalcreatebtn">
+                <button class="bbuttoncreate" *ngIf="billflag === 'save'" (click)="onSubmit()">Save Bill </button>
+            </div>
+
+            <div class="divtotalcreate">
+                Grand Total - {{ this.GrandtotalListViewbill}} Rs
+            </div>
+
+        </div>
+    </div>
 </form>
-<!-- [disabled]="!orderForm.valid " -->

@@ -1,16 +1,14 @@
 
-<ng-container *ngIf="updateData && updateData.status === 'tablebook'">
-  <mat-icon style=" float: right;
- cursor: pointer;" (click)="close()"> close</mat-icon>
-<h2 *ngIf="updateData" class="menu_item"> Invoice - # {{updateData.bill_no}} 
+<ng-container class="width_100" *ngIf="updateData && updateData.status === 'tablebook'">
+  <mat-icon class="closeicon" (click)="close()"> close</mat-icon>
+<div *ngIf="updateData" class="menu_item"> Invoice - # {{updateData.bill_no}} 
     <div class="btns">
-      <button printSectionId="print-section" ngxPrint>print</button> 
-        <span class="buttoninvoice"  (click)="generatePDF('Download','counter')">Download Pdf</span>
-        <span class="buttoninvoice"(click)="generatePDF('Download','counter')">Print Pdf</span>
-        <span class="buttoninvoice" style="color: red;" (click)="deleteUser()">Completed Order</span>
+        <span class="buttoninvoice"  (click)="generatePDF('Download','counterlist')">Download Pdf</span>
+        <span class="buttoninvoice"(click)="generatePDF('Download','counterlist')">Print Pdf</span>
+        <span class="buttoninvoice" style="color: red;" (click)="CompletedUserOrder(updateData.bill_no)">Completed Order</span>
     </div>
-</h2>
-<section class="back" id="print-section">
+  </div>
+<section class="back">
   <div class="container">
     <div class="row">
       <div class="col-xs-12">
@@ -21,20 +19,22 @@
             </div>
             <div class="row">
               <div class="col-sm-6">
-                <div class="invoice-top-left">
-                  <h2 class="client-company-name">Customer</h2>
-                  <p> {{updateData.cutomer_name | titlecase}}</p>
-                  <p> {{updateData.cutomer_number}}</p>
-                  <p><b>Invoice </b> : # {{updateData.bill_no}}</p>
-                  <p><b>Created Date </b>:  {{updateData.create_date | date:'medium'}} </p>
+                  <div class="invoice-top-right">
+                    <h2> Customer Details</h2>
+                    <h2 class="our-company-name"><b>Invoice </b> : # {{updateData.bill_no}}</h2>
+                      <h2 class="our-company-name"><b>Payment Type </b> : {{updateData.payment_type}}</h2>
+                    <h2 class="our-company-name">Name : {{updateData.cutomer_name | titlecase}}</h2>
+                      <h2 class="our-company-name">Number : {{updateData.cutomer_number}}</h2>
+                      <h2 class="our-company-name"><b>Created Date </b>:  {{updateData.create_date | date:'medium'}} </h2>
                 </div>
               </div>
               <div class="col-sm-6">
-                <div class="invoice-top-right">
-                  <h2 class="our-company-name"> {{userdata.company_name}}</h2>
-                  <h2 class="our-company-name"> {{userdata.phone_number}}</h2>
-                  <h2 class="our-company-name"> {{userdata.email}}</h2>
-                  <h2 class="our-company-name"> {{userdata.shop_address}}</h2>
+                   <div class="invoice-top-right">
+                  <h2> Business Details -</h2>
+                  <h2 class="our-company-name"> Name:{{userdata.company_name}}</h2>
+                  <h2 class="our-company-name"> Number:{{userdata.phone_number}}</h2>
+                  <h2 class="our-company-name"> Email:{{userdata.email}}</h2>
+                  <h2 class="our-company-name"> Address:{{userdata.shop_address}}</h2>
                 </div>
               </div>
             </div>
@@ -50,117 +50,248 @@
                     <thead>
                       <tr>
                         <th>Item</th>
-                        <th>Qty</th>
                         <th>Price</th>
+                        <th>Qty</th>
+                        <th>Total Price</th>
                       </tr>
                     </thead>
                     <tr *ngFor="let billorderlist of billupdate.items">
                       <td>{{billorderlist.name}}</td>
+                      <td> {{billorderlist.itemprice}}</td>
+                      <td>{{billorderlist.qty}}</td>
+                      <td>  {{billorderlist.price}}</td>
+                  </tr>
+                  <thead>
+                    <tr>
+                      <th><b>SubTotal</b></th>
+                      <th></th>
+                      <th></th>
+                      <th >{{updateData.subtotal_bill}} ₹</th>
+                    </tr>
+                    <tr>
+                      <th><b>Discount</b></th>
+                      <th></th>
+                      <th></th>
+                      <th *ngIf="updateData.discount !== ''">- {{updateData.discount}} ₹</th>
+                      <th *ngIf="updateData.discount === ''">00 ₹</th>
+                    </tr>
+                  </thead>
+                    <thead>
+                      <tr>
+                        <th><b>Grand Total</b></th>
+                        <th></th>
+                        <th></th>
+                        <th>  {{updateData.total_bill}} ₹</th>
+                      </tr>
+                    </thead>
+                  </table>
+                  <ul>
+                    <li>Thankyou For Visit.</li>
+                  </ul>
+                </div>
+              </div>
+              <div class="clearfix"></div>
+            </div>
+            <div class="bottom-bar"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+</ng-container>
+
+<!-- ------------------------------------------------------------------------------------------------------ -->
+<ng-container   class="width_100" *ngIf="updateData && updateData.bill_status === 'counter'">
+  <div><mat-icon class="closeicon"   (click)="close()"> close</mat-icon>
+  <div class="btns">
+      <span class="buttoninvoice" (click)="generatePDF('Download','counter')">Download Pdf<mat-icon>picture_as_pdf</mat-icon> </span>
+      <span class="buttoninvoice" (click)="generatePDF('Print','counter')">Print Invoice <mat-icon>print</mat-icon></span>
+  </div>
+</div>
+<section class="back">
+  <div class="container">
+    <div class="row">
+      <div class="col-xs-12">
+        <div class="invoice-wrapper">
+          <div class="invoice-top">
+            <div class="col-xs-12">
+              <h2 class="titlehead">{{userdata.company_name}} </h2>
+            </div>
+            <div class="row">
+              <div class="col-sm-6">
+                <div class="invoice-top-right">
+                  <h2> Customer Details -</h2>
+                  <h2 class="our-company-name"><b>Invoice </b> : # {{updateData.bill_no}}</h2>
+                  <h2 class="our-company-name"><b>Token No </b> :  {{updateData.token_no}}</h2>
+                    <h2 class="our-company-name"><b>Payment Type </b> : {{updateData.payment_type}}</h2>
+                  <h2 class="our-company-name">Name - {{updateData.cutomer_name | titlecase}}</h2>
+                    <h2 class="our-company-name">Number - {{updateData.cutomer_number}}</h2>
+                    <h2 class="our-company-name"><b>Created Date </b>:  {{updateData.create_date | date:'medium'}} </h2>
+                </div>
+              </div>
+              <div class="col-sm-6">
+                <div class="invoice-top-right">
+                  <h2> Business Details -</h2>
+                  <h2 class="our-company-name"> Name- {{userdata.company_name}}</h2>
+                  <h2 class="our-company-name">Number- {{userdata.phone_number}}</h2>
+                  <h2 class="our-company-name"> Email -{{userdata.email}}</h2>
+                  <h2 class="our-company-name">Address- {{userdata.shop_address}}</h2>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="invoice-bottom">
+            <div class="row">
+              
+              <div class="clearfix"></div>
+
+              <div class="col-md-offset-1 col-md-11 col-sm-11">
+                <div class="invoice-bottom-right">
+                  <table class="table">
+                    <thead>
+                      <tr>
+                        <th>Item</th>
+                        <th>Price</th>
+                        <th>Qty</th>
+                        <th>Total Price</th>
+                      </tr>
+                    </thead>
+                    <tr *ngFor="let billorderlist of billupdate.items">
+                      <td>{{billorderlist.menu_name}}</td>
+                      <td>  {{billorderlist.menu_price}}</td>
+                      <td>{{billorderlist.qty}}</td>
+                      <td>{{billorderlist.total}}</td>
+                     
+                  </tr>
+                  <thead>
+                    <tr>
+                      <th><b>SubTotal</b></th>
+                      <th></th>
+                      <th></th>
+                      <th *ngIf="updateData.discount !== ''"> {{updateData.subtotal_bill}} ₹</th>
+                    </tr>
+                  </thead>
+                  <thead>
+                    <tr>
+                      <th><b>Discount</b></th>
+                      <th></th>
+                      <th></th>
+                      <th *ngIf="updateData.discount !== ''">{{updateData.discount}} ₹</th>
+                      <th *ngIf="updateData.discount === ''">00 ₹</th>
+                    </tr>
+                  </thead>
+                    <thead>
+                      <tr>
+                        <th><b>Grand Total</b></th>
+                        <th></th>
+                        <th></th>
+                        <th> {{updateData.total_bill}} ₹</th>
+                      </tr>
+                    </thead>
+                  </table>
+                  <ul>
+                    <li>Thankyou For Visit.</li>
+                  </ul>
+                </div>
+              </div>
+              <div class="clearfix"></div>
+            </div>
+            <div class="bottom-bar"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+</ng-container>
+
+
+<!-- ------------------------------------------------------------------------------------------------------ -->
+
+<ng-container  class="width_100" *ngIf="updateData && updateData.bill_status === 'counterlist'">
+  <div >
+    <mat-icon class="closeicon"   (click)="close()"> close</mat-icon>
+     <div class="btns">
+         <span class="buttoninvoice" (click)="generatePDF('Download','counterlist')">Download Pdf<mat-icon>picture_as_pdf</mat-icon> </span>
+         <span class="buttoninvoice" (click)="generatePDF('Print','counterlist')">Print Invoice <mat-icon>print</mat-icon></span>
+     </div>
+  </div>
+<section class="back">
+  <div class="container">
+    <div class="row">
+      <div class="col-xs-12">
+        <div class="invoice-wrapper">
+          <div class="invoice-top">
+            <div class="col-xs-12">
+              <h2 class="titlehead">{{userdata.company_name}} </h2>
+            </div>
+            <div class="row">
+              <div class="col-sm-6">
+                <div class="invoice-top-right">
+                  <h2> Customer Details</h2>
+                  <h2 class="our-company-name"><b>Invoice </b> : # {{updateData.bill_no}}</h2>
+                  <h2 class="our-company-name"><b>Token No </b> :  {{updateData.token_no}}</h2>
+                    <h2 class="our-company-name"><b>Payment Type </b> : {{updateData.payment_type}}</h2>
+                  <h2 class="our-company-name">Name : {{updateData.cutomer_name | titlecase}}</h2>
+                    <h2 class="our-company-name">Number : {{updateData.cutomer_number}}</h2>
+                    <h2 class="our-company-name"><b>Created Date </b>:  {{updateData.create_date | date:'medium'}} </h2>
+                </div>
+              </div>
+              <div class="col-sm-6">
+                <div class="invoice-top-right">
+                  <h2> Business Details -</h2>
+                  <h2 class="our-company-name"> Name:{{userdata.company_name}}</h2>
+                  <h2 class="our-company-name"> Number:{{userdata.phone_number}}</h2>
+                  <h2 class="our-company-name"> Email:{{userdata.email}}</h2>
+                  <h2 class="our-company-name"> Address:{{userdata.shop_address}}</h2>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="invoice-bottom">
+            <div class="row">
+              <div class="clearfix"></div>
+              <div class="col-md-offset-1 col-md-11 col-sm-11">
+                <div class="invoice-bottom-right">
+                  <table class="table">
+                    <thead>
+                      <tr>
+                        <th>Item</th>
+                        <th>Price</th>
+                        <th>Qty</th>
+                        <th>Total Price</th>
+                      </tr>
+                    </thead>
+                    <tr *ngFor="let billorderlist of billupdate.items">
+                      <td>{{billorderlist.name}}</td>
+                      <td> {{billorderlist.itemprice}}</td>
                       <td>{{billorderlist.qty}}</td>
                       <td> ₹ {{billorderlist.price}}</td>
                   </tr>
                   <thead>
                     <tr>
-                      <th>Discount</th>
+                      <th><b>SubTotal</b></th>
                       <th></th>
-                      <th *ngIf="updateData.discount !== ''">₹{{updateData.discount}}</th>
-                      <th *ngIf="updateData.discount === ''">₹00</th>
+                      <th></th>
+                      <th> {{updateData.subtotal_bill}} ₹</th>
                     </tr>
                   </thead>
-                    <thead>
-                      <tr>
-                        <th>Total</th>
-                        <th></th>
-                        <th> ₹{{updateData.total_bill}}</th>
-                      </tr>
-                    </thead>
-                  </table>
-                  <ul>
-                    <li>Thankyou For Visit.</li>
-                  </ul>
-                </div>
-              </div>
-              <div class="clearfix"></div>
-            </div>
-            <div class="bottom-bar"></div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-</ng-container>
-
-
-<ng-container *ngIf="updateData && updateData.bill_status === 'counter'">
-  <mat-icon style=" float: right;
- cursor: pointer;" (click)="close()"> close</mat-icon>
-  <div class="btns">
-      <span class="buttoninvoice" (click)="generatePDF('Download','counter')">Download Pdf<mat-icon>picture_as_pdf</mat-icon> </span>
-      <span class="buttoninvoice" (click)="generatePDF('Print','counter')">Print Invoice <mat-icon>print</mat-icon></span>
-  </div>
-<section class="back">
-  <div class="container">
-    <div class="row">
-      <div class="col-xs-12">
-        <div class="invoice-wrapper">
-          <div class="invoice-top">
-            <div class="col-xs-12">
-              <h2 class="titlehead">{{userdata.company_name}} </h2>
-            </div>
-            <div class="row">
-              <div class="col-sm-6">
-                <div class="invoice-top-left">
-                  <h2 class="client-company-name">Customer</h2>
-                  <p> {{updateData.cutomer_name | titlecase}}</p>
-                  <p> {{updateData.cutomer_number}}</p>
-                  <p><b>Invoice </b> : # {{updateData.bill_no}}</p>
-                  <p><b>Created Date </b>:  {{updateData.create_date | date:'medium'}} </p>
-                </div>
-              </div>
-              <div class="col-sm-6">
-                <div class="invoice-top-right">
-                  <h2 class="our-company-name"> {{userdata.company_name}}</h2>
-                  <h2 class="our-company-name"> {{userdata.phone_number}}</h2>
-                  <h2 class="our-company-name"> {{userdata.email}}</h2>
-                  <h2 class="our-company-name"> {{userdata.shop_address}}</h2>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="invoice-bottom">
-            <div class="row">
-              
-              <div class="clearfix"></div>
-
-              <div class="col-md-offset-1 col-md-11 col-sm-11">
-                <div class="invoice-bottom-right">
-                  <table class="table">
-                    <thead>
-                      <tr>
-                        <th>Item</th>
-                        <th>Qty</th>
-                        <th>Price</th>
-                      </tr>
-                    </thead>
-                    <tr *ngFor="let billorderlist of billupdate.items">
-                      <td>{{billorderlist.menu_name}}</td>
-                      <td>{{billorderlist.qty}}</td>
-                      <td> Rs {{billorderlist.menu_price}}</td>
-                  </tr>
                   <thead>
                     <tr>
-                      <th>Discount</th>
+                      <th><b>Discount</b></th>
                       <th></th>
-                      <th *ngIf="updateData.discount !== ''">₹{{updateData.discount}}</th>
-                      <th *ngIf="updateData.discount === ''">₹00</th>
+                      <th></th>
+                      <th *ngIf="updateData.discount !== ''"> {{updateData.discount}} ₹</th>
+                      <th *ngIf="updateData.discount === ''">₹ 00</th>
                     </tr>
                   </thead>
                     <thead>
                       <tr>
-                        <th>Total</th>
+                        <th><b>Grand Total</b></th>
                         <th></th>
-                        <th> ₹{{updateData.total_bill}}</th>
+                        <th></th>
+                        <th>  {{updateData.total_bill}} ₹</th>
                       </tr>
                     </thead>
                   </table>
@@ -182,95 +313,5 @@
 
 </ng-container>
 
-
-<ng-container *ngIf="updateData && updateData.bill_status === 'counterlist'">
-  <mat-icon style=" float: right;
- cursor: pointer;" (click)="close()"> close</mat-icon>
-  <div class="btns">
-      <span class="buttoninvoice" (click)="generatePDF('Download','counterlist')">Download Pdf<mat-icon>picture_as_pdf</mat-icon> </span>
-      <span class="buttoninvoice" (click)="generatePDF('Print','counterlist')">Print Invoice <mat-icon>print</mat-icon></span>
-  </div>
-<section class="back">
-  <div class="container">
-    <div class="row">
-      <div class="col-xs-12">
-        <div class="invoice-wrapper">
-          <div class="invoice-top">
-            <div class="col-xs-12">
-              <h2 class="titlehead">{{userdata.company_name}} </h2>
-            </div>
-            <div class="row">
-              <div class="col-sm-6">
-                <div class="invoice-top-left">
-                  <h2 class="client-company-name">Customer</h2>
-                  <p> {{updateData.cutomer_name | titlecase}}</p>
-                  <p> {{updateData.cutomer_number}}</p>
-                  <p><b>Invoice </b> : # {{updateData.bill_no}}</p>
-                  <p><b>Created Date </b>:  {{updateData.create_date | date:'medium'}} </p>
-                </div>
-              </div>
-              <div class="col-sm-6">
-                <div class="invoice-top-right">
-                  <h2 class="our-company-name"> {{userdata.company_name}}</h2>
-                  <h2 class="our-company-name"> {{userdata.phone_number}}</h2>
-                  <h2 class="our-company-name"> {{userdata.email}}</h2>
-                  <h2 class="our-company-name"> {{userdata.shop_address}}</h2>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="invoice-bottom">
-            <div class="row">
-              
-              <div class="clearfix"></div>
-
-              <div class="col-md-offset-1 col-md-11 col-sm-11">
-                <div class="invoice-bottom-right">
-                  <table class="table">
-                    <thead>
-                      <tr>
-                        <th>Item</th>
-                        <th>Qty</th>
-                        <th>Price</th>
-                      </tr>
-                    </thead>
-                    <tr *ngFor="let billorderlist of billupdate.items">
-                      <td>{{billorderlist.name}}</td>
-                      <td>{{billorderlist.qty}}</td>
-                      <td> Rs {{billorderlist.price}}</td>
-                  </tr>
-                  <thead>
-                    <tr>
-                      <th>Discount</th>
-                      <th></th>
-                      <th *ngIf="updateData.discount !== ''">₹{{updateData.discount}}</th>
-                      <th *ngIf="updateData.discount === ''">₹00</th>
-                    </tr>
-                  </thead>
-                    <thead>
-                      <tr>
-                        <th>Total</th>
-                        <th></th>
-                        <th> ₹{{updateData.total_bill}}</th>
-                      </tr>
-                    </thead>
-                  </table>
-                  <ul>
-                    <li>Thankyou For Visit.</li>
-                  </ul>
-                </div>
-              </div>
-              <div class="clearfix"></div>
-            </div>
-            <div class="bottom-bar"></div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-
-</ng-container>
 
 

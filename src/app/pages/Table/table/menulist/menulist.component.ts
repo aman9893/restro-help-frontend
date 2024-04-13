@@ -11,6 +11,8 @@ import { DataService } from 'src/app/service/data.service';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
+import { ConfrimBoxComponent } from 'src/app/pages/confrim-box/confrim-box.component';
+import { MatDialog } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-menulist',
@@ -37,7 +39,7 @@ export class MenulistComponent implements OnInit ,AfterViewInit  {
   constructor(
     private formBuilder: FormBuilder,
     private dataService: DataService,
-    private authService: AuthService,
+    private authService: AuthService,public dialog: MatDialog,
     public snackBar: MatSnackBar,private cdref: ChangeDetectorRef,
   ) {}
   
@@ -202,5 +204,24 @@ export class MenulistComponent implements OnInit ,AfterViewInit  {
       this.dataService.openSnackBar(data.message, 'Dismiss')
       this.getTableDatamenu();
     }
+  }
+
+  deleteValue(id:any) {
+    let deletedata = {
+      flag:'delete',
+      body: 'Want to delete Item? '
+    };
+    const dialogRef = this.dialog.open(ConfrimBoxComponent, {
+      width: '300px',
+      autoFocus: false,
+      data: deletedata,
+    });
+  
+    dialogRef.afterClosed().subscribe((result:any) => {
+      console.log(result);
+      if(result === 'yes'){
+        this.delete(id)
+      }
+    });
   }
 }

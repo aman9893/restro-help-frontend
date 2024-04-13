@@ -16,7 +16,7 @@
              <label for="remember-me">Remember me</label>
           </div>
           <div class="pass-link">
-             <a href="#">Forgot password?</a>
+             <a routerLink="/forgetpassword">Forgot password?</a>
           </div>
        </div>
        <div class="field">
@@ -39,12 +39,24 @@
        <div class="field">
         <input type="text" formControlName="name"  placeholder="Enter Name" />
        </div>
+       <div class="field" style="    height: 20px;">
+       <label style="    font-size: 13px;"> * Shop Type</label>
+      </div>
        <div class="field">
-        <input type="text" formControlName="company_name" placeholder="Restaurants Name" />
+         <select formControlName="shop_type" >
+            <option value="restaurant">Restaurant </option>
+            <option value="shop">Shop </option>
+         </select>
+        </div>
+       <div class="field">
+        <input type="text" formControlName="company_name" placeholder="Shop Name" />
        </div>
        <div class="field">
-        <input type="text"  formControlName="shop_address" placeholder="Restaurants Address" />
+        <input type="text"  formControlName="shop_address" placeholder="Shop Address" />
        </div>
+       <div class="field">
+         <input type="text"  formControlName="gst" placeholder="Shop Gst Number" />
+        </div>
        <div class="field">
         <input type="email" formControlName="email" placeholder="Enter Email" />
        </div>
@@ -55,17 +67,15 @@
         <input type="password" formControlName="password" placeholder="Password">
        </div>
      
-       <div class="content">
-          <div class="pass-link">
-             <a href="#">Forgot password?</a>
-          </div>
-       </div>
+     
        <div class="field">
           <input type="submit"  (click)="onSubmit()"value="Register">
        </div>
        <div class="signup-link" >
-          you a member <a  (click)="login('login')">Login now</a>
+  
+          You a member? <a  (click)="login('login')">Login now</a>
        </div>
+      
     </form>
   </div>
 </div>

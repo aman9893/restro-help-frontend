@@ -8,6 +8,7 @@ import { MatSort } from '@angular/material/sort';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
 import { InvoiceComponent } from '../bill/invoice/invoice.component';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-bill-counter',
@@ -18,19 +19,31 @@ export class BillCounterComponent implements OnInit,AfterViewInit {
   searchView: boolean | undefined;
   listView: boolean | undefined ;
   GirdView!: boolean;
-  showDataLoader: boolean = false;;
+  showDataLoader: boolean = false;
+  dashborddata: boolean = false;
+;
   searchedKeyword!: string;
   BillData: any;
-  public displayedColumns:any = ['bill_id', 'create_date', 'status', 'bill_no', 'cutomer_name','total_bill'];
+  public displayedColumns:any;
   public dataSource :any;
  
    @ViewChild(MatSort) sort = {} as MatSort;
    @ViewChild(MatPaginator) paginator = {} as MatPaginator;
   categoryDataList: any;
-  constructor(public dataService: DataService,private cdref: ChangeDetectorRef,
-  public snackBar: MatSnackBar, public dialog: MatDialog) { }
+  constructor(public dataService: DataService,private cdref: ChangeDetectorRef, public router: Router,
+  public snackBar: MatSnackBar, public dialog: MatDialog) {
+    console.log(this.router.routerState.snapshot.url);
+    if(this.router.routerState.snapshot.url == '/'  || router.routerState.snapshot.url == '/home'){
+      this.dashborddata = true;
+      this. displayedColumns= ['bill_id', 'create_date', 'status', 'bill_no','total_bill'];
+    }
+    else{
+      this. displayedColumns= ['bill_id', 'create_date', 'status', 'bill_no', 'cutomer_name','total_bill'];
+    }
+   }
     stopPropagation(event:any) {
     event.stopPropagation()
+ 
   }
   ngOnInit() {
     this.cdref.detectChanges();
@@ -69,7 +82,12 @@ export class BillCounterComponent implements OnInit,AfterViewInit {
   }
   billData(data: Object): void {
     this.BillData = data;
-    this.dataSource =new MatTableDataSource(this.BillData);
+    let counterBill :any=[];
+    this.BillData.forEach((element:any) => {
+      if(element.bill_status == "counter")
+        counterBill.push(element)
+    });
+    this.dataSource =new MatTableDataSource(counterBill);
     this.setDataSourceAttributes();
     this.showDataLoader = false;
   }
@@ -88,25 +106,7 @@ export class BillCounterComponent implements OnInit,AfterViewInit {
   }
 
   addBill(flag:any, data:any) {
-    let updatedata = {
-      flag: flag,
-      bill_data: data,
-    }
-    let enterAnimationDuration= '500ms'
-    const dialogRef = this.dialog.open(AddBillCounetrComponent, {
-        panelClass: 'my-full-screen-dialog',
-        maxWidth: '100vw',
-        maxHeight: '100vh',
-        height: '100%',
-        width: '100%',
-      data: updatedata,
-      enterAnimationDuration,
-    });
-    dialogRef.afterClosed().subscribe((result: any) => {
-        if (result === true) {
-          this.getBillData();
-      }
-    });
+    this.router.navigateByUrl('/addcounterbill');
   }
 
 

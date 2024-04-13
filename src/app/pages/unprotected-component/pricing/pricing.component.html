@@ -1,0 +1,66 @@
+<mat-toolbar color="primary">
+    <mat-toolbar-row>
+        <span class="main_header_title"> ShopMart 360</span>
+        <span class="example-spacer"></span>
+        <mat-icon class="icon_value">laptop</mat-icon>
+        <span routerLinkActive="active" routerLink="/login" class="icon_text"> Login </span>
+    </mat-toolbar-row>
+</mat-toolbar>
+<div class="demo6">
+    <div class="container-fuild">
+        <h4 class="pricing_label_header">...</h4>
+        <div class="row">
+            <div class="col-md-4 col-sm-6">
+                <div class="pricingTable6">
+                    <h3 class="title">Standard</h3>
+                    <div class="price-value">Rs 150
+                        <span class="month">/month</span>
+                    </div>
+                    <ul class="pricing-content">
+                        <li>150 Bill Manage</li>
+                        <li> 150 Customer Accounts</li>
+                        <li>250 Product Save </li>
+                        <li>150 Contact </li>
+                        <li>150 Khata Manage </li>
+                        <li>Export Customer Data </li>
+                    </ul>
+                    <a (click)="planInfo('Standard',150)" class="pricingTable-signup">Subscribe</a>
+                </div>
+            </div>
+            <div class="col-md-4 col-sm-6">
+                <div class="pricingTable6 blue">
+                    <h3 class="title">Business</h3>
+                    <div class="price-value">Rs 250
+                        <span class="month">/month</span>
+                    </div>
+                    <ul class="pricing-content">
+                        <li>350 Bill Manage</li>
+                        <li> 350 Customer Accounts</li>
+                        <li>350 Product Save </li>
+                        <li>350 Contact </li>
+                        <li>350 Khata Manage </li>
+                        <li>Export Customer Data </li>
+                    </ul>
+                    <a (click)="planInfo('Business',250)" class="pricingTable-signup">Subscribe</a>
+                </div>
+            </div>
+            <div class="col-md-4 col-sm-6">
+                <div class="pricingTable6 green">
+                    <h3 class="title">Premium</h3>
+                    <div class="price-value">Rs 500
+                        <span class="month">/month</span>
+                    </div>
+                    <ul class="pricing-content">
+                        <li>Unlimited Bill Manage</li>
+                        <li> Unlimited Customer Accounts</li>
+                        <li>Unlimited Product Save </li>
+                        <li>Unlimited Contact </li>
+                        <li>Unlimited Khata Manage </li>
+                        <li>Export Customer Data </li>
+                    </ul>
+                    <a (click)="planInfo('Premium',500)" class="pricingTable-signup">Subscribe</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,12 +1,15 @@
 export const apiConfig = {
     // localhostUrl:"http://18.217.110.106:3011/",
     localhostUrl: "http://localhost:8000/",
+    getAllusers:'api/getAllusers',
 
-
+    forgetPasswordData: 'api/forgetpassword',
+    updatePassword:'api/UpdatePassword',
     registerData: 'api/register',
     loginData: 'api/login',
     updateUser: 'api/update_user',
     getAdminProfile: 'api/get_admin_profile',
+    getMonthlyData: 'api/get_monthly_data',
   
     getallcount:'api/getallcount',
     getTable: 'api/get_table',
@@ -43,7 +46,8 @@ export const apiConfig = {
     add_attender:'api/add_attender',
     delete_attender:'api/delete_attender',
    
-    completeorder:'api/complete_order'
+    completeorder:'api/complete_order',
+    today_bill_list:'api/today_bill_list'
 
 //////////////////
 };

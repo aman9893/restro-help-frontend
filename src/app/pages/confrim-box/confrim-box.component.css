@@ -17,6 +17,11 @@
     width: 100%;
     font-size: larger;
 }
+.model_delete{
+    float: left;
+    width: 100%;
+    padding: 10PX;
+}
 
 .Modal_explanation {
     margin-bottom: 10px;
@@ -26,16 +31,15 @@
 
 .Modal_footer {
     float: right;
-    padding: 14px;
 }
 
 .delete_btn {
     margin: 10px;
 }
-.Modal_delete_footer  button{
+.Modal_delete_footer  {
     float: right;
-    margin: 2px;
-    margin-top: 20px;
 
-    
+}
+.cancle_deelete_button{
+    margin: 5px;
 }

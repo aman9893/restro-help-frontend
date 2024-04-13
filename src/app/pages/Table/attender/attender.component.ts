@@ -11,6 +11,8 @@ import { MatSort } from '@angular/material/sort';
 import { AuthService } from 'src/app/auth.service';
 import { DataService } from 'src/app/service/data.service';
 import { MatTableDataSource } from '@angular/material/table';
+import { ConfrimBoxComponent } from '../../confrim-box/confrim-box.component';
+import { MatDialog } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-attender',
@@ -30,7 +32,7 @@ export class AttenderComponent implements OnInit {
 
 
   
- public displayedColumns:any = ['attender_id', 'attender_name'];
+ public displayedColumns:any = ['attender_name','attender_id'];
  public dataSource :any;
 
   @ViewChild(MatSort) sort = {} as MatSort;
@@ -42,7 +44,7 @@ export class AttenderComponent implements OnInit {
   constructor(
     private formBuilder: FormBuilder,
     private dataService: DataService,
-    private authService: AuthService,
+    private authService: AuthService, public dialog: MatDialog,
     public snackBar: MatSnackBar,private cdref: ChangeDetectorRef,
   ) {}
 
@@ -176,4 +178,24 @@ export class AttenderComponent implements OnInit {
       this.attenderForm.reset();
     }
   }
+
+  deleteValue(id:any) {
+    let deletedata = {
+      flag:'delete',
+      body: 'Want to delete Attender? '
+    };
+    const dialogRef = this.dialog.open(ConfrimBoxComponent, {
+      width: '300px',
+      autoFocus: false,
+      data: deletedata,
+    });
+  
+    dialogRef.afterClosed().subscribe((result:any) => {
+      console.log(result);
+      if(result === 'yes'){
+        this.delete(id)
+      }
+    });
+  }
+
 }

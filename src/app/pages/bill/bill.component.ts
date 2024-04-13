@@ -14,15 +14,14 @@ import { InvoiceComponent } from './invoice/invoice.component';
 export class BillComponent implements OnInit {
   billDataList: any;
   tableBillData: any;
-  newArrayvalue: any=[];
+  newArrayvalue: any = [];
   billid: any;
-  public searchFilter: any = '';
-  searchText:any;
-  searchKey :any ;
-  term:any;
-  constructor(public dataService: DataService, public dialog: MatDialog,private cdref: ChangeDetectorRef,) {}
+  searchText: any;
+  searchKey: any;
+  term: any;
+  constructor(public dataService: DataService, public dialog: MatDialog, private cdref: ChangeDetectorRef,) { }
   tableDataList: any;
-  showDataLoader:boolean =true;
+  showDataLoader: boolean = true;
 
   ngOnInit() {
     this.getTableData();
@@ -37,36 +36,32 @@ export class BillComponent implements OnInit {
 
   tableData(data: any) {
     this.tableDataList = data;
-    console.log( this.tableDataList)
-    if(this.tableDataList.length != 0){
-      this.billid = this.tableDataList[0].bill_id;
-      console.log( this.billid)
-    }
     this.showDataLoader = false;
     this.cdref.detectChanges();
   }
+
   billData(data: any) {
     this.billDataList = data;
     console.log(this.billDataList)
   }
 
-addOder(tablename: any) {
-  console.log(tablename)
-  let tabledata={
-    tablename:tablename,
-    flag:'save'
-  }
+  addOder(tablename: any) {
+    console.log(tablename)
+    let tabledata = {
+      tablename: tablename,
+      flag: 'save'
+    }
     let dialogRef = this.dialog.open(CreateBillComponent, {
       panelClass: 'my-full-screen-dialog',
-    maxWidth: '100vw',
-    maxHeight: '100vh',
-    height: '100%',
-    width: '100%',
+      maxWidth: '100vw',
+      maxHeight: '100vh',
+      height: '100%',
+      width: '100%',
       data: tabledata,
-      autoFocus: false 
+      autoFocus: false
     });
     dialogRef.afterClosed().subscribe((result) => {
-      if(result === true){
+      if (result === true) {
         this.getTableData();
         this.getBillData();
       }
@@ -76,51 +71,49 @@ addOder(tablename: any) {
 
 
 
- updateOder(tableInfo: any) {
-  let tabledata={
-    tablename:tableInfo,
-    flag:'update'
-  }
-  let dialogRef = this.dialog.open(CreateBillComponent, {
-    panelClass: 'my-full-screen-dialog',
-    maxWidth: '100vw',
-    maxHeight: '100vh',
-    height: '100%',
-    width: '100%',
-    data: tabledata,
-    autoFocus: false 
-  });
-  dialogRef.afterClosed().subscribe((result) => {
-    if(result === true){
-      this.getTableData();
-      this.getBillData();
+  updateOder(tableInfo: any) {
+    let tabledata = {
+      tablename: tableInfo,
+      flag: 'update'
     }
-  });
- }
- onSearchClear() {
-  this.searchKey = '';
-}
-
-applyFilter(value: string) {
-  this.tableDataList.filter = this.searchKey.trim().toLowerCase();
-}
-
-viewOder(tableInfo: any) { {
-  let tabData= {
-    'billid':this.billid,
-    'tableid':tableInfo
+    let dialogRef = this.dialog.open(CreateBillComponent, {
+      panelClass: 'my-full-screen-dialog',
+      maxWidth: '100vw',
+      maxHeight: '100vh',
+      height: '100%',
+      width: '100%',
+      data: tabledata,
+      autoFocus: false
+    });
+    dialogRef.afterClosed().subscribe((result) => {
+      if (result === true) {
+        this.getTableData();
+        this.getBillData();
+      }
+    });
   }
-  const dialogRef = this.dialog.open(InvoiceComponent, {
-    panelClass: 'my-full-screen-dialog',
-    maxWidth: '100vw',
-    maxHeight: '100vh',
-    height: '100%',
-    width: '100%',
-    autoFocus: false,
-    data: tabData,
-  });
-  dialogRef.afterClosed().subscribe((result) => {});
-}
 
-}
+
+  applyFilter(value: string) {
+    this.tableDataList.filter = this.searchKey.trim().toLowerCase();
+  }
+
+  viewOder(id: any) {
+    let invoicedata = {
+      tableid: id,
+      billcounter:false,
+       bill:'tableBilling'
+    };
+      const dialogRef = this.dialog.open(InvoiceComponent, {
+        panelClass: 'my-full-screen-dialog',
+        maxWidth: '100vw',
+        maxHeight: '100vh',
+        height: '100%',
+        width: '100%',
+        autoFocus: false,
+        data: invoicedata,
+      });
+      dialogRef.afterClosed().subscribe((result) => { });
+    }
+  
 }
