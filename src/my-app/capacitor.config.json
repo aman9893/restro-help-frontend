@@ -1,8 +1,8 @@
 {
   "appId": "com.example.app",
-  "appName": "billwala",
+  "appName": "restrohelp",
   "bundledWebRuntime": false,
-  "webDir": "www",
+  "webDir": "dist",
   "plugins": {
     "SplashScreen": {
       "launchShowDuration": 0

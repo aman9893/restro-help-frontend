@@ -2,7 +2,7 @@ import { CapacitorConfig } from '@capacitor/cli';
 
 const config: CapacitorConfig = {
   appId: 'com.example.app',
-  appName: 'restro-help',
+  appName: 'retrohelp',
   webDir: 'www',
   server: {
     androidScheme: 'https'

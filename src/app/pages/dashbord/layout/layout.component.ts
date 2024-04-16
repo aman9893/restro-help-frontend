@@ -54,7 +54,7 @@ export class LayoutComponent implements OnInit {
         },
         {
           title: 'Counter Billing',
-          icon: 'assignment',
+          icon: 'receipt',
           link: '/counterbill',
           color: '##000'
         },
