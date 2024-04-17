@@ -180,7 +180,6 @@ export class CategiresComponent implements OnInit {
       this.categoryForm.reset();
     }
   }
-
   deleteValue(id:any) {
     let deletedata = {
       flag:'delete',

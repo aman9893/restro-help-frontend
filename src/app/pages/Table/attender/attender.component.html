@@ -4,10 +4,6 @@
   <span  class="centertext">
       Attender management
   </span>
-  <!-- <button mat-flat-button color="primary" class="action" >
-    <mat-icon class="mr-2">add</mat-icon>
-    <span> Attender </span>
-  </button> -->
 </app-page-header>
 <section class="divmain">
     <section class="wrapper" id="goUp">
@@ -24,10 +20,17 @@
              (click)="update()">Update</button>
             </div>
                 <div *ngIf="attenderDataList && attenderDataList.length >0" class="grid-wrapper" >
-                    <mat-form-field class="fiter">
-                        <mat-label>Filter</mat-label>
-                        <input matInput (keyup)="applyFilter($event)" placeholder="Item Name" #input>
-                      </mat-form-field>
+                  <div class="container-search">
+                    <div class="row height d-flex justify-content-left align-items-left">
+                        <div class="col-md-6">
+                            <div class="form">
+                                <i class="fa fa-search"></i>
+                                <input type="text" (keyup)="applyFilter($event)" class="form-control form-input"
+                                    placeholder="Search Attender Name...">
+                            </div>
+                        </div>
+                    </div>
+                </div>
                     <div class="mat-elevation-z8" *ngIf="dataSource">
                       <table  class="mat-elevation-z8" mat-table   [dataSource]="dataSource" matSortmatSortStart="desc"  matSort>
             
@@ -53,14 +56,15 @@
             </div>
         </form>
   </section>
-  
   <div class="loaderwrap" *ngIf="showDataLoader === true">
     <div class="loader" >
       <mat-spinner [diameter]="60" mode="indeterminate"></mat-spinner>
     </div>
   </div>
+  </section>
+
     <div *ngIf="attenderDataList">
-      <div *ngIf="attenderDataList.length === 0" >
+      <div *ngIf="attenderDataList.length === 0" class="width_100" >
           <div class="empty-state">
               <div class="empty-state__content">
                 <div class="empty-state__icon">

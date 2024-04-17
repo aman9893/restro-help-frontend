@@ -22,10 +22,17 @@
            (click)="update()">Update</button>
           </div>
               <div *ngIf="tableDataList && tableDataList.length >0" class="grid-wrapper" >
-                  <mat-form-field class="fiter">
-                      <mat-label>Filter</mat-label>
-                      <input matInput (keyup)="applyFilter($event)" placeholder="Item Name" #input>
-                    </mat-form-field>
+                <div class="container-search">
+                  <div class="row height d-flex justify-content-left align-items-left">
+                      <div class="col-md-6">
+                          <div class="form">
+                              <i class="fa fa-search"></i>
+                              <input type="text" (keyup)="applyFilter($event)" class="form-control form-input"
+                                  placeholder="Search Table Name...">
+                          </div>
+                      </div>
+                  </div>
+              </div>
                   <div class="mat-elevation-z8" *ngIf="dataSource">
                     <table  class="mat-elevation-z8" mat-table   [dataSource]="dataSource" matSortmatSortStart="desc"  matSort>
           
@@ -50,17 +57,13 @@
              </div>
           </div>
       </form>
-      
-      <div class="loaderwrap" *ngIf="showDataLoader === true">
-        <div class="loader" >
-          <mat-spinner [diameter]="60" mode="indeterminate"></mat-spinner>
-        </div>
-      </div>
 </section>
-
-
-  
-  <div *ngIf="tableDataList">
+<div class="loaderwrap" *ngIf="showDataLoader === true">
+  <div class="loader" >
+    <mat-spinner [diameter]="60" mode="indeterminate"></mat-spinner>
+  </div>
+</div>
+  <div *ngIf="tableDataList" class="width_100 ">
     <div *ngIf="tableDataList.length === 0" >
         <div class="empty-state">
             <div class="empty-state__content">
