@@ -336,7 +336,7 @@ export class CreateBillComponent implements OnInit {
       delivery_charge: '',
       cutomer_address: '',
       attender_name: this.orderForm.controls['attender_name'].value,
-      attender_id: '',
+      attender_id: 0,
       token_no:this.orderForm.controls['token_no'].value,
       payment_type:this.orderForm.controls['payment_type'].value,
     };

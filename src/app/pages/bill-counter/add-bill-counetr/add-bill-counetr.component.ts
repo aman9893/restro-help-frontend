@@ -488,7 +488,7 @@ showGirdView() {
       delivery_charge: '',
       cutomer_address: '',
       attender_name: '',
-      attender_id: '',
+      attender_id: 0,
       token_no:this.orderForm.controls['token_no'].value,
       payment_type:this.orderForm.controls['payment_type'].value,
     };

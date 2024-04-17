@@ -26,6 +26,7 @@ export class MenulistComponent implements OnInit ,AfterViewInit  {
   updatebtn: boolean = false;
   menu_id: any;
   tableForm!: FormGroup;
+  showDataLoader: boolean= false;
 
 
  public displayedColumns:any = ['menu_id', 'menu_name', 'menu_price'];
@@ -33,7 +34,6 @@ export class MenulistComponent implements OnInit ,AfterViewInit  {
 
   @ViewChild(MatSort) sort = {} as MatSort;
   @ViewChild(MatPaginator) paginator = {} as MatPaginator;
-  showDataLoader: boolean= true;
   categoryDataList: any;
 
   constructor(
@@ -72,18 +72,21 @@ export class MenulistComponent implements OnInit ,AfterViewInit  {
 }
 
   ngOnInit() {
+    this.showDataLoader =true;
     this.createForm();
     let UserId = this.authService.getUserId();
     this.user_id = UserId;
     this.getTableDatamenu();
+
     this.getcategoryData();
 
   }
   getTableDatamenu(): void {
     this.dataService.getMenuInfo().subscribe((data) => this.tableData(data),
-    (err: Error) => console.log(err));
+    (err: Error) => this.errorcall(err));
   }
   tableData(data: any) { 
+    this.showDataLoader = true;
     this.billData= data;
     if( this.billData){
     this.dataSource =new MatTableDataSource(this.billData);
@@ -93,13 +96,19 @@ export class MenulistComponent implements OnInit ,AfterViewInit  {
     }
   }
 
+  errorcall(errorcall:any){
+     this.dataService.openSnackBar(errorcall.message,'Dismiss');
+     this.showDataLoader = false;
+
+  }
+
   getcategoryData(): void {
     this.dataService.getcategoryList().subscribe((data) => this.categoryData(data));
   }
 
   categoryData(data: any) {
     this.categoryDataList = data;
-    console.log(this.categoryDataList);
+
   }
 
   createForm() {
@@ -116,7 +125,7 @@ export class MenulistComponent implements OnInit ,AfterViewInit  {
         // validators: [Validators.required, Validators.maxLength(500)],
         // updateOn: 'blur',
       }),
-      menu_categories: new FormControl('', {
+      menu_categories: new FormControl('allItem', {
         // validators: [Validators.required, Validators.maxLength(500)],
         // updateOn: 'blur',
       }),
@@ -133,6 +142,7 @@ export class MenulistComponent implements OnInit ,AfterViewInit  {
       this.dataService.openSnackBar('* Item Name  And Item Price is mandatory ', 'Dismiss')
       return;
   }
+  this.showDataLoader =true;
 
     if (this.tableForm.valid) {
       let tableFormData = {
@@ -141,7 +151,7 @@ export class MenulistComponent implements OnInit ,AfterViewInit  {
         menu_price: this.tableForm.controls['menu_price'].value,
         menu_url: this.tableForm.controls['menu_url'].value,
         menu_categories: this.tableForm.controls['menu_categories'].value,
-        category_id: this.tableForm.controls['menu_categories'].value,
+        category_id: 0,
       };
       console.log(tableFormData);
       this.dataService.saveMenu(tableFormData).subscribe(
@@ -154,8 +164,14 @@ export class MenulistComponent implements OnInit ,AfterViewInit  {
 
   closeDialog(data: any) {
     this.getTableDatamenu();
-    this.dataService.openSnackBar(data.message, 'Dismiss')
+    if(data.status===false){
+      this.dataService.openSnackBar(data.message.sqlMessage, 'Dismiss');
+    }
+    else{
+      this.dataService.openSnackBar(data.message, 'Dismiss');
+    }
     this.createForm();
+    this.showDataLoader =false;
   }
   cancel(data: any) {}
 
@@ -170,6 +186,7 @@ export class MenulistComponent implements OnInit ,AfterViewInit  {
     this.menu_id= data.menu_id;
   }
   update() {
+    this.showDataLoader =true;
     let tableFormData = {
       menu_id:this.menu_id,
       user_id: this.user_id,
@@ -177,6 +194,7 @@ export class MenulistComponent implements OnInit ,AfterViewInit  {
       menu_price: this.tableForm.controls['menu_price'].value,
       menu_url: this.tableForm.controls['menu_url'].value,
       menu_categories: this.tableForm.controls['menu_categories'].value,
+      category_id: 0,
     };
     this.dataService.updateMenu(tableFormData).subscribe(
       (data: any) => this.updateDialog(data),
@@ -192,9 +210,11 @@ export class MenulistComponent implements OnInit ,AfterViewInit  {
       this.tableForm.reset();
       this.createForm();
       this.setDataSourceAttributes();
+      this.showDataLoader =false;
     }
   }
   delete(id: any) {
+    this.showDataLoader =true;
     this.dataService
       .deleteMenu(id)
       .subscribe((data) => this.deleteResponse(data));
@@ -203,6 +223,11 @@ export class MenulistComponent implements OnInit ,AfterViewInit  {
     if (data.status === true) {
       this.dataService.openSnackBar(data.message, 'Dismiss')
       this.getTableDatamenu();
+      this.showDataLoader =false;
+    }
+    if (data.status === false) {
+      this.dataService.openSnackBar(data.message, 'Dismiss')
+      this.showDataLoader =false;
     }
   }
 

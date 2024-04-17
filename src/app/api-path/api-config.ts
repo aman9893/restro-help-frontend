@@ -1,6 +1,6 @@
 export const apiConfig = {
-    // localhostUrl:"http://18.217.110.106:3011/",
-    localhostUrl: "http://localhost:8000/",
+ localhostUrl:"http://54.167.105.117:3011/",
+     ///localhostUrl: "http://localhost:3011/",
     getAllusers:'api/getAllusers',
 
     forgetPasswordData: 'api/forgetpassword',
