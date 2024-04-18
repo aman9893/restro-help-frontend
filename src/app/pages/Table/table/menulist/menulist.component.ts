@@ -29,7 +29,7 @@ export class MenulistComponent implements OnInit ,AfterViewInit  {
   showDataLoader: boolean= false;
 
 
- public displayedColumns:any = ['menu_id', 'menu_name', 'menu_price'];
+ public displayedColumns:any = ['menu_name', 'menu_price' ,'menu_categories','menu_id' ];
  public dataSource :any;
 
   @ViewChild(MatSort) sort = {} as MatSort;
@@ -125,7 +125,7 @@ export class MenulistComponent implements OnInit ,AfterViewInit  {
         // validators: [Validators.required, Validators.maxLength(500)],
         // updateOn: 'blur',
       }),
-      menu_categories: new FormControl('allItem', {
+      menu_categories: new FormControl('', {
         // validators: [Validators.required, Validators.maxLength(500)],
         // updateOn: 'blur',
       }),

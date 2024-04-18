@@ -32,7 +32,7 @@ export class CategiresComponent implements OnInit {
 
 
   
- public displayedColumns:any = ['category_id', 'category_name'];
+ public displayedColumns:any = [ 'category_name','category_id',];
  public dataSource :any;
 
   @ViewChild(MatSort) sort = {} as MatSort;

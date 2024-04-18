@@ -31,7 +31,7 @@ export class AddTableComponent implements OnInit,AfterViewInit {
 
 
   
- public displayedColumns:any = [ 'table_name','table_id',];
+ public displayedColumns:any = ['table_name', 'table_id', ];
  public dataSource :any;
 
   @ViewChild(MatSort) sort = {} as MatSort;

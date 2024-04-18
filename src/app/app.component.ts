@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthService } from './auth.service';
+import { Subject } from 'rxjs';
+import { LoaderService } from './service/LoaderService';
 
 
 @Component({
@@ -10,10 +12,13 @@ import { AuthService } from './auth.service';
 })
 export class AppComponent {
 
-  constructor(public authService:AuthService,public router: Router) {
+  constructor(public authService:AuthService,public router: Router,public loader: LoaderService,) {
     if( router.routerState.snapshot.url == '/login'){
         this.authService.logout();
     }
+    console.log(this.loader.isLoading)
   }
+
+  isLoading: Subject<boolean> = this.loader.isLoading;
 
 }

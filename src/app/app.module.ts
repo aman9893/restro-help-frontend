@@ -59,6 +59,7 @@ import { LoginOtpComponent } from './pages/unprotected-component/login-otp/login
 import { ForgetpassComponent } from './pages/unprotected-component/forgetpass/forgetpass.component';
 import {MatRadioModule} from '@angular/material/radio';
 import { AdminUserlistComponent } from './pages/unprotected-component/admin-userlist/admin-userlist.component';
+import { LoaderInterceptor } from './service/LoaderInterceptor';
 @NgModule({
   declarations: [
     AppComponent,
@@ -110,7 +111,8 @@ import { AdminUserlistComponent } from './pages/unprotected-component/admin-user
   MatAutocompleteModule,MatDialogModule ,MatMenuModule,MatSortModule,MatCardModule,
   MatSidenavModule,MatToolbarModule,MatListModule,MatExpansionModule,CanvasJSAngularChartsModule , MatRadioModule
   ],
-  providers: [{provide: HTTP_INTERCEPTORS, useClass: TokenInterService, multi: true},],
+  providers: [{provide: HTTP_INTERCEPTORS, useClass: TokenInterService, multi: true},{ provide: HTTP_INTERCEPTORS, useClass: LoaderInterceptor, multi: true }
+  ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
   bootstrap: [AppComponent]
 })
