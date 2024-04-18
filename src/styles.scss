@@ -1928,7 +1928,7 @@ button {
 
 .feature-header {
   background: white;
-  padding: 1px 14px;
+  padding: 1px 3px;
   /* border-bottom: 1px solid #ececec; */
   display: flex;
   align-items: center;
@@ -1996,46 +1996,6 @@ button {
 }
 
 
-.wrapperdiscount{
-
-  input,
-  label {
-      border: 1px solid transparent;
-      line-height: 30px;
-      height: 35px;
-      padding: 0;
-      margin: 0;
-      margin-top: 2px;
-  }
-  
-  input  {
-      // General styling
-      display: block;
-      border-radius: 5px;
-      border-color: #ccc;
-      text-indent: 68px !important;
-  
-      &:focus {
-          border-color: #666;
-          outline: 0
-      }
-  
-      // Required space for <label>
-  }
-  
-  label {
-      // Offset label over input
-      // without absolute position
-      // or margins.
-      width: 0;
-      z-index: 2;
-      float: left;
-      position: relative;
-      // "Style it"
-      left: 0.5em;
-      color: #999;
-  }
-}
 
 .divtotal {
   /* margin-left: 13px; */
@@ -2050,7 +2010,6 @@ button {
   /* padding-top: 18px; */
   box-shadow: 0 4px 6px rgba(50, 50, 93, 0.11), 0 1px 3px rgba(0, 0, 0, 0.08);
   width: 100%;
-  margin-top: 9px;
   background: #ff4081cf;
   font-weight: 500;
 }

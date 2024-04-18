@@ -84,7 +84,7 @@ export class BillCounterComponent implements OnInit,AfterViewInit {
     this.BillData = data;
     let counterBill :any=[];
     this.BillData.forEach((element:any) => {
-      if(element.bill_status == "counter")
+      if(element.bill_status == "counter" ||  "counterlist")
         counterBill.push(element)
     });
     this.dataSource =new MatTableDataSource(counterBill);
@@ -113,7 +113,7 @@ export class BillCounterComponent implements OnInit,AfterViewInit {
   deleteBillListValue(id:any) {
     let deletedata = {
       flag:'delete',
-      body: 'Want to delete? '
+      body: 'Want to delete Bill ? '
     };
     const dialogRef = this.dialog.open(ConfrimBoxComponent, {
       width: '300px',

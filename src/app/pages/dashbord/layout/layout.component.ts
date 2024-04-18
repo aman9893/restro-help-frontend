@@ -59,6 +59,12 @@ export class LayoutComponent implements OnInit {
           color: '##000'
         },
         {
+          title: 'Add Counter Bill',
+          icon: 'restaurant_menu',
+          link: '/addcounterbill',
+          color: '##000'
+        },
+        {
           title: 'Table Billing',
           icon: 'table_chart',
           link: '/tablebill',
@@ -120,9 +126,15 @@ export class LayoutComponent implements OnInit {
           color: '##000'
         },
         {
-          title: 'Counter Billing',
+          title: 'Bill List',
           icon: 'assignment',
           link: '/counterbill',
+          color: '##000'
+        },
+        {
+          title: 'Add Bill',
+          icon: 'restaurant_menu',
+          link: '/addcounterbill',
           color: '##000'
         },
     

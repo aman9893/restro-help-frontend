@@ -12,11 +12,21 @@
         <span> Show Grid </span>
     </button>
 </app-page-header>
-<div *ngIf="GirdView" class="row floatleft">
-    <div class="col-md-6">
+<div *ngIf="GirdView" class="row gridviewwrap">
+    <div class="col-md-6  border-right">
         <div>
-            <div *ngIf="!mobileview " class="content py-md-0 ">
-                <section id="sidebar">
+            <div *ngIf="!mobileview && menuDataList.length>0" >
+                <div class="container-search">
+                    <div class="row height d-flex justify-content-left align-items-left">
+                        <div class="col-md-11">
+                            <div class="form">
+                                <i class="fa fa-search"></i>
+                                <input type="text" [(ngModel)]="searchText" class="form-control form-input" placeholder="Search Menu Name...">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <section  id="sidebar">
                     <div class="py-1">
                         <ul class="list-group">
                             <li (click)="getmenuData()"
@@ -31,7 +41,8 @@
                 </section>
 
                 <div class="buttonsbox1">
-                    <div *ngFor="let menu of menuDataList " class="box2 active">
+                    
+                    <div *ngFor="let menu of menuDataList | searchFilter: searchText " class="box2 active">
                         <div (click)="addProduct(menu)">
                             <mat-card class="menuboxovrflow" title="{{menu.menu_name}}">
                                 <div *ngIf="menu.menu_url" class="image-container img-one">
@@ -50,12 +61,22 @@
             </div>
             <!-- mobile view only -->
 
-            <div *ngIf="mobileview && menuDataList">
+            <div *ngIf="mobileview && menuDataList.length>0">
                 <div class="filters">
+                    <div class="container-search">
+                        <div class="row height d-flex justify-content-left align-items-left">
+                            <div class="col-md-11">
+                                <div class="form">
+                                    <i class="fa fa-search"></i>
+                                    <input type="text" [(ngModel)]="searchText" class="form-control form-input" placeholder="Search Menu Name...">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                     <mat-tab-group (selectedTabChange)="ontabChange($event)">
                         <mat-tab label="All Item">
                             <div class="mobile_menu">
-                                <div class="mobile_menusub" *ngFor="let menu of menuDataList "
+                                <div class="mobile_menusub" *ngFor="let menu of menuDataList  | searchFilter: searchText"
                                     (click)="addProduct(menu)">
                                     <span title={{menu.menu_name}}>{{menu.menu_name}}</span>
                                 </div>
@@ -80,8 +101,8 @@
     <div class="col-md-6">
         <form *ngIf="menuDataList " [formGroup]="orderForm" (keydown.enter)="$event.preventDefault()">
             <div class="row maindiv">
-                <div *ngIf="!mobileview && DesktopProducts.length !==0 " class="row">
-                    <div class="col-md-6 inputbox">
+                <div *ngIf="!mobileview && DesktopProducts.length !==0 " class="width_100">
+                    <div class="width_50 newinput">
                         <input type="number" formControlName="cutomer_number" (change)="onChangeDataset()"
                             placeholder="Customer Number" list="languages">
                         <datalist id="languages">
@@ -89,12 +110,12 @@
                                 [value]="item.contact_number">
                         </datalist>
                     </div>
-                    <div class="col-md-6 inputbox">
+                    <div class="width_50 newinput">
                         <input type="text" formControlName="cutomer_name" placeholder="Customer Name">
                     </div>
                 </div>
                 <div *ngIf="mobileview && DesktopProducts.length !==0 " class="width_100">
-                    <div class="width_50  inputbox">
+                    <div class="width_50  newinput">
                         <input type="number" formControlName="cutomer_number" (change)="onChangeDataset()"
                             placeholder="Customer Number" list="languages">
                         <datalist id="languages">
@@ -102,14 +123,14 @@
                                 [value]="item.contact_number">
                         </datalist>
                     </div>
-                    <div class="width_50 inputbox">
+                    <div class="width_50 newinput">
                         <input type="text" formControlName="cutomer_name" placeholder="Customer Name">
                     </div>
                 </div>
                 <div>
                     <div class="cardcart">
                         <div class="card-body-cart p-0 table-responsive">
-                            <table class="table cart-table mb-0 ">
+                            <table class="table cart-table mb-0 " *ngIf="menuDataList && menuDataList.length >0">
                                 <tbody *ngIf="DesktopProducts.length ===0 ">
                                     <tr>
                                         <td colSpan="6">
@@ -170,26 +191,24 @@
                     <div *ngIf="DesktopProducts.length !==0  && !mobileview">
                         <div class="wrapperdiv1">
                             <div>
-                                Total Item <span style="padding-left: 54px;"> {{DesktopProducts.length}}</span>
+                                Total Item <span > - {{DesktopProducts.length}}</span>
                             </div>
                             <div>
-                                Subtotal <span style="padding-left: 155px;">{{this.subtotal}} Rs</span>
+                                Subtotal <span> - {{this.subtotal}} Rs</span>
                             </div>
 
                         </div>
                         <div class="wrapperdiscount">
                             <div *ngIf="!mobileview && DesktopProducts.length !==0 " class="row">
                                 <div class="col-md-4">
-                                    <label for="last">Token:</label>
-                                    <input id="last" class="form-label" type="text" formControlName="token_no" />
+                                    <input id="last" class="form-label" type="text" placeholder="Token No" formControlName="token_no" />
                                 </div>
                                 <div class="col-md-4 ">
-                                    <label for="first">Discount:</label>
-                                    <input id="first" class="form-label" type="text" formControlName="discount"
+                                    <input id="first" class="form-label" type="text" placeholder="Discount" formControlName="discount"
                                         (change)="discountchange('grid')" />
                                 </div>
                                 <div class="col-md-4 ">
-                                    <select class="form-select" formControlName="payment_type">
+                                    <select  formControlName="payment_type">
                                         <option value="Payment Type">Payment Type</option>
                                         <option value="UPI">UPI</option>
                                         <option value="CASH">CASH</option>
@@ -267,26 +286,24 @@
                         </div>
                        
                     </div>
-                 
                 </div>
             </div>
-
         </form>
     </div>
 </div>
 
 <!-- List view Code -->
-<div *ngIf="listView">
+<div *ngIf="listView" class="listwrap">
     <form *ngIf="menuDataList " [formGroup]="orderForm" (keydown.enter)="$event.preventDefault()">
         <div class="width_100">
-            <div class="width_50  inputbox">
+            <div class="width_50  newinput">
                 <input type="number" formControlName="cutomer_number" (change)="onChangeDataset()"
                     placeholder="Customer Number" list="languages">
                 <datalist id="languages">
                     <option class="optionLIST" *ngFor="let item of conatctBookList" [value]="item.contact_number">
                 </datalist>
             </div>
-            <div class="width_50 inputbox">
+            <div class="width_50 newinput">
                 <input type="text" formControlName="cutomer_name" placeholder="Customer Name">
             </div>
         </div>
@@ -346,7 +363,7 @@
                                     <button class="prdct-qty-btn" type="button" (click)="onMaualKeyUpEvent(item,'remove')">
                                         <i class="fa fa-minus"></i>
                                     </button>
-                                    <input placeholder="qty" class="qty-input-box" formControlName="qty" readonly>
+                                    <input placeholder="0" class="qty-input-box" formControlName="qty" readonly>
                                     <button class="prdct-qty-btn" (click)="onMaualKeyUpEvent(item,'add')" type="button">
                                         <i class="fa fa-plus"></i>
                                     </button>
@@ -368,8 +385,8 @@
                     <tr>
                         <th width="15%"> Total Item</th>
                         <th width="15%">Subtotal </th>
-                        <th width="15%"> Token No</th>
-                        <th width="15%">Discount </th>
+                        <th width="10%"> Token No</th>
+                        <th width="10%">Discount </th>
                         <th width="15%">Payment Type</th>
                     </tr>
                 </thead>
@@ -382,16 +399,14 @@
                             {{this.ListViewTotalBill}} Rs
                         </td>
                         <td>
-                            <label for="last">Token:</label>
                             <input id="last" class="form-label" type="text" formControlName="token_no" />
                         </td>
                         <td>
-                            <label for="first">Discount:</label>
                             <input id="first" class="form-label" type="text" formControlName="discount"
                                 (change)="discountListchange()" />
                         </td>
                         <td>
-                            <select class="form-select" formControlName="payment_type">
+                            <select formControlName="payment_type">
                                 <option value="Payment Type">Payment Type</option>
                                 <option value="UPI">UPI</option>
                                 <option value="CASH">CASH</option>
@@ -470,3 +485,27 @@
         </div>
     </form>
 </div>
+
+<div *ngIf="menuDataList && menuDataList.length === 0 && !listView">
+    <div class="empty-state">
+      <div class="empty-state__content">
+        <div class="empty-state__icon">
+          <img
+            src="https://cdni.iconscout.com/illustration/premium/thumb/sorry-item-not-found-3328225-2809510.png"
+            alt>
+        </div>
+        <div class="empty-state__message">No Menu Item Found .</div>
+        <div class="empty-state__help">
+               Simpley clicking <a routerLink="/menu">Add Menu  </a> and Add menu firstly
+        </div>
+
+        <div class="empty-state__help">
+          Want to Create Manual Bill Please Click  
+          <button mat-flat-button color="primary" class="action" (click)="showListView()">
+            <mat-icon class="mr-2">menu</mat-icon>
+            <span> Show List </span>
+        </button>
+         </div>
+      </div>
+    </div>
+  </div>

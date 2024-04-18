@@ -30,8 +30,9 @@ export interface Cart {
 })
 export class AddBillCounetrComponent implements OnInit {
   orderForm!: FormGroup;
+  searchText:any;
   items!: FormArray;
-  menuDataList: any;
+  menuDataList: any=[];
   user_id: any;
   menuItem: any = [];
   value: any;
@@ -41,7 +42,7 @@ export class AddBillCounetrComponent implements OnInit {
   updateFlag: boolean = false;
   billflag: any;
   totalUnitPrice: any;
-  qtyr: number = 1;
+  qtyr: any;
   table_id: any;
   myFormValueChanges$: any;
   myContactValueChanges$: any;
@@ -210,11 +211,15 @@ showGirdView() {
     this.dataService.getMenuInfo().subscribe((data) => this.menuData(data));
   }
   menuData(data: any) {
-    for (var i = 0; i < data.length; i++) {
-      data[i].qty = 1;
-      data[i].total = data[i].menu_price;
+    console.log(data)
+    if(data.length !== 0){
+      for (var i = 0; i < data.length; i++) {
+        data[i].qty = 1;
+        data[i].total = data[i].menu_price;
+      }
+      this.menuDataList = data;
     }
-    this.menuDataList = data;
+   
 
   }
   //////////////////////////////////////////////////api call/////////////////////////////////////////
@@ -252,12 +257,12 @@ showGirdView() {
       payment_type: new FormControl('UPI', [
       ]),
     });
-    this.addItem();
+    // this.addItem();
   }
   createItem(): FormGroup {
     return this.formBuilder.group({
       name: ['', Validators.required],
-      qty: [1, Validators.required],
+      qty: ['', Validators.required],
       price: ['', Validators.required],
       itemprice: ['', Validators.required],
       restro_name: [''],
@@ -454,7 +459,7 @@ showGirdView() {
       delivery_charge: '',
       cutomer_address: '',
       attender_name: '',
-      attender_id: '',
+      attender_id: 0,
       token_no:this.orderForm.controls['token_no'].value,
       payment_type:this.orderForm.controls['payment_type'].value,
     };
@@ -469,7 +474,6 @@ showGirdView() {
     let obj = {
       items: this.DesktopProducts
     }
-    console.log(obj)
     let r = Math.random().toString(36).substring(7);
     let BillData = {
       user_id: this.user_id,
