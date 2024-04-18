@@ -1,0 +1,17 @@
+<div
+  class="app-splash-screen"
+  [ngStyle]="{ 
+    left: windowWidth, 
+    opacity: opacityChange,
+    transition: splashTransition
+  }"
+  *ngIf="showSplash"
+>
+  <div class="app-splash-inner">
+    <div class="app-logo">
+        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRtPjBJ4SE0WHLFHEa3UKQrdtkSyxpCNme7kzzz3sLZ1w&s" style="margin: 39px;" height="100px" width="100px">
+    </div>
+    <div class="app-label">Apna Bill Bala</div>
+    <div class="app-loader"></div>
+  </div>
+</div>

@@ -1,6 +1,6 @@
-<app-page-header icon="eye"   >
+<app-page-header icon="eye">
   <h3 routerLink="/home">Home</h3>
-  <span  class="centertext">
+  <span class="centertext">
     Contact management
   </span>
   <button mat-flat-button color="primary" class="action" (click)="addContact('save','data')">
@@ -18,105 +18,93 @@
         Contact</button>
     </div> -->
     <div *ngIf="ConatctBookData.length >0" class="grid-wrapper">
-      <mat-form-field class="fiter">
-        <mat-label>Filter</mat-label>
-        <input matInput (keyup)="applyFilter($event)"
-          placeholder="Contact  Name" #input>
-      </mat-form-field>
+      <div class="container-search">
+        <div class="row height d-flex justify-content-left align-items-left">
+          <div class="col-md-6">
+            <div class="form">
+              <i class="fa fa-search"></i>
+              <input type="text" (keyup)="applyFilter($event)" class="form-control form-input"
+                placeholder="Search Item Name...">
+            </div>
+          </div>
+        </div>
+      </div>
       <div class="mat-elevation-z8">
-        <table class="mat-elevation-z8" mat-table [dataSource]="dataSource"
-          matSortmatSortStart="desc" matSort>
+        <table class="mat-elevation-z8" mat-table [dataSource]="dataSource" matSortmatSortStart="desc" matSort>
           <!-- Position Column -->
           <ng-container matColumnDef="contact_id">
             <th mat-header-cell *matHeaderCellDef> Action </th>
             <td mat-cell *matCellDef="let element">
-                <button mat-icon-button
-                  [matMenuTriggerFor]="menu"
-                  aria-label="Example icon-button with a menu">
-                  <mat-icon>more_vert</mat-icon>
+              <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="Example icon-button with a menu">
+                <mat-icon>more_vert</mat-icon>
+              </button>
+              <mat-menu #menu="matMenu">
+                <button (click)="openPhone(element.contact_number)" mat-menu-item>
+                  <mat-icon>phone</mat-icon>
+                  <span>Call</span>
                 </button>
-                <mat-menu #menu="matMenu">
-                  <button (click)="openPhone(element.contact_number)"
-                    mat-menu-item>
-                    <mat-icon>phone</mat-icon>
-                    <span>Call</span>
-                  </button>
-                  <button mat-menu-item (click)="email(element.contact_email)">
-                    <mat-icon>mail</mat-icon>
-                    <span>Email</span>
+                <button mat-menu-item (click)="email(element.contact_email)">
+                  <mat-icon>mail</mat-icon>
+                  <span>Email</span>
 
-                  </button>
-                  <button (click)="deleteContactValue(element.contact_id)"
-                    mat-menu-item>
-                    <mat-icon>delete</mat-icon>
-                    <span>Delete Contact</span>
-                  </button>
+                </button>
+                <button (click)="deleteContactValue(element.contact_id)" mat-menu-item>
+                  <mat-icon>delete</mat-icon>
+                  <span>Delete Contact</span>
+                </button>
 
-                  <button (click)="addContact('update',element)" mat-menu-item>
-                    <mat-icon>edit</mat-icon>
-                    <span>Edit Contact</span>
-                  </button>
-                </mat-menu>
+                <button (click)="addContact('update',element)" mat-menu-item>
+                  <mat-icon>edit</mat-icon>
+                  <span>Edit Contact</span>
+                </button>
+              </mat-menu>
             </td>
           </ng-container>
           <ng-container matColumnDef="contact_name">
             <th mat-header-cell mat-sort-header *matHeaderCellDef> Contact Name
             </th>
-            <td mat-cell  *matCellDef="let element"> {{element.contact_name}}
+            <td mat-cell *matCellDef="let element"> {{element.contact_name}}
             </td>
-            
           </ng-container>
-          
           <ng-container matColumnDef="contact_number">
-            <th mat-header-cell mat-sort-header
-                *matHeaderCellDef> Contact Number </th>
+            <th mat-header-cell mat-sort-header *matHeaderCellDef> Contact Number </th>
             <td mat-cell *matCellDef="let element">
-                {{element.contact_number}} </td>
-        </ng-container>
+              {{element.contact_number}} </td>
+          </ng-container>
 
-          
+
 
           <ng-container matColumnDef="contact_email">
             <th mat-header-cell mat-sort-header *matHeaderCellDef> Contact Email
             </th>
-            <td mat-cell  *matCellDef="let element"> {{element.contact_email}}
+            <td mat-cell *matCellDef="let element"> {{element.contact_email}}
             </td>
-            
+
           </ng-container>
 
           <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
           <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
         </table>
-        <mat-paginator [pageSizeOptions]="[5, 10, 20,50,100,150]"
-          showFirstLastButtons
+        <mat-paginator [pageSizeOptions]="[5, 10, 20,50,100,150]" showFirstLastButtons
           aria-label="Select page of periodic elements">
         </mat-paginator>
       </div>
     </div>
   </section>
+</section>
 
-
-<div class="loaderwrap" *ngIf="showDataLoader === true">
-  <div class="loader" >
-    <mat-spinner [diameter]="60" mode="indeterminate"></mat-spinner>
-  </div>
-</div>
-
-
-  <div *ngIf="ConatctBookData">
-    <div *ngIf="ConatctBookData.length === 0">
-      <div class="empty-state">
-        <div class="empty-state__content">
-          <div class="empty-state__icon">
-            <img
-              src="https://cdni.iconscout.com/illustration/premium/thumb/sorry-item-not-found-3328225-2809510.png"
-              alt>
-          </div>
-          <div class="empty-state__message">No records has been added yet.</div>
-          <div class="empty-state__help">
-            Add a new record by simpley clicking the button on top
-          </div>
+<div *ngIf="ConatctBookData">
+  <div *ngIf="ConatctBookData.length === 0">
+    <div class="empty-state">
+      <div class="empty-state__content">
+        <div class="empty-state__icon">
+          <img src="https://cdni.iconscout.com/illustration/premium/thumb/sorry-item-not-found-3328225-2809510.png" alt>
+        </div>
+        <div class="empty-state__message">No records has been added yet.</div>
+        <div class="empty-state__help">
+          Add a new record by simpley clicking the button on top
         </div>
       </div>
     </div>
   </div>
+</div>

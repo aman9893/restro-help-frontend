@@ -2,4 +2,5 @@
 <div *ngIf="isLoading| async" class="overlay">
     <mat-spinner class="spinner"></mat-spinner>
   </div>
+  <splash-screen  [duration]="2" [animationDuration]="0.5"></splash-screen>
 <router-outlet></router-outlet>

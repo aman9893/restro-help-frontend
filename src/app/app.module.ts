@@ -60,6 +60,7 @@ import { ForgetpassComponent } from './pages/unprotected-component/forgetpass/fo
 import {MatRadioModule} from '@angular/material/radio';
 import { AdminUserlistComponent } from './pages/unprotected-component/admin-userlist/admin-userlist.component';
 import { LoaderInterceptor } from './service/LoaderInterceptor';
+import { SplashScreenComponent } from './pages/SplashScreenComponent';
 @NgModule({
   declarations: [
     AppComponent,
@@ -90,7 +91,8 @@ import { LoaderInterceptor } from './service/LoaderInterceptor';
     SearchpipeComponent
     ,PricingComponent,
     ForgetpassComponent,
-    AdminUserlistComponent
+    AdminUserlistComponent,
+    SplashScreenComponent
   ],
   imports: [
     BrowserModule,

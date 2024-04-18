@@ -151,12 +151,7 @@ export class LayoutComponent implements OnInit {
               color: '##000',
               link: '/category'
             },
-            {
-              title: 'Add Attender',
-              icon: 'person_pin',
-              color: '##000',
-              link: '/attender'
-            },
+       
             {
               title: 'Help',
               icon: 'pan_tool',
