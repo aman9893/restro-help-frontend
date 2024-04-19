@@ -67,10 +67,10 @@ th.mat-sort-header-sorted {
   height: 100%;
   width: 100%;
   outline: none;
-  font-size: 14px;
+  font-size: 11px;
   padding-left: 20px;
-  border: 2px solid #1abc9c;
-  border-radius: 25px;
+  border: 1px solid #1abc9c;
+  border-radius: 4px;
   transition: all 0.3s ease;
   margin: 3px;
 }
@@ -78,16 +78,16 @@ th.mat-sort-header-sorted {
   height: 100%;
   width: 100%;
   outline: none;
-  font-size: 14px;
+  font-size: 11px;
   padding-left: 20px;
-  border: 2px solid #1abc9c;
-  border-radius: 25px;
+  border: 1px solid #1abc9c;
+  border-radius: 4px;
   transition: all 0.3s ease;
   margin: 3px;
 }
-.wrapper form .field input:focus,
-form .field input:valid{
-  // border-color: #4158d0;
+.wrapper form .field input:focus{
+  border: 2px solid #1abc9c;
+
 }
 .wrapper form .field label{
   position: absolute;
@@ -686,7 +686,7 @@ img {
 }
 .feature-header {
 
-  font-size: 10px !important;
+  font-size: 9px !important;
 
 }
 .wrapper form .field {
@@ -697,6 +697,10 @@ img {
   float: left  !important;
   font-size: 11px !important;
   margin: 11px !important;
+}
+
+.container-search .form-input {
+  margin-left: 1px !important;
 }
 
 
@@ -1270,20 +1274,11 @@ button.neumorphic {
   font-size: 0.8rem;
 }
 
-#sidebar {
-  float: left;
-}
-
 .category {
   font-size: 0.9rem;
   cursor: pointer;
 }
 
-.list-group-item {
-  font-size: 12px;
-  width: 81px;
-  height: 32px;
-}
 
 .badge-primary {
   background-color: #defadb;
@@ -1847,10 +1842,7 @@ button {
     top: -10px;
   }
 
-  .buttonsbox1{
-    float: left;
-    width: 100%;
-  }
+
   .box2{
     float: left;
     width: 18%;
@@ -1943,6 +1935,7 @@ button {
   font-weight: 500;
   cursor: pointer;
   height: 37px;
+  margin-top: 1px;
 }
 
 
@@ -1955,25 +1948,11 @@ button {
   margin-top: 8px;
 }
 
-#sidebar {
-  font-size: 12px;
-  width: auto;
-  height: 32px;
-  margin-left: 7px;
-}
 
-.buttonsbox1 {
-  float: left;
-  width: 80%;
-  text-align: center;
-}
 
-.list-group-item {
-  font-size: 12px;
-  width: auto;
-  height: 32px;
-  margin-left: 7px;
-}
+
+
+
 
 .floatleft {
   float: left;
@@ -2248,12 +2227,7 @@ margin-top: 0px !important;
       margin-top: 5px;
       margin-left: 14px;
     }
-    
-    .form-input:focus{
-    
-      // box-shadow: none;
-      // border:none;
-    }
+
   }
   
   .app-splash-screen {
@@ -2268,9 +2242,9 @@ margin-top: 0px !important;
     align-items: center;
     width: 100%;
     height: 100%;
-    z-index: 100;
     opacity: 1;
     color: white;
     font-size: 30px;
     font-weight: 600;
+    z-index: 999;
  }

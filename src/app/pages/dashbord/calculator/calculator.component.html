@@ -1,1 +1,45 @@
-<p>calculator works!</p>
+<div  id=calculator>
+    <mat-icon style="float: left;
+    width: 100%;
+    text-align: right; cursor: pointer;" (click)="close()">close</mat-icon>
+    <form Name="calc">
+      <table>
+        <tr>
+          <td><input class="input" class="display" id="textboxes" Name="display"></td>
+        </tr>
+      </table>
+      <br>
+      <table>	
+        <tr>
+          <td><input  style="background-color: #bf0000;
+            color: white;
+            border: none;   border-radius: 9px; " class="input"  type=button value="C" OnClick="calc.display.value=''"></td>  
+        </tr>
+        <tr> 
+          <td><input class="input"  type=button value="1" OnClick="calc.display.value+='1'"></td>
+          <td><input class="input" type=button value="2" OnClick="calc.display.value+='2'"></td>
+          <td><input class="input" type=button value="3" OnClick="calc.display.value+='3'"></td>
+          <td><input class="input" type=button value="+" OnClick="calc.display.value+='+'"></td>
+        </tr>
+        <tr>
+          <td><input class="input" type=button value="4" OnClick="calc.display.value+='4'"></td>
+          <td><input class="input" type=button value="5" OnClick="calc.display.value+='5'"></td>
+          <td><input class="input" type=button value="6" OnClick="calc.display.value+='6'"></td>
+          <td><input class="input" type=button value="-" OnClick="calc.display.value+='-'"></td>
+        </tr>
+        <tr>
+          <td><input class="input" type=button value="7" OnClick="calc.display.value+='7'"></td>
+          <td><input class="input" type=button value="8" OnClick="calc.display.value+='8'"></td>
+          <td><input class="input" type=button value="9" OnClick="calc.display.value+='9'"></td>
+          <td><input class="input" type=button value="x" OnClick="calc.display.value+='*'"></td>
+        </tr>
+        <tr>
+          <td><input class="input" type=button value="0" OnClick="calc.display.value+='0'"></td>
+          <td><input class="input" type=button value="." OnClick="calc.display.value+='.'"></td>
+          <td><input style="color: white;
+            background-color: #4d9605;" class="input" type=button value="=" id="equals" OnClick="calc.display.value=eval(calc.display.value)"></td>
+          <td><input class="input" type=button value="/" OnClick="calc.display.value+='/'"></td>
+        </tr>
+      </table>
+    </form>
+    </div>

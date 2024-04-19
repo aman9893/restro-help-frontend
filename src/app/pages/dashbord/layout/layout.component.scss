@@ -5,12 +5,12 @@
   }
   
   mat-drawer {
-    min-width: 200px;
-    max-width: 300px;
+    min-width: 174px;
+    max-width: 174px;
   }
   
   .margin-left {
-    margin-left: 300px;
+    margin-left: 123px;
   }
   
   mat-drawer-container  {
@@ -23,12 +23,12 @@
       flex-direction: column;
       justify-content: space-between;
       background: #fff;
-      /* padding: 0.75rem 1.5rem; */
       font-size: .875rem;
       font-weight: 500;
       display: flex;
       align-items: center;
       white-space: nowrap;
+      overflow-x: hidden;
   }
   }
 
@@ -36,6 +36,9 @@
     background: #dee2e68a;
   }
   
+  ::ng-deep .mat-list-base .mat-list-item:active{
+    background: #dee2e68a;
+  }
   
   
   .center {

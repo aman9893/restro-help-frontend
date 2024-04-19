@@ -150,16 +150,14 @@
 }
 
 #sidebar {
-    font-size: 12px;
-    width: auto;
+    width: 22%;
     height: 400PX !important;
     overflow: auto;
-    /* margin-left: 7px; */
-    background: radial-gradient(black, transparent);
+    float: left;
 }
 .buttonsbox1 {
     float: left;
-    width: 70%;
+    width: 75%;
     text-align: center;
 }
 .box2 {
@@ -170,3 +168,15 @@
     font-weight: 500;
     cursor: pointer;
 }
+.table > :not(caption) > * > * {
+    padding: 2px !important;
+    font-size: 12px;
+    font-weight: 400;
+}
+
+.list-group-item {
+    font-size: 9px;
+    width: auto;
+    height: 28px;
+
+  }

@@ -9,13 +9,14 @@
   margin: 5px;
   
   .form-input {
-      border-color: #19a78b;
+
       height: 35px;
       text-indent: 33px;
       border-radius: 10px;
       margin-top: 5px;
       margin-left: 14px;
-      border: 2px solid #18a2878f;
+      border: 2px solid rgba(0, 0, 0, 0.38);
+
       margin-left: 2px;
   }
   
