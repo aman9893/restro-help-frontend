@@ -1,6 +1,6 @@
 export const apiConfig = {
-// localhostUrl:"http://54.167.105.117:3011/",
-  localhostUrl: "http://localhost:3011/",
+ localhostUrl:"https://apnabillwala.com/api/",
+  //localhostUrl: "http://localhost:3011/",
     getAllusers:'api/getAllusers',
 
     forgetPasswordData: 'api/forgetpassword',
