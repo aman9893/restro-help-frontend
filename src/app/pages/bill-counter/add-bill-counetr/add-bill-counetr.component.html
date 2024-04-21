@@ -260,8 +260,7 @@
                                             (change)="discountListchange()" />
                                     </td>
                                     <td>
-                                        <select style="    padding: 5px;
-                                        width: 63px;" formControlName="payment_type">
+                                        <select style="padding: 5px;  width: 63px;" formControlName="payment_type">
                                             <option value="Payment Type">Payment Type</option>
                                             <option value="UPI">UPI</option>
                                             <option value="CASH">CASH</option>
@@ -318,10 +317,10 @@
                     <thead>
                         <tr>
                             <th width="3%">Action</th>
-                            <th width="40%">Items </th>
-                            <th width="25%">Price</th>
+                            <th width="38%">Items </th>
+                            <th width="22%">Price</th>
                             <th width="20%">Qty</th>
-                            <th width="15%">Total Amount</th>
+                            <th width="22%">T Amount</th>
                         </tr>
                     </thead>
                     <tbody formArrayName="items" *ngFor="let item of items.controls; index as idx">
@@ -344,7 +343,7 @@
                             </td>
                             <td>
                                 <div class="product-name" *ngIf="!manualView">
-                                    <input class="form-control" formControlName="itemprice" readonly>
+                                    <input class="form-control" formControlName="itemprice" placeholder="0" readonly>
                                 </div>
                                 <div class="product-name" *ngIf="manualView">
                                     <input class="form-control" formControlName="itemprice"  (change)="onPriceChange($event,item)">
@@ -372,7 +371,7 @@
                             </td>
                             <td>
                                 <div class="product-name">
-                                    <input class="form-control" placeholder="Price" formControlName="price" readonly>
+                                    <input class="form-control" placeholder="0" formControlName="price" readonly>
                                 </div>
                             </td>
                         </tr>

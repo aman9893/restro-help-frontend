@@ -125,7 +125,7 @@ export class MenulistComponent implements OnInit ,AfterViewInit  {
         // validators: [Validators.required, Validators.maxLength(500)],
         // updateOn: 'blur',
       }),
-      menu_categories: new FormControl('', {
+      menu_categories: new FormControl(0, {
         // validators: [Validators.required, Validators.maxLength(500)],
         // updateOn: 'blur',
       }),
@@ -138,7 +138,7 @@ export class MenulistComponent implements OnInit ,AfterViewInit  {
 
   //---------------------------------------------add file end -------------------------------------
   onSubmit() {
-    let menuname ;
+    let menuname ='no menu';
     let category_id =this.tableForm.controls['menu_categories'].value;
     this.categoryDataList .forEach((element: any) => {
         if(element.category_id == category_id){

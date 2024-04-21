@@ -23,7 +23,7 @@ export class DashbordComponent implements OnInit {
   mobileview: any
   todaybillDataList: any = [];
   todaybillDataLlength: any = 0;
-  public displayedColumns: any = ['create_date', 'status', 'bill_no', 'cutomer_name', 'total_bill'];
+  public displayedColumns: any = ['create_date', 'status', 'bill_no'];
   public dataSource: any;
   todayincome: number = 0;
   monthlySalesData: any = [];

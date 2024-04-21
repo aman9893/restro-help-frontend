@@ -35,7 +35,7 @@ export class BillCounterComponent implements OnInit,AfterViewInit {
     console.log(this.router.routerState.snapshot.url);
     if(this.router.routerState.snapshot.url == '/'  || router.routerState.snapshot.url == '/home'){
       this.dashborddata = true;
-      this. displayedColumns= ['bill_id', 'create_date', 'status', 'bill_no'];
+      this. displayedColumns= [ 'create_date', 'status', 'bill_no'];
     }
     else{
       this. displayedColumns= ['bill_id', 'create_date', 'status', 'bill_no',];

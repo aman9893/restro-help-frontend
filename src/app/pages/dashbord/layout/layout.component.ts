@@ -82,7 +82,7 @@ export class LayoutComponent implements OnInit {
           color: '##000',
           subMenu: [
             {
-              title: 'Add Menu',
+              title: 'Add Item',
               icon: 'restaurant_menu',
               link: '/menu',
               color: '##000'
@@ -150,7 +150,7 @@ export class LayoutComponent implements OnInit {
           color: '##000',
           subMenu: [
             {
-              title: 'Add Menu',
+              title: 'Add Item',
               icon: 'restaurant_menu',
               link: '/menu',
               color: '##000'

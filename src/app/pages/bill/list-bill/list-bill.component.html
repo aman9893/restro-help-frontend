@@ -3,7 +3,7 @@
 <app-page-header icon="home" *ngIf="!dashborddata"  >
     <h3 routerLink="/home">Home</h3>
     <span  class="centertext">
-   Table Bill List
+   Table Bill
     </span>
     <button mat-flat-button color="primary" class="action"  routerLink="/tablebill">
       <mat-icon class="mr-2">add</mat-icon>
@@ -14,11 +14,17 @@
     <section class="wrapper" id="goUp">
 
       <div *ngIf="BillData && BillData.length > 0" class="grid-wrapper">
-        <mat-form-field class="fiter">
-          <mat-label>Filter</mat-label>
-          <input matInput (keyup)="applyFilter($event)"
-            placeholder="Filter Bill" #input>
-        </mat-form-field>
+        <div class="container-search">
+          <div class="row height d-flex justify-content-left align-items-left">
+            <div class="col-md-6">
+              <div class="form">
+                <i class="fa fa-search"></i>
+                <input type="text" (keyup)="applyFilter($event)" class="form-control form-input"
+                  placeholder="Search The Bill...">
+              </div>
+            </div>
+          </div>
+        </div>
         <div *ngIf="BillData" class="mat-elevation-z8">
           <table class="mat-elevation-z8" mat-table [dataSource]="dataSource"
             matSortmatSortStart="desc" matSort>
