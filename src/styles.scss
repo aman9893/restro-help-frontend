@@ -678,11 +678,18 @@ img {
 .prdct-qty-wrp{
   display: block;
 }
+.margin-left {
+  margin-left: 123px;
+}
 ///mobile
 @media only screen and (max-width: 450px) {
   .cardcart .table td, .table th {
   font-size: 10px !important;
     padding: 4px !important;
+}
+.margin-left {
+  margin-left: 123px;
+  opacity: 0.1  !important;
 }
 
 .listwarpfixed{
