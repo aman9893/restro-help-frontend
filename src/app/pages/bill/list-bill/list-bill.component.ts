@@ -36,10 +36,10 @@ export class ListBillComponent implements  OnInit,AfterViewInit {
     console.log(router.routerState.snapshot.url);
     if(router.routerState.snapshot.url == '/' || router.routerState.snapshot.url == '/home'){
       this.dashborddata = true;
-        this.displayedColumns = ['bill_id', 'create_date', 'status', 'bill_no','total_bill'];
+        this.displayedColumns = ['bill_id', 'create_date', 'status', 'bill_no'];
     }
     else{
-      this.displayedColumns = ['bill_id', 'create_date', 'status', 'bill_no', 'cutomer_name','total_bill'];
+      this.displayedColumns = ['bill_id', 'create_date', 'status', 'bill_no'];
       }
   }
 

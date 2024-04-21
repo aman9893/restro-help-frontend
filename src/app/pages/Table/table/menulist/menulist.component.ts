@@ -138,6 +138,13 @@ export class MenulistComponent implements OnInit ,AfterViewInit  {
 
   //---------------------------------------------add file end -------------------------------------
   onSubmit() {
+    let menuname ;
+    let category_id =this.tableForm.controls['menu_categories'].value;
+    this.categoryDataList .forEach((element: any) => {
+        if(element.category_id == category_id){
+          menuname=element.category_name;
+        }
+    });
     if (this.tableForm.invalid) {
       this.dataService.openSnackBar('* Item Name  And Item Price is mandatory ', 'Dismiss')
       return;
@@ -150,8 +157,8 @@ export class MenulistComponent implements OnInit ,AfterViewInit  {
         menu_name: this.tableForm.controls['menu_name'].value,
         menu_price: this.tableForm.controls['menu_price'].value,
         menu_url: this.tableForm.controls['menu_url'].value,
-        menu_categories: this.tableForm.controls['menu_categories'].value,
-        category_id: 0,
+        menu_categories: menuname,
+        category_id: this.tableForm.controls['menu_categories'].value,
       };
       console.log(tableFormData);
       this.dataService.saveMenu(tableFormData).subscribe(
@@ -182,10 +189,18 @@ export class MenulistComponent implements OnInit ,AfterViewInit  {
     this.tableForm.controls['menu_name'].setValue(data.menu_name);
     this.tableForm.controls['menu_price'].setValue(data.menu_price);
     this.tableForm.controls['menu_url'].setValue(data.menu_url);
-    this.tableForm.controls['menu_categories'].setValue(data.menu_categories);
+    this.tableForm.controls['menu_categories'].setValue(data.category_id);
     this.menu_id= data.menu_id;
   }
   update() {
+    let menuname ;
+    let category_id =this.tableForm.controls['menu_categories'].value;
+    console.log(category_id)
+    this.categoryDataList .forEach((element: any) => {
+        if(element.category_id == category_id){
+          menuname=element.category_name;
+        }
+    });
     this.showDataLoader =true;
     let tableFormData = {
       menu_id:this.menu_id,
@@ -193,8 +208,8 @@ export class MenulistComponent implements OnInit ,AfterViewInit  {
       menu_name: this.tableForm.controls['menu_name'].value,
       menu_price: this.tableForm.controls['menu_price'].value,
       menu_url: this.tableForm.controls['menu_url'].value,
-      menu_categories: this.tableForm.controls['menu_categories'].value,
-      category_id: 0,
+      menu_categories: menuname,
+      category_id: this.tableForm.controls['menu_categories'].value,
     };
     this.dataService.updateMenu(tableFormData).subscribe(
       (data: any) => this.updateDialog(data),
