@@ -138,6 +138,7 @@ export class DashbordComponent implements OnInit {
   chartOptions3function(countDataList: any) {
     console.log(countDataList)
     this.chartOptions3 = {
+      theme: 'light2',
       animationEnabled: true,
       exportEnabled: true,
       title: {
