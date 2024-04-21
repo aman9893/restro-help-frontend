@@ -34,10 +34,10 @@
                     <thead>
                         <tr>
                             <th width="3%">Action</th>
-                            <th width="40%">Items </th>
-                            <th width="25%">Price</th>
-                            <th width="20%">Qty</th>
-                            <th width="15%">Total Amt</th>
+                            <th width="38%">Items </th>
+                            <th width="20%">Price</th>
+                            <th width="22%">Qty</th>
+                            <th width="25%"> Amt</th>
                         </tr>
                     </thead>
                     <tbody formArrayName="items" *ngFor="let item of items.controls; index as idx">
@@ -60,7 +60,7 @@
                             </td>
                             <td>
                                 <div class="product-name">
-                                    <input class="form-control" formControlName="itemprice" readonly>
+                                    <input class="form-control" placeholder="0" formControlName="itemprice" readonly>
                                 </div>
                             </td>
                             <td>
@@ -76,7 +76,7 @@
                             </td>
                             <td>
                                 <div class="product-name">
-                                    <input class="form-control" placeholder="Price" formControlName="price" readonly>
+                                    <input class="form-control" placeholder="0" formControlName="price" readonly>
                                 </div>
                             </td>
                         </tr>
