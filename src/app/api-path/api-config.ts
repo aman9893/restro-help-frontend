@@ -1,5 +1,5 @@
 export const apiConfig = {
- localhostUrl:"https://apnabillwala.com/api/",
+ localhostUrl:"https://retroshop-psi.vercel.app/",
   //localhostUrl: "http://localhost:3011/",
     getAllusers:'api/getAllusers',
 
