@@ -54,10 +54,8 @@ export class InvoiceComponent implements OnInit {
   tableData(data: any) {
     let datalist = data[0];
     if (datalist && datalist.bill_order) {
-      console.log( datalist.bill_order)
 
       this.updateData = JSON.parse(datalist.bill_order);
-      console.log(this.updateData)
       this.billupdate = this.updateData.bill_order;
       this.invoice.products = this.billupdate.items
     }
@@ -70,7 +68,6 @@ export class InvoiceComponent implements OnInit {
   }
 
   BillData(data: any) {
-    console.log(data)
     let datalist;
     if (data) {
       datalist = data[0];
@@ -322,7 +319,6 @@ export class InvoiceComponent implements OnInit {
 
       };
       if (result === 'yes') {
-        console.log(tableFormData)
         this.dataService
           .compelteOrder(tableFormData)
           .subscribe((data: any) => this.closedeleteDialog(data));
@@ -335,6 +331,5 @@ export class InvoiceComponent implements OnInit {
     });
   }
   closedeleteDialog(data: any) {
-    console.log(data)
   }
 }

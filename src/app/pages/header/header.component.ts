@@ -29,7 +29,6 @@ export class HeaderComponent implements OnInit {
 
   getRegisterData(data: any) {
     this.userData = data[0];
-    console.log(this.userData);
     this.dataService.userData = this.userData;
     this.cdref.detectChanges();
 

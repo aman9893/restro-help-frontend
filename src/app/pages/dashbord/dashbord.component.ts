@@ -92,13 +92,11 @@ export class DashbordComponent implements OnInit {
   }
   getRegisterData(data: any) {
     this.userData = data[0];
-    console.log(this.userData);
     this.dataService.userData = this.userData;
   }
   getAllCount(): void {
     this.dataService.getallcount().subscribe((data) => this.countdata(data),
-      (err: Error) => console.log(err));
-  }
+    )}
   countdata(data: any) {
     this.countData = data.data;
     let countDataList: any = []
@@ -136,7 +134,6 @@ export class DashbordComponent implements OnInit {
   }
 
   chartOptions3function(countDataList: any) {
-    console.log(countDataList)
     this.chartOptions3 = {
       theme: 'light2',
       animationEnabled: true,

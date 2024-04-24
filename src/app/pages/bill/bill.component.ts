@@ -42,11 +42,9 @@ export class BillComponent implements OnInit {
 
   billData(data: any) {
     this.billDataList = data;
-    console.log(this.billDataList)
   }
 
   addOder(tablename: any) {
-    console.log(tablename)
     let tabledata = {
       tablename: tablename,
       flag: 'save'
@@ -65,7 +63,6 @@ export class BillComponent implements OnInit {
         this.getTableData();
         this.getBillData();
       }
-      console.log(`Dialog result: ${result}`);
     });
   }
 

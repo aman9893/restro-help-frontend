@@ -24,7 +24,6 @@ export class DataService {
 
 
   inProduct(product:any) {
-    console.log(product)
     for (let p of this.cartDataList) {
       if (p.menu_id === product.menu_id) {
         p.qty += 1;
@@ -40,7 +39,6 @@ export class DataService {
  
   decreaseProduct(product:any) {
     let added = false;
-    console.log(product)
     for (let  p of this.cartDataList) {
       if (p.menu_id === product.menu_id) {
         p.qty -= 1;
@@ -287,7 +285,6 @@ private isMobileResolution: boolean = false;
 
 
 public getIsMobileResolution(): boolean {
-  console.log(this.isMobileResolution)
   return this.isMobileResolution;
 }
 

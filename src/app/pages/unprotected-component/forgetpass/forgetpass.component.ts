@@ -131,7 +131,6 @@ export class ForgetpassComponent implements OnInit {
         )
       }
       if (value === 'phone') {
-        console.log(this.ForgotPhoneForm['controls']['phone'].value)
         let userData = {
           value: 'nootpCheck',
           flag: 'phone',
@@ -146,7 +145,6 @@ export class ForgetpassComponent implements OnInit {
   }
 
   closeDialog(data:any) {
-    console.log(data)
     this.showDataLoader = false;
 
     if (data.status === true) {

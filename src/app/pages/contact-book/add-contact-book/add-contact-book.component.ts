@@ -60,7 +60,6 @@ export class AddContactBookComponent implements OnInit {
     }
     this.dataService.addConatctBook(ContactFormData).subscribe(
       data => this.closeContactDialog(data),
-      err => console.log(err)
     )
   }
 
@@ -82,7 +81,6 @@ export class AddContactBookComponent implements OnInit {
     }
     this.dataService.updateConatactItem(ContactFormData).subscribe(
       data => this.closeContactDialog(data),
-      err => console.log(err)
     )
   }
   closeContactDialog(data:any) {

@@ -137,7 +137,6 @@ export class ListContactBookComponent implements OnInit ,AfterViewInit{
     });
   
     dialogRef.afterClosed().subscribe((result) => {
-      console.log(result);
       if(result === 'yes'){
         this.deleteContactType(id)
       }

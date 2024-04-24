@@ -51,7 +51,6 @@ export class AdminUserlistComponent implements OnInit {
   }
 
   UsersData(data: { data: any; }) {
-    console.log(data)
     this.Userslist = data.data;
     this.dataSource = new MatTableDataSource(this.Userslist);
     this.showDataLoader = false;
@@ -100,14 +99,12 @@ export class AdminUserlistComponent implements OnInit {
     });
 
     dialogRef.afterClosed().subscribe(result => {
-      console.log(result)
       if (result == 'yes') {
         this.dataService.deleteBill(id).subscribe(
           (data: any) => this.closedeleteDialog(data),
         )
       }
       if (result === 'no') {
-        console.log("not deleted")
       }
     });
   }

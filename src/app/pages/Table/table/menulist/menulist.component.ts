@@ -160,7 +160,6 @@ export class MenulistComponent implements OnInit ,AfterViewInit  {
         menu_categories: menuname,
         category_id: this.tableForm.controls['menu_categories'].value,
       };
-      console.log(tableFormData);
       this.dataService.saveMenu(tableFormData).subscribe(
         (data: any) => this.closeDialog(data),
         (err: any) => console.log(err)
@@ -195,7 +194,6 @@ export class MenulistComponent implements OnInit ,AfterViewInit  {
   update() {
     let menuname ;
     let category_id =this.tableForm.controls['menu_categories'].value;
-    console.log(category_id)
     this.categoryDataList .forEach((element: any) => {
         if(element.category_id == category_id){
           menuname=element.category_name;
@@ -258,7 +256,6 @@ export class MenulistComponent implements OnInit ,AfterViewInit  {
     });
   
     dialogRef.afterClosed().subscribe((result:any) => {
-      console.log(result);
       if(result === 'yes'){
         this.delete(id)
       }

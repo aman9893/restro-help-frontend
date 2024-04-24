@@ -148,7 +148,6 @@ export class LoginComponent implements OnInit {
     };
     this.dataService.registerData(userData).subscribe(
       (data: any) => this.closeDialog(data),
-      (err: any) => console.log(err)
     );
     }
     else{
@@ -173,7 +172,6 @@ export class LoginComponent implements OnInit {
       email: this.loginForm['controls']['emailid'].value,
       password: this.loginForm['controls']['password'].value,
     };
-    console.log(userData);
     if (this.loginForm.valid) {
       this.dataService.loginData(userData).subscribe(
         (data) => this.closeLoginDialog(data),

@@ -49,8 +49,7 @@ export class AddPaymentComponent implements OnInit, OnDestroy {
   getRegisterData(data) {
     this.userData = data[0];
     this.Trialdays = this.userData.trial_days
-     console.log(this.Trialdays)
-     console.log( this.userData )
+ 
  }
 
   loadStripe() {

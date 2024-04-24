@@ -69,7 +69,6 @@ export class CreateBillComponent implements OnInit {
   onChangeDataset() {
     let contactValue;
     let cutomer_number = this.orderForm.controls['cutomer_number'].value;
-    console.log(cutomer_number)
     this.conatctBookList.forEach((ele: any) => {
       if (ele.contact_number == cutomer_number) {
         contactValue = ele.contact_name;
@@ -83,7 +82,6 @@ export class CreateBillComponent implements OnInit {
     this.discount = this.orderForm.controls['discount'].value;
     if(this.discount < this.total_bill  ){
     this.GrandtotalListViewbill = this.total_bill - this.discount;
-    console.log(this.GrandtotalListViewbill)
     }
     else{
       this.GrandtotalListViewbill =0;
@@ -163,7 +161,6 @@ export class CreateBillComponent implements OnInit {
     });
     if (this.billflag === 'update' ) {
       if(this.updateData ){
-        console.log(this.updateData)
         this.orderForm.controls['cutomer_name'].setValue(this.updateData.cutomer_name);
         this.orderForm.controls['cutomer_number'].setValue(this.updateData.cutomer_number);
         this.orderForm.controls['discount'].setValue(this.updateData.discount);
@@ -217,7 +214,6 @@ export class CreateBillComponent implements OnInit {
     });
   
     dialogRef.afterClosed().subscribe((result:any) => {
-      console.log(result);
       if(result === 'yes'){
         this.removeGroup(id)
       }
@@ -342,7 +338,6 @@ export class CreateBillComponent implements OnInit {
     };
     this.dataService.saveBill(tableFormData).subscribe(
       (data: any) => this.closeDialog(data),
-      (err: any) => console.log(err)
     );
     }
   }
@@ -378,7 +373,6 @@ export class CreateBillComponent implements OnInit {
     };
     this.dataService.updateBill(tableFormData).subscribe(
       (data: any) => this.closeDialog(data),
-      (err: any) => console.log(err)
     );
     this.validation();
       }  }

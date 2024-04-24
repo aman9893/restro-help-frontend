@@ -33,7 +33,6 @@ export class ListBillComponent implements  OnInit,AfterViewInit {
   categoryDataList: any;
   constructor(public dataService: DataService,private cdref: ChangeDetectorRef,
   public snackBar: MatSnackBar, public dialog: MatDialog,router: Router) { 
-    console.log(router.routerState.snapshot.url);
     if(router.routerState.snapshot.url == '/' || router.routerState.snapshot.url == '/home'){
       this.dashborddata = true;
         this.displayedColumns = [ 'create_date', 'status', 'bill_no'];
@@ -119,7 +118,6 @@ export class ListBillComponent implements  OnInit,AfterViewInit {
     });
   
     dialogRef.afterClosed().subscribe((result) => {
-      console.log(result);
       if(result === 'yes'){
         this.deleteBillList(id)
       }

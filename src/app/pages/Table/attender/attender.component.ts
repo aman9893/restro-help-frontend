@@ -88,7 +88,6 @@ export class AttenderComponent implements OnInit {
 
   attenderData(data: any) {
     this.attenderDataList = data;
-    console.log(this.attenderDataList);
     this.dataSource =new MatTableDataSource(this.attenderDataList);
     this.showDataLoader = false;
     this.cdref.detectChanges();
@@ -123,7 +122,6 @@ export class AttenderComponent implements OnInit {
         user_id: this.user_id,
         attender_name: this.attenderForm.controls['attender_name'].value,
       };
-      console.log(attenderFormData);
       this.dataService.saveAttender(attenderFormData).subscribe(
         (data: any) => this.closeDialog(data),
         (err: any) => console.log(err)
@@ -191,7 +189,6 @@ export class AttenderComponent implements OnInit {
     });
   
     dialogRef.afterClosed().subscribe((result:any) => {
-      console.log(result);
       if(result === 'yes'){
         this.delete(id)
       }

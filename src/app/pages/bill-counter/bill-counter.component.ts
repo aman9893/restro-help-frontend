@@ -32,7 +32,6 @@ export class BillCounterComponent implements OnInit,AfterViewInit {
   categoryDataList: any;
   constructor(public dataService: DataService,private cdref: ChangeDetectorRef, public router: Router,
   public snackBar: MatSnackBar, public dialog: MatDialog) {
-    console.log(this.router.routerState.snapshot.url);
     if(this.router.routerState.snapshot.url == '/'  || router.routerState.snapshot.url == '/home'){
       this.dashborddata = true;
       this. displayedColumns= [ 'create_date', 'status', 'bill_no'];
@@ -122,7 +121,6 @@ export class BillCounterComponent implements OnInit,AfterViewInit {
     });
   
     dialogRef.afterClosed().subscribe((result) => {
-      console.log(result);
       if(result === 'yes'){
         this.deleteBillList(id)
       }

@@ -86,7 +86,6 @@ export class AddTableComponent implements OnInit,AfterViewInit {
 
   tableData(data: any) {
     this.tableDataList = data;
-    console.log(this.tableDataList);
     this.dataSource =new MatTableDataSource(this.tableDataList);
     this.showDataLoader = false;
     this.setDataSourceAttributes();
@@ -122,7 +121,6 @@ export class AddTableComponent implements OnInit,AfterViewInit {
         user_id: this.user_id,
         table_name: this.tableForm.controls['table_name'].value,
       };
-      console.log(tableFormData);
       this.dataService.saveTable(tableFormData).subscribe(
         (data: any) => this.closeDialog(data),
         (err: any) => console.log(err)
@@ -190,7 +188,6 @@ export class AddTableComponent implements OnInit,AfterViewInit {
     });
   
     dialogRef.afterClosed().subscribe((result:any) => {
-      console.log(result);
       if(result === 'yes'){
         this.delete(id)
       }

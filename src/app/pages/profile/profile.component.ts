@@ -32,7 +32,6 @@ export class ProfileComponent implements OnInit {
 
   getRegisterData(data:any) {
      this.userData = data[0];
-     console.log(this.userData)
   }
 
 
@@ -45,7 +44,6 @@ export class ProfileComponent implements OnInit {
     dialogRef.afterClosed().subscribe((result) => {
       window.location.reload();
       this.getResgiterDataById();
-      console.log(`Dialog result: ${result}`);
     });
    }
 }

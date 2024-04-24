@@ -211,7 +211,6 @@ showGirdView() {
     this.dataService.getMenuInfo().subscribe((data) => this.menuData(data));
   }
   menuData(data: any) {
-    console.log(data)
     if(data.length !== 0){
       for (var i = 0; i < data.length; i++) {
         data[i].qty = 1;
@@ -297,7 +296,6 @@ showGirdView() {
     this.discount = this.orderForm.controls['discount'].value;
     if(this.discount < this.ListViewTotalBill  ){
     this.GrandtotalListViewbill = this.ListViewTotalBill - this.discount;
-    console.log(this.GrandtotalListViewbill)
     }
     else{
       this.GrandtotalListViewbill =0;
@@ -465,7 +463,6 @@ showGirdView() {
     };
     this.dataService.saveBill(tableFormData).subscribe(
       (data: any) => this.closeDialog(data),
-      (err: any) => console.log(err)
     );
     }
   }
@@ -498,7 +495,6 @@ showGirdView() {
     };
     this.dataService.saveBill(BillData).subscribe(
       (data: any) => this.closeDialog(data),
-      (err: any) => console.log(err)
     );
   }
 
@@ -550,7 +546,6 @@ showGirdView() {
     };
     this.dataService.updateBill(tableFormData).subscribe(
       (data: any) => this.closeDialog(data),
-      (err: any) => console.log(err)
     );
   }
   competeItem() {
@@ -574,7 +569,6 @@ showGirdView() {
         window.location.reload();
       }
       if (result === 'no') {
-        console.log('not deleted');
       }
     });
   }

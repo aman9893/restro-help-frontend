@@ -117,7 +117,6 @@ export class UpdateComponent implements OnInit {
 
   closeDialog(data: any) {
     if (data.status === true) {
-      console.log(data)
       this.openSnackBar(data.message, 'Dismiss');
       this.dialogRef.close();
       this.sginupForm.reset();

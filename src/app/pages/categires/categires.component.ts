@@ -89,7 +89,6 @@ export class CategiresComponent implements OnInit {
 
   categoryData(data: any) {
     this.categoryDataList = data;
-    console.log(this.categoryDataList);
     this.dataSource =new MatTableDataSource(this.categoryDataList);
     this.showDataLoader = false;
     this.setDataSourceAttributes();
@@ -125,10 +124,8 @@ export class CategiresComponent implements OnInit {
         user_id: this.user_id,
         category_name: this.categoryForm.controls['category_name'].value,
       };
-      console.log(categoryFormData);
       this.dataService.adddcategoryList(categoryFormData).subscribe(
         (data: any) => this.closeDialog(data),
-        (err: any) => console.log(err)
       );
     }
     this.categoryForm.reset();
@@ -154,7 +151,6 @@ export class CategiresComponent implements OnInit {
     };
     this.dataService.updateCategory(categoryFormData).subscribe(
       (data: any) => this.updateDialog(data),
-      (err: any) => console.log(err)
     );
   }
   updateDialog(data:any){
@@ -192,7 +188,6 @@ export class CategiresComponent implements OnInit {
     });
   
     dialogRef.afterClosed().subscribe((result:any) => {
-      console.log(result);
       if(result === 'yes'){
         this.delete(id)
       }
