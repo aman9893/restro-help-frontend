@@ -116,7 +116,7 @@ export class CategiresComponent implements OnInit {
 
     // stop here if form is invalid
     if (this.categoryForm.invalid) {
-      this.dataService.openSnackBar('* category Name is mandatory ', 'Dismiss')
+      this.dataService.openSnackBar('* Category Name is mandatory ', 'Dismiss')
         return;
     }
 

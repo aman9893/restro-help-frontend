@@ -12,6 +12,7 @@
         <span> Show Grid </span>
     </button>
 </app-page-header>
+<div *ngIf="menuDataList && menuDataList.length > 0">
 <div *ngIf="GirdView" class="row gridviewwrap">
     <div class="col-md-6  border-right">
         <div>
@@ -291,6 +292,7 @@
         </form>
     </div>
 </div>
+</div>
 
 <!-- List view Code -->
 <div *ngIf="listView" class="listwrap">
@@ -486,7 +488,7 @@
     </form>
 </div>
 
-<div *ngIf="menuDataList && menuDataList.length === 0">
+<div *ngIf="menuDataList && menuDataList.length === 0 && !listView">
     <div class="empty-state">
       <div class="empty-state__content">
         <div class="empty-state__icon">
@@ -494,9 +496,9 @@
             src="https://cdni.iconscout.com/illustration/premium/thumb/sorry-item-not-found-3328225-2809510.png"
             alt>
         </div>
-        <div class="empty-state__message">No Menu Item Found .</div>
+        <div class="empty-state__message">No  Item Found .</div>
         <div class="empty-state__help">
-               Simpley clicking <a routerLink="/menu">Add Menu  </a> and Add menu firstly
+               Simpley clicking <a routerLink="/menu">Add ITEM  </a> and Add Item firstly
         </div>
 
         <div class="empty-state__help">

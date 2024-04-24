@@ -16,7 +16,6 @@ export class AppComponent {
     if( router.routerState.snapshot.url == '/login'){
         this.authService.logout();
     }
-    console.log(this.loader.isLoading)
   }
 
   isLoading: Subject<boolean> = this.loader.isLoading;
