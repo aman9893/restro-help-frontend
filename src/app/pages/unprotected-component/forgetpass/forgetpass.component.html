@@ -17,7 +17,7 @@
            <h3 class="title">Reset Password</h3>
            <div class="input-container">
              <input type="text" name="name" type="email" formControlName="email" placeholder="Please Enter The Email'Id"  class="input"  />
-           </div>
+            </div>
            <input type="submit"[disabled]="!ForgotForm.valid" (click)="onSubmit('email')"  value="Submit"class="btn" />
            <div class="signup-link">
             you a member? <a   routerLink="/login">Login now</a>

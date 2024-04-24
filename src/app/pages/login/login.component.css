@@ -377,5 +377,10 @@ textarea.input {
   text-align: center;
   color: #fff;
   background: #18b092;
-  height: 38px;
+  height: 64px;
+  line-height: 59px;
+
+}
+.input-container div{
+  color: #9a0000;
 }

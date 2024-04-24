@@ -2269,3 +2269,9 @@ margin-top: 0px !important;
   width: 100%;
   height: 100%;
   overflow-x: hidden !important;}
+  .mat-mdc-tab .mdc-tab__text-label {
+    color: var(--mat-tab-header-inactive-label-text-color);
+    display: inline-flex;
+    align-items: center;
+    text-transform: capitalize;
+}

@@ -13,6 +13,8 @@ import { DataService } from '../../service/data.service';
 export class LoginComponent implements OnInit {
   loginData: any;
   updateValue: any;
+  submitted: boolean =false;
+  submittedlogin: boolean =false;
   constructor(
     private snackBar: MatSnackBar,
     private myRoute: Router,
@@ -39,32 +41,32 @@ export class LoginComponent implements OnInit {
   private createForm() {
     this.sginupForm = this.formBuilder.group({
       name: new FormControl('', {
-        validators: [Validators.maxLength(55)],
+        validators: [Validators.required,Validators.maxLength(55)],
         updateOn: 'change',
       }),
       email: new FormControl('', {
-        validators: [Validators.maxLength(55)],
+        validators: [Validators.required,Validators.maxLength(55),Validators.email],
         updateOn: 'change',
       }),
       password: new FormControl('', {
-        validators: [Validators.maxLength(55)],
+        validators: [Validators.required,Validators.maxLength(55)],
         updateOn: 'change',
       }),
       username: new FormControl(''),
       company_name: new FormControl('', {
-        validators: [Validators.maxLength(55)],
+        validators: [Validators.required,Validators.maxLength(55)],
         updateOn: 'change',
       }),
       shop_address: new FormControl('', {
-        validators: [Validators.maxLength(55)],
+        validators: [Validators.required,Validators.maxLength(55)],
         updateOn: 'change',
       }),
       shop_type: new FormControl('restaurant', {
-        validators: [Validators.maxLength(55)],
+        validators: [Validators.required,Validators.maxLength(55)],
         updateOn: 'change',
       }),
       phone_number: new FormControl('', {
-        validators: [Validators.maxLength(55)],
+        validators: [Validators.required,Validators.maxLength(55)],
         updateOn: 'change',
       }),
       gst: new FormControl(''),
@@ -128,6 +130,7 @@ export class LoginComponent implements OnInit {
   }
 
   onSubmit() {
+    if (this.loginForm.valid) {
     let userData = {
       name: this.sginupForm['controls']['name'].value,
       email: this.sginupForm['controls']['email'].value,
@@ -147,12 +150,17 @@ export class LoginComponent implements OnInit {
       (data: any) => this.closeDialog(data),
       (err: any) => console.log(err)
     );
-    this.sginupForm.reset();
+    }
+    else{
+      this.submitted = true;
+      this.openSnackBar('* Please Enter Required Feilds', 'Dismiss');
+    }
   }
 
   closeDialog(data: any) {
     if (data.status === true) {
       this.loginFormFlg = true;
+      this.sginupForm.reset();
       this.registerFormFlg = false;
       this.openSnackBar(data.message, 'Dismiss');
     }
@@ -172,12 +180,15 @@ export class LoginComponent implements OnInit {
         (err) => this.openSnackBar(err.message, 'Dismiss')
       );
     }
-    this.loginForm.reset();
+    else{
+      this.submittedlogin = true;
+      this.openSnackBar('* Please Enter Email Id/Mobile Number & Password', 'Dismiss');
+    }
   }
 
   closeLoginDialog(data: any) {
     if (data.status === true) {
-      console.log(data)
+      this.loginForm.reset();
       this.loginData =data;
       this.openSnackBar(data.message, 'Dismiss');
       this.authService.sendToken( this.loginData.token);

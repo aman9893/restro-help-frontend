@@ -22,11 +22,17 @@
             <h3 class="title">Login</h3>
             <div class="input-container">
               <input type="text" name="name" formControlName="emailid" class="input" placeholder="Email Id /  Mobile Number" />
-              <span>Email/ Mobile No</span>
+              <div *ngIf="submittedlogin && loginForm['controls']['emailid'].errors" >
+                <div *ngIf="loginForm.controls['emailid'].errors['required']">* Email id  Or Mobile Number  is required</div>
+              </div>
+            
             </div>
-          
+       
             <div class="input-container">
               <input type="password" name="phone"  formControlName="password" class="input" placeholder="Password"/>
+              <div *ngIf="submittedlogin && loginForm['controls']['password'].errors" >
+                <div *ngIf="loginForm.controls['password'].errors['required']">* Password  is required</div>
+              </div>
             </div>
             <input type="submit"  (click)="onLogin()" value="Login"  class="btn" />
             <div class="signup-link">
@@ -60,15 +66,28 @@
             <h3 class="title">SignUp</h3>
             <div class="input-container">
               <input type="text" name="name" formControlName="name" class="input" placeholder="Full Name" />
+              <div *ngIf="submitted && sginupForm['controls']['name'].errors" >
+                <div *ngIf="sginupForm.controls['name'].errors['required']">*Full Name is required</div>
+              </div>
             </div>
             <div class="input-container">
                <input type="number" name="phone_number"  formControlName="phone_number" class="input" placeholder="Phone Number"/>
+               <div *ngIf="submitted && sginupForm['controls']['phone_number'].errors" >
+                <div *ngIf="sginupForm.controls['phone_number'].errors['required']">*PhoneNumber is required</div>
+              </div>
              </div>
             <div class="input-container">
               <input type="email" name="phone"  formControlName="email" class="input" placeholder="Email"/>
+              <div *ngIf="submitted && sginupForm['controls']['email'].errors" >
+                <div *ngIf="sginupForm.controls['email'].errors['required']">*Email is required</div>
+                <div *ngIf="sginupForm.controls['email'].errors['email']"> *Email is invalid</div>
+              </div>
             </div>
             <div class="input-container">
                <input type="password" name="password"  formControlName="password" class="input" placeholder="Password"/>
+               <div *ngIf="submitted && sginupForm['controls']['password'].errors" >
+                <div *ngIf="sginupForm.controls['password'].errors['required']">*Password is required</div>
+              </div>
              </div>
              <div class="field" style="    height: 20px;">
                <label style="font-size: 14px;
@@ -80,12 +99,21 @@
                   <option value="restaurant">Restaurant </option>
                   <option value="shop">Shop </option>
                </select>
+               <div *ngIf="submitted && sginupForm['controls']['shop_type'].errors" >
+                <div *ngIf="sginupForm.controls['shop_type'].errors['required']">*Shop Type is required</div>
+              </div>
               </div>
              <div class="input-container">
                <input type="text" name="company_name"  formControlName="company_name" class="input" placeholder="Shop Name"/>
+               <div *ngIf="submitted && sginupForm['controls']['company_name'].errors" >
+                <div *ngIf="sginupForm.controls['company_name'].errors['required']">*Shop Name is required</div>
+              </div>
              </div>
              <div class="input-container">
                <input type="text" name="shop_address"  formControlName="shop_address" class="input" placeholder="Shop Address"/>
+               <div *ngIf="submitted && sginupForm['controls']['shop_address'].errors" >
+                <div *ngIf="sginupForm.controls['shop_address'].errors['required']">*Shop Address is required</div>
+              </div>
              </div>
        
              <div class="input-container">

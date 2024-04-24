@@ -40,7 +40,7 @@ export class DashbordComponent implements OnInit {
     this.mobileview = this.dataService.getIsMobileResolution();
     this.getBillData()
     this.shopType = localStorage.getItem('shop_type')
-    // this.getMonthlydata()
+    this.getMonthlydata();
   }
   @ViewChild(MatSort) set matSort(ms: MatSort) {
     this.sort = ms;
