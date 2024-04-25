@@ -115,3 +115,12 @@
   float: right;
   margin: 10px;
 }
+.iconmob{
+  font-size: 18px;
+  text-align: center;
+  padding-top: 6px;
+  padding-left: 3px;
+  background: gray;
+  padding: 4px;
+  color: white;
+}

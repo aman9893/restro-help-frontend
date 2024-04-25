@@ -3,7 +3,7 @@
     <mat-dialog-content>
         <div class="">
             <mat-form-field appearance="outline">
-                <input matInput list="customerid" placeholder="Customer Number" formControlName="customer_number" (change)="onChangeDataset()">
+                <input matInput type="number" list="customerid" placeholder="Customer Number" formControlName="customer_number" (change)="onChangeDataset()">
                 <mat-error *ngIf="khataFom['controls']['customer_number'].invalid">{{ErrorMessage('Customer Number')}}
                 </mat-error>
 

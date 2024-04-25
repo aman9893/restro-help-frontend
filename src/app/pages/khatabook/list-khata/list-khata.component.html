@@ -108,14 +108,21 @@
     </mat-expansion-panel>
   </mat-accordion>
 
-
-  <div *ngIf="khataItemlist">
-    <div *ngIf="khataItemlist.length === 0" class="ListPage_emptyContent ember-view">
-      <div class="empty-icon">
-        <mat-icon>money</mat-icon>
-      </div>
-      <div class="empty-title">No Khata Person Item Yet</div>
-      <div class="Title_listtable">Add a Item by clicking the ADD NEW button above</div>
+  <div *ngIf="khataItemlist && khataItemlist.length === 0" class="width_100">
+    <div class="empty-state">
+        <div class="empty-state__content">
+            <div class="empty-state__icon">
+                <img src="https://cdni.iconscout.com/illustration/premium/thumb/sorry-item-not-found-3328225-2809510.png"
+                    alt>
+            </div>
+            <div class="empty-state__message">No records has been added
+                yet.</div>
+            <div class="empty-state__help">
+                Add a new Item 
+            </div>
+        </div>
     </div>
-  </div>
+
+</div>
+
 </div>
