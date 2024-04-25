@@ -61,6 +61,10 @@ import {MatRadioModule} from '@angular/material/radio';
 import { AdminUserlistComponent } from './pages/unprotected-component/admin-userlist/admin-userlist.component';
 import { LoaderInterceptor } from './service/LoaderInterceptor';
 import { SplashScreenComponent } from './pages/SplashScreenComponent';
+import { AddKhataComponent } from './pages/khatabook/add-khata/add-khata.component';
+import { MoreHisabComponent } from './pages/khatabook/more-hisab/more-hisab.component';
+import { ListKhataComponent } from './pages/khatabook/list-khata/list-khata.component';
+import { AddkhataAmtComponent } from './pages/khatabook/addkhata-amt/addkhata-amt.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -92,7 +96,11 @@ import { SplashScreenComponent } from './pages/SplashScreenComponent';
     ,PricingComponent,
     ForgetpassComponent,
     AdminUserlistComponent,
-    SplashScreenComponent
+    SplashScreenComponent,
+    AddKhataComponent,
+    MoreHisabComponent,
+    ListKhataComponent,
+    AddkhataAmtComponent,
   ],
   imports: [
     BrowserModule,

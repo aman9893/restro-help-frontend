@@ -71,6 +71,12 @@ export class LayoutComponent implements OnInit {
           color: '##000'
         },
         {
+          title: 'Khatabook',
+          icon: 'assignment',
+          link: '/Khatabook',
+          color: '##000'
+        },
+        {
           title: 'Contact',
           icon: 'person_add',
           link: '/contact',
@@ -135,6 +141,12 @@ export class LayoutComponent implements OnInit {
           title: 'Add Bill',
           icon: 'restaurant_menu',
           link: '/addcounterbill',
+          color: '##000'
+        },
+         {
+          title: 'Khatabook',
+          icon: 'assignment',
+          link: '/Khatabook',
           color: '##000'
         },
     

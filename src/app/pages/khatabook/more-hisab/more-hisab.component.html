@@ -1,0 +1,36 @@
+
+
+<div class="emp_wrapper">
+  <div class="emp_details_header_wrapper">
+      <div class="emp_details_header_leftside">
+          {{Updatedata.amount_date| date: "short"}}
+      </div>
+      <div class="emp_details_header_rightside">
+          <button mat-icon-button matTooltip="Close"  (click)="CloseUpdateDialog()">
+              <mat-icon class="contact_header_right_calender_icon">close</mat-icon>
+          </button>
+      </div>
+  </div>
+  <div class="emp_details_header_cantainer">
+
+      <div class="person_data_wrapper">
+          <div class="person_data_left">
+              <i class="material-icons">receipt_long</i>
+          </div>
+          <div class="person_data_right">
+              Amount : {{Updatedata.amount}} 
+              <span *ngIf=" Updatedata.amount_status == 2"> - उधार दिया (You Gave) </span>
+              <span *ngIf=" Updatedata.amount_status == 1"> - उधार वाविस मिला (You Got It)</span>
+          </div>
+      </div>
+      <div class="person_data_wrapper">
+          <div class="person_data_left">
+              <i class="material-icons">today</i>
+          </div>
+          <div class="person_data_right">
+             Description : {{Updatedata.description}}
+          </div>
+      </div>
+    
+  </div>
+</div>

@@ -1,0 +1,73 @@
+
+
+.emp_wrapper {
+    float: left;
+    width: 100%;
+}
+
+.emp_details_header_wrapper {
+    float: left;
+    width: 100%;
+    background: #2c3881;
+    height: 80px;
+    padding: 16px;
+    color: white;
+}
+
+
+
+.emp_details_header_leftside {
+    float: left;
+    padding: 10px;
+    font-size: 15px;
+    text-transform: capitalize;
+    word-break: break-all;
+
+}
+
+.emp_details_header_rightside {
+    float: right;
+}
+
+.person_data_wrapper {
+    float: left;
+    width: 100%;
+    padding: 9px;
+    padding-left: 27px;
+}
+
+.person_data_left {
+    float: left;
+}
+
+.person_data_right {
+    float: left;
+    padding-left: 17px;
+    color: rgba(0, 0, 0, 0.74);
+    font-size: 13px;
+}
+
+.office_text_staus {
+    float: left;
+}
+
+.outtime {
+    color: rgb(128, 0, 0);
+}
+
+.intime {
+    color: rgb(68, 128, 0);
+}
+
+.subheader_right {
+    float: left;
+    text-align: right;
+}
+.subheader_right button {
+    outline: none;
+    color: white !important;
+    background: linear-gradient(135deg, #0a3300 0, #04e449e0 100%) !important;
+    border: none;
+    margin: 6px;
+    font-size: 12px !important;
+}

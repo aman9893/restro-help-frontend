@@ -288,6 +288,31 @@ public getIsMobileResolution(): boolean {
   return this.isMobileResolution;
 }
 
+
+//==================================khata book==============================
+
+addKhatabookList(data:any){
+  return this.http.post(apiConfig.localhostUrl+apiConfig.addkhatabook,data);
+}
+getKhatalist(){
+  return this.http.get(apiConfig.localhostUrl+apiConfig.khatabooklist);
+}
+
+addKhataAmount(data:any){
+  return this.http.post(apiConfig.localhostUrl+apiConfig.addKhataAmount,data);
+}
+getKhataAmountlist(id:any){
+  return this.http.get(apiConfig.localhostUrl+apiConfig.khataAmountbooklist+'/'+id );
+}
+
+deleteKhataHIsab(request_id:any){
+  return this.http.delete(apiConfig.localhostUrl+apiConfig.deleteKhataHisab + '/' + request_id);
+}
+
+deleteCustomer(request_id:any){
+  return this.http.delete(apiConfig.localhostUrl+apiConfig.deleteKhatacustomer + '/' + request_id);
+}
+
 }
 
 

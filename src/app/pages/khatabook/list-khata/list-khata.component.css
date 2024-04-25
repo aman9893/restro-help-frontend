@@ -1,0 +1,114 @@
+.example-action-buttons {
+    padding-bottom: 20px;
+  }
+  
+  .example-headers-align .mat-expansion-panel-header-description {
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  .example-headers-align .mat-form-field + .mat-form-field {
+    margin-left: 8px;
+  }
+
+  .my-classred{
+    color: red;
+    /* font-weight: 600; */
+  }
+  .my-classgreen{
+    color: green;
+    /* font-weight: 600; */
+  }
+
+  .total button {
+    outline: none;
+    /* color: white !important;
+    border: none; */
+  
+    margin: 6px;
+}
+.table thead th {
+  
+    font-size: 14px;
+    text-align: center;
+    font-weight: 500;
+}
+.deletebtn{
+  float: right;
+  margin: 3px;
+  color: red;
+  cursor: pointer;
+}
+.textcenter{
+  text-align: center;
+  float: left;
+  width: 100%;
+  padding: 10px;
+  font-size: 14px;
+
+}
+.mat-expansion-panel-header-description, .mat-expansion-panel-header-title {
+  display: flex;
+  flex-grow: 1;
+  margin-right: 40px !important;
+  color: #182657 !important;
+  font-weight: 500 !important;
+  text-transform: capitalize;
+  font-size: 13px !important;
+}
+.table td {
+  
+  font-size: 14px;
+  text-align: center;
+}
+
+@media only screen and (max-width: 600px) {
+  .mat-expansion-panel-header-description, .mat-expansion-panel-header-title {
+    font-size: 10px !important;
+  }
+
+  .iconmob{
+    font-size: 18px;
+    text-align: center;
+    padding-top: 3px;
+    padding-left: 12px;
+  }
+  .table td {
+    
+    font-size: 11px;
+    text-align: center;
+}
+.table td {
+  
+  font-size: 11px;
+  text-align: center;
+}
+.table thead th{
+  
+  font-size: 10px;
+}
+}
+
+@media screen and (max-width: 480px) {
+  .table td{
+    font-family: 'poppinsnormal' !important;
+    font-size: 9px !important;
+    text-align: center;
+}
+.my-classgreen{
+  color: green;
+  /* font-weight: 600; */
+  font-size: 18px !important;
+}
+
+.my-classred{
+  color: red;
+  font-size: 18px !important;
+}
+
+}
+
+.Modal_delete_footer button{
+  float: right;
+  margin: 10px;
+}
