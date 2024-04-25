@@ -1,0 +1,44 @@
+<h1 mat-dialog-title> ADD KHATA </h1>
+<form [formGroup]="khataFom" novalidate>
+  <mat-dialog-content>
+    <div class="">
+      <mat-form-field appearance="outline">
+        <mat-label>Add Amount</mat-label>
+        <input type="number" matInput placeholder="0.00" formControlName="amount">
+        <mat-error *ngIf="khataFom['controls']['amount'].invalid">{{getError('Amount')}}</mat-error>
+        <mat-icon matSuffix>attach_money</mat-icon>
+      </mat-form-field>
+    </div>
+    <div class="">
+      <mat-form-field class="matamt"   appearance="outline">
+        <mat-label>Amount Type</mat-label>
+        <mat-select  formControlName="amount_status">
+          <mat-option class="matamt"  *ngFor="let competence of amountType" value="{{competence.id}}">
+            {{competence.value}}</mat-option>
+        </mat-select>
+        <mat-icon matSuffix>done</mat-icon>
+      </mat-form-field>
+    </div>
+    <div class="">
+    <mat-form-field appearance="outline">
+      <mat-label>Desciption</mat-label>
+      <textarea matInput formControlName="description" placeholder="Desciption"></textarea>
+      <mat-icon matSuffix>menu_book</mat-icon>
+    </mat-form-field>
+</div>
+  </mat-dialog-content>
+  <div class="both_btn">
+    <div class="Modal_delete_footer">
+      <button mat-stroked-button color="warn" (click)="cancel('Cancel')" class="cancle_deelete_button">Cancel</button>
+      <button mat-stroked-button color="primary" type="submit" [disabled]="!khataFom.valid" (click)="onSubmit()"
+        class="uppercase_button">Save</button>
+    </div>
+  </div>
+  <div *ngIf="updateFlag === 'update' " class="both_btn">
+    <div class="Modal_delete_footer">
+      <button mat-stroked-button color="warn" (click)="cancel('Cancel')" class="cancle_deelete_button">Cancel</button>
+      <button mat-stroked-button color="primary" type="submit" [disabled]="!khataFom.valid" (click)="onUpdate()"
+        class="uppercase_button">Update</button>
+    </div>
+  </div>
+</form>
