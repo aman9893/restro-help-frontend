@@ -5,6 +5,7 @@ import * as pdfFonts from 'pdfmake/build/vfs_fonts';
 import { DataService } from 'src/app/service/data.service';
 import { ConfrimBoxComponent } from '../../confrim-box/confrim-box.component';
 import { AuthService } from 'src/app/auth.service';
+import { Router } from '@angular/router';
 
 class Invoice {
   customerName!: string;
@@ -31,7 +32,7 @@ export class InvoiceComponent implements OnInit {
   
 
   constructor(
-    public dialogRef: MatDialogRef<InvoiceComponent>, public dataService: DataService,
+    public dialogRef: MatDialogRef<InvoiceComponent>, public dataService: DataService,private router: Router ,
     @Inject(MAT_DIALOG_DATA) public tabledata: any, public dialog: MatDialog, public authService: AuthService,
   ) {
     (pdfMake as any).vfs = pdfFonts.pdfMake.vfs;
@@ -322,8 +323,9 @@ export class InvoiceComponent implements OnInit {
         this.dataService
           .compelteOrder(tableFormData)
           .subscribe((data: any) => this.closedeleteDialog(data));
-          this.dialogRef.close();
-         window.location.reload();
+           this.dialogRef.close();
+           this.router.navigate(['/tablebill']);
+           window.location.reload();
       }
       if (result === 'no') {
         this.dialogRef.close();

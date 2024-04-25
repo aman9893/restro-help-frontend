@@ -21,7 +21,7 @@ export class BillCounterComponent implements OnInit,AfterViewInit {
   GirdView!: boolean;
   showDataLoader: boolean = false;
   dashborddata: boolean = false;
-;
+  counterBill: any=[];
   searchedKeyword!: string;
   BillData: any;
   public displayedColumns:any;
@@ -81,12 +81,13 @@ export class BillCounterComponent implements OnInit,AfterViewInit {
   }
   billData(data: Object): void {
     this.BillData = data;
-    let counterBill :any=[];
+    console.log(this.BillData)
+
     this.BillData.forEach((element:any) => {
-      if(element.bill_status == "counter" ||  "counterlist")
-        counterBill.push(element)
+      if(element.bill_status == "counter" || element.bill_status== "counterlist")
+        this.counterBill.push(element)
     });
-    this.dataSource =new MatTableDataSource(counterBill);
+    this.dataSource =new MatTableDataSource(this.counterBill);
     this.setDataSourceAttributes();
     this.showDataLoader = false;
   }

@@ -130,7 +130,7 @@ export class LoginComponent implements OnInit {
   }
 
   onSubmit() {
-    if (this.loginForm.valid) {
+    if (this.sginupForm.valid) {
     let userData = {
       name: this.sginupForm['controls']['name'].value,
       email: this.sginupForm['controls']['email'].value,
