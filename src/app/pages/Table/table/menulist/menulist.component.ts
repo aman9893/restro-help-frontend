@@ -182,7 +182,6 @@ export class MenulistComponent implements OnInit ,AfterViewInit  {
   cancel(data: any) {}
 
   edit(data: any){
-
     this.showUp()
     this.updatebtn =true;
     this.tableForm.controls['menu_name'].setValue(data.menu_name);
@@ -192,7 +191,7 @@ export class MenulistComponent implements OnInit ,AfterViewInit  {
     this.menu_id= data.menu_id;
   }
   update() {
-    let menuname ;
+    let menuname ='no menu';
     let category_id =this.tableForm.controls['menu_categories'].value;
     this.categoryDataList .forEach((element: any) => {
         if(element.category_id == category_id){

@@ -19,6 +19,7 @@ import { ForgetpassComponent } from './pages/unprotected-component/forgetpass/fo
 import { AdminUserlistComponent } from './pages/unprotected-component/admin-userlist/admin-userlist.component';
 import { HelprequestComponent } from './pages/unprotected-component/helprequest/helprequest.component';
 import { ListKhataComponent } from './pages/khatabook/list-khata/list-khata.component';
+import { TaxComponent } from './pages/tax/tax.component';
 
 const routes: Routes = [
   // { path: '', component: BillComponent  , canActivate: [AuthGuard] },
@@ -54,6 +55,9 @@ const routes: Routes = [
   { path: 'attender', component: AttenderComponent  , canActivate: [AuthGuard] },
   { path: 'tablebillList', component: ListBillComponent  , canActivate: [AuthGuard] },
   { path: 'Khatabook', component: ListKhataComponent  , canActivate: [AuthGuard] },
+  { path: 'tax', component: TaxComponent  , canActivate: [AuthGuard] },
+
+  
 
   
   

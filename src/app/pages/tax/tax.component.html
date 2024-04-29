@@ -1,0 +1,82 @@
+
+<app-page-header icon="home"  >
+    <h3 routerLink="/home">Home</h3>
+    <span  class="centertext">
+        Attender management
+    </span>
+  </app-page-header>
+  <section class="divmain">
+      <section class="wrapper" id="goUp">
+          <!-- <div class="title">
+              Add Attender Name
+          </div> -->
+          <form class="menu-container" [formGroup]="taxform" autocomplete="off" novalidate>
+              <div class="field">
+                <label>*  Gst Amount calculate  in %  </label>
+                <input type="text" formControlName="total_gst" placeholder="Gst Amount in % ">
+              </div>
+              <div class="field">
+                <button *ngIf="!updatebtn &&gstDatalist && gstDatalist.length === 0" class="btn" type="submit" (click)="onSubmit()">Save</button>
+                <button *ngIf="updatebtn" class="btn" type="submit" [disabled]="!taxform.valid"
+               (click)="update()">Update</button>
+              </div>
+                  <div *ngIf="gstDatalist && gstDatalist.length >0" class="grid-wrapper" >
+                    <div class="container-search">
+                      <div class="row height d-flex justify-content-left align-items-left">
+                          <div class="col-md-6">
+                              <div class="form">
+                                  <i class="fa fa-search"></i>
+                                  <input type="text" (keyup)="applyFilter($event)" class="form-control form-input"
+                                      placeholder="Search Attender Name...">
+                              </div>
+                          </div>
+                      </div>
+                  </div>
+                      <div class="mat-elevation-z8" *ngIf="dataSource">
+                        <table  class="mat-elevation-z8" mat-table   [dataSource]="dataSource" matSortmatSortStart="desc"  matSort>
+              
+                          <!-- Position Column -->
+                          <ng-container  matColumnDef="tax_id">
+                            <th mat-header-cell   *matHeaderCellDef> Action </th>
+                                <td  mat-cell  *matCellDef="let element"> <mat-icon style="color: gery;" class="icons" (click)="edit(element)"> edit</mat-icon>
+                              <mat-icon style="color: #c84874;" class="icons" (click)="deleteValue(element.tax_id)"> delete</mat-icon> </td>
+                          </ng-container>
+                          <ng-container matColumnDef="total_tax">
+                            <th mat-header-cell  mat-sort-header *matHeaderCellDef> Total Gst </th>
+                            <td mat-cell *matCellDef="let element let i = index">   {{element.total_tax}} %</td>
+                          </ng-container>
+                     
+                          <tr mat-header-row  *matHeaderRowDef="displayedColumns"></tr>
+                          <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+                      </table>
+                          <mat-paginator [pageSizeOptions]="[5, 10, 20,50,100,150]"
+                          showFirstLastButtons
+                          aria-label="Select page of periodic elements">
+                       </mat-paginator>
+                 </div>
+              </div>
+          </form>
+    </section>
+    <!-- <div class="loaderwrap" *ngIf="showDataLoader === true">
+      <div class="loader" >
+        <mat-spinner [diameter]="60" mode="indeterminate"></mat-spinner>
+      </div>
+    </div> -->
+    </section>
+  
+      <div *ngIf="gstDatalist">
+        <div *ngIf="gstDatalist.length === 0" class="width_100" >
+            <div class="empty-state">
+                <div class="empty-state__content">
+                  <div class="empty-state__icon">
+                    <img src="https://cdni.iconscout.com/illustration/premium/thumb/sorry-item-not-found-3328225-2809510.png" alt="">
+                  </div>
+                  <div class="empty-state__message">No records has been added yet.</div>
+                  <div class="empty-state__help">
+                    Add a new record by simpley clicking the button on top 
+                  </div>
+                </div>
+              </div>
+        </div>
+      </div>
+    

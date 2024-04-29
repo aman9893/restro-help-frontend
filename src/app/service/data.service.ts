@@ -313,6 +313,19 @@ deleteCustomer(request_id:any){
   return this.http.delete(apiConfig.localhostUrl+apiConfig.deleteKhatacustomer + '/' + request_id);
 }
 
+updatetax(data:any){
+  return this.http.put(apiConfig.localhostUrl + apiConfig.updateTax, data);
+}
+deletetax(id:any){
+  return this.http.delete(apiConfig.localhostUrl + apiConfig.deleteTax+'/'+id);
+}
+saveTax(data:any){
+  return this.http.post(apiConfig.localhostUrl + apiConfig.addtax, data);
+}
+getTaxInfo() {
+  return this.http.get(apiConfig.localhostUrl + apiConfig.taxBooklist);
+}
+
 }
 
 

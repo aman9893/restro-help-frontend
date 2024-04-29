@@ -65,6 +65,7 @@ import { AddKhataComponent } from './pages/khatabook/add-khata/add-khata.compone
 import { MoreHisabComponent } from './pages/khatabook/more-hisab/more-hisab.component';
 import { ListKhataComponent } from './pages/khatabook/list-khata/list-khata.component';
 import { AddkhataAmtComponent } from './pages/khatabook/addkhata-amt/addkhata-amt.component';
+import { TaxComponent } from './pages/tax/tax.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -101,6 +102,7 @@ import { AddkhataAmtComponent } from './pages/khatabook/addkhata-amt/addkhata-am
     MoreHisabComponent,
     ListKhataComponent,
     AddkhataAmtComponent,
+    TaxComponent
   ],
   imports: [
     BrowserModule,

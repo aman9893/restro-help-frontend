@@ -88,6 +88,12 @@ export class LayoutComponent implements OnInit {
           color: '##000',
           subMenu: [
             {
+              title: 'Add Category',
+              icon: 'event_note',
+              color: '##000',
+              link: '/category'
+            },
+            {
               title: 'Add Item',
               icon: 'restaurant_menu',
               link: '/menu',
@@ -101,10 +107,10 @@ export class LayoutComponent implements OnInit {
               link: '/table'
             },
             {
-              title: 'Add Category',
-              icon: 'event_note',
+              title: 'Add Tax',
+              icon: 'store_mall_directory',
               color: '##000',
-              link: '/category'
+              link: '/tax'
             },
             {
               title: 'Add Attender',
@@ -161,6 +167,14 @@ export class LayoutComponent implements OnInit {
           icon: 'bar_chart',
           color: '##000',
           subMenu: [
+      
+         
+            {
+              title: 'Add Category',
+              icon: 'event_note',
+              color: '##000',
+              link: '/category'
+            },
             {
               title: 'Add Item',
               icon: 'restaurant_menu',
@@ -168,12 +182,11 @@ export class LayoutComponent implements OnInit {
               color: '##000'
             },
         
-         
             {
-              title: 'Add Category',
-              icon: 'event_note',
+              title: 'Add Tax',
+              icon: 'store_mall_directory',
               color: '##000',
-              link: '/category'
+              link: '/tax'
             },
        
             {

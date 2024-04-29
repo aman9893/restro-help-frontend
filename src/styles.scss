@@ -69,7 +69,7 @@ th.mat-sort-header-sorted {
   outline: none;
   font-size: 11px;
   padding-left: 20px;
-  border: 2px solid #1abc9c;
+  border: 2px solid #01120f;
   border-radius: 4px;
   transition: all 0.3s ease;
   margin: 3px;
@@ -80,13 +80,13 @@ th.mat-sort-header-sorted {
   outline: none;
   font-size: 11px;
   padding-left: 20px;
-  border: 2px solid #1abc9c;
+  border: 2px solid #01120f;
   border-radius: 4px;
   transition: all 0.3s ease;
   margin: 3px;
 }
 .wrapper form .field input:focus{
-  border: 2px solid #1abc9c;
+  border: 2px solid #000000;
 
 }
 .wrapper form .field label{
@@ -135,17 +135,19 @@ form .content .pass-link{
   color: "";
 }
 .btn{
-  height: 37px;
+  line-height: 21px;
+  margin-top: 4px;
   width: 35%;
   position: relative;
   color: #fff;
   border: none;
   /* padding-left: 0; */
-  font-size: 16px;
+  font-size: 14px;
   font-weight: 500;
   cursor: pointer;
   background: linear-gradient(313deg, #1abc9c, #11483d);
   transition: all 0.3s ease;
+  text-transform: uppercase
 }
 form .field input[type="submit"]:active{
   transform: scale(0.95);
@@ -209,11 +211,31 @@ a{
 
 // end the page 
 
+.container-search .form-input{
+  height: 35px;
+  text-indent: 33px;
+  border-radius: 4px !important;
+  margin-top: 5px;
+  margin-left: 14px;
+  border: 2px solid #212121d1 !important;
+  margin-left: 2px;
+}
 
+.wrapper form .field {
+  height: 35px;
+  width: 44% !important;
+  position: relative;
+  margin-top: 8px;
+  float: left;
+  margin: 4px;
+  margin-top: 19px;
+}
 
+.wrapper form .field label {
+  color: #031006 !important;
+  font-size: 11px !important;
 
-
-
+}
 
 
 

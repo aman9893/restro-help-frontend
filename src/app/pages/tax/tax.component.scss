@@ -1,0 +1,48 @@
+.wrapper form .field label {
+    position: absolute;
+    top: -18%;
+    left: 20px;
+    color: #28a745;
+    font-weight: 400;
+    font-size: 9px;
+    pointer-events: none;
+    transform: translateY(-50%);
+    transition: all 0.3s ease;
+    margin-top: 1px;
+}
+.wrapper form .field {
+    height: 35px;
+    width: 44%;
+    position: relative;
+    margin-top: 8px;
+    float: left;
+    margin: 4px;
+    margin-top: 19px;
+}
+
+.container-search{ 
+float: left;
+width: 90%;
+margin: 5px;
+
+.form-input {
+    border-color: #19a78b;
+    height: 35px;
+    text-indent: 33px;
+    border-radius: 10px;
+    margin-top: 5px;
+    margin-left: 14px;
+    border: 2px solid rgba(0, 0, 0, 0.38);
+
+    margin-left: 2px;
+}
+
+}
+
+.wrapper {
+    padding: 10px;
+}
+.empty-state {
+    width: 99%;
+    margin: 2px;
+}

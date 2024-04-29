@@ -46,7 +46,7 @@
                       </ng-container>
                       <ng-container matColumnDef="table_name">
                         <th mat-header-cell  mat-sort-header *matHeaderCellDef> Table Name </th>
-                        <td mat-cell *matCellDef="let element"> {{element.table_name}} </td>
+                        <td mat-cell *matCellDef="let element  let i = index">  {{i + 1}} -  {{element.table_name}} </td>
                       </ng-container>
                  
                       <tr mat-header-row  *matHeaderRowDef="displayedColumns"></tr>

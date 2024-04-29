@@ -44,7 +44,7 @@
                         </ng-container>
                         <ng-container matColumnDef="attender_name">
                           <th mat-header-cell  mat-sort-header *matHeaderCellDef> Attender Name </th>
-                          <td mat-cell *matCellDef="let element"> {{element.attender_name}} </td>
+                          <td mat-cell *matCellDef="let element let i = index">  {{i + 1}} -   {{element.attender_name}} </td>
                         </ng-container>
                    
                         <tr mat-header-row  *matHeaderRowDef="displayedColumns"></tr>

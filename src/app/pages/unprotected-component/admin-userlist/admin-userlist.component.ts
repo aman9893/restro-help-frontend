@@ -26,7 +26,7 @@ export class AdminUserlistComponent implements OnInit {
   public displayedColumns = ["name", "email", "phone_number", "user_expiry_date", "company_name", "password", "trial_days", "action"]
   showDataLoader: boolean = true;
   ngOnInit() {
-    this.getUsersData();
+   
     this.createForm();
   }
 
@@ -89,9 +89,9 @@ export class AdminUserlistComponent implements OnInit {
 
   deleteUser(id: any) {
     let deletedata = {
-      id: id,
-      body: 'Users'
-    }
+      flag:'delete',
+      body: 'Want to delete Item? '
+    };
     const dialogRef = this.dialog.open(ConfrimBoxComponent, {
       width: '400px',
       autoFocus: false,
@@ -123,6 +123,7 @@ export class AdminUserlistComponent implements OnInit {
       let password= this.loginForm['controls'].password.value;
       if(email === 'aman' && password ==='aman12345@'){
           this.showAdminUser = true;
+          this.getUsersData();
       }
     }
   }

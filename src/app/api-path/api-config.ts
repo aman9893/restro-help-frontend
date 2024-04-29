@@ -1,6 +1,6 @@
 export const apiConfig = {
-localhostUrl:"https://retroshop-psi.vercel.app/",
-  //localhostUrl: "http://localhost:3011/",
+// localhostUrl:"https://retroshop-psi.vercel.app/",
+  localhostUrl: "http://localhost:3011/",
     getAllusers:'api/getAllusers',
 
     forgetPasswordData: 'api/forgetpassword',
@@ -56,6 +56,12 @@ localhostUrl:"https://retroshop-psi.vercel.app/",
          deleteKhataHisab:'api/delete_khatahisab',
          deleteKhatacustomer:'api/delete_khatahisabCustomer',
          ///------------------------------------
+         taxBooklist: 'api/tax_list',
+         addtax: 'api/add_tax',
+         deleteTax:'api/delete_tax',
+         updateTax:'api/update_tax',
+
+
 
 //////////////////
 };
