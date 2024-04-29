@@ -5,6 +5,7 @@ import { CreateBillComponent } from './create-bill/create-bill.component';
 import { FormControl } from '@angular/forms';
 import { ListBillComponent } from './list-bill/list-bill.component';
 import { InvoiceComponent } from './invoice/invoice.component';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-bill',
@@ -19,13 +20,19 @@ export class BillComponent implements OnInit {
   searchText: any;
   searchKey: any;
   term: any;
-  constructor(public dataService: DataService, public dialog: MatDialog, private cdref: ChangeDetectorRef,) { }
+  constructor(public dataService: DataService, public dialog: MatDialog, private cdref: ChangeDetectorRef,private router: Router) {
+    this.router.events.subscribe((event: any) => {
+      this.getTableData();
+      this.getBillData();
+    })
+   }
   tableDataList: any;
   showDataLoader: boolean = true;
 
   ngOnInit() {
     this.getTableData();
     this.getBillData();
+  
   }
   getTableData() {
     this.dataService.getTableInfo().subscribe((data) => this.tableData(data));
@@ -37,7 +44,6 @@ export class BillComponent implements OnInit {
   tableData(data: any) {
     this.tableDataList = data;
     this.showDataLoader = false;
-    this.cdref.detectChanges();
   }
 
   billData(data: any) {

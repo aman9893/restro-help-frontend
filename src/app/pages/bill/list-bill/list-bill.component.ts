@@ -16,7 +16,7 @@ import { Router } from '@angular/router';
   templateUrl: './list-bill.component.html',
   styleUrls: ['./list-bill.component.scss']
 })
-export class ListBillComponent implements  OnInit,AfterViewInit {
+export class ListBillComponent implements  OnInit {
   searchView: boolean | undefined;
   listView: boolean | undefined ;
   GirdView!: boolean;
@@ -46,15 +46,12 @@ export class ListBillComponent implements  OnInit,AfterViewInit {
     event.stopPropagation()
   }
   ngOnInit() {
-    this.cdref.detectChanges();
     this.getBillData();
   }
   @ViewChild(MatSort) set matSort(ms: MatSort) {
     this.sort = ms;
     this.setDataSourceAttributes();
-  }  ngAfterViewInit() {
-   
-  }
+  }  
 
   @ViewChild(MatPaginator) set matPaginator(mp: MatPaginator) {
     this.paginator = mp;
@@ -82,14 +79,12 @@ export class ListBillComponent implements  OnInit,AfterViewInit {
   billDataCall(data: Object): void {
     let billlist :any;
     billlist= data;
-
     billlist.forEach((ele:any) => {
       if(ele.status === "tablebook"){
         this.BillData.push(ele);
       }
     });
     this.dataSource =new MatTableDataSource(this.BillData);
-    this.cdref.detectChanges();
     this.showDataLoader = false;
   }
  
@@ -133,14 +128,16 @@ export class ListBillComponent implements  OnInit,AfterViewInit {
     if (data.status === true) {
        this.getBillData();
        this.setDataSourceAttributes();
+       this.BillData=[];
       }
       this.dataService.openSnackBar(data.message, 'Dissmiss')
     }
 
     downloadInvoice(id:any) {
       let invoicedata = {
-        order: id,
-        billcounter:true, bill:'counter'
+         order: id,
+         billcounter:true,
+         bill:'counter'
       };
       const dialogRef = this.dialog.open(InvoiceComponent, {
         autoFocus: false,

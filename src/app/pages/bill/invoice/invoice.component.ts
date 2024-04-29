@@ -325,7 +325,6 @@ export class InvoiceComponent implements OnInit {
           .subscribe((data: any) => this.closedeleteDialog(data));
            this.dialogRef.close();
            this.router.navigate(['/tablebill']);
-           window.location.reload();
       }
       if (result === 'no') {
         this.dialogRef.close();

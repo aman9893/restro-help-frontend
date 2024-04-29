@@ -45,7 +45,6 @@ export class BillCounterComponent implements OnInit,AfterViewInit {
  
   }
   ngOnInit() {
-    this.cdref.detectChanges();
     this.getBillData();
   }
   @ViewChild(MatSort) set matSort(ms: MatSort) {
@@ -73,8 +72,8 @@ export class BillCounterComponent implements OnInit,AfterViewInit {
   }
  
   showUp() {
-    let element :any = document.querySelector('#goUp');
-    element.scrollIntoView();
+     let element :any = document.querySelector('#goUp');
+     element.scrollIntoView();
  }
   getBillData() {
     this.dataService.getBillInfo().subscribe((data) => this.billData(data));
@@ -82,14 +81,14 @@ export class BillCounterComponent implements OnInit,AfterViewInit {
   billData(data: Object): void {
     this.BillData = data;
     console.log(this.BillData)
-
     this.BillData.forEach((element:any) => {
       if(element.bill_status == "counter" || element.bill_status== "counterlist")
         this.counterBill.push(element)
+      this.dataSource =new MatTableDataSource(this.counterBill);
+      this.setDataSourceAttributes();
+      this.showDataLoader = false;
     });
-    this.dataSource =new MatTableDataSource(this.counterBill);
-    this.setDataSourceAttributes();
-    this.showDataLoader = false;
+
   }
  
   showSearchView() {
@@ -134,9 +133,11 @@ export class BillCounterComponent implements OnInit,AfterViewInit {
     )
   }
   deleteResponse(data:any, id:any) {
+    console.log(data)
     if (data.status === true) {
        this.getBillData();
        this.setDataSourceAttributes();
+       this.counterBill=[]
       }
       this.dataService.openSnackBar(data.message, 'Dissmiss')
     }

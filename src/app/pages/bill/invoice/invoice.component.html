@@ -5,7 +5,7 @@
     <div class="btns">
         <span class="buttoninvoice"  (click)="generatePDF('Download','counterlist')">Download Pdf</span>
         <span class="buttoninvoice"(click)="generatePDF('Download','counterlist')">Print Pdf</span>
-        <span class="buttoninvoice" style="color: red;" (click)="CompletedUserOrder(updateData.bill_no)">Completed Order</span>
+        <span *ngIf= "tabledata.bill !== 'counter'" class="buttoninvoice" style="color: red;" (click)="CompletedUserOrder(updateData.bill_no)">Completed Order</span>
     </div>
   </div>
 <section class="back">
@@ -312,6 +312,4 @@
 
 
 </ng-container>
-
-
 
