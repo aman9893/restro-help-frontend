@@ -69,7 +69,7 @@ export class LoginComponent implements OnInit {
         validators: [Validators.required,Validators.maxLength(55)],
         updateOn: 'change',
       }),
-      gst: new FormControl(''),
+      gst: new FormControl('NoGst'),
       company_logo: new FormControl(''),
     });
     if(this.updateFlag === true){
@@ -80,7 +80,7 @@ export class LoginComponent implements OnInit {
       this.sginupForm.controls['company_name'].setValue(this.updateValue.company_name);
       this.sginupForm.controls['phone_number'].setValue(this.updateValue.phone_number);
       this.sginupForm.controls['shop_address'].setValue(this.updateValue.shop_address);
-      this.sginupForm.controls['gst'].setValue(this.updateValue.gst);
+      this.sginupForm.controls['gst'].setValue(this.updateValue.gst_num);
       this.sginupForm.controls['company_logo'].setValue(this.updateValue.company_logo);
       this.sginupForm.controls['username'].setValue(this.updateValue.username);
     }

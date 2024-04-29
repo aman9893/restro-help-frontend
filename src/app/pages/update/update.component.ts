@@ -29,7 +29,6 @@ export class UpdateComponent implements OnInit {
 
   ngOnInit() {
     this.createForm();
-    console.log(this.updateValue)
   }
 
   private createForm() {
@@ -59,7 +58,7 @@ export class UpdateComponent implements OnInit {
         validators: [Validators.maxLength(55)],
         updateOn: 'change',
       }),
-      gst: new FormControl(''),
+      gst: new FormControl('No Gst'),
       company_logo: new FormControl(''),
     });
     if(this.updateValue.name){
@@ -69,7 +68,7 @@ export class UpdateComponent implements OnInit {
       this.sginupForm.controls['company_name'].setValue(this.updateValue.company_name);
       this.sginupForm.controls['phone_number'].setValue(this.updateValue.phone_number);
       this.sginupForm.controls['shop_address'].setValue(this.updateValue.shop_address);
-      this.sginupForm.controls['gst'].setValue(this.updateValue.gst);
+      this.sginupForm.controls['gst'].setValue(this.updateValue.gst_num);
       this.sginupForm.controls['company_logo'].setValue(this.updateValue.company_logo);
       this.sginupForm.controls['username'].setValue(this.updateValue.username);
     }
@@ -103,9 +102,10 @@ export class UpdateComponent implements OnInit {
       phone_number: this.sginupForm['controls']['phone_number'].value,
       shop_address: this.sginupForm['controls']['shop_address'].value,
       company_logo: '',
-      username: '',
-      gst_num: '',
+      username:  this.sginupForm['controls']['username'].value,
+      gst_num:  this.sginupForm['controls']['gst'].value,
       user_expiry_date: new Date(),
+      shop_type:this.updateValue.shop_type,
       trial_days: 14,
       rolename_id: 1,
     };
@@ -122,7 +122,7 @@ export class UpdateComponent implements OnInit {
       this.sginupForm.reset();
     }
     if (data.status === false) {
-      this.openSnackBar(data.message, 'Dismiss');
+      this.openSnackBar(data.message.message, 'Dismiss');
     }
   }
 
