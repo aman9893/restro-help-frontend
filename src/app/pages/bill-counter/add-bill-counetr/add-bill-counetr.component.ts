@@ -66,6 +66,9 @@ export class AddBillCounetrComponent implements OnInit {
   allProductsDesktopTotal: any = 0;
   GrandtotalListViewbill: number=0;
   manualView: boolean = true;
+  gstDatalist!: any;
+  tax: any;
+  taxvaluedata: number =0;
   constructor(
     public dataService: DataService,
     private formBuilder: FormBuilder,
@@ -73,6 +76,8 @@ export class AddBillCounetrComponent implements OnInit {
     public dialog: MatDialog,private router: Router,private cdref: ChangeDetectorRef
   ) {
     this.user_id = this.authService.getUserId();
+    this.getTaxvalue();
+
   }
   ngOnInit() {
     this.mobileview =this.dataService.getIsMobileResolution();
@@ -86,7 +91,31 @@ export class AddBillCounetrComponent implements OnInit {
       this.updateCustomer();
       this.formcall();
       this.myFormValueChanges$ = this.orderForm.controls['items'].valueChanges;
-  
+  }
+
+  getTaxvalue(): void {
+    this.dataService.getTaxInfo().subscribe((data:any) => this.taxdata(data));
+  }
+
+  taxdata(data: any) {
+   this.gstDatalist = data;
+   this.tax= this.gstDatalist[0].total_tax
+
+
+  }
+  updatevalue:number =0;
+
+  onCheckChange($event: any) {
+    let val = $event.target.checked;
+    if(val){
+       this.updatevalue= parseInt( ((this.tax *this.allProductsDesktopTotal)/100).toFixed(2));
+       this.allProductsDesktopTotal = parseInt(this.allProductsDesktopTotal + this.updatevalue);
+       this.taxvaluedata =this.tax;
+    }
+    else{
+      this.allProductsDesktopTotal = this.allProductsDesktopTotal - this.updatevalue;
+      this.taxvaluedata =0;
+    }
   }
 // page All Api all-------------------------------------------------------------------------------
 
@@ -255,6 +284,9 @@ showGirdView() {
       ]),
       payment_type: new FormControl('UPI', [
       ]),
+      gst_amt:new FormControl(0, [
+      ]),
+    
     });
     // this.addItem();
   }
@@ -264,7 +296,6 @@ showGirdView() {
       qty: ['', Validators.required],
       price: ['', Validators.required],
       itemprice: ['', Validators.required],
-      restro_name: [''],
     });
   }
 
@@ -460,6 +491,7 @@ showGirdView() {
       attender_id: 0,
       token_no:this.orderForm.controls['token_no'].value,
       payment_type:this.orderForm.controls['payment_type'].value,
+      gst_amt :this.taxvaluedata
     };
     this.dataService.saveBill(tableFormData).subscribe(
       (data: any) => this.closeDialog(data),
@@ -492,6 +524,8 @@ showGirdView() {
       attender_id: 0,
       token_no:this.orderForm.controls['token_no'].value,
       payment_type:this.orderForm.controls['payment_type'].value,
+      gst_amt :this.taxvaluedata
+
     };
     this.dataService.saveBill(BillData).subscribe(
       (data: any) => this.closeDialog(data),
@@ -543,6 +577,8 @@ showGirdView() {
       delivery_charge: '20',
       token_no:this.orderForm.controls['token_no'].value,
       payment_type:this.orderForm.controls['payment_type'].value,
+      gst_amt :this.taxvaluedata
+
     };
     this.dataService.updateBill(tableFormData).subscribe(
       (data: any) => this.closeDialog(data),

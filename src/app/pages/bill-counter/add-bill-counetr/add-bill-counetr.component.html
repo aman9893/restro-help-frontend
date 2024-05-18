@@ -4,12 +4,12 @@
         Counter Bill
     </span>
     <button *ngIf="GirdView" mat-flat-button color="primary" class="action" (click)="showListView()">
-        <mat-icon class="mr-2">menu</mat-icon>
-        <span> Show List </span>
+        <mat-icon class="mr-2">add</mat-icon>
+        <span> Add Custom Bill </span>
     </button>
     <button *ngIf="listView" mat-flat-button color="primary" class="action" (click)="showGirdView()">
-        <mat-icon class="mr-2">desktop_mac</mat-icon>
-        <span> Show Grid </span>
+        <mat-icon class="mr-2">add</mat-icon>
+        <span> Add Counter Bill</span>
     </button>
 </app-page-header>
 <div *ngIf="menuDataList && menuDataList.length > 0">
@@ -197,28 +197,43 @@
                             <div>
                                 Subtotal <span> - {{this.subtotal}} Rs</span>
                             </div>
-
                         </div>
                         <div class="wrapperdiscount">
-                            <div *ngIf="!mobileview && DesktopProducts.length !==0 " class="row">
-                                <div class="col-md-4">
-                                    <input id="last" class="form-label" type="text" placeholder="Token No" formControlName="token_no" />
+                            <div *ngIf="!mobileview && DesktopProducts.length !==0 " class="width_100">
+                                <div class="width30">
+                                    <span class="spant">TokenNo :</span>
+                                    <span><input  class="form-label" type="number" placeholder="Token No" formControlName="token_no" /></span>
                                 </div>
-                                <div class="col-md-4 ">
-                                    <input id="first" class="form-label" type="text" placeholder="Discount" formControlName="discount"
-                                        (change)="discountchange('grid')" />
+                                <div class="width30 ">
+                                    <span class="spant">Discount:</span>
+                                    <span> <input id="first" class="form-label" type="number" placeholder="Discount " formControlName="discount"
+                                        (change)="discountchange('grid')" /> Rs</span>
                                 </div>
-                                <div class="col-md-4 ">
+                                <div class="width30">
+                                    <span class="spant">Payment Type:</span>
+                                    <span>
                                     <select  formControlName="payment_type">
-                                        <option value="Payment Type">Payment Type</option>
+                                        <option value="Payment Type"></option>
                                         <option value="UPI">UPI</option>
                                         <option value="CASH">CASH</option>
                                         <option value="Bank">Bank</option>
                                     </select>
+                                    </span>
 
                                 </div>
+                        
                             </div>
+                            
                         </div>
+                        <div *ngIf="tax" class="width_100  checktax" >
+                            <div class="form-check">
+                                <input class="form-check-input"  formControlName="gst_amt"   (change)="onCheckChange($event)"   type="checkbox" [value]="gstDatalist[0].total_tax">
+                                <label class="form-check-label"  for="flexCheckDefault">
+                                  Add Tax (GST) -  {{gstDatalist[0].total_tax}} % - Tax calculated in percentage
+                                </label>
+                              </div>
+                        </div>
+                     
                         <div class="divtotal">
                             Grand Total - {{allProductsDesktopTotal}} Rs
                         </div>
@@ -238,7 +253,7 @@
                         <table class="table">
                             <thead>
                                 <tr>
-                                    <th width="5%"> Total I</th>
+                                    <th width="5%"> T-Item</th>
                                     <th width="5%">Subtotal </th>
                                     <th width="15%"> Token No</th>
                                     <th width="15%">Discount </th>
@@ -271,6 +286,14 @@
                                 </tr>
                             </tbody>
                         </table>
+                        <div *ngIf="tax" class="width_100  checktax" >
+                            <div class="form-check">
+                                <input class="form-check-input"  formControlName="gst_amt"   (change)="onCheckChange($event)"   type="checkbox" [value]="gstDatalist[0].total_tax">
+                                <label class="form-check-label"  for="flexCheckDefault">
+                                  Add Tax (GST) -  {{gstDatalist[0].total_tax}} % - Tax calculated in percentage
+                                </label>
+                              </div>
+                        </div>
                         <div class="divtotalmobile">
                             Grand Total -{{allProductsDesktopTotal}} Rs
                         </div>
@@ -385,7 +408,7 @@
             <table class="table">
                 <thead>
                     <tr>
-                        <th width="15%"> Total Item</th>
+                        <th width="15%"> Total-Item</th>
                         <th width="15%">Subtotal </th>
                         <th width="10%"> Token No</th>
                         <th width="10%">Discount </th>
@@ -393,7 +416,7 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr class="wrapperdiscount">
+                    <tr class="wrapperdiscountlist">
                         <td class="subtitiletable">
                             {{items.length}}
                         </td>
@@ -418,6 +441,14 @@
                     </tr>
                 </tbody>
             </table>
+            <div *ngIf="tax" class="width_100  checktax" >
+                <div class="form-check">
+                    <input class="form-check-input"  formControlName="gst_amt"   (change)="onCheckChange($event)"   type="checkbox" [value]="gstDatalist[0].total_tax">
+                    <label class="form-check-label"  for="flexCheckDefault">
+                      Add Tax (GST) -  {{gstDatalist[0].total_tax}} % - Tax calculated in percentage
+                    </label>
+                  </div>
+            </div>
             <div class="divtotal">
                 Grand Total - {{GrandtotalListViewbill}} Rs
             </div>
@@ -437,7 +468,7 @@
             <table class="table">
                 <thead>
                     <tr>
-                        <th width="5%"> Total Item</th>
+                        <th width="5%">  Items</th>
                         <th width="5%">Subtotal </th>
                         <th width="15%"> Token No</th>
                         <th width="15%">Discount </th>
@@ -470,6 +501,14 @@
                     </tr>
                 </tbody>
             </table>
+            <div *ngIf="tax" class="width_100  checktax" >
+                <div class="form-check">
+                    <input class="form-check-input"  formControlName="gst_amt"   (change)="onCheckChange($event)"   type="checkbox" [value]="gstDatalist[0].total_tax">
+                    <label class="form-check-label"  for="flexCheckDefault">
+                      Add Tax (GST) -  {{gstDatalist[0].total_tax}} % - Tax calculated in percentage
+                    </label>
+                  </div>
+            </div>
             <div class="divtotalmobile">
                 Grand Total - {{GrandtotalListViewbill}} Rs
             </div>

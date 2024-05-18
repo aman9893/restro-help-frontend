@@ -1,6 +1,6 @@
 .listwrap{
     padding: 2px;
-    border: 3px solid rebeccapurple;
+    border: 1px solid #e9ecef;
     float: left;
     width: 98%;
     margin-top: 1px;
@@ -14,7 +14,8 @@
   }
 
   .bbutton {
- 
+    color: #fff !important;
+    background: #021b10ab !important;
     width: 32%;
 }
 
@@ -22,7 +23,7 @@
 .gridviewwrap{
     float: left;
     width: 99%;
-    border: 2px solid rebeccapurple;
+    border: 1px solid #dee2e6;
     padding: 2px;
     margin-left: 2px;
     margin-top: 2px;
@@ -30,51 +31,73 @@
 }
 
 .border-right{
-    border-right: 2px solid rebeccapurple !important;
+    border-right: 2px solid #dee2e6 !important;
     border-radius: 2px;
-
 }
 
 .newinput input{
     width: 100%;
     outline: none;
-    font-size: 14px;
+    font-size: 10px;
     padding-left: 20px;
-    border: 2px solid rebeccapurple;
+    border: 2px solid rgb(208, 208, 209);
     border-radius: 7px;
     transition: all 0.3s ease;
     /* margin: 3px; */
-    height: 39px;
+    height: 30px;
 }
 
 .wrapperdiv1 div {
     float: left;
     width: 48%;
-    border-right: 94px solid rebeccapurple !important;
+    /* border-right: 94px solid rebeccapurple !important; */
     padding: 4px;
     margin-right: 9px;
-    border-radius: 6px;
-    border: solid;
+    border-radius: 4px;
+    /* border: solid; */
     opacity: 0.8;
+    text-align: center;
+    background: #21212191;
+    color: white;
 }
 
 .wrapperdiscount  input{
-    display: block;
-    border-radius: 5px;
-    border-color: #0d6efd;
-    color: black;
+    border-radius: 3px;
+ 
+    font-size: 12px;
+    padding: 6px;
+    width: 80px;
 }
 .wrapperdiscount{
-    padding: 9px;
+    padding: 11px;
+    float: left;
+    width: 100%;
+    margin-top: 0px;
+    background: rgba(0, 0, 0, 0.6);
+    color: white;
+}
+.wrapperdiscountlist{
+    padding: 11px;
+    width: 100%;
+    margin-top: 0px;
+    background: rgba(0, 0, 0, 0.6);
+    color: white;
 }
 .wrapperdiscount  select{
+
+    padding: 9px;
     display: block;
-    border-radius: 5px;
-    border-color: #0d6efd;
+    border-radius: 3px;
     color: black;
-    width: 100%;
-    padding: 2px;
-    border: 2px solid #0d6efd;
+    font-size: 12px;
+}
+.width30{
+    width: 32%;
+    float: left;
+    display: flex;
+    margin: 3px;
+    font-size: 12px;
+
 }
 
 .wrapperdivbtn {
@@ -87,28 +110,37 @@
     width: 100%;
     margin: 10px;
 }
+.spant{
+    padding: 8px;
+    font-size: 13px;
+
+
+}
+.checktax{
+    font-size: 13px;
+    margin-left: 3px;
+}
 
 .divtotal {
-    /* margin-left: 13px; */
     text-align: center;
     background: #f8f9fa;
     color: #fff;
-    /* padding-left: 62px; */
     font-size: 13px;
     border-radius: 2px;
-    height: 35px;
-    line-height: 35px;
-    /* padding-top: 18px; */
+    height: 40px;
+    line-height: 40px;
     box-shadow: 0 4px 6px rgba(50, 50, 93, 0.11), 0 1px 3px rgba(0, 0, 0, 0.08);
     width: 100%;
-    background: #845bac;
+    background: #28a745;
     font-weight: 500;
+    float: left;
+    margin-top: 1px;
 }
 
 .divtotalmobile {
-    width: auto !important;
+    width: 100% !important;
     text-align: center !important;
-    background: rgb(148 112 183) !important;
+    background: #28a745 !important;
     color: #fff !important;
     font-size: 18px !important;
     border-radius: 4px !important;
@@ -117,12 +149,13 @@
     box-shadow: 0 4px 6px rgba(50, 50, 93, 0.11), 0 1px 3px rgba(0, 0, 0, 0.08);
     margin-left: 10px !important;
     margin-top: 0px !important;
+    float: left;
 }
 
 .bbuttonmobile {
     color: #fff !important;
-    background: #00ad5f;
-    text-shadow: 0 1px 3px rgba(36, 180, 126, 0.4);
+    background: #021b10ab !important;
+    text-shadow: 0 1px 3px rgba(1, 17, 11, 0.4);
     white-space: nowrap;
     display: inline-block;
     height: 24px;
@@ -175,8 +208,9 @@
 }
 
 .list-group-item {
-    font-size: 9px;
+    font-size: 11px;
     width: auto;
     height: 28px;
+    font-weight: 500;
 
   }

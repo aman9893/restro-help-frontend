@@ -29,6 +29,7 @@ export class InvoiceComponent implements OnInit {
   billupdate: any;
   userdata: any;
   user_id: any;
+  gst_num: any;
   
 
   constructor(
@@ -46,6 +47,8 @@ export class InvoiceComponent implements OnInit {
       this.getTableBillData(this.tabledata.tableid);
     }
       this.userdata = this.dataService.userData;
+      console.log(this.userdata)
+      this.gst_num = this.userdata?.gst_num;
   }
   getTableBillData(id: any) {
     this.dataService
@@ -332,5 +335,28 @@ export class InvoiceComponent implements OnInit {
     });
   }
   closedeleteDialog(data: any) {
+  }
+  date = new Date().toLocaleDateString();
+  receiptNumber = Math.floor(Math.random() * 1000000).toString();
+  items = [
+    { name: 'Item 1', quantity: 2, price: 5.00 },
+    { name: 'Item 2', quantity: 1, price: 10.00 }
+  ];
+  total = this.items.reduce((acc, item) => acc + item.quantity * item.price, 0);
+
+  printReceipt() {
+    const receiptContent = `
+      Store Name\n
+      Date: ${this.date}\n
+      Receipt #: ${this.receiptNumber}\n
+      ------------------------------\n
+      ${this.items.map(item => `${item.name} x${item.quantity} @ ${item.price}\n`).join('')}
+      ------------------------------\n
+      Total: ${this.total}\n
+    `;
+    this.dataService.print(receiptContent).subscribe(response=> {
+      if(response)
+      console.log('Print success:', response);
+    });
   }
 }

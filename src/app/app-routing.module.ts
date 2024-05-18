@@ -20,6 +20,7 @@ import { AdminUserlistComponent } from './pages/unprotected-component/admin-user
 import { HelprequestComponent } from './pages/unprotected-component/helprequest/helprequest.component';
 import { ListKhataComponent } from './pages/khatabook/list-khata/list-khata.component';
 import { TaxComponent } from './pages/tax/tax.component';
+import { ThermalPrinterComponent } from './thermal-printer/thermal-printer.component';
 
 const routes: Routes = [
   // { path: '', component: BillComponent  , canActivate: [AuthGuard] },
@@ -42,6 +43,9 @@ const routes: Routes = [
     { path: 'help', component: HelprequestComponent },
 
   { path: '', component: DashbordComponent  , canActivate: [AuthGuard] },
+  
+  { path: 'printer',  component: ThermalPrinterComponent , canActivate: [AuthGuard]},
+
   { path: 'addcounterbill',  component: AddBillCounetrComponent , canActivate: [AuthGuard]},
   { path: 'booktable/:id',  component: CreateBillComponent , canActivate: [AuthGuard]},
   { path: 'home',  component: DashbordComponent , canActivate: [AuthGuard]},

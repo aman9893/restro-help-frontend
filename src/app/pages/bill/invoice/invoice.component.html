@@ -18,9 +18,10 @@
               <h2 class="titlehead">{{userdata.company_name}} </h2>
             </div>
             <div class="row">
+              <h2  class="our-company-name"> GST No - {{gst_num}}</h2>
               <div class="col-sm-6">
                   <div class="invoice-top-right">
-                    <h2> Customer Details</h2>
+                    <h2  class="our-company-name"> Customer Details</h2>
                     <h2 class="our-company-name"><b>Invoice </b> : # {{updateData.bill_no}}</h2>
                       <h2 class="our-company-name"><b>Payment Type </b> : {{updateData.payment_type}}</h2>
                     <h2 class="our-company-name">Name : {{updateData.cutomer_name | titlecase}}</h2>
@@ -30,7 +31,7 @@
               </div>
               <div class="col-sm-6">
                    <div class="invoice-top-right">
-                  <h2> Business Details -</h2>
+                  <h2  class="our-company-name"> Business Details -</h2>
                   <h2 class="our-company-name"> Name:{{userdata.company_name}}</h2>
                   <h2 class="our-company-name"> Number:{{userdata.phone_number}}</h2>
                   <h2 class="our-company-name"> Email:{{userdata.email}}</h2>
@@ -107,6 +108,8 @@
   <div class="btns">
       <span class="buttoninvoice" (click)="generatePDF('Download','counter')">Download Pdf<mat-icon>picture_as_pdf</mat-icon> </span>
       <span class="buttoninvoice" (click)="generatePDF('Print','counter')">Print Invoice <mat-icon>print</mat-icon></span>
+      <span class="buttoninvoice" (click)="printReceipt()">Print KOT Invoice <mat-icon>print</mat-icon></span>
+
   </div>
 </div>
 <section class="back">
@@ -119,9 +122,11 @@
               <h2 class="titlehead">{{userdata.company_name}} </h2>
             </div>
             <div class="row">
+              <h2  class="our-company-name"> GST No - {{gst_num}}</h2>
+
               <div class="col-sm-6">
                 <div class="invoice-top-right">
-                  <h2> Customer Details -</h2>
+                  <h2 class="our-company-name"> Customer Details -</h2>
                   <h2 class="our-company-name"><b>Invoice </b> : # {{updateData.bill_no}}</h2>
                   <h2 class="our-company-name"><b>Token No </b> :  {{updateData.token_no}}</h2>
                     <h2 class="our-company-name"><b>Payment Type </b> : {{updateData.payment_type}}</h2>
@@ -132,7 +137,7 @@
               </div>
               <div class="col-sm-6">
                 <div class="invoice-top-right">
-                  <h2> Business Details -</h2>
+                  <h2 class="our-company-name"> Business Details -</h2>
                   <h2 class="our-company-name"> Name- {{userdata.company_name}}</h2>
                   <h2 class="our-company-name">Number- {{userdata.phone_number}}</h2>
                   <h2 class="our-company-name"> Email -{{userdata.email}}</h2>
@@ -215,6 +220,8 @@
      <div class="btns">
          <span class="buttoninvoice" (click)="generatePDF('Download','counterlist')">Download Pdf<mat-icon>picture_as_pdf</mat-icon> </span>
          <span class="buttoninvoice" (click)="generatePDF('Print','counterlist')">Print Invoice <mat-icon>print</mat-icon></span>
+      <span class="buttoninvoice" (click)="printReceipt()">Print KOT Invoice <mat-icon>print</mat-icon></span>
+
      </div>
   </div>
 <section class="back">
@@ -227,9 +234,11 @@
               <h2 class="titlehead">{{userdata.company_name}} </h2>
             </div>
             <div class="row">
+              <h2  class="our-company-name"> GST No - {{gst_num}}</h2>
+
               <div class="col-sm-6">
                 <div class="invoice-top-right">
-                  <h2> Customer Details</h2>
+                  <h2 class="our-company-name"> Customer Details</h2>
                   <h2 class="our-company-name"><b>Invoice </b> : # {{updateData.bill_no}}</h2>
                   <h2 class="our-company-name"><b>Token No </b> :  {{updateData.token_no}}</h2>
                     <h2 class="our-company-name"><b>Payment Type </b> : {{updateData.payment_type}}</h2>
@@ -240,7 +249,7 @@
               </div>
               <div class="col-sm-6">
                 <div class="invoice-top-right">
-                  <h2> Business Details -</h2>
+                  <h2 class="our-company-name"> Business Details -</h2>
                   <h2 class="our-company-name"> Name:{{userdata.company_name}}</h2>
                   <h2 class="our-company-name"> Number:{{userdata.phone_number}}</h2>
                   <h2 class="our-company-name"> Email:{{userdata.email}}</h2>

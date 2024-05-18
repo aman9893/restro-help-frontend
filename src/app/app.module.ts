@@ -66,6 +66,7 @@ import { MoreHisabComponent } from './pages/khatabook/more-hisab/more-hisab.comp
 import { ListKhataComponent } from './pages/khatabook/list-khata/list-khata.component';
 import { AddkhataAmtComponent } from './pages/khatabook/addkhata-amt/addkhata-amt.component';
 import { TaxComponent } from './pages/tax/tax.component';
+import {MatCheckboxModule} from '@angular/material/checkbox';
 @NgModule({
   declarations: [
     AppComponent,
@@ -121,7 +122,7 @@ import { TaxComponent } from './pages/tax/tax.component';
   MatTableModule, MatPaginatorModule,
   CommonModule,
   MatAutocompleteModule,MatDialogModule ,MatMenuModule,MatSortModule,MatCardModule,
-  MatSidenavModule,MatToolbarModule,MatListModule,MatExpansionModule,CanvasJSAngularChartsModule , MatRadioModule
+  MatSidenavModule,MatToolbarModule,MatListModule,MatExpansionModule,CanvasJSAngularChartsModule , MatRadioModule,MatCheckboxModule 
   ],
   providers: [{provide: HTTP_INTERCEPTORS, useClass: TokenInterService, multi: true},{ provide: HTTP_INTERCEPTORS, useClass: LoaderInterceptor, multi: true }
   ],

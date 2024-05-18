@@ -119,6 +119,12 @@ export class LayoutComponent implements OnInit {
               link: '/attender'
             },
             {
+              title: 'Add Printer',
+              icon: 'picture_as_pdf',
+              color: '##000',
+              link: '/printer'
+            },
+            {
               title: 'Help',
               icon: 'pan_tool',
               color: '##000',
@@ -188,7 +194,13 @@ export class LayoutComponent implements OnInit {
               color: '##000',
               link: '/tax'
             },
-       
+            {
+              title: 'Add Printer',
+              icon: 'picture_as_pdf',
+              color: '##000',
+              link: '/printer'
+            },
+            
             {
               title: 'Help',
               icon: 'pan_tool',

@@ -114,7 +114,9 @@ export class DataService {
   }
 
 
-
+  print(content: string) {
+    return this.http.post(apiConfig.localhostUrl + apiConfig.printer, content );
+  }
   
   
   registerData(data:any) {
