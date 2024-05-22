@@ -20,6 +20,7 @@ export class BillComponent implements OnInit {
   searchText: any;
   searchKey: any;
   term: any;
+  mobileview: boolean =false;
   constructor(public dataService: DataService, public dialog: MatDialog, private cdref: ChangeDetectorRef,private router: Router) {
     this.router.events.subscribe((event: any) => {
       this.getTableData();
@@ -32,6 +33,7 @@ export class BillComponent implements OnInit {
   ngOnInit() {
     this.getTableData();
     this.getBillData();
+    this.mobileview = this.dataService.getIsMobileResolution();
   
   }
   getTableData() {

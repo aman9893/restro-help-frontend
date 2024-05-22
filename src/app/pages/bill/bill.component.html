@@ -60,7 +60,7 @@
                                
                               
                                 <div class="actions">
-                                    <div *ngIf="table.bill_status !=='booked'" class="example-button-container" style="margin-left: 45px;">
+                                    <div *ngIf="table.bill_status !=='booked'" class="example-button-container"   [class.desktop] = "!mobileview"    [class.mobiledata] = "mobileview"> 
                                         <button  mat-mini-fab color="primary" title="Add Order" aria-label="Example icon button with a delete icon"  (click)="addOder(table)">
                                           <mat-icon>add</mat-icon>
                                         </button>

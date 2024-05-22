@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-
+import {Location} from '@angular/common';
 @Component({
   selector: 'app-page-header',
   templateUrl: './page-header.component.html',
@@ -7,9 +7,11 @@ import { Component, Input, OnInit } from '@angular/core';
 })
 export class PageHeaderComponent implements OnInit {
 
-  constructor() { }
+  constructor(private _location: Location) { }
   @Input() icon?: string;
   ngOnInit(): void {
   }
-
+  backClicked() {
+    this._location.back();
+  }
 }

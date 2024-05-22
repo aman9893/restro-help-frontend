@@ -25,10 +25,11 @@
     </mat-dialog-content>
     <div   class="both_btn">
         <div class="Modal_delete_footer">
+            <button mat-stroked-button color="primary" type="submit" [disabled]="!khataFom.valid" (click)="onSubmit()"
+            class="uppercase_button">Save</button>
             <button mat-stroked-button color="warn" (click)="cancel('Cancel')"
                 class="cancle_deelete_button">Cancel</button>
-            <button mat-stroked-button color="primary" type="submit" [disabled]="!khataFom.valid" (click)="onSubmit()"
-                class="uppercase_button">Save</button>
+          
         </div>
     </div>
 </form>

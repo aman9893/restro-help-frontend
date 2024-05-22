@@ -54,7 +54,7 @@
   color: #182657 !important;
   font-weight: 500 !important;
   text-transform: capitalize;
-  font-size: 13px !important;
+  font-size: 14px !important;
 }
 .table td {
   
@@ -64,17 +64,15 @@
 
 @media only screen and (max-width: 600px) {
   .mat-expansion-panel-header-description, .mat-expansion-panel-header-title {
-    font-size: 10px !important;
+    font-size: 14px !important;
   }
 
   .iconmob{
-    font-size: 18px;
-    text-align: center;
-    padding-top: 6px;
-    padding-left: 3px;
-    background: gray;
-    padding: 4px;
+    background: #3f51b5;
+    padding: 0px;
     color: white;
+    border-radius: 3px;
+    margin-right: -27px;
   }
   .table td {
     
@@ -94,8 +92,8 @@
 
 @media screen and (max-width: 480px) {
   .table td{
-    font-family: 'poppinsnormal' !important;
-    font-size: 9px !important;
+    font-family: sans-serif;
+    font-size: 14px !important;
     text-align: center;
 }
 .my-classgreen{
@@ -114,13 +112,4 @@
 .Modal_delete_footer button{
   float: right;
   margin: 10px;
-}
-.iconmob{
-  font-size: 18px;
-  text-align: center;
-  padding-top: 6px;
-  padding-left: 3px;
-  background: gray;
-  padding: 4px;
-  color: white;
 }

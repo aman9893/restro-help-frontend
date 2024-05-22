@@ -54,7 +54,7 @@ export class AddkhataAmtComponent implements OnInit {
     }
   }
   getError(err:any) {
-    return '* is required field';
+    return '* Amount is required field';
   }
 
   //---------------------------------------------add file end -------------------------------------

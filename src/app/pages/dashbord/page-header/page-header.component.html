@@ -1,13 +1,10 @@
 <div class="feature-header justify-content-between align-items-center">
     <div class="start">
       <div class="title">
-        <mat-icon *ngIf="icon" class="feature-icon mr-1" routerLink="/home">
-          home
+        <mat-icon *ngIf="icon" class="feature-icon mr-1" (click)="backClicked()">
+          arrow_back
         </mat-icon>
-        <div class="h3data" >
-        <ng-content select="h3"></ng-content>
-
-        </div>
+   
       </div>
 
       <ng-content  select="p"></ng-content>

@@ -30,6 +30,7 @@ export class DashbordComponent implements OnInit {
   chartOptions3: any
   shopType: any;
   chartOptions2: any
+  showdata: boolean =false;
   constructor(public dataService: DataService, public authService: AuthService, public dialog: MatDialog,) {
   }
   @ViewChild(MatSort) sort = {} as MatSort;
@@ -38,9 +39,8 @@ export class DashbordComponent implements OnInit {
     this.UserId = this.authService.getUserId();
     this.getResgiterDataById();
     this.mobileview = this.dataService.getIsMobileResolution();
-    this.getBillData()
     this.shopType = localStorage.getItem('shop_type')
-    this.getMonthlydata();
+
   }
   @ViewChild(MatSort) set matSort(ms: MatSort) {
     this.sort = ms;
@@ -87,12 +87,15 @@ export class DashbordComponent implements OnInit {
       sum += parseInt(incomedata.total_bill);
     });
     this.todayincome = sum;
-    this.getAllCount();
 
   }
   getRegisterData(data: any) {
     this.userData = data[0];
     this.dataService.userData = this.userData;
+    this.getAllCount();
+    this.getBillData()
+    this.getMonthlydata();
+    this.showdata =true;
   }
   getAllCount(): void {
     this.dataService.getallcount().subscribe((data) => this.countdata(data),

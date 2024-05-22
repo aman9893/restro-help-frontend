@@ -335,6 +335,7 @@ export class CreateBillComponent implements OnInit {
       attender_id: 0,
       token_no:this.orderForm.controls['token_no'].value,
       payment_type:this.orderForm.controls['payment_type'].value,
+      gst_amt:0
     };
     this.dataService.saveBill(tableFormData).subscribe(
       (data: any) => this.closeDialog(data),
@@ -369,6 +370,7 @@ export class CreateBillComponent implements OnInit {
       attender_id: '',
       token_no:this.orderForm.controls['token_no'].value,
       payment_type:this.orderForm.controls['payment_type'].value,
+      gst_amt:0
 
     };
     this.dataService.updateBill(tableFormData).subscribe(
