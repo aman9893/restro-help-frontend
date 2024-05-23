@@ -5,8 +5,8 @@
 	box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
 }
 .invoice-top{
-	background-color: #fafafa;
-	padding: 0px 40px;
+    background-color: #fafafa;
+    padding: 0px 19px;
 }
 /*
 Invoice-top-left refers to the client name & address, service provided
@@ -51,8 +51,9 @@ Invoice-top-right refers to the our name & address, logo and date
     margin-top: 0;
 }
 .our-company-name{
-	font-size: 16px;
+    font-size: 13px !important;
     margin-bottom: 0;
+
 }
 .our-address{
 	font-size: 13px;
@@ -65,9 +66,10 @@ Invoice-top-right refers to the our name & address, logo and date
 Invoice-bottom refers to the bottom part of invoice template
 */
 .invoice-bottom{
-	background-color: #ffffff;
-    padding: 1px 36px;
-    position: relative;
+    background-color: #ffffff;
+    padding: 0px 19px;
+    float: left;
+    width: 100%;
 }
 .title{
 	font-size: 30px;
@@ -124,7 +126,6 @@ bottom-bar is colored bar located at bottom of invoice-card
 .titlehead{
 	text-align: center;
     font-weight: 500;
-    border-bottom: 1px dotted;
 }
 .btns{
   text-align: center;

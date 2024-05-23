@@ -113,18 +113,16 @@
   </div>
 </div>
 <section class="back">
-  <div class="container">
-    <div class="row">
-      <div class="col-xs-12">
         <div class="invoice-wrapper">
           <div class="invoice-top">
             <div class="col-xs-12">
               <h2 class="titlehead">{{userdata.company_name}} </h2>
             </div>
-            <div class="row">
-              <h2  class="our-company-name"> GST No - {{gst_num}}</h2>
+            <div class="width_100">
+              <h4 class="our-company-name" >GST  - {{gst_num}}</h4>
+              <h4 class="our-company-name">Date :  {{updateData.create_date | date:'short'}} </h4>
 
-              <div class="col-sm-6">
+              <div class="width_50">
                 <div class="invoice-top-right">
                   <h2 class="our-company-name"> Customer Details -</h2>
                   <h2 class="our-company-name"><b>Invoice </b> : # {{updateData.bill_no}}</h2>
@@ -132,10 +130,9 @@
                     <h2 class="our-company-name"><b>Payment Type </b> : {{updateData.payment_type}}</h2>
                   <h2 class="our-company-name">Name - {{updateData.cutomer_name | titlecase}}</h2>
                     <h2 class="our-company-name">Number - {{updateData.cutomer_number}}</h2>
-                    <h2 class="our-company-name"><b>Created Date </b>:  {{updateData.create_date | date:'medium'}} </h2>
                 </div>
               </div>
-              <div class="col-sm-6">
+              <div class="width_50">
                 <div class="invoice-top-right">
                   <h2 class="our-company-name"> Business Details -</h2>
                   <h2 class="our-company-name"> Name- {{userdata.company_name}}</h2>
@@ -179,6 +176,15 @@
                   </thead>
                   <thead>
                     <tr>
+                      <th><b>Gst (Total Tax)</b></th>
+                      <th></th>
+                      <th></th>
+                      <th *ngIf="updateData.gst_amt !== ''"> {{updateData.gst_amt}} ₹</th>
+                    </tr>
+                  </thead>
+                  
+                  <thead>
+                    <tr>
                       <th><b>Discount</b></th>
                       <th></th>
                       <th></th>
@@ -205,9 +211,7 @@
             <div class="bottom-bar"></div>
           </div>
         </div>
-      </div>
-    </div>
-  </div>
+ 
 </section>
 </ng-container>
 
