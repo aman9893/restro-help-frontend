@@ -240,6 +240,7 @@ showGirdView() {
     this.dataService.getMenuInfo().subscribe((data) => this.menuData(data));
   }
   menuData(data: any) {
+    console.log(data)
     if(data.length !== 0){
       for (var i = 0; i < data.length; i++) {
         data[i].qty = 1;
@@ -247,7 +248,9 @@ showGirdView() {
       }
       this.menuDataList = data;
     }
-   
+    else{
+      // this.menuDataList = data[0].data ='np';
+    }
 
   }
   //////////////////////////////////////////////////api call/////////////////////////////////////////
@@ -278,6 +281,7 @@ showGirdView() {
       ]),
       
       discount: new FormControl( '', [Validators.pattern(this.dataService.phoneValidation()),Validators.maxLength(20)]),
+      
       delivery_charge: new FormControl('', [
       ]),
       token_no: new FormControl('', [
@@ -324,6 +328,7 @@ showGirdView() {
   }
 
   discountListchange(){
+    this.updateCart();
     this.discount = this.orderForm.controls['discount'].value;
     if(this.discount < this.ListViewTotalBill  ){
     this.GrandtotalListViewbill = this.ListViewTotalBill - this.discount;
@@ -332,6 +337,8 @@ showGirdView() {
       this.GrandtotalListViewbill =0;
     }
   }
+
+
   onBookChange(event: any, idx: any) {
     for (let i in this.menuDataList) {
       if (event.target .value === this.menuDataList[i].menu_name) {

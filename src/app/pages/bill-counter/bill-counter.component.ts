@@ -37,7 +37,7 @@ export class BillCounterComponent implements OnInit,AfterViewInit {
       this. displayedColumns= [ 'create_date', 'status', 'bill_no'];
     }
     else{
-      this. displayedColumns= ['bill_id', 'create_date', 'status', 'bill_no',];
+      this. displayedColumns= ['bill_id', 'bill_no','create_date', 'status', ];
     }
    }
     stopPropagation(event:any) {

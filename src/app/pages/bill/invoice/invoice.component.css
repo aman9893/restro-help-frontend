@@ -1,8 +1,11 @@
 .back{}
 .invoice-wrapper{
-	margin: 20px auto;
-	max-width: 700px;
-	box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
+    margin: 20px auto;
+    max-width: 700px;
+    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
+    border: 1px solid gainsboro;
+    height: 642px;
+    overflow: auto;
 }
 .invoice-top{
     background-color: #fafafa;
@@ -152,7 +155,8 @@ bottom-bar is colored bar located at bottom of invoice-card
 }
 
 .table td{
-    padding: 2px !important;
+    padding: 8px !important;
     font-size: 11px;
+    text-transform: capitalize;
 
 }

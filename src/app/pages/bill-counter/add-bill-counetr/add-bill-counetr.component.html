@@ -195,7 +195,7 @@
                                 Total Item <span > - {{DesktopProducts.length}}</span>
                             </div>
                             <div>
-                                Subtotal <span> - {{this.subtotal}} Rs</span>
+                                Subtotal <span> - {{this.subtotal}} ₹</span>
                             </div>
                         </div>
                         <div class="wrapperdiscount">
@@ -207,7 +207,7 @@
                                 <div class="width30 ">
                                     <span class="spant">Discount:</span>
                                     <span> <input id="first" class="form-label" type="number" placeholder="Discount " formControlName="discount"
-                                        (change)="discountchange('grid')" /> Rs</span>
+                                        (change)="discountchange('grid')" /> ₹</span>
                                 </div>
                                 <div class="width30">
                                     <span class="spant">Payment Type:</span>
@@ -235,7 +235,7 @@
                         </div>
                      
                         <div class="divtotal">
-                            Grand Total - {{allProductsDesktopTotal}} Rs
+                            Grand Total - {{allProductsDesktopTotal}} ₹
                         </div>
                         <div class="wrapperdivbtn">
                             <div>
@@ -253,11 +253,11 @@
                         <table class="table">
                             <thead>
                                 <tr>
-                                    <th width="5%"> T-Item</th>
+                                    <th width="5%"> Items</th>
                                     <th width="5%">Subtotal </th>
                                     <th width="15%"> Token No</th>
                                     <th width="15%">Discount </th>
-                                    <th width="15%">Payment Type</th>
+                                    <th width="15%">Payment.T</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -266,14 +266,14 @@
                                         {{DesktopProducts.length}}
                                     </td>
                                     <td  class="subtitiletable">
-                                        {{this.subtotal}} Rs
+                                        {{this.subtotal}} ₹
                                     </td>
                                     <td >
                                         <input  style="width: 61px;" id="last" class="form-label" type="text" formControlName="token_no" />
                                     </td>
                                     <td>
                                         <input   style="width: 61px;"  id="first" class="form-label" type="text" formControlName="discount"
-                                            (change)="discountListchange()" />
+                                        (change)="discountchange('grid')"  />
                                     </td>
                                     <td>
                                         <select style="padding: 5px;  width: 63px;" formControlName="payment_type">
@@ -295,7 +295,7 @@
                               </div>
                         </div>
                         <div class="divtotalmobile">
-                            Grand Total -{{allProductsDesktopTotal}} Rs
+                            Grand Total -{{allProductsDesktopTotal}} ₹
                         </div>
                         <div class="wrapperdivbtn">
                             <div>
@@ -345,7 +345,7 @@
                             <th width="38%">Items </th>
                             <th width="22%">Price</th>
                             <th width="20%">Qty</th>
-                            <th width="22%">T Amount</th>
+                            <th width="22%">T.Amt</th>
                         </tr>
                     </thead>
                     <tbody formArrayName="items" *ngFor="let item of items.controls; index as idx">
@@ -408,11 +408,11 @@
             <table class="table">
                 <thead>
                     <tr>
-                        <th width="15%"> Total-Item</th>
+                        <th width="15%"> Total-I</th>
                         <th width="15%">Subtotal </th>
                         <th width="10%"> Token No</th>
                         <th width="10%">Discount </th>
-                        <th width="15%">Payment Type</th>
+                        <th width="15%">Payment .T</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -421,7 +421,7 @@
                             {{items.length}}
                         </td>
                         <td  class="subtitiletable">
-                            {{this.ListViewTotalBill}} Rs
+                            {{this.ListViewTotalBill}} ₹
                         </td>
                         <td>
                             <input id="last" class="form-label" type="text" formControlName="token_no" />
@@ -431,7 +431,7 @@
                                 (change)="discountListchange()" />
                         </td>
                         <td>
-                            <select formControlName="payment_type">
+                            <select style="padding: 5px;  width: 63px;" formControlName="payment_type">
                                 <option value="Payment Type">Payment Type</option>
                                 <option value="UPI">UPI</option>
                                 <option value="CASH">CASH</option>
@@ -450,7 +450,7 @@
                   </div>
             </div>
             <div class="divtotal">
-                Grand Total - {{GrandtotalListViewbill}} Rs
+                Grand Total - {{GrandtotalListViewbill}} ₹
             </div>
             <div class="wrapperdivbtn">
                 <div>
@@ -472,7 +472,7 @@
                         <th width="5%">Subtotal </th>
                         <th width="15%"> Token No</th>
                         <th width="15%">Discount </th>
-                        <th width="15%">Payment Type</th>
+                        <th width="15%">Payment.T</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -481,7 +481,7 @@
                             {{items.length}}
                         </td>
                         <td  class="subtitiletable">
-                            {{this.ListViewTotalBill}} Rs
+                            {{this.ListViewTotalBill}} ₹
                         </td>
                         <td >
                             <input  style="width: 61px;" id="last" class="form-label" type="text" formControlName="token_no" />
@@ -491,7 +491,7 @@
                                 (change)="discountListchange()" />
                         </td>
                         <td>
-                            <select class="form-select" formControlName="payment_type">
+                            <select  style="padding: 5px;  width: 63px;"  formControlName="payment_type">
                                 <option value="Payment Type">Payment Type</option>
                                 <option value="UPI">UPI</option>
                                 <option value="CASH">CASH</option>
@@ -510,7 +510,7 @@
                   </div>
             </div>
             <div class="divtotalmobile">
-                Grand Total - {{GrandtotalListViewbill}} Rs
+                Grand Total - {{GrandtotalListViewbill}} ₹
             </div>
             <div class="wrapperdivbtn">
                 <div>
@@ -543,8 +543,8 @@
         <div class="empty-state__help">
           Want to Create Manual Bill Please Click  
           <button mat-flat-button color="primary" class="action" (click)="showListView()">
-            <mat-icon class="mr-2">menu</mat-icon>
-            <span> Show List </span>
+            <mat-icon class="mr-2">add</mat-icon>
+            <span> Add Custom Bill </span>
         </button>
          </div>
       </div>

@@ -154,9 +154,9 @@
                     <thead>
                       <tr>
                         <th>Item</th>
-                        <th>Price</th>
+                        <th>U.Price</th>
                         <th>Qty</th>
-                        <th>Total Price</th>
+                        <th>T.Price</th>
                       </tr>
                     </thead>
                     <tr *ngFor="let billorderlist of billupdate.items">
@@ -179,7 +179,7 @@
                       <th><b>Gst (Total Tax)</b></th>
                       <th></th>
                       <th></th>
-                      <th *ngIf="updateData.gst_amt !== ''"> {{updateData.gst_amt}} ₹</th>
+                      <th *ngIf="updateData.gst_amt !== ''"> {{updateData.gst_amt}} %</th>
                     </tr>
                   </thead>
                   
@@ -263,17 +263,13 @@
             </div>
           </div>
           <div class="invoice-bottom">
-            <div class="row">
-              <div class="clearfix"></div>
-              <div class="col-md-offset-1 col-md-11 col-sm-11">
-                <div class="invoice-bottom-right">
                   <table class="table">
                     <thead>
                       <tr>
                         <th>Item</th>
-                        <th>Price</th>
+                        <th>U.Price</th>
                         <th>Qty</th>
-                        <th>Total Price</th>
+                        <th>T. Price</th>
                       </tr>
                     </thead>
                     <tr *ngFor="let billorderlist of billupdate.items">
@@ -318,9 +314,7 @@
             <div class="bottom-bar"></div>
           </div>
         </div>
-      </div>
-    </div>
-  </div>
+ 
 </section>
 
 

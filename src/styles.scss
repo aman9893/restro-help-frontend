@@ -830,6 +830,7 @@ img {
 .empty-state__content .empty-state__help {
   color: #a2a5b9;
   font-size: 10px;
+  text-align: center;
 }
 .empty-state__content {
   padding: 23px;
@@ -1849,21 +1850,24 @@ button {
     overflow-y: auto;
     margin-bottom: 17px;
 }
-.mobile_menusub{
-    width: 29%;
-    float: left;
-    height: 65px;
-    background: #fff;
-    margin: 6px;
-    line-height: 32px;
-    border-radius: 4px;
-    font-size: 12px;
-    background: #fff;
-    position: relative;
-    border-radius: 8px;
-    padding: 1px 8px 3px;
-    transition-duration: 0.15s;
-    box-shadow: 0 13px 27px -5px rgba(50, 50, 93, 0.25), 0 8px 16px -8px rgba(0, 0, 0, 0.3), 0 -6px 16px -6px rgba(0, 0, 0, 0.025);
+.mobile_menusub {
+  width: 18%;
+  float: left;
+  height: 65px;
+  background: #fff;
+  margin: 10px;
+  line-height: 58px;
+  border-radius: 4px;
+  font-size: 12px;
+  background: #fff;
+  position: relative;
+  border-radius: 5px;
+  padding: 1px 8px 3px;
+  transition-duration: 0.15s;
+  box-shadow: 0 13px 27px -5px rgba(50, 50, 93, 0.25), 0 8px 16px -8px rgba(0, 0, 0, 0.3), 0 -6px 16px -6px rgba(0, 0, 0, 0.025);
+  text-align: center;
+  text-transform: capitalize;
+  font-weight: 500;
 }
 .width_50{
     float: left;
