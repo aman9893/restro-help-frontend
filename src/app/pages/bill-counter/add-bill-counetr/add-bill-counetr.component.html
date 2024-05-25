@@ -41,8 +41,8 @@
                     </div>
                 </section>
 
-                <div class="buttonsbox1">
-                    
+                <div class="buttonsbox1"  *ngIf="menuDataList[0].menu_name !== 'Nodata'">
+                     
                     <div *ngFor="let menu of menuDataList | searchFilter: searchText " class="box2 active">
                         <div (click)="addProduct(menu)">
                             <mat-card class="menuboxovrflow" title="{{menu.menu_name}}">
@@ -51,13 +51,15 @@
                                 </div>
                                 <p *ngIf="!menu.menu_url" style="text-transform: capitalize; margin-top: 10px;">
                                     {{menu.menu_name}} </p>
-                                <span *ngIf="menu.menu_url" style="text-transform: capitalize;"> {{menu.menu_name}}
+                                <span *ngIf="menu.menu_url" style="text-transform: capitalize;"> {{menu.menu_name}}ddfd
                                 </span>
                             </mat-card>
                         </div>
                     </div>
                 </div>
-
+                <div class="buttonsbox1" *ngIf="menuDataList[0].menu_name === 'Nodata'">
+                    <h4 class="box2 active"> No Item Found</h4>
+               </div>
 
             </div>
             <!-- mobile view only -->
@@ -85,13 +87,17 @@
 
                         </mat-tab>
                         <mat-tab *ngFor="let item of categoryDataList" label={{item.category_name}}>
-                            <div class="mobile_menu">
-                                <div class="mobile_menusub" *ngFor="let menu of menuDataList "
-                                    (click)="addProduct(menu)">
-                                    <span title={{menu.menu_name}}>{{menu.menu_name}}</span>
+                            <div *ngIf="menuDataList[0].menu_name !== 'Nodata'">
+                                <div class="mobile_menu"  *ngFor="let menu of menuDataList ">
+                                    <div  class="mobile_menusub"
+                                        (click)="addProduct(menu)">
+                                        <span  title={{menu.menu_name}}>{{menu.menu_name}}</span>
+                                    </div>
                                 </div>
                             </div>
-
+                            <div *ngIf="menuDataList[0].menu_name === 'Nodata'">
+                                 <h4> No Item Found</h4>
+                            </div>
                         </mat-tab>
                     </mat-tab-group>
                 </div>

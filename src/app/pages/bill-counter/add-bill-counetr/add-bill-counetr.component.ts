@@ -240,7 +240,6 @@ showGirdView() {
     this.dataService.getMenuInfo().subscribe((data) => this.menuData(data));
   }
   menuData(data: any) {
-    console.log(data)
     if(data.length !== 0){
       for (var i = 0; i < data.length; i++) {
         data[i].qty = 1;
@@ -249,8 +248,9 @@ showGirdView() {
       this.menuDataList = data;
     }
     else{
-      // this.menuDataList = data[0].data ='np';
+      this.menuDataList = [{'menu_name':'Nodata'}];
     }
+    console.log( this.menuDataList)
 
   }
   //////////////////////////////////////////////////api call/////////////////////////////////////////
