@@ -12,6 +12,7 @@
         <span> Add Counter Bill</span>
     </button>
 </app-page-header>
+<div *ngIf="showData">
 <div *ngIf="menuDataList && menuDataList.length > 0">
 <div *ngIf="GirdView" class="row gridviewwrap">
     <div class="col-md-6  border-right">
@@ -149,7 +150,7 @@
                                     </tr>
                                 </tbody>
                             </table>
-                            <table *ngIf="DesktopProducts.length !==0 " class="table cart-table mb-0">
+                            <table *ngIf="DesktopProducts.length !==0 " class="table cart-table mb-0 ">
                                 <thead>
                                     <tr>
                                         <th>Action</th>
@@ -192,19 +193,25 @@
                                         <td>{{item.qty * item.menu_price}}</td>
                                     </tr>
                                 </tbody>
+                             
                             </table>
+                       
+                          
                         </div>
                     </div>
-                    <div *ngIf="DesktopProducts.length !==0  && !mobileview">
-                        <div class="wrapperdiv1">
-                            <div>
-                                Total Item <span > - {{DesktopProducts.length}}</span>
-                            </div>
-                            <div>
-                                Subtotal <span> - {{this.subtotal}} ₹</span>
-                            </div>
-                        </div>
+                    <div  *ngIf="DesktopProducts.length !==0  && !mobileview">
+                        <table>
+                            <tbody>
+                            <tfoot  *ngIf="DesktopProducts.length !==0  && !mobileview">
+                                    <td style="    font-weight: 500;" colspan="1">Total Item </td>
+                                    <td style="    font-weight: 500;" colspan="1"> {{DesktopProducts.length}}</td>
+                                    <td style="    font-weight: 500;" colspan="2"> Subtotal </td>
+                                    <td style="    font-weight: 500;" colspan="1">  {{this.subtotal}} ₹</td>
+                            </tfoot>
+                            <tbody>
+                        </table>
                         <div class="wrapperdiscount">
+                         
                             <div *ngIf="!mobileview && DesktopProducts.length !==0 " class="width_100">
                                 <div class="width30">
                                     <span class="spant">TokenNo :</span>
@@ -225,20 +232,18 @@
                                         <option value="Bank">Bank</option>
                                     </select>
                                     </span>
-
                                 </div>
-                        
                             </div>
-                            
+                            <div *ngIf="tax" class="width_100  checktax" >
+                                <div class="form-check">
+                                    <input style="width: 2%;" class="form-check-input"  formControlName="gst_amt"   (change)="onCheckChange($event)"   type="checkbox" [value]="gstDatalist[0].total_tax">
+                                    <label class="form-check-label"  for="flexCheckDefault">
+                                      Add Tax (GST) -  {{gstDatalist[0].total_tax}} % - Tax calculated in percentage
+                                    </label>
+                                  </div>
+                            </div>
                         </div>
-                        <div *ngIf="tax" class="width_100  checktax" >
-                            <div class="form-check">
-                                <input class="form-check-input"  formControlName="gst_amt"   (change)="onCheckChange($event)"   type="checkbox" [value]="gstDatalist[0].total_tax">
-                                <label class="form-check-label"  for="flexCheckDefault">
-                                  Add Tax (GST) -  {{gstDatalist[0].total_tax}} % - Tax calculated in percentage
-                                </label>
-                              </div>
-                        </div>
+                     
                      
                         <div class="divtotal">
                             Grand Total - {{allProductsDesktopTotal}} ₹
@@ -555,4 +560,5 @@
          </div>
       </div>
     </div>
-  </div>
+</div>
+</div>

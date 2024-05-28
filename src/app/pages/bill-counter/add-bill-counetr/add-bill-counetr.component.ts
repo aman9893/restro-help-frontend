@@ -69,6 +69,7 @@ export class AddBillCounetrComponent implements OnInit {
   gstDatalist!: any;
   tax: any;
   taxvaluedata: number =0;
+  showData: boolean = false;
   constructor(
     public dataService: DataService,
     private formBuilder: FormBuilder,
@@ -251,7 +252,7 @@ showGirdView() {
       this.menuDataList = [{'menu_name':'Nodata'}];
     }
     console.log( this.menuDataList)
-
+     this.showData =true;
   }
   //////////////////////////////////////////////////api call/////////////////////////////////////////
 

@@ -15,7 +15,7 @@
 
   .bbutton {
     color: #fff !important;
-    background: #021b10ab !important;
+    background: #aa0e03c2 !important;
     width: 32%;
 }
 
@@ -69,12 +69,13 @@
     width: 80px;
 }
 .wrapperdiscount{
-    padding: 11px;
+    padding: 2px;
     float: left;
     width: 100%;
     margin-top: 0px;
-    background: rgba(0, 0, 0, 0.6);
+    background: rgb(0 0 0 / 79%);
     color: white;
+    border-radius: 2px;
 }
 .wrapperdiscountlist{
     padding: 11px;
@@ -95,9 +96,9 @@
     width: 32%;
     float: left;
     display: flex;
-    margin: 3px;
+    /* margin: 3px; */
     font-size: 12px;
-
+    margin-top: 12px;
 }
 
 .wrapperdivbtn {
