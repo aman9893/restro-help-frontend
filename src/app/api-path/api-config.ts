@@ -1,6 +1,6 @@
 export const apiConfig = {
-//localhostUrl:"https://retroshop-psi.vercel.app/",
-localhostUrl: "http://localhost:5000/",
+localhostUrl:"https://retroshop-psi.vercel.app/",
+// localhostUrl: "http://localhost:5000/",
     getAllusers:'api/getAllusers',
     printer:'api/printrecipt',
     forgetPasswordData: 'api/forgetpassword',
