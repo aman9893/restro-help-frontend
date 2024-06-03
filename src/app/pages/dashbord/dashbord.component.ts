@@ -114,6 +114,7 @@ export class DashbordComponent implements OnInit {
 
 
   prepareChart(data: any) {
+    console.log(data)
     this.chartOptions2 = {
       title: {
         text: 'Monthly Sales Data',

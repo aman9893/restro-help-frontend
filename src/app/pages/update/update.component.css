@@ -75,4 +75,6 @@
     cursor: pointer;
   }
   
-  
+  .wrapper form {
+    padding: 27px;
+}

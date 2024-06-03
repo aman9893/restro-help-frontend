@@ -1856,7 +1856,7 @@ button {
   height: 65px;
   background: #fff;
   margin: 10px;
-  line-height: 58px;
+  line-height: 26px;
   border-radius: 4px;
   font-size: 12px;
   background: #fff;
@@ -2339,3 +2339,33 @@ ul.breadcrumb li a:hover {
   display: none !important;
 }
 
+@media only screen and (min-width: 600px) {
+  .alfawra span {
+    padding: 4px ;
+    background: #f8f9fa;
+    color: rgba(0, 0, 0, 0.9411764706);
+    border: 1px solid rgba(128, 128, 128, 0.2588235294);
+    height: 28px;
+    cursor: pointer;
+    font-size: 8px;
+    width: 15px;
+}
+.gridviewwrap {
+
+  height: 880px !important;
+}
+}
+
+.alfawra{
+  display: flex;
+}
+.alfawra span{
+  padding: 8px;
+  background: #f8f9fa;
+  color: #000000f0;
+  border: 1px solid #80808042;
+  height: 32px;
+  cursor: pointer;
+  font-size: 12px;
+  width: 27px;
+}

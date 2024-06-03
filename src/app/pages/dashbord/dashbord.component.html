@@ -61,7 +61,7 @@
 		</div>
 	
 	</div>
-	<div class="row">
+	<div  *ngIf="countData"  class="row">
 		<div class="col-md-12">
 			<div class="cardbox">
 				<mat-tab-group>
@@ -150,7 +150,7 @@
 		</div>
 		
 	</div>
-	<div class="row">
+	<div *ngIf="countData && showdata"  class="row">
 		<div class="col-md-6">
 			<div class="cardbox">
 				<canvasjs-chart [options]="chartOptions2"></canvasjs-chart>    
@@ -163,10 +163,7 @@
 				</div>
 			</div>
 		</div>
-		
 	</div>
-
-
 </div>
 <div class="fixed-footer"> 
 	© 2024 Galaxy Script. All rights reserved.
