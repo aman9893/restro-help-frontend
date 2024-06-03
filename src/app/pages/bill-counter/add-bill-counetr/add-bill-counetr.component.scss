@@ -63,18 +63,17 @@
 
 .wrapperdiscount  input{
     border-radius: 3px;
-    border: none;
+    /* border: none; */
     font-size: 12px;
-    padding: 6px;
-    width: 80px;
+    padding: 7px;
 }
 .wrapperdiscount{
     padding: 2px;
     float: left;
     width: 100%;
     margin-top: 0px;
-    background: rgb(0 0 0 / 79%);
-    color: white;
+    background: #dee2e659;
+    color: #212121;
     border-radius: 2px;
 }
 .wrapperdiscountlist{
@@ -93,12 +92,10 @@
     font-size: 12px;
 }
 .width30{
-    width: 32%;
     float: left;
     display: flex;
-    /* margin: 3px; */
-    font-size: 12px;
-    margin-top: 12px;
+    font-size: 14px;
+    margin-top: 5px;
 }
 
 .wrapperdivbtn {
@@ -191,7 +188,7 @@
 }
 .buttonsbox1 {
     float: left;
-    width: 75%;
+    width: 78%;
     text-align: center;
 }
 .box2 {
@@ -220,3 +217,31 @@
     padding-left: 0px !important;
     padding: 0px !important;
   }
+
+  .alfawra{
+    display: flex;
+  }
+  .alfawra span{
+    padding: 8px;
+    background: #f8f9fa;
+    color: #000000f0;
+    border: 1px solid #80808042;
+    height: 32px;
+    cursor: pointer;
+    font-size: 12px;
+    width: 27px;
+  }
+
+  .container-search .form-input {
+     height: 35px; 
+    text-indent: 33px;
+    border-radius: 2px !important;
+    margin-top: 5px;
+    border: 2px solid rgb(0 0 0 / 34%) !important;
+    margin-left: 0px; 
+    margin-bottom: 5px;
+}
+.col-md-11 {
+    flex: 0 0 auto;
+    width: 93.666667%;
+}

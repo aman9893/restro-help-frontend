@@ -70,6 +70,8 @@ export class AddBillCounetrComponent implements OnInit {
   tax: any;
   taxvaluedata: number =0;
   showData: boolean = false;
+  letterArray: any;
+  sortedList: any=[];
   constructor(
     public dataService: DataService,
     private formBuilder: FormBuilder,
@@ -241,20 +243,40 @@ showGirdView() {
     this.dataService.getMenuInfo().subscribe((data) => this.menuData(data));
   }
   menuData(data: any) {
+    console.log(data)
     if(data.length !== 0){
       for (var i = 0; i < data.length; i++) {
         data[i].qty = 1;
         data[i].total = data[i].menu_price;
       }
-      this.menuDataList = data;
+       this.sortedList = data.sort((a:any, b:any) => a.menu_name.localeCompare(b.menu_name));
+       this.menuDataList = this.sortedList;
     }
     else{
-      this.menuDataList = [{'menu_name':'Nodata'}];
+      this.menuDataList = [{'menu_name':'NoItem'}];
     }
-    console.log( this.menuDataList)
      this.showData =true;
+     this.letterArray = [];
+     for(var i = 0; i < 26; i++) {
+     this.letterArray.push(String.fromCharCode(65 + i));
+}
   }
-  //////////////////////////////////////////////////api call/////////////////////////////////////////
+  letterdata(letter:any){
+    this.menuDataList = this.sortedList;
+    let filteredUsers = this.menuDataList.filter((user:any) => {
+      return user.menu_name[0].toLowerCase() == letter.toLowerCase();
+  });
+
+  console.log(filteredUsers);
+  if(filteredUsers.length>0){
+    this.menuDataList = filteredUsers;
+  }
+  else{
+    this.menuDataList = [{'menu_name':'NoItem'}];
+  }
+  }
+ 
+     //////////////////////////////////////////////////api call/////////////////////////////////////////
 
   filter(value: any) {
     const filterValue = value.toLowerCase();

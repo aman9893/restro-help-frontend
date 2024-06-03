@@ -98,7 +98,6 @@ Invoice-bottom-left
 bottom-bar is colored bar located at bottom of invoice-card
 */
 .bottom-bar{
-	position: absolute;
 	bottom: 0;
 	left: 0;
 	right: 0;

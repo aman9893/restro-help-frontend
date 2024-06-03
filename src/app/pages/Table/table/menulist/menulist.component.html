@@ -19,10 +19,7 @@
                 <label>* Item Price</label>
                 <input type="number" formControlName="menu_price" placeholder="Enter Item Price">
             </div>
-            <div class="field">
-                <label>Item Image Url</label>
-                <input type="text" formControlName="menu_url" placeholder="Enter Item Product Image Url">
-            </div>
+     
             <div class="field" *ngIf="categoryDataList">
                 <label>Select Category</label>
                 <select formControlName="menu_categories" placeholder="Enter Item Categories">
@@ -31,6 +28,10 @@
                     <option *ngFor="let item of categoryDataList" value="{{item.category_id}}">{{item.category_name}}
                     </option>
                 </select>
+            </div>
+            <div class="field">
+                <label>Item Image Url</label>
+                <input type="text" formControlName="menu_url" placeholder="Enter Item Product Image Url">
             </div>
             <div class="field">
                 <button *ngIf="!updatebtn" class="btn" type="submit" (click)="onSubmit()">Save</button>

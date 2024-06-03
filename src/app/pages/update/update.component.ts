@@ -58,7 +58,7 @@ export class UpdateComponent implements OnInit {
         validators: [Validators.maxLength(55)],
         updateOn: 'change',
       }),
-      gst: new FormControl('No Gst'),
+      gst: new FormControl('NA'),
       company_logo: new FormControl(''),
     });
     if(this.updateValue.name){

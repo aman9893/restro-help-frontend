@@ -219,6 +219,10 @@ updateTableStaus(data:any){
 deleteBill(id:any){
   return this.http.delete(apiConfig.localhostUrl + apiConfig.deleteBill+'/'+id);
 }
+
+deleteUser(id:any){
+  return this.http.delete(apiConfig.localhostUrl + apiConfig.deleteUser+'/'+id);
+}
 saveBill(data:any){
   return this.http.post(apiConfig.localhostUrl + apiConfig.addBill, data);
 }

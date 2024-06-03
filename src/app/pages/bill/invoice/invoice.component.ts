@@ -47,7 +47,6 @@ export class InvoiceComponent implements OnInit {
       this.getTableBillData(this.tabledata.tableid);
     }
       this.userdata = this.dataService.userData;
-      console.log(this.userdata)
       this.gst_num = this.userdata?.gst_num;
   }
   getTableBillData(id: any) {
@@ -75,6 +74,7 @@ export class InvoiceComponent implements OnInit {
     let datalist;
     if (data) {
       datalist = data[0];
+      console.log(datalist)
       this.updateData = JSON.parse(datalist.bill_order);
       this.billupdate = this.updateData.bill_order;
       this.invoice.products = this.billupdate.items;
@@ -158,6 +158,7 @@ export class InvoiceComponent implements OnInit {
                 ['Item', 'Price', 'Quantity', 'Amount'],
                 ...this.invoice.products.map(p => ([p.name, p.itemprice, p.qty,p.price])),
                 [{text: 'Sub Total', colSpan: 3}, {}, {}, this.invoice.products.reduce((sum, p)=> sum + (p.qty * p.itemprice), 0)  +' Rs'],
+                [{text: 'Tax Amount', colSpan: 3}, {}, {}, + this.updateData.gst_amt +' Rs'],
                 [{text: 'Discount Amount', colSpan: 3}, {}, {}, - this.updateData.discount +' Rs'],
                 [{text: 'Grand Total', colSpan: 3}, {}, {}, this.updateData.total_bill+' Rs'],
               ]
@@ -192,6 +193,7 @@ export class InvoiceComponent implements OnInit {
       };
     }
     if (type === 'counter') {
+      console.log(this.invoice)
       this.docDefinition = {
         content: [
           {
@@ -207,6 +209,9 @@ export class InvoiceComponent implements OnInit {
             fontSize: 16,
             alignment: 'center',
             color: '#047886'
+          },
+          {
+            text: 'GST-' +''+ this.gst_num ,
           },
         
           {
@@ -229,7 +234,7 @@ export class InvoiceComponent implements OnInit {
               ],
               [
                 {
-                  text: `Invoice No : ${this.updateData.bill_no}`,
+                  text: `Invoice No : # ${this.updateData.bill_no}`,
                   alignment: 'right'
                 },
                 {
@@ -237,11 +242,11 @@ export class InvoiceComponent implements OnInit {
                   alignment: 'right'
                 },
                 {
-                  text: `Restro No : ${this.userdata.phone_number}`,
+                  text: `Shop No : ${this.userdata.phone_number}`,
                   alignment: 'right'
                 },
                 {
-                  text: `Restro Address : ${this.userdata.shop_address}`,
+                  text: `Shop Address : ${this.userdata.shop_address}`,
                   alignment: 'right'
                 },
 
@@ -261,7 +266,8 @@ export class InvoiceComponent implements OnInit {
                   ['Item', 'Price', 'Quantity', 'Amount'],
                   ...this.invoice.products.map(p => ([p.menu_name, p.menu_price, p.qty,p.total ])),
                   [{text: 'Sub Total', colSpan: 3}, {}, {}, this.invoice.products.reduce((sum, p)=> sum + (p.qty * p.menu_price), 0)  +' Rs'],
-                [{text: 'Discount Amount', colSpan: 3}, {}, {}, - this.updateData.discount +' Rs'],
+                  [{text: 'Tax Amount', colSpan: 3}, {}, {}, + this.updateData.gst_amt +' Rs'],
+                  [{text: 'Discount Amount', colSpan: 3}, {}, {}, - this.updateData.discount +' Rs'],
                 [{text: 'Grand Total', colSpan: 3}, {}, {}, this.updateData.total_bill+' Rs'],
                 ]
               }

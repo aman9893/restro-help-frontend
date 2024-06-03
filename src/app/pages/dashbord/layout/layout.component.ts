@@ -33,7 +33,8 @@ export class LayoutComponent implements OnInit {
 
     router.events.subscribe((val:any) => {
       if (val instanceof NavigationEnd) {
-        if(this.mobileview){
+        console.log(val.url)
+        if(this.mobileview || val.url==='/addcounterbill'){
           this.opened =false;
           this.cdref.detectChanges();
         }

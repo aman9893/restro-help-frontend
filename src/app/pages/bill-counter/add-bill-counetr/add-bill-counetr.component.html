@@ -28,6 +28,10 @@
                         </div>
                     </div>
                 </div>
+                <div class="alfawra">
+                  <span  *ngFor="let letter of letterArray " (click)="letterdata(letter)">{{letter}}</span>
+
+                </div>
                 <section  id="sidebar">
                     <div class="py-1">
                         <ul class="list-group">
@@ -42,7 +46,7 @@
                     </div>
                 </section>
 
-                <div class="buttonsbox1"  *ngIf="menuDataList[0].menu_name !== 'Nodata'">
+                <div class="buttonsbox1"  *ngIf="menuDataList[0].menu_name !== 'NoItem'">
                      
                     <div *ngFor="let menu of menuDataList | searchFilter: searchText " class="box2 active">
                         <div (click)="addProduct(menu)">
@@ -58,11 +62,12 @@
                         </div>
                     </div>
                 </div>
-                <div class="buttonsbox1" *ngIf="menuDataList[0].menu_name === 'Nodata'">
+                <div class="buttonsbox1" *ngIf="menuDataList[0].menu_name === 'NoItem'">
                     <h4 class="box2 active"> No Item Found</h4>
                </div>
-
+             
             </div>
+
             <!-- mobile view only -->
 
             <div *ngIf="mobileview && menuDataList.length>0">
@@ -88,7 +93,7 @@
 
                         </mat-tab>
                         <mat-tab *ngFor="let item of categoryDataList" label={{item.category_name}}>
-                            <div *ngIf="menuDataList[0].menu_name !== 'Nodata'">
+                            <div *ngIf="menuDataList[0].menu_name !== 'NoItem'">
                                 <div class="mobile_menu"  *ngFor="let menu of menuDataList ">
                                     <div  class="mobile_menusub"
                                         (click)="addProduct(menu)">
@@ -96,7 +101,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <div *ngIf="menuDataList[0].menu_name === 'Nodata'">
+                            <div *ngIf="menuDataList[0].menu_name === 'NoItem'">
                                  <h4> No Item Found</h4>
                             </div>
                         </mat-tab>
@@ -193,18 +198,19 @@
                                         <td>{{item.qty * item.menu_price}}</td>
                                     </tr>
                                 </tbody>
-                             
                             </table>
-                       
-                          
                         </div>
                     </div>
                     <div  *ngIf="DesktopProducts.length !==0  && !mobileview">
                         <table>
                             <tbody>
                             <tfoot  *ngIf="DesktopProducts.length !==0  && !mobileview">
-                                    <td style="    font-weight: 500;" colspan="1">Total Item </td>
-                                    <td style="    font-weight: 500;" colspan="1"> {{DesktopProducts.length}}</td>
+                                    <td style="font-weight: 500;
+                                    width: 155px;
+                                    padding: 10px;" colspan="1">Total Item </td>
+                                    <td style="font-weight: 500;
+                                    width: 225px;
+                                    padding: 10px;" colspan="1"> {{DesktopProducts.length}}</td>
                                     <td style="    font-weight: 500;" colspan="2"> Subtotal </td>
                                     <td style="    font-weight: 500;" colspan="1">  {{this.subtotal}} ₹</td>
                             </tfoot>

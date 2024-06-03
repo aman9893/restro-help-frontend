@@ -100,7 +100,7 @@ export class AdminUserlistComponent implements OnInit {
 
     dialogRef.afterClosed().subscribe(result => {
       if (result == 'yes') {
-        this.dataService.deleteBill(id).subscribe(
+        this.dataService.deleteUser(id).subscribe(
           (data: any) => this.closedeleteDialog(data),
         )
       }
@@ -115,8 +115,6 @@ export class AdminUserlistComponent implements OnInit {
       this.getUsersData()
     }
   }
-
-
   onSubmit() {
     if (this.loginForm.valid) {
       let email= this.loginForm['controls'].email.value;
