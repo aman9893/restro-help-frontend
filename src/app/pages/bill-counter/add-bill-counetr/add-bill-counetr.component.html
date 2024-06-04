@@ -1,15 +1,14 @@
 <app-page-header icon="home">
     <h3 routerLink="/counterbill">Bill List</h3>
-    <span class="centertext">
+    <span *ngIf="GirdView" class="centertext">
         Counter Bill
     </span>
-    <button *ngIf="GirdView" mat-flat-button color="primary" class="action" (click)="showListView()">
+    <span *ngIf="listView" class="centertext">
+        Custom Bill
+    </span>
+    <button mat-flat-button color="primary" class="action" routerLink="/counterbill" >
         <mat-icon class="mr-2">add</mat-icon>
-        <span> Add Custom Bill </span>
-    </button>
-    <button *ngIf="listView" mat-flat-button color="primary" class="action" (click)="showGirdView()">
-        <mat-icon class="mr-2">add</mat-icon>
-        <span> Add Counter Bill</span>
+        <span>  Bill List </span>
     </button>
 </app-page-header>
 <div *ngIf="showData">
@@ -20,12 +19,10 @@
             <div *ngIf="!mobileview && menuDataList.length>0" >
                 <div class="container-search">
                     <div class="row height d-flex justify-content-left align-items-left">
-                        <div class="col-md-11">
                             <div class="form">
                                 <i class="fa fa-search"></i>
                                 <input type="text" [(ngModel)]="searchText" class="form-control form-input" placeholder="Search Item Name...">
                             </div>
-                        </div>
                     </div>
                 </div>
                 <div class="alfawra">
@@ -220,16 +217,16 @@
                          
                             <div *ngIf="!mobileview && DesktopProducts.length !==0 " class="width_100">
                                 <div class="width30">
-                                    <span class="spant">TokenNo :</span>
+                                    <span class="spant">TokenNo-</span>
                                     <span><input  class="form-label" type="number" placeholder="Token No" formControlName="token_no" /></span>
                                 </div>
                                 <div class="width30 ">
-                                    <span class="spant">Discount:</span>
+                                    <span class="spant">Discount-</span>
                                     <span> <input id="first" class="form-label" type="number" placeholder="Discount " formControlName="discount"
                                         (change)="discountchange('grid')" /> ₹</span>
                                 </div>
                                 <div class="width30">
-                                    <span class="spant">Payment Type:</span>
+                                    <span class="spant">Payment Type-</span>
                                     <span>
                                     <select  formControlName="payment_type">
                                         <option value="Payment Type"></option>

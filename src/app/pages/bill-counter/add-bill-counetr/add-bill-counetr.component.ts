@@ -15,7 +15,8 @@ import { DataService } from 'src/app/service/data.service';
 import { CreateBillComponent } from '../../bill/create-bill/create-bill.component';
 import { ConfrimBoxComponent } from '../../confrim-box/confrim-box.component';
 import { InvoiceComponent } from '../../bill/invoice/invoice.component';
-import { Router } from '@angular/router';
+import { NavigationEnd, Router } from '@angular/router';
+import { flatMap } from 'rxjs';
 export interface Cart {
   productName: string;
   productImage: string;
@@ -50,8 +51,8 @@ export class AddBillCounetrComponent implements OnInit {
   itemstable: any;
   Bill_id: any;
   term: any;
-  listView: boolean =  false;
-  GirdView: boolean = true;
+  listView: boolean =false ;
+  GirdView: boolean = false;
   categoryDataList: any;
   conatctBookList: any;
   discount: any;
@@ -72,6 +73,7 @@ export class AddBillCounetrComponent implements OnInit {
   showData: boolean = false;
   letterArray: any;
   sortedList: any=[];
+  currentURL: any;
   constructor(
     public dataService: DataService,
     private formBuilder: FormBuilder,
@@ -80,6 +82,15 @@ export class AddBillCounetrComponent implements OnInit {
   ) {
     this.user_id = this.authService.getUserId();
     this.getTaxvalue();
+    let route = this.router.url;
+    console.log(route)
+   
+        if(route=== '/addcustombill'){
+          this.listView = true;
+        }
+        if(route === '/addcounterbill'){
+          this.GirdView = true;
+        }
 
   }
   ngOnInit() {
@@ -94,6 +105,10 @@ export class AddBillCounetrComponent implements OnInit {
       this.updateCustomer();
       this.formcall();
       this.myFormValueChanges$ = this.orderForm.controls['items'].valueChanges;
+      this.currentURL = window.location.href; 
+      console.log(this.currentURL)
+     
+   
   }
 
   getTaxvalue(): void {
@@ -102,7 +117,7 @@ export class AddBillCounetrComponent implements OnInit {
 
   taxdata(data: any) {
    this.gstDatalist = data;
-   this.tax= this.gstDatalist[0].total_tax
+   this.tax= this.gstDatalist[0]?.total_tax
 
 
   }

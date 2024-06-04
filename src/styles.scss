@@ -2234,7 +2234,7 @@ margin-top: 0px !important;
     
     .form .fa-search{
       position: absolute;
-      top: 11px;
+      top: 15px;
       left: 26px;
       color: #9ca3af;
     
@@ -2362,10 +2362,10 @@ ul.breadcrumb li a:hover {
 .alfawra span{
   padding: 8px;
   background: #f8f9fa;
-  color: #000000f0;
-  border: 1px solid #80808042;
+  color: rgba(0, 0, 0, 0.9411764706);
+  border: 1px solid rgba(128, 128, 128, 0.2588235294);
   height: 32px;
   cursor: pointer;
   font-size: 12px;
-  width: 27px;
+  width: 24px;
 }

@@ -47,6 +47,8 @@ const routes: Routes = [
   { path: 'printer',  component: ThermalPrinterComponent , canActivate: [AuthGuard]},
 
   { path: 'addcounterbill',  component: AddBillCounetrComponent , canActivate: [AuthGuard]},
+  { path: 'addcustombill',  component: AddBillCounetrComponent , canActivate: [AuthGuard]},
+  
   { path: 'booktable/:id',  component: CreateBillComponent , canActivate: [AuthGuard]},
   { path: 'home',  component: DashbordComponent , canActivate: [AuthGuard]},
   { path: 'tablebill', component: BillComponent , canActivate: [AuthGuard]},

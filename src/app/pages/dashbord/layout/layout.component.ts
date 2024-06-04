@@ -34,7 +34,7 @@ export class LayoutComponent implements OnInit {
     router.events.subscribe((val:any) => {
       if (val instanceof NavigationEnd) {
         console.log(val.url)
-        if(this.mobileview || val.url==='/addcounterbill'){
+        if(this.mobileview || val.url==='/addcounterbill' || val.url==='/addcustombill'){
           this.opened =false;
           this.cdref.detectChanges();
         }
@@ -53,16 +53,17 @@ export class LayoutComponent implements OnInit {
           link: '/home',
           color: '##000'
         },
+      
         {
           title: 'Counter Billing',
-          icon: 'receipt',
-          link: '/counterbill',
+          icon: 'restaurant_menu',
+          link: '/addcounterbill',
           color: '##000'
         },
         {
-          title: 'Add Counter Bill',
+          title: 'Custom Billing',
           icon: 'restaurant_menu',
-          link: '/addcounterbill',
+          link: '/addcustombill',
           color: '##000'
         },
         {
@@ -71,6 +72,19 @@ export class LayoutComponent implements OnInit {
           link: '/tablebill',
           color: '##000'
         },
+        {
+          title: 'Billing List',
+          icon: 'receipt',
+          link: '/counterbill',
+          color: '##000'
+        },
+        {
+          title: 'Table Billing List',
+          icon: 'receipt',
+          link: '/tablebillList',
+          color: '##000'
+        },
+        
         {
           title: 'Khatabook',
           icon: 'assignment',
@@ -145,17 +159,24 @@ export class LayoutComponent implements OnInit {
           color: '##000'
         },
         {
+          title: 'Counter Billing',
+          icon: 'restaurant_menu',
+          link: '/addcounterbill',
+          color: '##000'
+        },
+        {
+          title: 'Custom Billing',
+          icon: 'restaurant_menu',
+          link: '/addcustombill',
+          color: '##000'
+        },
+        {
           title: 'Bill List',
           icon: 'assignment',
           link: '/counterbill',
           color: '##000'
         },
-        {
-          title: 'Add Bill',
-          icon: 'restaurant_menu',
-          link: '/addcounterbill',
-          color: '##000'
-        },
+    
          {
           title: 'Khatabook',
           icon: 'assignment',
