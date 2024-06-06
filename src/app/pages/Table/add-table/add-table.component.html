@@ -14,9 +14,11 @@
  
       <form class="menu-container" [formGroup]="tableForm" autocomplete="off" novalidate>
           <div class="field">
-        <label>* Enter Table Name</label>
-
+    
             <input type="text" formControlName="table_name" placeholder="Enter Table Name">
+            <div *ngIf="submitted && tableForm['controls']['table_name'].errors" >
+              <div class="errormsg" *ngIf="tableForm.controls['table_name'].errors['required']">*Table name is required</div>
+          </div>
           </div>
           <div class="field">
             <button *ngIf="!updatebtn" class="btn" type="submit" (click)="onSubmit()">Save</button>

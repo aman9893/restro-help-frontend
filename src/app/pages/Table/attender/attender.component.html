@@ -12,9 +12,11 @@
         </div> -->
         <form class="menu-container" [formGroup]="attenderForm" autocomplete="off" novalidate>
             <div class="field">
-           <label>* Enter Attender Name</label>
-
+    
               <input type="text" formControlName="attender_name" placeholder="Enter attender Name">
+              <div *ngIf="submitted && attenderForm['controls']['attender_name'].errors" >
+                <div class="errormsg" *ngIf="attenderForm.controls['attender_name'].errors['required']">*Attender Name  is required .</div>
+            </div>
             </div>
             <div class="field">
               <button *ngIf="!updatebtn" class="btn" type="submit" (click)="onSubmit()">Save</button>

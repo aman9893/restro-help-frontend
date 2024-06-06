@@ -12,8 +12,13 @@
           </div> -->
           <form class="menu-container" [formGroup]="taxform" autocomplete="off" novalidate>
               <div class="field">
-                <label>*  Gst Amount calculate  in %  </label>
+
                 <input type="text" formControlName="total_gst" placeholder="Gst Amount in % ">
+                <div *ngIf="submitted && taxform['controls']['total_gst'].errors" >
+                  <div class="errormsg" *ngIf="taxform.controls['total_gst'].errors['required']">*GST Value  is required .</div>
+              </div>
+              <span style="padding: 4px;
+              font-size: 11px;"> Gst Amount calculate  in % (percentage) </span>
               </div>
               <div class="field">
                 <button *ngIf="!updatebtn &&gstDatalist && gstDatalist.length === 0" class="btn" type="submit" (click)="onSubmit()">Save</button>

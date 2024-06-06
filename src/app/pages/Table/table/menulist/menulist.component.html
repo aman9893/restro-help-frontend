@@ -12,25 +12,30 @@
         </div> -->
         <form class="menu-container" [formGroup]="tableForm" autocomplete="off" novalidate>
             <div class="field">
-                <label>* Item Name</label>
                 <input type="text" formControlName="menu_name" placeholder="Enter Item Name" required>
+                <div *ngIf="submitted && tableForm['controls']['menu_name'].errors" >
+                    <div class="errormsg" *ngIf="tableForm.controls['menu_name'].errors['required']">*Item  Name is required</div>
+                  </div>
             </div>
             <div class="field">
-                <label>* Item Price</label>
                 <input type="number" formControlName="menu_price" placeholder="Enter Item Price">
+                <div *ngIf="submitted && tableForm['controls']['menu_price'].errors" >
+                    <div class="errormsg" *ngIf="tableForm.controls['menu_price'].errors['required']">*Item  Price is required</div>
+                  </div>
             </div>
      
             <div class="field" *ngIf="categoryDataList">
-                <label>Select Category</label>
                 <select formControlName="menu_categories" placeholder="Enter Item Categories">
                     <option *ngIf="categoryDataList.length >0" selected disabled value="0" >Please Select Category</option>
                     <option *ngIf="categoryDataList.length ===0" selected disabled  value="0" >Please Add The   Category First</option>
                     <option *ngFor="let item of categoryDataList" value="{{item.category_id}}">{{item.category_name}}
                     </option>
                 </select>
+                <div *ngIf="submitted && tableForm['controls']['menu_categories'].errors" >
+                    <div class="errormsg" *ngIf="tableForm.controls['menu_categories'].errors['required']">*Please Select Category</div>
+                </div>
             </div>
             <div class="field">
-                <label>Item Image Url</label>
                 <input type="text" formControlName="menu_url" placeholder="Enter Item Product Image Url">
             </div>
             <div class="field">

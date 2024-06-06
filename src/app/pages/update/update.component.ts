@@ -58,6 +58,10 @@ export class UpdateComponent implements OnInit {
         validators: [Validators.maxLength(55)],
         updateOn: 'change',
       }),
+      shop_type: new FormControl('', {
+        validators: [Validators.maxLength(55)],
+        updateOn: 'change',
+      }),
       gst: new FormControl('NA'),
       company_logo: new FormControl(''),
     });
@@ -71,6 +75,7 @@ export class UpdateComponent implements OnInit {
       this.sginupForm.controls['gst'].setValue(this.updateValue.gst_num);
       this.sginupForm.controls['company_logo'].setValue(this.updateValue.company_logo);
       this.sginupForm.controls['username'].setValue(this.updateValue.username);
+      this.sginupForm.controls['shop_type'].setValue(this.updateValue.shop_type);
     }
   }
 

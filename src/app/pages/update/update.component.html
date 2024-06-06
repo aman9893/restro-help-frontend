@@ -10,6 +10,12 @@
        <form  [formGroup]="sginupForm" novalidate >
          <label> Name</label>
          <input type="text" formControlName="name"  placeholder="Enter Name" />
+         <div class="input-container">
+          <select formControlName="shop_type"   class="input" >
+             <option value="restaurant">Restaurant </option>
+             <option value="shop">Shop </option>
+          </select>
+         </div>
          <label>Shop Name</label>
          <input type="text" formControlName="company_name" placeholder="Restaurants Name" />
          <label>Shop Address</label>

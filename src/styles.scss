@@ -1891,6 +1891,11 @@ button {
     font-weight: 500;
     box-shadow: 0 13px 27px -5px rgba(50, 50, 93, 0.25), 0 8px 16px -8px rgba(0, 0, 0, 0.3), 0 -6px 16px -6px rgba(0, 0, 0, 0.025);
   }
+  
+.btn:hover {
+  background-color: wheat !important;
+  color: #fff;
+}
 
   .btntop{
     position: relative;
@@ -2234,7 +2239,7 @@ margin-top: 0px !important;
     
     .form .fa-search{
       position: absolute;
-      top: 15px;
+      top: 12px;
       left: 26px;
       color: #9ca3af;
     
@@ -2368,4 +2373,14 @@ ul.breadcrumb li a:hover {
   cursor: pointer;
   font-size: 12px;
   width: 24px;
+}
+.grid-wrapper{
+  float: left;
+  width: 100%;
+  margin-top: 26px;
+}
+.errormsg{
+  color: #e80016;
+  font-size: 11px;
+  margin-left: 3px;
 }

@@ -35,6 +35,7 @@ export class MenulistComponent implements OnInit ,AfterViewInit  {
   @ViewChild(MatSort) sort = {} as MatSort;
   @ViewChild(MatPaginator) paginator = {} as MatPaginator;
   categoryDataList: any;
+  submitted: boolean=false;
 
   constructor(
     private formBuilder: FormBuilder,
@@ -146,12 +147,14 @@ export class MenulistComponent implements OnInit ,AfterViewInit  {
         }
     });
     if (this.tableForm.invalid) {
+      this.submitted = true;
       this.dataService.openSnackBar('* Item Name  And Item Price is mandatory ', 'Dismiss')
       return;
   }
-  this.showDataLoader =true;
 
     if (this.tableForm.valid) {
+      this.submitted = false;
+ 
       let tableFormData = {
         user_id: this.user_id,
         menu_name: this.tableForm.controls['menu_name'].value,
@@ -165,7 +168,10 @@ export class MenulistComponent implements OnInit ,AfterViewInit  {
         (err: any) => console.log(err)
       );
     }
-    this.tableForm.reset();
+    else{
+     this.showDataLoader =true;
+
+    }
   }
 
   closeDialog(data: any) {
@@ -177,7 +183,7 @@ export class MenulistComponent implements OnInit ,AfterViewInit  {
       this.dataService.openSnackBar(data.message, 'Dismiss');
     }
     this.createForm();
-    this.showDataLoader =false;
+    this.tableForm.reset();
   }
   cancel(data: any) {}
 

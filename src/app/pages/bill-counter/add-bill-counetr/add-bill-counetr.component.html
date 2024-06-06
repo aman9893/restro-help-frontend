@@ -7,7 +7,7 @@
         Custom Bill
     </span>
     <button mat-flat-button color="primary" class="action" routerLink="/counterbill" >
-        <mat-icon class="mr-2">add</mat-icon>
+        <mat-icon class="mr-2">note</mat-icon>
         <span>  Bill List </span>
     </button>
 </app-page-header>
@@ -71,12 +71,10 @@
                 <div class="filters">
                     <div class="container-search">
                         <div class="row height d-flex justify-content-left align-items-left">
-                            <div class="col-md-11">
                                 <div class="form">
                                     <i class="fa fa-search"></i>
                                     <input type="text" [(ngModel)]="searchText" class="form-control form-input" placeholder="Search Item Name...">
                                 </div>
-                            </div>
                         </div>
                     </div>
                     <mat-tab-group (selectedTabChange)="ontabChange($event)">

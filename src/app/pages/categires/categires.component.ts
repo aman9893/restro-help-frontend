@@ -112,7 +112,6 @@ export class CategiresComponent implements OnInit {
   //---------------------------------------------add file end -------------------------------------
   onSubmit() {
     this.submitted = true;
-
     // stop here if form is invalid
     if (this.categoryForm.invalid) {
       this.dataService.openSnackBar('* Category Name is mandatory ', 'Dismiss')

@@ -14,8 +14,10 @@
         </div> -->
         <form class="menu-container" [formGroup]="categoryForm" autocomplete="off" novalidate>
             <div class="field">
-              <label>* Enter Category Name</label>
               <input type="text" formControlName="category_name" placeholder="Enter Category Name">
+              <div *ngIf="submitted && categoryForm['controls']['category_name'].errors" >
+                <div class="errormsg" *ngIf="categoryForm.controls['category_name'].errors['required']">*Category  name is required</div>
+              </div>
             </div>
             <div class="field">
               <button *ngIf="!updatebtn" class="btn" type="submit" (click)="onSubmit()">Save</button>
