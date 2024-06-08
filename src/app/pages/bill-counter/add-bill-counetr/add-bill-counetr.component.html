@@ -12,6 +12,9 @@
     </button>
 </app-page-header>
 <div *ngIf="showData">
+    <div class="alfawra">
+        <span  *ngFor="let letter of letterArray " (click)="letterdata(letter)">{{letter}}</span>
+      </div>
 <div *ngIf="menuDataList && menuDataList.length > 0">
 <div *ngIf="GirdView" class="row gridviewwrap">
     <div class="col-md-6  border-right">
@@ -25,10 +28,7 @@
                             </div>
                     </div>
                 </div>
-                <div class="alfawra">
-                  <span  *ngFor="let letter of letterArray " (click)="letterdata(letter)">{{letter}}</span>
-
-                </div>
+            
                 <section  id="sidebar">
                     <div class="py-1">
                         <ul class="list-group">
