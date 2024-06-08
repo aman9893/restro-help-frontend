@@ -127,7 +127,12 @@ export class InvoiceComponent implements OnInit {
               ],
               [
                 {
-                  text: `Bill No : ${this.updateData.bill_no}`,
+                  text: 'Business Details',
+                  alignment: 'right',
+                  style: 'sectionHeader'
+                },
+                {
+                  text: `Inoice No : # ${this.updateData.bill_no}`,
                   alignment: 'right'
                 },
                 {
@@ -135,11 +140,14 @@ export class InvoiceComponent implements OnInit {
                   alignment: 'right'
                 },
                 {
-                  text: `Restro No : ${this.userdata.phone_number}`,
+                  text: ` Mobile No : ${this.userdata.phone_number}`,
+                  alignment: 'right'
+                },   {
+                  text: ` Email : ${this.userdata.email}`,
                   alignment: 'right'
                 },
                 {
-                  text: `Restro Address : ${this.userdata.shop_address}`,
+                  text: ` Address : ${this.userdata.shop_address}`,
                   alignment: 'right'
                 },
 
@@ -178,7 +186,7 @@ export class InvoiceComponent implements OnInit {
           },
           {
             ul: [
-              'Thanks For Visting   and will come back again!',
+              'Thanks For Visting!',
             ],
           }
         ],
@@ -246,6 +254,10 @@ export class InvoiceComponent implements OnInit {
                   alignment: 'right'
                 },
                 {
+                  text: `Shop Email : ${this.userdata.email}`,
+                  alignment: 'right'
+                },
+                {
                   text: `Shop Address : ${this.userdata.shop_address}`,
                   alignment: 'right'
                 },
@@ -284,7 +296,7 @@ export class InvoiceComponent implements OnInit {
           },
           {
             ul: [
-              'We sincerely hope you enjoyed your Food and will come back again!',
+              'Thanks For Visting!',
             ],
           }
         ],

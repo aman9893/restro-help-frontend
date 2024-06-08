@@ -110,7 +110,7 @@ export class UpdateComponent implements OnInit {
       username:  this.sginupForm['controls']['username'].value,
       gst_num:  this.sginupForm['controls']['gst'].value,
       user_expiry_date: new Date(),
-      shop_type:this.updateValue.shop_type,
+      shop_type:this.sginupForm['controls']['shop_type'].value,
       trial_days: 14,
       rolename_id: 1,
     };

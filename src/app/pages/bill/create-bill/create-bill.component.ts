@@ -37,9 +37,16 @@ export class CreateBillComponent implements OnInit {
   conatctBookList: any;
   discount: any;
   allSubtotal: number=0;
-  GrandtotalListViewbill: number=0;
+  GrandtotalListViewbill: any=0;
+  mobileview: boolean = false;
   validationvalue: boolean =false;
   totalSum: any;
+  gstDatalist: any;
+  tax: any;
+  updatevalue: number=0;
+  allProductsDesktopTotal: number=0;
+  taxvaluedata: number=0;
+  showQty: boolean =false;
 
   constructor(
     public dataService: DataService,
@@ -51,6 +58,8 @@ export class CreateBillComponent implements OnInit {
   ) {
     let UserId = this.authService.getUserId();
     this.user_id = UserId;
+    this.mobileview = this.dataService.getIsMobileResolution();
+
   }
 
   ngOnInit() {
@@ -63,9 +72,30 @@ export class CreateBillComponent implements OnInit {
     this.formcall();
     this.getattenderData();
     this.getConatctBookData();
+    this.getTaxvalue();
     this.myFormValueChanges$ = this.orderForm.controls['items'].valueChanges;
   }
+  onCheckChange($event: any) {
+    let val = $event.target.checked;
 
+    if (val) {
+      this.updatevalue = parseInt(((this.tax * this.GrandtotalListViewbill) / 100).toFixed(2));
+      this.GrandtotalListViewbill= parseInt((this.GrandtotalListViewbill + this.updatevalue));
+      this.taxvaluedata = this.tax;
+    }
+    else {
+      this.GrandtotalListViewbill= this.GrandtotalListViewbill - this.updatevalue;
+      this.taxvaluedata = 0;
+    }
+    console.log( this.GrandtotalListViewbill)
+  }
+  getTaxvalue(): void {
+    this.dataService.getTaxInfo().subscribe((data: any) => this.taxdata(data));
+  }
+  taxdata(data: any) {
+    this.gstDatalist = data;
+    this.tax = this.gstDatalist[0]?.total_tax
+  }
   onChangeDataset() {
     let contactValue;
     let cutomer_number = this.orderForm.controls['cutomer_number'].value;
@@ -82,9 +112,12 @@ export class CreateBillComponent implements OnInit {
     this.discount = this.orderForm.controls['discount'].value;
     if(this.discount < this.total_bill  ){
     this.GrandtotalListViewbill = this.total_bill - this.discount;
+    this.orderForm.controls['gst_amt'].setValue(false);
+
     }
     else{
       this.GrandtotalListViewbill =0;
+      this.orderForm.controls['gst_amt'].setValue(false);
     }
   }
 
@@ -153,6 +186,8 @@ export class CreateBillComponent implements OnInit {
       ]), 
       attender_id: new FormControl('',[
       ]), 
+      gst_amt: new FormControl('',[
+      ]),
       discount: new FormControl( '', [Validators.pattern(this.dataService.phoneValidation()),Validators.maxLength(20)]),
       token_no: new FormControl('0', [
       ]),
@@ -234,6 +269,8 @@ export class CreateBillComponent implements OnInit {
         let totalUnitPrice = qty * price;
         idx.controls['price'].setValue(totalUnitPrice);
         idx.controls['itemprice'].setValue(price);
+        idx.showQty =true;
+
       }
       this.myFormValueChanges$ = this.orderForm.controls['items'].valueChanges;
         this.myFormValueChanges$.subscribe((salesList: any) =>
@@ -242,7 +279,6 @@ export class CreateBillComponent implements OnInit {
     }
     this.getmenuData();
   }
-
   onKeyUpEvent(idx: any, flag: any) {
     this.myFormValueChanges$ = this.orderForm.controls['items'].valueChanges;
     this.myFormValueChanges$.subscribe((salesList: any) =>
@@ -256,10 +292,13 @@ export class CreateBillComponent implements OnInit {
       this.qtyr = ++qty;
     }
     if (flag === 'remove') {
-      if (this.qtyr-1 === 0) {
+      if (this.qtyr === 0) {
         this.removeGroup(idx)
       }
-      else{
+      if (this.qtyr - 1 === 0) {
+        this.removeGroup(idx)
+      }
+      else {
         this.qtyr = --qty;
       }
     }
@@ -278,6 +317,7 @@ export class CreateBillComponent implements OnInit {
       );
     }, 2000);
   }
+ 
 
   ///////////////////////////////////////////////////////////////////////////////
 

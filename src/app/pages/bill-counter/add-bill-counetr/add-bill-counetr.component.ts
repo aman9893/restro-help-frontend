@@ -31,9 +31,9 @@ export interface Cart {
 })
 export class AddBillCounetrComponent implements OnInit {
   orderForm!: FormGroup;
-  searchText:any;
+  searchText: any;
   items!: FormArray;
-  menuDataList: any=[];
+  menuDataList: any = [];
   user_id: any;
   menuItem: any = [];
   value: any;
@@ -51,91 +51,93 @@ export class AddBillCounetrComponent implements OnInit {
   itemstable: any;
   Bill_id: any;
   term: any;
-  listView: boolean =false ;
+  listView: boolean = false;
   GirdView: boolean = false;
   categoryDataList: any;
   conatctBookList: any;
   discount: any;
   taxvalue: any;
-  subtotal: number=0;
-  listViewSubTotal: number=0;
-  mobileview: boolean= false;
+  subtotal: number = 0;
+  listViewSubTotal: number = 0;
+  mobileview: boolean = false;
   validationvalue: boolean = false;
-  itemprice: number =0;
-  billDataValue:any;
+  itemprice: number = 0;
+  billDataValue: any;
   DesktopProducts: any = [];
   allProductsDesktopTotal: any = 0;
-  GrandtotalListViewbill: number=0;
+  GrandtotalListViewbill: number = 0;
   manualView: boolean = true;
   gstDatalist!: any;
   tax: any;
-  taxvaluedata: number =0;
+  taxvaluedata: number = 0;
   showData: boolean = false;
   letterArray: any;
-  sortedList: any=[];
+  sortedList: any = [];
   currentURL: any;
+  tokenno: any;
   constructor(
     public dataService: DataService,
     private formBuilder: FormBuilder,
     public authService: AuthService,
-    public dialog: MatDialog,private router: Router,private cdref: ChangeDetectorRef
+    public dialog: MatDialog, private router: Router, private cdref: ChangeDetectorRef
   ) {
     this.user_id = this.authService.getUserId();
     this.getTaxvalue();
     let route = this.router.url;
-    console.log(route)
-   
-        if(route=== '/addcustombill'){
-          this.listView = true;
-        }
-        if(route === '/addcounterbill'){
-          this.GirdView = true;
-        }
-
+    if (route === '/addcustombill') {
+      this.listView = true;
+    }
+    if (route === '/addcounterbill') {
+      this.GirdView = true;
+    }
   }
   ngOnInit() {
-    this.mobileview =this.dataService.getIsMobileResolution();
+    this.mobileview = this.dataService.getIsMobileResolution();
     this.updateCart();
+    this.lastTokenvalue();
     this.getcategoryData();
     this.getConatctBookData();
     this.ListViewTotalBill = 0;
     this.billflag = "this.billDataValue.flag;"
     this.Bill_id = "this.billDataValue.bill_data;"
-      this.getmenuData();
-      this.updateCustomer();
-      this.formcall();
-      this.myFormValueChanges$ = this.orderForm.controls['items'].valueChanges;
-      this.currentURL = window.location.href; 
-      console.log(this.currentURL)
-     
-   
+    this.getmenuData();
+    this.updateCustomer();
+    this.formcall();
+    this.myFormValueChanges$ = this.orderForm.controls['items'].valueChanges;
+    this.currentURL = window.location.href;
   }
 
   getTaxvalue(): void {
-    this.dataService.getTaxInfo().subscribe((data:any) => this.taxdata(data));
+    this.dataService.getTaxInfo().subscribe((data: any) => this.taxdata(data));
   }
+  lastTokenvalue(): void {
+    this.dataService.lasttokenno().subscribe((data: any) => this.lasttoken(data));
+  }
+  lasttoken(data: any) {
+    this.tokenno= parseInt(data[0].token_no)+1;
+    console.log(this.tokenno);
+    this.orderForm.controls['token_no'].setValue(this.tokenno);
 
+  }
   taxdata(data: any) {
-   this.gstDatalist = data;
-   this.tax= this.gstDatalist[0]?.total_tax
-
-
+    this.gstDatalist = data;
+    this.tax = this.gstDatalist[0]?.total_tax
   }
-  updatevalue:number =0;
+  updatevalue: number = 0;
 
   onCheckChange($event: any) {
     let val = $event.target.checked;
-    if(val){
-       this.updatevalue= parseInt( ((this.tax *this.allProductsDesktopTotal)/100).toFixed(2));
-       this.allProductsDesktopTotal = parseInt(this.allProductsDesktopTotal + this.updatevalue);
-       this.taxvaluedata =this.tax;
+    if (val) {
+      this.updatevalue = parseInt(((this.tax * this.allProductsDesktopTotal) / 100).toFixed(2));
+      this.allProductsDesktopTotal = parseInt(this.allProductsDesktopTotal + this.updatevalue);
+      this.taxvaluedata = this.tax;
     }
-    else{
+    else {
       this.allProductsDesktopTotal = this.allProductsDesktopTotal - this.updatevalue;
-      this.taxvaluedata =0;
+      this.taxvaluedata = 0;
     }
   }
-// page All Api all-------------------------------------------------------------------------------
+  // page All Api all-------------------------------------------------------------------------------
 
   getcategoryData(): void {
     this.dataService.getcategoryList().subscribe((data) => this.categoryData(data));
@@ -157,11 +159,11 @@ export class AddBillCounetrComponent implements OnInit {
     this.formcall();
     this.listView = true;
     this.GirdView = false;
-}
-showGirdView() {
-  this.listView = false;
-  this.GirdView = true;
-}
+  }
+  showGirdView() {
+    this.listView = false;
+    this.GirdView = true;
+  }
   // page All Api all-------------------------------------------------------------------------------
 
   // DesktopView  All Api all-------------------------------------------------------------------------------
@@ -175,34 +177,30 @@ showGirdView() {
     });
     this.orderForm.controls['cutomer_name'].setValue(contactValue);
   }
- 
-
-  ontabChange(event:any){
-               if(event.tab.textLabel !== 'All Item'){
-                let category_id:any;
-                for (let i in this.categoryDataList) {
-                 if (event.tab.textLabel === this.categoryDataList[i].category_name) {
-                    category_id =  this.categoryDataList[i].category_id;
-                 }
-               }
-               this.filtercate(category_id)
-               }
-           else{
-            this.getmenuData()
-           }
+  ontabChange(event: any) {
+    if (event.tab.textLabel !== 'All Item') {
+      let category_id: any;
+      for (let i in this.categoryDataList) {
+        if (event.tab.textLabel === this.categoryDataList[i].category_name) {
+          category_id = this.categoryDataList[i].category_id;
+        }
+      }
+      this.filtercate(category_id)
     }
-
+    else {
+      this.getmenuData()
+    }
+  }
   updateCustomer() {
     this.myControl.valueChanges.subscribe((selectedValue) => {
       this.filter(selectedValue);
     });
   }
-
   updateCart() {
     this.dataService.getProductData().subscribe(res => {
       this.DesktopProducts = res;
       this.allProductsDesktopTotal = this.dataService.getTotalAmount();
-      this.subtotal =  this.dataService.getTotalAmount();
+      this.subtotal = this.dataService.getTotalAmount();
     })
   }
   removeProduct(item: any) {
@@ -210,7 +208,6 @@ showGirdView() {
     this.updateCart();
     this.discountchange('grid')
   }
-
   removeAllProducts() {
     this.dataService.removeAllCart();
     this.updateCart()
@@ -243,8 +240,8 @@ showGirdView() {
   }
   billdata(data: any) {
     let datalist = data[0];
-    if(datalist.bill_status ==='couter'){
-      let datalistvalue =  JSON.parse(datalist.bill_order)
+    if (datalist.bill_status === 'couter') {
+      let datalistvalue = JSON.parse(datalist.bill_order)
       this.dataService.productList.next(datalistvalue.bill_order.items);
     }
     if (datalist && datalist.bill_order) {
@@ -259,39 +256,39 @@ showGirdView() {
   }
   menuData(data: any) {
     console.log(data)
-    if(data.length !== 0){
+    if (data.length !== 0) {
       for (var i = 0; i < data.length; i++) {
         data[i].qty = 1;
         data[i].total = data[i].menu_price;
       }
-       this.sortedList = data.sort((a:any, b:any) => a.menu_name.localeCompare(b.menu_name));
-       this.menuDataList = this.sortedList;
+      this.sortedList = data.sort((a: any, b: any) => a.menu_name.localeCompare(b.menu_name));
+      this.menuDataList = this.sortedList;
     }
-    else{
-      this.menuDataList = [{'menu_name':'NoItem'}];
+    else {
+      this.menuDataList = [{ 'menu_name': 'NoItem' }];
     }
-     this.showData =true;
-     this.letterArray = [];
-     for(var i = 0; i < 26; i++) {
-     this.letterArray.push(String.fromCharCode(65 + i));
-}
+    this.showData = true;
+    this.letterArray = [];
+    for (var i = 0; i < 26; i++) {
+      this.letterArray.push(String.fromCharCode(65 + i));
+    }
   }
-  letterdata(letter:any){
+  letterdata(letter: any) {
     this.menuDataList = this.sortedList;
-    let filteredUsers = this.menuDataList.filter((user:any) => {
+    let filteredUsers = this.menuDataList.filter((user: any) => {
       return user.menu_name[0].toLowerCase() == letter.toLowerCase();
-  });
+    });
 
-  console.log(filteredUsers);
-  if(filteredUsers.length>0){
-    this.menuDataList = filteredUsers;
+    console.log(filteredUsers);
+    if (filteredUsers.length > 0) {
+      this.menuDataList = filteredUsers;
+    }
+    else {
+      this.menuDataList = [{ 'menu_name': 'NoItem' }];
+    }
   }
-  else{
-    this.menuDataList = [{'menu_name':'NoItem'}];
-  }
-  }
- 
-     //////////////////////////////////////////////////api call/////////////////////////////////////////
+
+  //////////////////////////////////////////////////api call/////////////////////////////////////////
 
   filter(value: any) {
     const filterValue = value.toLowerCase();
@@ -317,18 +314,18 @@ showGirdView() {
       ]),
       cutomer_address: new FormControl('', [
       ]),
-      
-      discount: new FormControl( '', [Validators.pattern(this.dataService.phoneValidation()),Validators.maxLength(20)]),
-      
+
+      discount: new FormControl('', [Validators.pattern(this.dataService.phoneValidation()), Validators.maxLength(20)]),
+
       delivery_charge: new FormControl('', [
       ]),
-      token_no: new FormControl('', [
+      token_no: new FormControl(this.tokenno, [
       ]),
       payment_type: new FormControl('UPI', [
       ]),
-      gst_amt:new FormControl(0, [
+      gst_amt: new FormControl(0, [
       ]),
-    
+
     });
     // this.addItem();
   }
@@ -344,7 +341,7 @@ showGirdView() {
   addItem() {
     this.items = this.orderForm.get('items') as FormArray;
     this.items.push(this.createItem());
-    
+
   }
   removeGroup(i: number) {
     this.items = this.orderForm.get('items') as FormArray;
@@ -352,34 +349,34 @@ showGirdView() {
   }
   //////////////////////////////////////////////////////////////////////////////./////////////////////////////////////////////
 
-  discountchange(view:any){
-    if(view === 'grid'){
+  discountchange(view: any) {
+    if (view === 'grid') {
       this.updateCart();
-      this. discount = this.orderForm.controls['discount'].value;
-      if(this.discount < this.allProductsDesktopTotal  ){
-        this.allProductsDesktopTotal = this.allProductsDesktopTotal -  this.discount ;
+      this.discount = this.orderForm.controls['discount'].value;
+      if (this.discount < this.allProductsDesktopTotal) {
+        this.allProductsDesktopTotal = this.allProductsDesktopTotal - this.discount;
       }
-      else{
-        this.allProductsDesktopTotal =0;
+      else {
+        this.allProductsDesktopTotal = 0;
       }
     }
   }
 
-  discountListchange(){
+  discountListchange() {
     this.updateCart();
     this.discount = this.orderForm.controls['discount'].value;
-    if(this.discount < this.ListViewTotalBill  ){
-    this.GrandtotalListViewbill = this.ListViewTotalBill - this.discount;
+    if (this.discount < this.ListViewTotalBill) {
+      this.GrandtotalListViewbill = this.ListViewTotalBill - this.discount;
     }
-    else{
-      this.GrandtotalListViewbill =0;
+    else {
+      this.GrandtotalListViewbill = 0;
     }
   }
 
 
   onBookChange(event: any, idx: any) {
     for (let i in this.menuDataList) {
-      if (event.target .value === this.menuDataList[i].menu_name) {
+      if (event.target.value === this.menuDataList[i].menu_name) {
         let price = this.menuDataList[i].menu_price;
         this.itemprice = this.menuDataList[i].menu_price;
         let qty = idx.controls['qty'].value;
@@ -389,15 +386,15 @@ showGirdView() {
         this.manualView = true;
       }
       this.myFormValueChanges$ = this.orderForm.controls['items'].valueChanges;
-        this.myFormValueChanges$.subscribe((salesList: any) =>
-          this.updateTotalUnitPrice(salesList)
-        )
+      this.myFormValueChanges$.subscribe((salesList: any) =>
+        this.updateTotalUnitPrice(salesList)
+      )
     }
     this.cdref.detectChanges();
     this.getmenuData();
   }
 
-  onPriceChange(event: any, idx: any){
+  onPriceChange(event: any, idx: any) {
     let qty = idx.controls['qty'].value;
     let price = idx.controls['itemprice'].value;
     this.totalUnitPrice = qty * price;
@@ -422,10 +419,10 @@ showGirdView() {
       this.qtyr = ++qty;
     }
     if (flag === 'remove') {
-      if (this.qtyr-1 === 0) {
+      if (this.qtyr - 1 === 0) {
         this.removeGroup(idx)
       }
-      else{
+      else {
         this.qtyr = --qty;
       }
     }
@@ -457,14 +454,14 @@ showGirdView() {
       this.qtyr = ++qty;
     }
     if (flag === 'remove') {
-      if (this.qtyr-1 === 0) {
+      if (this.qtyr - 1 === 0) {
         this.removeGroup(idx)
       }
-      else{
+      else {
         this.qtyr = --qty;
       }
     }
-   this.totalUnitPrice = this.qtyr * price;
+    this.totalUnitPrice = this.qtyr * price;
     idx.controls['qty'].setValue(this.qtyr);
     idx.controls['price'].setValue(this.totalUnitPrice);
     setTimeout(() => {
@@ -483,67 +480,67 @@ showGirdView() {
       let totalUnitPrice = units[i].price;
       this.totalSum += totalUnitPrice;
       this.ListViewTotalBill = this.totalSum;
-      this.GrandtotalListViewbill =this.totalSum;
+      this.GrandtotalListViewbill = this.totalSum;
     }
   }
 
-  validation(){
+  validation() {
     let orderbe = this.orderForm.value;
     orderbe.items.forEach((element: any) => {
-      if (element.name === '' || element.qty === 0 ||  !this.orderForm.valid) {
+      if (element.name === '' || element.qty === 0 || !this.orderForm.valid) {
         this.validationvalue = true;
       }
-      else{
+      else {
         this.validationvalue = false;
       }
     })
-    if(this.validationvalue){
-      this.dataService.openSnackBar("* Please Select the Item", 'Dismiss');   
+    if (this.validationvalue) {
+      this.dataService.openSnackBar("* Please Select the Item", 'Dismiss');
 
     }
-    
+
   }
-   generateKitchenTokenNumbers(startingNumber=1, numTokens=100) {
+  generateKitchenTokenNumbers(startingNumber = 1, numTokens = 100) {
     let tokenNumbers = [];
     for (let i = 0; i < numTokens; i++) {
-        let token = (startingNumber + i)
-        tokenNumbers.push(token);
+      let token = (startingNumber + i)
+      tokenNumbers.push(token);
     }
     return tokenNumbers;
-}
-//////////////////////////////////////////////////////////////////////////////////////
+  }
+  //////////////////////////////////////////////////////////////////////////////////////
   onSubmit() {
     this.validation();
-    if(!this.validationvalue){
+    if (!this.validationvalue) {
       let r = Math.random().toString(36).substring(7);
       let tableFormData = {
-      user_id: this.user_id,
-      bill_no: r,
-      bill_order: this.orderForm.value,
-      table_id: '',
-      table_name: '',
-      total_bill: this.GrandtotalListViewbill,
-      subtotal_bill: this.ListViewTotalBill,
-      bill_status: 'counterlist',
-      cutomer_name: this.orderForm.controls['cutomer_name'].value,
-      cutomer_number: this.orderForm.controls['cutomer_number'].value,
-      create_date: new Date(),
-      status: 'Ordered',
-       discount: this.orderForm.controls['discount'].value,
-      delivery_charge: '',
-      cutomer_address: '',
-      attender_name: '',
-      attender_id: 0,
-      token_no:this.orderForm.controls['token_no'].value,
-      payment_type:this.orderForm.controls['payment_type'].value,
-      gst_amt :this.taxvaluedata
-    };
-    this.dataService.saveBill(tableFormData).subscribe(
-      (data: any) => this.closeDialog(data),
-    );
+        user_id: this.user_id,
+        bill_no: r,
+        bill_order: this.orderForm.value,
+        table_id: '',
+        table_name: '',
+        total_bill: this.GrandtotalListViewbill,
+        subtotal_bill: this.ListViewTotalBill,
+        bill_status: 'counterlist',
+        cutomer_name: this.orderForm.controls['cutomer_name'].value,
+        cutomer_number: this.orderForm.controls['cutomer_number'].value,
+        create_date: new Date(),
+        status: 'Ordered',
+        discount: this.orderForm.controls['discount'].value,
+        delivery_charge: '',
+        cutomer_address: '',
+        attender_name: '',
+        attender_id: 0,
+        token_no: this.orderForm.controls['token_no'].value,
+        payment_type: this.orderForm.controls['payment_type'].value,
+        gst_amt: this.taxvaluedata
+      };
+      this.dataService.saveBill(tableFormData).subscribe(
+        (data: any) => this.closeDialog(data),
+      );
     }
   }
-//////////////////////////////////////////////////////////////////////////////////////
+  //////////////////////////////////////////////////////////////////////////////////////
   onDesktopBillSubmit() {
     let obj = {
       items: this.DesktopProducts
@@ -556,7 +553,7 @@ showGirdView() {
       table_id: '',
       table_name: '',
       total_bill: this.allProductsDesktopTotal,
-      subtotal_bill:this.subtotal,
+      subtotal_bill: this.subtotal,
       bill_status: 'counter',
       cutomer_name: this.orderForm.controls['cutomer_name'].value,
       cutomer_number: this.orderForm.controls['cutomer_number'].value,
@@ -567,9 +564,9 @@ showGirdView() {
       cutomer_address: '',
       attender_name: '',
       attender_id: 0,
-      token_no:this.orderForm.controls['token_no'].value,
-      payment_type:this.orderForm.controls['payment_type'].value,
-      gst_amt :this.taxvaluedata
+      token_no: this.orderForm.controls['token_no'].value,
+      payment_type: this.orderForm.controls['payment_type'].value,
+      gst_amt: this.taxvaluedata
 
     };
     this.dataService.saveBill(BillData).subscribe(
@@ -620,9 +617,9 @@ showGirdView() {
       status: 'Ordered',
       discount: '',
       delivery_charge: '20',
-      token_no:this.orderForm.controls['token_no'].value,
-      payment_type:this.orderForm.controls['payment_type'].value,
-      gst_amt :this.taxvaluedata
+      token_no: this.orderForm.controls['token_no'].value,
+      payment_type: this.orderForm.controls['payment_type'].value,
+      gst_amt: this.taxvaluedata
 
     };
     this.dataService.updateBill(tableFormData).subscribe(
@@ -657,8 +654,8 @@ showGirdView() {
   downloadInvoice() {
     let invoicedata = {
       order: this.updateData,
-      billcounter:true,
-      bill:'counter'
+      billcounter: true,
+      bill: 'counter'
     };
     const dialogRef = this.dialog.open(InvoiceComponent, {
       width: '300px',
@@ -671,8 +668,8 @@ showGirdView() {
   downloadInvoicelist() {
     let invoicedata = {
       order: this.updateData,
-      billcounter:true,
-      bill:'counterlist'
+      billcounter: true,
+      bill: 'counterlist'
     };
     const dialogRef = this.dialog.open(InvoiceComponent, {
       width: '300px',

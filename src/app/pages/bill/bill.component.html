@@ -1,109 +1,101 @@
-<app-page-header icon="home"  >
+<app-page-header icon="home">
   <h3 routerLink="/home">Home</h3>
-  <span  class="centertext">
+  <span class="centertext">
     Table Billing
   </span>
-  <button mat-flat-button color="primary" class="action"  routerLink="/tablebillList">
-   <mat-icon>note</mat-icon> Bill List 
+  <button mat-flat-button color="primary" class="action" routerLink="/tablebillList">
+    <mat-icon>note</mat-icon> Bill List
   </button>
 </app-page-header>
-<div *ngIf="tableDataList && tableDataList.length>0" class="container" >
-    <div class="container-search">
-      <div >
-
-        <div class="row height d-flex justify-content-left align-items-left">
-
-          <div class="col-md-6">
-
-            <div class="form">
-              <i class="fa fa-search"></i>
-              <input type="text" [(ngModel)]="searchText" class="form-control form-input" placeholder="Search Table Name...">
-            </div>
-            
+<div *ngIf="tableDataList && tableDataList.length>0" class="container">
+  <div class="container-search">
+    <div>
+      <div class="row height d-flex justify-content-left align-items-left">
+        <div class="col-md-6">
+          <div class="form">
+            <i class="fa fa-search"></i>
+            <input type="text" [(ngModel)]="searchText" class="form-control form-input"
+              placeholder="Search Table Name...">
           </div>
-          
         </div>
-        
       </div>
-        <div >
-  
-            <div class="page-wrapper">
-                    <ul class="infographic-cards">
-                        <li class="color-1" *ngFor="let table of tableDataList  | searchFilter: searchText">
-                            <div class="cardboxs">
-                               <div class="row">
-                                <div class="col-md-3 elementcardbox">
-                                    <div *ngIf="table.bill_status =='booked'" class="number-box booked">
-                                    </div>
-                                    <div *ngIf="table.bill_status !=='booked'" class="number-box Available">
-                                    </div>
-                                   
-                                </div>
-                                <div class="col-md-9">
-                                    <div *ngIf="table.bill_status ==='booked'" >
-                                       <h6> {{table.attender_name}}</h6> 
-                                      </div>
-                                      <div *ngIf="table.bill_status !=='booked'" >
-                                        <h6> .</h6> 
-                                       </div>
-                                </div>
-                               </div>
-
-                                <span class="title">
-                                  
-                                    {{table.table_name | titlecase}}
-                                 
-                                </span>
-                                <p *ngIf="table.bill_status ==='booked'" class="description"> {{table.create_date |  date:'shortTime' }} </p>
-
-                                <p *ngIf="table.bill_status !=='booked'" class="description" style="color: green;"> Available</p>
-                               
-                              
-                                <div class="actions">
-                                    <div *ngIf="table.bill_status !=='booked'" class="example-button-container"   [class.desktop] = "!mobileview"    [class.mobiledata] = "mobileview"> 
-                                        <button  mat-mini-fab color="primary" title="Add Order" aria-label="Example icon button with a delete icon"  (click)="addOder(table)">
-                                          <mat-icon>add</mat-icon>
-                                        </button>
-                                      </div>
-                                      <div *ngIf="table.bill_status ==='booked'" class="example-button-container">
-                                        <button  mat-mini-fab color="primary"  title="Edit Order"  aria-label="Example icon button with a delete icon"  (click)="updateOder(table)">
-                                          <mat-icon>edit</mat-icon>
-                                        </button>
-                                      </div>
-                                      <div *ngIf="table.bill_status ==='booked'" class="example-button-container">
-                                        <button  mat-mini-fab color="accent"  title="View Order"   aria-label="Example icon button with a delete icon"  (click)="viewOder(table.table_id)">
-                                          <mat-icon>remove_red_eye</mat-icon>
-                                        </button>
-                                      </div>
-                                </div>
-                            </div>
-                        </li>
-                    </ul>
-                </div>
-               </div>
     </div>
-  </div>
-
-
-<div class="loaderwrap" *ngIf="showDataLoader === true">
-  <div class="loader" >
-    <mat-spinner [diameter]="60" mode="indeterminate"></mat-spinner>
-  </div>
-</div>
-  <section class="divmain">
-    <div *ngIf="tableDataList">
-        <div *ngIf="tableDataList.length === 0" >
-            <div class="empty-state">
-                <div class="empty-state__content">
-                  <div class="empty-state__icon">
-                    <img src="https://cdni.iconscout.com/illustration/premium/thumb/sorry-item-not-found-3328225-2809510.png" alt="">
+    <div>
+      <div class="page-wrapper">
+        <ul class="infographic-cards">
+          <li class="color-1" *ngFor="let table of tableDataList  | searchFilter: searchText">
+            <div class="cardboxs">
+              <div class="row">
+                <div class="col-md-3 elementcardbox">
+                  <div *ngIf="table.bill_status =='booked'" class="number-box booked">
                   </div>
-                  <div class="empty-state__message">No records has been added yet.</div>
-                  <div class="empty-state__help">
-                    Add a new record by simpley clicking link <a class="button" [routerLink]="['/table']"> Add Table </a>
+                  <div *ngIf="table.bill_status !=='booked'" class="number-box Available">
+                  </div>
+
+                </div>
+                <div class="col-md-9">
+                  <div *ngIf="table.bill_status ==='booked'">
+                    <h6> {{table.attender_name}}</h6>
+                  </div>
+                  <div *ngIf="table.bill_status !=='booked'">
+                    <h6> .</h6>
                   </div>
                 </div>
               </div>
+              <span class="title">
+                {{table.table_name | titlecase}}
+              </span>
+              <p *ngIf="table.bill_status ==='booked'" class="description"> {{table.create_date | date:'shortTime' }}
+              </p>
+              <p *ngIf="table.bill_status !=='booked'" class="description" style="color: green;"> Available</p>
+              <div class="actions">
+                <div *ngIf="table.bill_status !=='booked'" class="example-button-container"
+                  [class.desktop]="!mobileview" [class.mobiledata]="mobileview">
+                  <button mat-mini-fab color="primary" title="Add Order"
+                    aria-label="Example icon button with a delete icon" (click)="addOder(table)">
+                    <mat-icon>add</mat-icon>
+                  </button>
+                </div>
+                <div *ngIf="table.bill_status ==='booked'" class="example-button-container">
+                  <button mat-mini-fab color="primary" title="Edit Order"
+                    aria-label="Example icon button with a delete icon" (click)="updateOder(table)">
+                    <mat-icon>edit</mat-icon>
+                  </button>
+                </div>
+                <div *ngIf="table.bill_status ==='booked'" class="example-button-container">
+                  <button mat-mini-fab color="accent" title="View Order"
+                    aria-label="Example icon button with a delete icon" (click)="viewOder(table.table_id)">
+                    <mat-icon>remove_red_eye</mat-icon>
+                  </button>
+                </div>
+              </div>
+            </div>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="loaderwrap" *ngIf="showDataLoader === true">
+  <div class="loader">
+    <mat-spinner [diameter]="60" mode="indeterminate"></mat-spinner>
+  </div>
+</div>
+<section class="divmain">
+  <div *ngIf="tableDataList">
+    <div *ngIf="tableDataList.length === 0">
+      <div class="empty-state">
+        <div class="empty-state__content">
+          <div class="empty-state__icon">
+            <img src="https://cdni.iconscout.com/illustration/premium/thumb/sorry-item-not-found-3328225-2809510.png"
+              alt="">
+          </div>
+          <div class="empty-state__message">No records has been added yet.</div>
+          <div class="empty-state__help">
+            Add a new record by simpley clicking link <a class="button" [routerLink]="['/table']"> Add Table </a>
+          </div>
         </div>
       </div>
-      </section>
+    </div>
+  </div>
+</section>
