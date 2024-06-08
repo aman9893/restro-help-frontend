@@ -50,6 +50,15 @@
     border-radius: 6px;
     outline: none;
   }
+  form  select{
+    width: 100%;
+    padding: 7px;
+    border: none;
+    border: 1px solid gray;
+    border-radius: 6px;
+    outline: none;
+  }
+  
   input[type="button"] {
     width: 320px;
     height: 35px;

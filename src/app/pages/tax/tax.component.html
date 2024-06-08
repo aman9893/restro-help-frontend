@@ -2,7 +2,7 @@
 <app-page-header icon="home"  >
     <h3 routerLink="/home">Home</h3>
     <span  class="centertext">
-        Attender management
+        Tax management
     </span>
   </app-page-header>
   <section class="divmain">
@@ -18,7 +18,7 @@
                   <div class="errormsg" *ngIf="taxform.controls['total_gst'].errors['required']">*GST Value  is required .</div>
               </div>
               <span style="padding: 4px;
-              font-size: 11px;"> Gst Amount calculate  in % (percentage) </span>
+              font-size: 11px;"> Gst Amount calculate  in % (percentage) and SGST , CGST add both  </span>
               </div>
               <div class="field">
                 <button *ngIf="!updatebtn &&gstDatalist && gstDatalist.length === 0" class="btn" type="submit" (click)="onSubmit()">Save</button>

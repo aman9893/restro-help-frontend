@@ -4,19 +4,44 @@
     </div>
 </div>
 <form *ngIf="menuDataList && table_id" [formGroup]="orderForm">
-    <div class="width_100">
+    <div *ngIf="items.length !==0  && !mobileview" class="width_100">
         <div class="width_30  inputbox">
-            <input type="number" formControlName="cutomer_number" (change)="onChangeDataset()"
+            <span class="fontlable"> Enter Customer Number</span>
+            <input type="number" formControlName="cutomer_number" class="custom-select custom-select-sm" (change)="onChangeDataset()"
                 placeholder="Customer Number" list="languages">
             <datalist id="languages">
                 <option class="optionLIST" *ngFor="let item of conatctBookList" [value]="item.contact_number">
             </datalist>
         </div>
         <div class="width_30 inputbox">
-            <input type="text" formControlName="cutomer_name" placeholder="Customer Name">
+            <span class="fontlable"> Enter Customer Name</span>
+            <input type="text"  formControlName="cutomer_name" placeholder="Customer Name">
         </div>
-        <div class="width_30 inputbox mt-2">
-            <select formControlName="attender_name" class="form-control selectpicker">
+        <div class="width_30 inputbox">
+            <span class="fontlable"> Select Attender Name</span>
+            <select formControlName="attender_name" class="form-select">
+                <option value="NoAttender">Please Select Attender Name</option>
+                <option *ngFor="let item of attenderDataList" [value]="item.attender_name">{{item.attender_name}}
+                </option>
+            </select>
+        </div>
+    </div>
+    <div *ngIf="items.length !==0  && mobileview" class="width_100">
+        <div class="width_20  inputbox">
+            <span class="fontlablemobi"> Enter Customer Number</span>
+            <input type="number" formControlName="cutomer_number" class="custom-select custom-select-sm" (change)="onChangeDataset()"
+                placeholder="Customer Number" list="languages">
+            <datalist id="languages">
+                <option class="optionLIST" *ngFor="let item of conatctBookList" [value]="item.contact_number">
+            </datalist>
+        </div>
+        <div class="width_20 inputbox">
+            <span class="fontlablemobi"> Enter Customer Name</span>
+            <input type="text"  formControlName="cutomer_name" placeholder="Customer Name">
+        </div>
+        <div class="width_20 inputbox">
+            <span class="fontlablemobi"> Select Attender Name</span>
+            <select formControlName="attender_name" class="form-select">
                 <option value="NoAttender">Please Select Attender Name</option>
                 <option *ngFor="let item of attenderDataList" [value]="item.attender_name">{{item.attender_name}}
                 </option>
@@ -25,7 +50,6 @@
     </div>
     <button class="btnadd" mat-raised-button (click)="addItem()">ADD
         ITEM <mat-icon> add</mat-icon></button>
-
     <div [class.wrapview]="billflag === 'view'" *ngIf="items" class="wrpbill">
         <div class="listwarpfixed">
             <div>
@@ -47,9 +71,9 @@
                                 </button>
                             </td>
                             <td>
-                                <div class="product-name">
+                                <div class="inputbox1">
                                     <input list="encodings" formControlName="name" (change)="onBookChange($event,item)"
-                                        class="custom-select custom-select-sm">
+                                        class="custom-select custom-select-sm inputbox">
                                     <datalist id="encodings">
                                         <option *ngFor="let stock of menuDataList" [value]="stock.menu_name">
                                             {{stock.menu_name}}-
@@ -58,7 +82,7 @@
                                 </div>
                             </td>
                             <td>
-                                <div class="product-name">
+                                <div class="product-name inputbox1">
                                     <input class="form-control" placeholder="0" formControlName="itemprice" readonly>
                                 </div>
                             </td>
@@ -74,7 +98,7 @@
                                 </div>
                             </td>
                             <td>
-                                <div class="product-name">
+                                <div class="product-name inputbox1">
                                     <input class="form-control" placeholder="0" formControlName="price" readonly>
                                 </div>
                             </td>
@@ -84,54 +108,112 @@
             </div>
         </div>
     </div>
+    <div  *ngIf="items.length !==0 && mobileview ">
+        <div class="listwrapp">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th width="5%"> Items</th>
+                        <th width="5%">Subtotal </th>
+                        <th width="5%"> Token No</th>
+                        <th width="5%">Discount </th>
+                        <th width="5%">Payment.T</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr class=" wrapperdiscountmobi">
+                        <td class="itemsd">
+                            {{items.length}}
+                        </td>
+                        <td  class="itemsd">
+                            {{ this.total_bill}}
+                            ₹
+                        </td>
+                        <td >
+                            <input  class="inp"  id="last"  type="text" formControlName="token_no" />
+                        </td>
+                        <td>
+                            <input class="inp"  id="first"  type="text" placeholder="0 Rs" formControlName="discount"
+                            (change)="discountListchange()"  />    
+                        </td>
+                        <td>
+                            <select formControlName="payment_type">
+                                <option value="Payment Type">Payment Type</option>
+                                <option value="UPI">UPI</option>
+                                <option value="CASH">CASH</option>
+                                <option value="Bank">Bank</option>
+                            </select>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+            <div *ngIf="tax && total_bill !== 0" class="checkboxdata  checktax" >
+            <input class="form-check-input"  formControlName="gst_amt"   (change)="onCheckChange($event)"   type="checkbox" [value]="gstDatalist[0].total_tax">
+                    <label class="form-check-label"  for="flexCheckDefault"> 
+                        Add Tax (GST) -  {{gstDatalist[0].total_tax}} % - Tax calculated in percentage
+             </label>
+            </div>
+        </div>
+    </div>
+    <div  *ngIf="items.length !==0 && !mobileview ">
+        <div class="listwrapp">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th width="5%"> Items</th>
+                        <th width="5%">Subtotal </th>
+                        <th width="15%"> Token No</th>
+                        <th width="15%">Discount </th>
+                        <th width="15%">Payment.T</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr class=" wrapperdiscount">
+                        <td class="subtitiletable">
+                            {{items.length}}
+                        </td>
+                        <td  class="subtitiletable">
+                            {{ this.total_bill}}
+                            ₹
+                        </td>
+                        <td >
+                            <input  class="inp"  id="last"  type="text" formControlName="token_no" />
+                        </td>
+                        <td>
+                            <input class="inp"  id="first"  type="text" formControlName="discount"
+                            (change)="discountListchange()"  />  ₹
+                        </td>
+                        <td>
+                            <select formControlName="payment_type">
+                                <option value="Payment Type">Payment Type</option>
+                                <option value="UPI">UPI</option>
+                                <option value="CASH">CASH</option>
+                                <option value="Bank">Bank</option>
+                            </select>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+            <div *ngIf="tax && total_bill !== 0" class="checkboxdata  checktax" >
+                    <input class="form-check-input"  formControlName="gst_amt"   (change)="onCheckChange($event)"   type="checkbox" [value]="gstDatalist[0].total_tax">
+                    <label class="form-check-label"  for="flexCheckDefault"> 
+                        Add Tax (GST) -  {{gstDatalist[0].total_tax}} % - Tax calculated in percentage
+                      </label>
+            </div>
+        </div>
+    </div>
     <div *ngIf="items &&items.length !==0 " class="listwrapp">
-        <table class="table">
-            <thead>
-                <tr>
-                    <th width="15%"> Total I</th>
-                    <th width="15%">Subtotal </th>
-                    <th width="15%">Discount </th>
-                    <th width="15%">Payment.T</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr class="">
-                    <td class="subtitiletable">
-                        {{items.length}}
-                    </td>
-                    <td class="subtitiletable">
-                        ₹ {{ this.total_bill}}
-                    </td>
-
-                    <td>
-                        <input class="form-control" type="text" placeholder="Discount" formControlName="discount"
-                            (change)="discountListchange()" />
-                    </td>
-                    <td>
-                        <select style="padding: 7px; width: 63px;
-                        border-radius: 5px;"  formControlName="payment_type">
-                            <option value="Payment Type">Payment Type</option>
-                            <option value="UPI">UPI</option>
-                            <option value="CASH">CASH</option>
-                            <option value="Bank">Bank</option>
-                        </select>
-                    </td>
-                </tr>
-            </tbody>
-        </table>
-
         <div class="width_100">
-
+            <div class="divtotalcreate">
+                Grand Total - {{ this.GrandtotalListViewbill}} ₹
+            </div>
             <div class="divtotalcreatebtn">
                 <button class="bbuttoncreate" *ngIf="billflag === 'update'" (click)="UpdateItem()">Update Bill </button>
             </div>
             <div class="divtotalcreatebtn">
                 <button class="bbuttoncreate" *ngIf="billflag === 'save'" (click)="onSubmit()">Save Bill </button>
             </div>
-
-            <div class="divtotalcreate">
-                Grand Total - {{ this.GrandtotalListViewbill}} ₹
-            </div>
+         
 
         </div>
     </div>

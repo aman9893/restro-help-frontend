@@ -253,6 +253,9 @@ getBillByBillID(id:any){
 getConatctList(){
   return this.http.get(apiConfig.localhostUrl+apiConfig.contactbook_list);
 }
+lasttokenno(){
+  return this.http.get(apiConfig.localhostUrl+apiConfig.lasttoken);
+}
 addConatctBook(data:any){
   return this.http.post(apiConfig.localhostUrl+apiConfig.addcontactBook,data);
 }
