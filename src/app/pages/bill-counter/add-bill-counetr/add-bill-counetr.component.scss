@@ -79,13 +79,31 @@
 }
 
 .wrapperdiscountlist {
-    padding: 11px;
+    // padding: 11px;
+    // width: 100%;
+    // margin-top: 0px;
+    // background: rgba(0, 0, 0, 0.6);
+    // color: white;
+}
+.wrapperdiscountlist input {
+    padding: 8px;
     width: 100%;
     margin-top: 0px;
-    background: rgba(0, 0, 0, 0.6);
-    color: white;
+    /* background: rgba(0, 0, 0, 0.6); */
+    text-align: center;
+    border: 2px solid gray;
+    border-radius: 3px;
+   
 }
-
+.wrapperdiscountlist select {
+    width: 100% !important;
+    margin-top: 0px;
+    text-align: center;
+    border: 2px solid gray;
+    border-radius: 3px;
+    padding: 8px !important;
+   
+}
 .wrapperdiscount select {
 
      display: block;
@@ -94,6 +112,22 @@
     padding: 9px;
    font-size: 12px;
 }
+
+.mobilewrplist input{
+    width: 100%;
+    padding: 1px;
+    text-align: center;
+    margin: 2px;
+    border: 1px solid;
+}
+.mobilewrplist select{
+    width: 100%;
+    padding: 1px;
+    text-align: center;
+    margin: 2px;
+    border: 1px solid;
+}
+
 
 .width30 {
     float: left;

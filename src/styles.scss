@@ -2339,14 +2339,16 @@ ul.breadcrumb li a:hover {
 
 @media only screen and (min-width: 600px) {
   .alfawra span {
-    padding: 4px ;
-    background: #f8f9fa;
+    padding: 6px;
+    background: #fff;
     color: rgba(0, 0, 0, 0.9411764706);
-    border: 1px solid rgba(128, 128, 128, 0.2588235294);
-    height: 28px;
+    border: 1px soild #212121;
+    height: 32px;
     cursor: pointer;
-    font-size: 8px;
-    width: 15px;
+    font-size: 12px;
+    width: 49px;
+    padding-left: 20px;
+    color: black;
 }
 .gridviewwrap {
 
@@ -2358,14 +2360,16 @@ ul.breadcrumb li a:hover {
   display: flex;
 }
 .alfawra span{
-  padding: 8px;
-  background: #f8f9fa;
+  padding: 6px;
+  background: #fff;
   color: rgba(0, 0, 0, 0.9411764706);
-  border: 1px solid rgba(128, 128, 128, 0.2588235294);
+  border: 1px solid;
   height: 32px;
   cursor: pointer;
   font-size: 12px;
-  width: 24px;
+  width: 49px;
+  padding-left: 20px;
+  color: black;
 }
 .grid-wrapper{
   float: left;
@@ -2387,4 +2391,20 @@ ul.breadcrumb li a:hover {
   vertical-align: bottom;
   border-bottom: 2px solid #dee2e6;
   font-weight: 500 !important;
+}
+element.style {
+}
+.custom-control-label::before, .custom-file-label, .custom-select {
+    transition: background-color .15s ease-in-out, border-color .15s ease-in-out, box-shadow .15s ease-in-out;
+}
+.custom-select-sm {
+    height: calc(1.5em + .5rem + 2px);
+    padding-top: .25rem;
+    padding-bottom: .25rem;
+    padding-left: .5rem;
+    font-size: .875rem;
+}
+.custom-select {
+
+   border: 1px solid #212121 !important;
 }
