@@ -29,7 +29,7 @@
     <div *ngIf="items.length !==0  && mobileview" class="width_100">
         <div class="width_20  inputbox">
             <span class="fontlablemobi"> Enter Customer Number</span>
-            <input type="number" formControlName="cutomer_number" class="custom-select custom-select-sm" (change)="onChangeDataset()"
+            <input type="number" formControlName="cutomer_number"  (change)="onChangeDataset()"
                 placeholder="Customer Number" list="languages">
             <datalist id="languages">
                 <option class="optionLIST" *ngFor="let item of conatctBookList" [value]="item.contact_number">
@@ -42,7 +42,7 @@
         <div class="width_20 inputbox">
             <span class="fontlablemobi"> Select Attender Name</span>
             <select formControlName="attender_name" class="form-select">
-                <option value="NoAttender">Please Select Attender Name</option>
+                <option value="NoAttender"> Attender Name</option>
                 <option *ngFor="let item of attenderDataList" [value]="item.attender_name">{{item.attender_name}}
                 </option>
             </select>
@@ -56,10 +56,10 @@
                 <table class="table" *ngIf="items">
                     <thead>
                         <tr>
-                            <th width="3%">Action</th>
+                            <th width="1%">Action</th>
                             <th width="38%">Items </th>
                             <th width="20%">Price</th>
-                            <th width="22%">Qty</th>
+                            <th width="20%">Qty</th>
                             <th width="25%"> Amt</th>
                         </tr>
                     </thead>
@@ -72,8 +72,10 @@
                             </td>
                             <td>
                                 <div class="inputbox1">
-                                    <input list="encodings" formControlName="name" (change)="onBookChange($event,item)"
+                                    <input *ngIf=" !mobileview" list="encodings" formControlName="name" (change)="onBookChange($event,item)"
                                         class="custom-select custom-select-sm inputbox">
+                                        <input *ngIf="mobileview" list="encodings" formControlName="name" (change)="onBookChange($event,item)"
+                                        class=" inputbox">
                                     <datalist id="encodings">
                                         <option *ngFor="let stock of menuDataList" [value]="stock.menu_name">
                                             {{stock.menu_name}}-
@@ -115,7 +117,6 @@
                     <tr>
                         <th width="5%"> Items</th>
                         <th width="5%">Subtotal </th>
-                        <th width="5%"> Token No</th>
                         <th width="5%">Discount </th>
                         <th width="5%">Payment.T</th>
                     </tr>
@@ -128,9 +129,6 @@
                         <td  class="itemsd">
                             {{ this.total_bill}}
                             ₹
-                        </td>
-                        <td >
-                            <input  class="inp"  id="last"  type="text" formControlName="token_no" />
                         </td>
                         <td>
                             <input class="inp"  id="first"  type="text" placeholder="0 Rs" formControlName="discount"
@@ -162,7 +160,6 @@
                     <tr>
                         <th width="5%"> Items</th>
                         <th width="5%">Subtotal </th>
-                        <th width="15%"> Token No</th>
                         <th width="15%">Discount </th>
                         <th width="15%">Payment.T</th>
                     </tr>
@@ -173,12 +170,9 @@
                             {{items.length}}
                         </td>
                         <td  class="subtitiletable">
-                            {{ this.total_bill}}
-                            ₹
+                            {{ this.total_bill}} ₹
                         </td>
-                        <td >
-                            <input  class="inp"  id="last"  type="text" formControlName="token_no" />
-                        </td>
+                    
                         <td>
                             <input class="inp"  id="first"  type="text" formControlName="discount"
                             (change)="discountListchange()"  />  ₹

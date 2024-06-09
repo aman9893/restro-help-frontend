@@ -154,7 +154,7 @@
                                         <th>Action</th>
                                         <th>Name</th>
                                         <th>Price</th>
-                                        <th style="padding-left: 37px;">Qty</th>
+                                        <th style="padding-left: 30px;">Qty</th>
                                         <th>Total Amount</th>
                                     </tr>
                                 </thead>
@@ -176,7 +176,7 @@
                                             </div>
                                         </td>
                                         <td>
-                                            <div class="prdct-qty-wrp">
+                                            <div class="prdct-qty-wrp-m">
                                                 <button class="prdct-qty-btn" type="button" (click)="decrease(item)">
                                                     <i class="fa fa-minus"></i>
                                                 </button>
@@ -277,13 +277,13 @@
                                         {{DesktopProducts.length}}
                                     </td>
                                     <td  class="subtitiletable">
-                                        {{this.subtotal}} ₹
+                                        {{this.subtotal}} 
                                     </td>
                                     <td >
                                         <input  style="width: 61px;" id="last" class="form-label" type="text" formControlName="token_no" />
                                     </td>
                                     <td>
-                                        <input   style="width: 61px;"  id="first" class="form-label" type="text" formControlName="discount"
+                                        <input   style="width: 61px;"  id="first" class="form-label" type="text" placeholder="0Rs" formControlName="discount"
                                         (change)="discountchange('grid')"  />
                                     </td>
                                     <td>
@@ -352,11 +352,11 @@
                 <table class="table" *ngIf="items">
                     <thead>
                         <tr>
-                            <th width="3%">Action</th>
+                            <th width="2%">Action</th>
                             <th width="38%">Items </th>
                             <th width="22%">Price</th>
                             <th width="20%">Qty</th>
-                            <th width="22%">T.Amt</th>
+                            <th width="25%">T.Amt</th>
                         </tr>
                     </thead>
                     <tbody formArrayName="items" *ngFor="let item of items.controls; index as idx">
@@ -386,7 +386,7 @@
                                 </div>
                             </td>
                             <td>
-                                <div class="prdct-qty-wrp" *ngIf="!manualView">
+                                <div class="prdct-qty-wrp-count" *ngIf="!manualView">
                                     <button class="prdct-qty-btn" type="button" (click)="onKeyUpEvent(item,'remove')">
                                         <i class="fa fa-minus"></i>
                                     </button>
@@ -395,7 +395,7 @@
                                         <i class="fa fa-plus"></i>
                                     </button>
                                 </div>
-                                <div class="prdct-qty-wrp" *ngIf="manualView">
+                                <div class="prdct-qty-wrp-count" *ngIf="manualView">
                                     <button class="prdct-qty-btn" type="button" (click)="onMaualKeyUpEvent(item,'remove')">
                                         <i class="fa fa-minus"></i>
                                     </button>
@@ -492,7 +492,7 @@
                             {{items.length}}
                         </td>
                         <td  class="subtitiletable">
-                            {{this.ListViewTotalBill}} ₹
+                            {{this.ListViewTotalBill}}
                         </td>
                         <td >
                             <input   id="last" class="form-label" type="text" formControlName="token_no" />
