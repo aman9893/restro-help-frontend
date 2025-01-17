@@ -19,7 +19,8 @@ class Invoice {
 @Component({
   selector: 'app-invoice',
   templateUrl: './invoice.component.html',
-  styleUrls: ['./invoice.component.css']
+  styleUrls: ['./invoice.component.css'],
+  standalone: false
 })
 export class InvoiceComponent implements OnInit {
   billorder: any;

@@ -43,17 +43,23 @@
                 <button *ngIf="updatebtn" class="btn" type="submit" (click)="update()">Update</button>
             </div>
             <div *ngIf="billData && billData.length>0" class="grid-wrapper">
-                <div class="container-search">
+                <div class="container-search ">
                     <div class="row height d-flex justify-content-left align-items-left">
-                        <div class="col-md-6">
-                            <div class="form">
-                                <i class="fa fa-search"></i>
-                                <input type="text" (keyup)="applyFilter($event)" class="form-control form-input"
-                                    placeholder="Search Item Name...">
-                            </div>
-                        </div>
+                        <div class="form">
+                          <div class="search-wrapper ser">
+                            <input class="search-input" type="text" (keyup)="applyFilter($event)" placeholder="Search">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="none" stroke="currentColor"
+                              stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="feather feather-search"
+                              viewBox="0 0 24 24">
+                              <defs></defs>
+                              <circle cx="11" cy="11" r="8"></circle>
+                              <path d="M21 21l-4.35-4.35"></path>
+                            </svg>
+                          </div>
+                      </div>
+              
                     </div>
-                </div>
+                  </div>
 
                 <div class="mat-elevation-z8" *ngIf="dataSource">
                     <table class="mat-elevation-z8" mat-table [dataSource]="dataSource" matSortmatSortStart="desc"

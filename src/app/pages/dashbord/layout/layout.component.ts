@@ -21,7 +21,7 @@ export type Menu = MenuItem[];
   styleUrls: ['./layout.component.scss']
 })
 export class LayoutComponent implements OnInit {
-  opened = true;
+  opened = false;
   shopType: any | null;
   menu:any
   mobileview: boolean =false;
@@ -33,12 +33,12 @@ export class LayoutComponent implements OnInit {
 
     router.events.subscribe((val:any) => {
       if (val instanceof NavigationEnd) {
+        this.opened =false;
         console.log(val.url)
         if(this.mobileview || val.url==='/addcounterbill' || val.url==='/addcustombill'){
           this.opened =false;
           this.cdref.detectChanges();
         }
-
       }
     });
   }
